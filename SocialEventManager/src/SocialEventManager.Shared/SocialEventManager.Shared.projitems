@@ -9,5 +9,8 @@
     <Import_RootNamespace>SocialEventManager.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Constants\DataConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\StringExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\StringHelpers.cs" />
   </ItemGroup>
 </Project>

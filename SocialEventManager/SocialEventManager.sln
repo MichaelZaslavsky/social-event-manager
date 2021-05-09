@@ -26,6 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "items", "items", "{880B2E99
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		src\SocialEventManager.Shared\SocialEventManager.Shared.projitems*{27fefebb-b724-4fa8-b30f-5542d96bbc48}*SharedItemsImports = 5
 		src\SocialEventManager.Shared\SocialEventManager.Shared.projitems*{60327afa-b6b1-4cc4-92be-087a8fb11a51}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
