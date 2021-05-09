@@ -19,9 +19,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{888EC12A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialEventManager.Tests", "tests\SocialEventManager.Tests\SocialEventManager.Tests.csproj", "{27FEFEBB-B724-4FA8-B30F-5542D96BBC48}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "items", "items", "{880B2E99-5053-43E9-898C-4D45E5CB6192}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "items", "items", "{9B0999CD-BE6D-4543-96FC-6AEEE589E60A}"
 	ProjectSection(SolutionItems) = preProject
-		items\.editorconfig = items\.editorconfig
+		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
 Global
