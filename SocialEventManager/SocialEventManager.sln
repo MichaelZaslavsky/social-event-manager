@@ -13,7 +13,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialEventManager.DLL", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialEventManager.Infrastructure", "SocialEventManager.Infrastructure\SocialEventManager.Infrastructure.csproj", "{20C3431B-8EC9-461D-B135-1ABB44E05354}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SocialEventManager.Shared", "SocialEventManager.Shared\SocialEventManager.Shared.shproj", "{60327AFA-B6B1-4CC4-92BE-087A8FB11A51}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{888EC12A-0549-477C-B2B5-42F56164DE27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialEventManager.Tests", "SocialEventManager.Tests\SocialEventManager.Tests.csproj", "{27FEFEBB-B724-4FA8-B30F-5542D96BBC48}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		SocialEventManager.Shared\SocialEventManager.Shared.projitems*{60327afa-b6b1-4cc4-92be-087a8fb11a51}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -35,6 +44,10 @@ Global
 		{20C3431B-8EC9-461D-B135-1ABB44E05354}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20C3431B-8EC9-461D-B135-1ABB44E05354}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20C3431B-8EC9-461D-B135-1ABB44E05354}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27FEFEBB-B724-4FA8-B30F-5542D96BBC48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27FEFEBB-B724-4FA8-B30F-5542D96BBC48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27FEFEBB-B724-4FA8-B30F-5542D96BBC48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27FEFEBB-B724-4FA8-B30F-5542D96BBC48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +57,8 @@ Global
 		{3003BB93-8C05-4171-A6E4-2BB22ACC54B3} = {A536E874-08F1-4C20-B33D-DD47A89555B6}
 		{BE980493-0840-4E1E-824E-E7ACBB3575CC} = {A536E874-08F1-4C20-B33D-DD47A89555B6}
 		{20C3431B-8EC9-461D-B135-1ABB44E05354} = {A536E874-08F1-4C20-B33D-DD47A89555B6}
+		{60327AFA-B6B1-4CC4-92BE-087A8FB11A51} = {A536E874-08F1-4C20-B33D-DD47A89555B6}
+		{27FEFEBB-B724-4FA8-B30F-5542D96BBC48} = {888EC12A-0549-477C-B2B5-42F56164DE27}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {857D7BD2-4EA0-42A4-8FC8-A30324D917CF}
