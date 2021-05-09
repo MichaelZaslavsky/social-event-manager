@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialEventManager.API", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialEventManager.BLL", "SocialEventManager.BLL\SocialEventManager.BLL.csproj", "{3003BB93-8C05-4171-A6E4-2BB22ACC54B3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialEventManager.DLL", "SocialEventManager.DLL\SocialEventManager.DLL.csproj", "{BE980493-0840-4E1E-824E-E7ACBB3575CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{3003BB93-8C05-4171-A6E4-2BB22ACC54B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3003BB93-8C05-4171-A6E4-2BB22ACC54B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3003BB93-8C05-4171-A6E4-2BB22ACC54B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE980493-0840-4E1E-824E-E7ACBB3575CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE980493-0840-4E1E-824E-E7ACBB3575CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE980493-0840-4E1E-824E-E7ACBB3575CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE980493-0840-4E1E-824E-E7ACBB3575CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,6 +36,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{082CC4AB-A9D7-4789-A1F0-0281165979AC} = {A536E874-08F1-4C20-B33D-DD47A89555B6}
 		{3003BB93-8C05-4171-A6E4-2BB22ACC54B3} = {A536E874-08F1-4C20-B33D-DD47A89555B6}
+		{BE980493-0840-4E1E-824E-E7ACBB3575CC} = {A536E874-08F1-4C20-B33D-DD47A89555B6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {857D7BD2-4EA0-42A4-8FC8-A30324D917CF}
