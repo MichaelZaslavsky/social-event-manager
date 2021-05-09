@@ -53,7 +53,6 @@ namespace SocialEventManager.Tests.DataMembers
             get
             {
                 yield return new object[] { $"{DataConstants.RandomText} {DataConstants.RandomText}", "Random", StringComparison.Ordinal, " Text" };
-
             }
         }
 
