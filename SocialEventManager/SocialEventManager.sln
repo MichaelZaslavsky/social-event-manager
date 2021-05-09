@@ -19,6 +19,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{888EC12A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialEventManager.Tests", "SocialEventManager.Tests\SocialEventManager.Tests.csproj", "{27FEFEBB-B724-4FA8-B30F-5542D96BBC48}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "items", "items", "{880B2E99-5053-43E9-898C-4D45E5CB6192}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		SocialEventManager.Shared\SocialEventManager.Shared.projitems*{60327afa-b6b1-4cc4-92be-087a8fb11a51}*SharedItemsImports = 13
