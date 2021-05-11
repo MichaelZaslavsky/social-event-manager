@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Helpers;
 
-namespace SocialEventManager.Tests.DataMembers
+namespace SocialEventManager.Tests.DataMembers.Common
 {
     public static class StringData
     {
@@ -13,7 +13,7 @@ namespace SocialEventManager.Tests.DataMembers
             {
                 yield return new object[] { null, true };
                 yield return new object[] { string.Empty, true };
-                yield return new object[] { StringHelpers.GenerateRandomValue(), false };
+                yield return new object[] { RandomGeneratorHelpers.GenerateRandomValue(), false };
             }
         }
 
@@ -36,7 +36,7 @@ namespace SocialEventManager.Tests.DataMembers
                 yield return new object[] { DataConstants.RandomText, "Random Text", StringComparison.Ordinal, string.Empty };
                 yield return new object[] { DataConstants.RandomText, null, StringComparison.Ordinal, DataConstants.RandomText };
                 yield return new object[] { DataConstants.RandomText, string.Empty, StringComparison.Ordinal, DataConstants.RandomText };
-                yield return new object[] { DataConstants.RandomText, StringHelpers.GenerateRandomValue(), StringComparison.Ordinal, DataConstants.RandomText };
+                yield return new object[] { DataConstants.RandomText, RandomGeneratorHelpers.GenerateRandomValue(), StringComparison.Ordinal, DataConstants.RandomText };
             }
         }
 
@@ -68,7 +68,7 @@ namespace SocialEventManager.Tests.DataMembers
                 yield return new object[] { DataConstants.RandomText, "Random Text", StringComparison.Ordinal, string.Empty };
                 yield return new object[] { DataConstants.RandomText, null, StringComparison.Ordinal, DataConstants.RandomText };
                 yield return new object[] { DataConstants.RandomText, string.Empty, StringComparison.Ordinal, DataConstants.RandomText };
-                yield return new object[] { DataConstants.RandomText, StringHelpers.GenerateRandomValue(), StringComparison.Ordinal, DataConstants.RandomText };
+                yield return new object[] { DataConstants.RandomText, RandomGeneratorHelpers.GenerateRandomValue(), StringComparison.Ordinal, DataConstants.RandomText };
             }
         }
 
