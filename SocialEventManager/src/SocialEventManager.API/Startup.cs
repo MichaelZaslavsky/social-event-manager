@@ -16,6 +16,7 @@ namespace SocialEventManager.API
         {
             services.AddControllers();
             services.AddSwagger();
+            services.AddCors(options => options.AddPolicy(ApiConstants.AllowAll, builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -31,6 +32,8 @@ namespace SocialEventManager.API
             app.UseSwagger();
             app.UseSwaggerUI(c =>
                 c.SwaggerEndpoint($"/{ApiConstants.Swagger}/{ApiConstants.FirstVersion}/{ApiConstants.Swagger}.json", ApiConstants.SocialEventManagerApi));
+
+            app.UseCors(ApiConstants.AllowAll);
 
             app.UseEndpoints(endpoints =>
             {
