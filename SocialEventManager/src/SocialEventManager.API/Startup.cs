@@ -37,12 +37,7 @@ namespace SocialEventManager.API
             app.UseCors(ApiConstants.AllowAll);
 
             app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
-            });
+                endpoints.MapGet("/", async context => await context.Response.WriteAsync("Success").ConfigureAwait(false)));
         }
     }
 }
