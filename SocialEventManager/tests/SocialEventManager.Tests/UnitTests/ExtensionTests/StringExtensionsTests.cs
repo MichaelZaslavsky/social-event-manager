@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 using SocialEventManager.Shared.Extensions;
-using SocialEventManager.Tests.DataMembers;
+using SocialEventManager.Tests.DataMembers.Common;
 using Xunit;
 
 namespace SocialEventManager.Tests.UnitTests.ExtensionTests
