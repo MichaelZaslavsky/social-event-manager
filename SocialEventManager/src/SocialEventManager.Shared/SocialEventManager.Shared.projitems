@@ -11,6 +11,8 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Constants\ApiConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\DataConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants\DbConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants\MessagesConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\EnumerableExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\StringExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\RandomGeneratorHelpers.cs" />
