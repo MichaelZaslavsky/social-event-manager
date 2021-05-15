@@ -28,6 +28,7 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\SocialEventManager.Shared\SocialEventManager.Shared.projitems*{27fefebb-b724-4fa8-b30f-5542d96bbc48}*SharedItemsImports = 5
 		src\SocialEventManager.Shared\SocialEventManager.Shared.projitems*{60327afa-b6b1-4cc4-92be-087a8fb11a51}*SharedItemsImports = 13
+		src\SocialEventManager.Shared\SocialEventManager.Shared.projitems*{be980493-0840-4e1e-824e-e7acbb3575cc}*SharedItemsImports = 5
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
