@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <CodeAnalysisRuleSet>SocialEventManager.Infrastructure.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\..\items\StyleCop.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>
