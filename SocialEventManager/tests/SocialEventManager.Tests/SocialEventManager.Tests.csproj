@@ -24,6 +24,6 @@
     </PackageReference>
   </ItemGroup>
 
-  <Import Project="..\..\src\SocialEventManager.Shared\SocialEventManager.Shared.projitems" Label="Shared" />
+  <Import Project="..\..\shared\SocialEventManager.Shared\SocialEventManager.Shared.projitems" Label="Shared" />
 
 </Project>
