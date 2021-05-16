@@ -20,6 +20,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "items", "items", "{9B0999CD-BE6D-4543-96FC-6AEEE589E60A}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		items\StyleCop.ruleset = items\StyleCop.ruleset
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{1F2C2588-0906-41B1-BA6A-25F4A53BCCB2}"
