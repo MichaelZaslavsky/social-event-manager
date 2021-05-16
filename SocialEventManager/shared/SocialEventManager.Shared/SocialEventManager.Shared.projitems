@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Constants\ApiConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants\CategoryConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\DataConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\DbConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\MessagesConstants.cs" />

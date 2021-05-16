@@ -1,9 +1,13 @@
 using AutoFixture.Xunit2;
+using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Helpers;
 using Xunit;
+using Xunit.Categories;
 
 namespace SocialEventManager.Tests.UnitTests.HelperTests
 {
+    [UnitTest]
+    [Category(CategoryConstants.Helpers)]
     public class RandomGeneratorHelpersTests
     {
         [Theory]

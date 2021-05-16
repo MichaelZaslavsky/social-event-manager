@@ -1,12 +1,16 @@
 using System;
 using System.Collections.Generic;
+using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Tests.Common.Constants;
 using SocialEventManager.Tests.DataMembers.Common;
 using Xunit;
+using Xunit.Categories;
 
 namespace SocialEventManager.Tests.UnitTests.ExtensionTests
 {
+    [UnitTest]
+    [Category(CategoryConstants.Extensions)]
     public class EnumerableExtensionsTests
     {
         [Theory]
