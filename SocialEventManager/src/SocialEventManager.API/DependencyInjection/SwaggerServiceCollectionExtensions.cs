@@ -2,11 +2,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using SocialEventManager.Shared.Constants;
 
-namespace SocialEventManager.API.Services
+namespace SocialEventManager.API.DependencyInjection
 {
-    public static class SwaggerService
+    public static class SwaggerServiceCollectionExtensions
     {
-        public static void AddSwagger(this IServiceCollection services)
+        public static IServiceCollection AddSwagger(this IServiceCollection services)
         {
             services.AddSwaggerGen(c =>
             {
@@ -16,6 +16,8 @@ namespace SocialEventManager.API.Services
                     Title = ApiConstants.SocialEventManagerApi,
                 });
             });
+
+            return services;
         }
     }
 }
