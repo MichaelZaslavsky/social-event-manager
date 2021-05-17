@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -28,7 +29,8 @@ namespace SocialEventManager.API
             services.AddCors(options => options.AddPolicy(ApiConstants.AllowAll, builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
 
             services.AddSwagger()
-                .AddSqlServer(Configuration);
+                .AddSqlServer(Configuration)
+                .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             // Temp code - for test purposes
             services.AddScoped<IUsersService, UsersService>();
