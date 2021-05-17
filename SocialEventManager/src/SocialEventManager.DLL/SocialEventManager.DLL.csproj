@@ -16,6 +16,8 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
   </ItemGroup>
 
-  <Import Project="..\..\shared\SocialEventManager.Shared\SocialEventManager.Shared.projitems" Label="Shared" />
-
+  <ItemGroup>
+    <ProjectReference Include="..\SocialEventManager.Infrastructure\SocialEventManager.Infrastructure.csproj" />
+  </ItemGroup>
+  
 </Project>

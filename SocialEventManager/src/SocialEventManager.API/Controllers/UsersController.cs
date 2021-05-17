@@ -2,8 +2,10 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using SocialEventManager.BLL.Models;
 using SocialEventManager.BLL.Services;
+using SocialEventManager.Infrastructure.Loggers;
 
 namespace SocialEventManager.API.Controllers
 {
@@ -13,10 +15,14 @@ namespace SocialEventManager.API.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUsersService _usersService;
+        private readonly ILogger<UsersController> _logger;
+        private readonly IScopeInformation _scopeInfo;
 
-        public UsersController(IUsersService usersService)
+        public UsersController(IUsersService usersService, ILogger<UsersController> logger, IScopeInformation scopeInfo)
         {
             _usersService = usersService;
+            _logger = logger;
+            _scopeInfo = scopeInfo;
         }
 
         [HttpPost]
@@ -32,8 +38,13 @@ namespace SocialEventManager.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserDto))]
         public async Task<IActionResult> GetUser(Guid id)
         {
-            UserDto user = await _usersService.GetUser(id);
-            return Ok(user);
+            // Usage of logging only for test purposes
+            using (_logger.BeginScope($"Searching user by externalId: {id}."))
+            using (_logger.BeginScope(_scopeInfo.HostScopeInfo))
+            {
+                UserDto user = await _usersService.GetUser(id);
+                return Ok(user);
+            }
         }
     }
 }

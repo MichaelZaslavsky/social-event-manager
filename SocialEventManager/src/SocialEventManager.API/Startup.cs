@@ -6,9 +6,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SocialEventManager.API.DependencyInjection;
-using SocialEventManager.API.Utilities.Attributes;
+using SocialEventManager.API.Utilities.Handlers;
 using SocialEventManager.BLL.Services;
 using SocialEventManager.DLL.Repositories;
+using SocialEventManager.Infrastructure.Attributes;
+using SocialEventManager.Infrastructure.Filters;
+using SocialEventManager.Infrastructure.Loggers;
+using SocialEventManager.Infrastructure.Middleware;
 using SocialEventManager.Shared.Constants;
 
 namespace SocialEventManager.API
@@ -26,25 +30,33 @@ namespace SocialEventManager.API
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
             services.AddCors(options => options.AddPolicy(ApiConstants.AllowAll, builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
 
             services.AddSwagger()
                 .AddSqlServer(Configuration)
                 .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
-                .AddScoped<ValidationFilterAttribute>();
+                .AddScoped<ValidationFilterAttribute>()
+                .AddSingleton<IScopeInformation, ScopeInformation>();
 
             // Temp code - for test purposes
             services.AddScoped<IUsersService, UsersService>();
             services.AddScoped<IUsersRepository, UsersRepository>();
+
+            services.AddControllers(config => config.Filters.Add(typeof(TrackActionPerformanceFilter)));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseApiExceptionHandler(options =>
+            {
+                options.AddResponseDetails = ErrorResponseHandler.UpdateApiErrorResponse;
+                options.DetermineLogLevel = ErrorResponseHandler.DetermineLogLevel;
+            });
+            app.UseHsts();
+
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c =>
                     c.SwaggerEndpoint($"/{ApiConstants.Swagger}/{ApiConstants.FirstVersion}/{ApiConstants.Swagger}.json", ApiConstants.SocialEventManagerApi));
