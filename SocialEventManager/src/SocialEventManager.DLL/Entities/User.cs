@@ -20,9 +20,9 @@ namespace SocialEventManager.DLL.Entities
             Email = email;
         }
 
+        [Computed]
         public int Id { get; set; }
 
-        [Key]
         public Guid ExternalId { get; set; }
 
         public string FirstName { get; set; }
