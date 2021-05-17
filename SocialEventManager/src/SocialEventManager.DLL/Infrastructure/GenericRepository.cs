@@ -1,13 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
-using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
-using DapperExtensions;
+using Dapper.Contrib.Extensions;
 using SocialEventManager.DLL.Constants;
-using SocialEventManager.Shared.Constants;
 
 namespace SocialEventManager.DLL.Infrastructure
 {
@@ -21,7 +18,7 @@ namespace SocialEventManager.DLL.Infrastructure
             _dbConnectionFactory = dbConnectionFactory ?? throw new ArgumentNullException(nameof(dbConnectionFactory));
         }
 
-        public async Task<TEntity> InsertAsync(TEntity entity)
+        public async Task<int> InsertAsync(TEntity entity)
         {
             using IDbConnection connection = CreateDbConnection();
             return await connection.InsertAsync(entity);
@@ -42,7 +39,7 @@ namespace SocialEventManager.DLL.Infrastructure
         public async Task<IEnumerable<TEntity>> GetAsync()
         {
             using IDbConnection connection = CreateDbConnection();
-            return await connection.GetListAsync<TEntity>();
+            return await connection.GetAllAsync<TEntity>();
         }
 
         public async Task<bool> UpdateAsync(TEntity entity)
@@ -78,12 +75,15 @@ namespace SocialEventManager.DLL.Infrastructure
 
         private static string GetTableName()
         {
+            return string.Empty;
+            /*
             if (typeof(TEntity).GetCustomAttributes(typeof(TableAttribute), true).FirstOrDefault() is not TableAttribute table)
             {
                 throw new NullReferenceException(MessagesConstants.InternalServerError);
             }
 
             return table.Name;
+            */
         }
 
         #endregion Private Methods
