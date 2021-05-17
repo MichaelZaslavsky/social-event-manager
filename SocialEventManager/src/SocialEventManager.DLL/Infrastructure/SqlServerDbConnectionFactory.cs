@@ -5,16 +5,16 @@ namespace SocialEventManager.DLL.Infrastructure
 {
     public class SqlServerDbConnectionFactory : IDbConnectionFactory
     {
-        private readonly string connectionString;
+        private readonly string _connectionString;
 
         public SqlServerDbConnectionFactory(string connectionString)
         {
-            this.connectionString = connectionString;
+            _connectionString = connectionString;
         }
 
         public IDbConnection CreateDbConnection()
         {
-            var connection = new SqlConnection(connectionString);
+            var connection = new SqlConnection(_connectionString);
             connection.Open();
 
             return connection;
