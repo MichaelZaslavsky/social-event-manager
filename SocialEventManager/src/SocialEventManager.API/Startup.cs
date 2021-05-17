@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SocialEventManager.API.DependencyInjection;
+using SocialEventManager.API.Utilities.Attributes;
 using SocialEventManager.BLL.Services;
 using SocialEventManager.DLL.Repositories;
 using SocialEventManager.Shared.Constants;
@@ -30,7 +31,8 @@ namespace SocialEventManager.API
 
             services.AddSwagger()
                 .AddSqlServer(Configuration)
-                .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+                .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
+                .AddScoped<ValidationFilterAttribute>();
 
             // Temp code - for test purposes
             services.AddScoped<IUsersService, UsersService>();
