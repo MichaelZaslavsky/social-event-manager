@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SocialEventManager.API.DependencyInjection;
+using SocialEventManager.BLL.Services;
+using SocialEventManager.DLL.Repositories;
 using SocialEventManager.Shared.Constants;
 
 namespace SocialEventManager.API
@@ -27,6 +29,10 @@ namespace SocialEventManager.API
 
             services.AddSwagger()
                 .AddSqlServer(Configuration);
+
+            // Temp code - for test purposes
+            services.AddScoped<IUsersService, UsersService>();
+            services.AddScoped<IUsersRepository, UsersRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,7 +53,10 @@ namespace SocialEventManager.API
             app.UseCors(ApiConstants.AllowAll);
 
             app.UseEndpoints(endpoints =>
-                endpoints.MapGet("/", async context => await context.Response.WriteAsync("Success")));
+            {
+                endpoints.MapGet("/", async context => await context.Response.WriteAsync("Success"));
+                endpoints.MapControllers();
+            });
         }
     }
 }

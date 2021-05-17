@@ -6,7 +6,7 @@ namespace SocialEventManager.DLL.Infrastructure
 {
     public interface IGenericRepository<TEntity>
     {
-        Task<TEntity> InsertAsync(TEntity entity);
+        Task<int> InsertAsync(TEntity entity);
 
         Task InsertAsync(IEnumerable<TEntity> entities);
 

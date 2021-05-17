@@ -12,4 +12,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SocialEventManager.DLL\SocialEventManager.DLL.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -25,6 +25,9 @@
     </PackageReference>
   </ItemGroup>
 
-  <Import Project="..\..\shared\SocialEventManager.Shared\SocialEventManager.Shared.projitems" Label="Shared" />
-
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\SocialEventManager.BLL\SocialEventManager.BLL.csproj" />
+    <ProjectReference Include="..\..\src\SocialEventManager.DLL\SocialEventManager.DLL.csproj" />
+  </ItemGroup>
+  
 </Project>
