@@ -29,8 +29,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SocialEventManager.Shared",
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		shared\SocialEventManager.Shared\SocialEventManager.Shared.projitems*{20c3431b-8ec9-461d-b135-1abb44e05354}*SharedItemsImports = 5
 		shared\SocialEventManager.Shared\SocialEventManager.Shared.projitems*{584e0610-bf45-4502-ad01-95bc6a08ca6e}*SharedItemsImports = 13
-		shared\SocialEventManager.Shared\SocialEventManager.Shared.projitems*{be980493-0840-4e1e-824e-e7acbb3575cc}*SharedItemsImports = 5
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

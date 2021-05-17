@@ -1,8 +1,9 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using SocialEventManager.Shared.Constants;
 
-namespace SocialEventManager.API.Utilities.Attributes
+namespace SocialEventManager.Infrastructure.Attributes
 {
     public class ValidationFilterAttribute : IAsyncActionFilter
     {
@@ -10,7 +11,7 @@ namespace SocialEventManager.API.Utilities.Attributes
         {
             if (context.ActionArguments == null)
             {
-                context.Result = new BadRequestObjectResult("Object is null");
+                context.Result = new BadRequestObjectResult(ValidationConstants.ObjectIsNull);
                 return;
             }
 

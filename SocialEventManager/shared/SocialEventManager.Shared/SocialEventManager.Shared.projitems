@@ -13,10 +13,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)Constants\CategoryConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\DataConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\DbConstants.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Constants\MessagesConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants\ExceptionConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants\GlobalConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants\LinkConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants\MessageConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\SupportedLengthConstants.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Constants\TableNamesConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants\TableNameConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants\ValidationConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\EnumerableExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ExceptionExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\StringExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\RandomGeneratorHelpers.cs" />
   </ItemGroup>

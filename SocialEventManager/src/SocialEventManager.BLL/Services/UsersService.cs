@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.Extensions.Logging;
 using SocialEventManager.BLL.Models;
 using SocialEventManager.DLL.Entities;
 using SocialEventManager.DLL.Repositories;
@@ -11,11 +12,13 @@ namespace SocialEventManager.BLL.Services
     public class UsersService : IUsersService
     {
         private readonly IUsersRepository _usersRepository;
+        private readonly ILogger<UsersService> _logger;
         private readonly IMapper _mapper;
 
-        public UsersService(IUsersRepository usersRepository, IMapper mapper)
+        public UsersService(IUsersRepository usersRepository, ILogger<UsersService> logger, IMapper mapper)
         {
             _usersRepository = usersRepository;
+            _logger = logger;
             _mapper = mapper;
         }
 
@@ -28,6 +31,10 @@ namespace SocialEventManager.BLL.Services
         public async Task<UserDto> GetUser(Guid userId)
         {
             User user = await _usersRepository.GetSingleOfDefaultAsync(userId, nameof(User.ExternalId));
+
+            // Usage of logging only for test purposes
+            _logger.LogInformation($"User {user.FirstName} {user.LastName} was found.");
+
             return _mapper.Map<UserDto>(user);
         }
     }
