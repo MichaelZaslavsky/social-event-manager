@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using AutoMapper;
 using SocialEventManager.BLL.Models;
 using SocialEventManager.DLL.Entities;
 using SocialEventManager.DLL.Repositories;
@@ -10,22 +11,24 @@ namespace SocialEventManager.BLL.Services
     public class UsersService : IUsersService
     {
         private readonly IUsersRepository _usersRepository;
+        private readonly IMapper _mapper;
 
-        public UsersService(IUsersRepository usersRepository)
+        public UsersService(IUsersRepository usersRepository, IMapper mapper)
         {
             _usersRepository = usersRepository;
+            _mapper = mapper;
         }
 
         public async Task<int> CreateUser(UserDto userDto)
         {
-            var user = new User(userDto.ExternalId, userDto.FirstName, userDto.LastName, userDto.Email);
+            User user = _mapper.Map<User>(userDto);
             return await _usersRepository.InsertAsync(user);
         }
 
         public async Task<UserDto> GetUser(Guid userId)
         {
             User user = await _usersRepository.GetAsync(userId);
-            return new UserDto(user.ExternalId, user.FirstName, user.LastName, user.Email);
+            return _mapper.Map<UserDto>(user);
         }
     }
 }
