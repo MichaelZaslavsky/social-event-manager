@@ -5,7 +5,7 @@ using SocialEventManager.Shared.Constants;
 namespace SocialEventManager.DLL.Entities
 {
     // Temp class - for test purposes
-    [Table(TableNamesConstants.Users)]
+    [Table(TableNameConstants.Users)]
     public class User
     {
         public User()

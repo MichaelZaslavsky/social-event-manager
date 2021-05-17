@@ -7,11 +7,15 @@ using System.Threading.Tasks;
 using AutoFixture.Xunit2;
 using Newtonsoft.Json;
 using SocialEventManager.BLL.Models;
+using SocialEventManager.Shared.Constants;
 using Xunit;
+using Xunit.Categories;
 
 namespace SocialEventManager.Tests.IntegrationTests.ControllerTests
 {
     // Temp class - for test purposes
+    [IntegrationTest]
+    [Category(CategoryConstants.User)]
     public class UsersControllerTests
     {
         [Theory]
