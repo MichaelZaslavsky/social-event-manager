@@ -16,14 +16,14 @@ namespace SocialEventManager.Tests.IntegrationTests.ControllerTests
     {
         [Theory]
         [InlineAutoData]
-        public async Task CreateUser(UserDto userDto)
+        public async Task CreateUser(UserDto user)
         {
             using var client = new HttpClient();
 
             var request = new HttpRequestMessage(HttpMethod.Post, "https://localhost:44322/api/users");
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string json = JsonConvert.SerializeObject(userDto);
+            string json = JsonConvert.SerializeObject(user);
             request.Content = new StringContent(json, Encoding.UTF8, "application/json");
 
             HttpResponseMessage response = await client.SendAsync(request);

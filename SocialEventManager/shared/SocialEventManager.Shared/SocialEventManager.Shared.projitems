@@ -14,6 +14,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Constants\DataConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\DbConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\MessagesConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants\SupportedLengthConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\TableNamesConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\EnumerableExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\StringExtensions.cs" />
