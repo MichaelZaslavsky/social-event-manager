@@ -11,7 +11,7 @@ namespace SocialEventManager.Shared.Helpers
         public static string GenerateRandomValue(int length = 50)
         {
             char[] chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*".ToCharArray();
-            byte[] data = new byte[1];
+            var data = new byte[1];
 
             CryptoServiceProvider.GetNonZeroBytes(data);
             data = new byte[length];

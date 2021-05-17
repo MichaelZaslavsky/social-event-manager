@@ -14,11 +14,11 @@ namespace SocialEventManager.DLL.Infrastructure
     public abstract class GenericRepository<TEntity> : IGenericRepository<TEntity>
         where TEntity : class
     {
-        private readonly IDbConnectionFactory dbConnectionFactory;
+        private readonly IDbConnectionFactory _dbConnectionFactory;
 
         protected GenericRepository(IDbConnectionFactory dbConnectionFactory)
         {
-            this.dbConnectionFactory = dbConnectionFactory ?? throw new ArgumentNullException(nameof(dbConnectionFactory));
+            _dbConnectionFactory = dbConnectionFactory ?? throw new ArgumentNullException(nameof(dbConnectionFactory));
         }
 
         public async Task<TEntity> InsertAsync(TEntity entity)
@@ -72,7 +72,7 @@ namespace SocialEventManager.DLL.Infrastructure
         }
 
         private IDbConnection CreateDbConnection() =>
-            dbConnectionFactory.CreateDbConnection();
+            _dbConnectionFactory.CreateDbConnection();
 
         #region Private Methods
 
