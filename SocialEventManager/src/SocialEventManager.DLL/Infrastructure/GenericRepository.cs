@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Reflection;
 using System.Threading.Tasks;
 using Dapper;
 using Dapper.Contrib.Extensions;
@@ -54,36 +55,54 @@ namespace SocialEventManager.DLL.Infrastructure
             return await connection.DeleteAsync(entity);
         }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task<TEntity> GetSingleOfDefaultAsync<TFilter>(TFilter filterValue, string columnName)
         {
             using IDbConnection connection = CreateDbConnection();
+            string tableName = GetTableName<TEntity>();
 
-            string tableName = GetTableName();
+            string query = $@"
+                SELECT  *
+                FROM    {tableName}
+                WHERE   {columnName} = @FilterValue;";
+
+            return await connection.QuerySingleOrDefaultAsync<TEntity>(query, new { FilterValue = filterValue });
+        }
+
+        public async Task<bool> DeleteAsync(Guid id)
+        {
+            using IDbConnection connection = CreateDbConnection();
+            string tableName = GetTableName<TEntity>();
+
             string query = $@"
                 DELETE FROM {tableName}
                 WHERE Id = @Id;
 
                 {QueryConstants.SelectRowCount}";
 
-            await connection.ExecuteAsync(query, new { Id = id });
+            return await connection.ExecuteAsync(query, new { Id = id }) > 0;
         }
+
+        #region Private Methods
 
         private IDbConnection CreateDbConnection() =>
             _dbConnectionFactory.CreateDbConnection();
 
-        #region Private Methods
-
-        private static string GetTableName()
+        private static string GetTableName<T>()
         {
-            return string.Empty;
-            /*
-            if (typeof(TEntity).GetCustomAttributes(typeof(TableAttribute), true).FirstOrDefault() is not TableAttribute table)
+            if (SqlMapperExtensions.TableNameMapper != null)
             {
-                throw new NullReferenceException(MessagesConstants.InternalServerError);
+                return SqlMapperExtensions.TableNameMapper(typeof(T));
             }
 
-            return table.Name;
-            */
+            const string getTableName = "GetTableName";
+            MethodInfo getTableNameMethod = typeof(SqlMapperExtensions).GetMethod(getTableName, BindingFlags.NonPublic | BindingFlags.Static);
+
+            if (getTableNameMethod == null)
+            {
+                throw new ArgumentOutOfRangeException($"Method '{getTableName}' is not found in '{nameof(SqlMapperExtensions)}' class.");
+            }
+
+            return getTableNameMethod.Invoke(null, new object[] { typeof(T) }) as string;
         }
 
         #endregion Private Methods

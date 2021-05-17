@@ -27,7 +27,7 @@ namespace SocialEventManager.BLL.Services
 
         public async Task<UserDto> GetUser(Guid userId)
         {
-            User user = await _usersRepository.GetAsync(userId);
+            User user = await _usersRepository.GetSingleOfDefaultAsync(userId, nameof(User.ExternalId));
             return _mapper.Map<UserDto>(user);
         }
     }
