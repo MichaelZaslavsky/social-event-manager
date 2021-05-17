@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace SocialEventManager.DLL.Infrastructure
 {
-    public interface IGenericRepository<TEntity>
+    public interface IGenericRepository<TEntity> : IExtendedRepository<TEntity>
     {
         Task<int> InsertAsync(TEntity entity);
 
@@ -17,7 +17,5 @@ namespace SocialEventManager.DLL.Infrastructure
         Task<bool> UpdateAsync(TEntity entity);
 
         Task<bool> DeleteAsync(TEntity entity);
-
-        Task DeleteAsync(Guid id);
     }
 }
