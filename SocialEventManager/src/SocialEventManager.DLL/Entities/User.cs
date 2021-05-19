@@ -8,18 +8,6 @@ namespace SocialEventManager.DLL.Entities
     [Table(TableNameConstants.Users)]
     public class User
     {
-        public User()
-        {
-        }
-
-        public User(Guid externalId, string firstName, string lastName, string email)
-        {
-            ExternalId = externalId;
-            FirstName = firstName;
-            LastName = lastName;
-            Email = email;
-        }
-
         [Computed]
         public int Id { get; set; }
 
