@@ -20,9 +20,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Constants\SupportedLengthConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\TableNameConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\ValidationConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Exceptions\BadRequestException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Exceptions\NotFoundException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\EnumerableExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\ExceptionExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\StringExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Exceptions\ValidationException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\RandomGeneratorHelpers.cs" />
   </ItemGroup>
 </Project>

@@ -5,6 +5,8 @@ using Microsoft.Extensions.Logging;
 using SocialEventManager.BLL.Models;
 using SocialEventManager.DLL.Entities;
 using SocialEventManager.DLL.Repositories;
+using SocialEventManager.Shared.Constants;
+using SocialEventManager.Shared.Exceptions;
 
 namespace SocialEventManager.BLL.Services
 {
@@ -31,6 +33,11 @@ namespace SocialEventManager.BLL.Services
         public async Task<UserDto> GetUser(Guid userId)
         {
             User user = await _usersRepository.GetSingleOfDefaultAsync(userId, nameof(User.ExternalId));
+
+            if (user == null)
+            {
+                throw new NotFoundException($"The user '{userId}' {ValidationConstants.WasNotFound}");
+            }
 
             // Usage of logging only for test purposes
             _logger.LogInformation($"User {user.FirstName} {user.LastName} was found.");

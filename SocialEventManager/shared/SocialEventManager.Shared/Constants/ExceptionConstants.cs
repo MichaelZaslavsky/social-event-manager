@@ -11,5 +11,8 @@ namespace SocialEventManager.Tests.Common.Constants
         public const string Exception = ExceptionWasA + "generic exception.";
         public const string CannotOpenDatabase = "cannot open database";
         public const string ANetworkRelated = "a network-related";
+        public const string NotFound = "Not Found";
+        public const string BadRequest = "Bad Request";
+        public const string InternalServerError = "Internal Server Error";
     }
 }
