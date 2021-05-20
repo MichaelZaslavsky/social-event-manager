@@ -1,11 +1,26 @@
 using System;
 using System.Collections.Generic;
+using System.Net;
+using SocialEventManager.Shared.Exceptions;
 using SocialEventManager.Tests.Common.Constants;
 
 namespace SocialEventManager.Tests.Common.DataMembers
 {
     public static class ExceptionData
     {
+        public static IEnumerable<object[]> ExceptionDataForHttpStatusAndTitle
+        {
+            get
+            {
+                yield return new object[] { new NotFoundException(), (HttpStatusCode.NotFound, ExceptionConstants.NotFound) };
+                yield return new object[] { new BadRequestException(), (HttpStatusCode.BadRequest, ExceptionConstants.BadRequest) };
+                yield return new object[] { new ValidationException(), (HttpStatusCode.BadRequest, ExceptionConstants.BadRequest) };
+                yield return new object[] { null, (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError) };
+                yield return new object[] { new NullReferenceException(), (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError) };
+                yield return new object[] { new Exception(), (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError) };
+            }
+        }
+
         public static IEnumerable<object[]> CriticalExceptionsData
         {
             get

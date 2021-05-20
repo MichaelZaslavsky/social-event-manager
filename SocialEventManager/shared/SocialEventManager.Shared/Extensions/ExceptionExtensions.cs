@@ -10,10 +10,15 @@ namespace SocialEventManager.Shared.Extensions
     {
         public static (HttpStatusCode httpStatusCode, string title) ToHttpStatusCodeAndTitle(this Exception ex)
         {
+            if (ex == null)
+            {
+                return (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError);
+            }
+
             return ex switch
             {
                 NotFoundException => (HttpStatusCode.NotFound, ExceptionConstants.NotFound),
-                BadRequestException or ValidationException or Exception => (HttpStatusCode.BadRequest, ExceptionConstants.BadRequest),
+                BadRequestException or ValidationException => (HttpStatusCode.BadRequest, ExceptionConstants.BadRequest),
                 _ => (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError),
             };
         }
