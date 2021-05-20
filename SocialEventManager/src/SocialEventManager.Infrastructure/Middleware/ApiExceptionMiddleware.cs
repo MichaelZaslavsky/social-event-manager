@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using SocialEventManager.Shared.Constants;
+using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Tests.Common.Constants;
 
 namespace SocialEventManager.Infrastructure.Middleware
@@ -38,11 +39,13 @@ namespace SocialEventManager.Infrastructure.Middleware
 
         private Task HandleExceptionAsync(HttpContext context, Exception ex, ApiExceptionOptions options)
         {
+            (HttpStatusCode httpStatusCode, string title) = ex.ToHttpStatusCodeAndTitle();
+
             var error = new ApiError
             {
                 Id = Guid.NewGuid().ToString(),
-                Status = (short)HttpStatusCode.InternalServerError,
-                Title = MessageConstants.InternalServerError,
+                Status = (short)httpStatusCode,
+                Title = title,
             };
 
             options.AddResponseDetails?.Invoke(context, ex, error);
@@ -54,7 +57,7 @@ namespace SocialEventManager.Infrastructure.Middleware
 
             string result = JsonConvert.SerializeObject(error);
             context.Response.ContentType = ApiConstants.ApplicationJson;
-            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            context.Response.StatusCode = (int)httpStatusCode;
 
             return context.Response.WriteAsync(result);
         }

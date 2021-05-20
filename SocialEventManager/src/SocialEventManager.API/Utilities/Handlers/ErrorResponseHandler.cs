@@ -2,8 +2,10 @@ using System;
 using System.Data.SqlClient;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using SocialEventManager.Infrastructure.Middleware;
 using SocialEventManager.Shared.Constants;
+using SocialEventManager.Shared.Exceptions;
 using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Tests.Common.Constants;
 
@@ -17,6 +19,9 @@ namespace SocialEventManager.API.Utilities.Handlers
 
             error.Data = name switch
             {
+                nameof(ValidationException) => new ApiErrorData(JsonConvert.SerializeObject(((ValidationException)ex).ValdationErrors)),
+                nameof(BadRequestException) => new ApiErrorData(ex.Message, LinkConstants.BadRequestException),
+                nameof(NotFoundException) => new ApiErrorData(ex.Message, LinkConstants.NotFoundException),
                 nameof(NullReferenceException) => new ApiErrorData(ExceptionConstants.NullReferenceException, LinkConstants.NullReferenceException),
                 nameof(TimeoutException) => new ApiErrorData(ExceptionConstants.TimeoutException, LinkConstants.TimeoutException),
                 nameof(SqlException) => new ApiErrorData(ExceptionConstants.SqlException, LinkConstants.SqlException),

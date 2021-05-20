@@ -36,6 +36,7 @@ namespace SocialEventManager.API.Controllers
         [HttpGet]
         [Route("{id:Guid}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserDto))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(UserDto))]
         public async Task<IActionResult> GetUser(Guid id)
         {
             // Usage of logging only for test purposes
