@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Reflection;
 
 namespace SocialEventManager.Shared.Extensions
 {
@@ -13,5 +15,25 @@ namespace SocialEventManager.Shared.Extensions
 
         public static bool IsNotNullAndAny<T>(this IEnumerable<T> enumerable) =>
             enumerable?.Any() == true;
+
+        public static DataTable ToDataTable<T>(this IEnumerable<T> enumerable)
+        {
+            var dataTable = new DataTable();
+
+            PropertyInfo[] properties = typeof(T).GetProperties();
+
+            foreach (PropertyInfo p in properties)
+            {
+                dataTable.Columns.Add(p.Name, p.PropertyType);
+            }
+
+            foreach (T item in enumerable)
+            {
+                object[] values = properties.Select(p => p.GetValue(item)).ToArray();
+                dataTable.Rows.Add(values);
+            }
+
+            return dataTable;
+        }
     }
 }

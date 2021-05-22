@@ -23,5 +23,10 @@
     <ProjectReference Include="..\SocialEventManager.DLL\SocialEventManager.DLL.csproj" />
     <ProjectReference Include="..\SocialEventManager.Infrastructure\SocialEventManager.Infrastructure.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="db\datasets\" />
+    <Folder Include="db\migrations\" />
+  </ItemGroup>
   
 </Project>

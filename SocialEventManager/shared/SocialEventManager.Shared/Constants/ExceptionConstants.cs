@@ -14,5 +14,6 @@ namespace SocialEventManager.Tests.Common.Constants
         public const string NotFound = "Not Found";
         public const string BadRequest = "Bad Request";
         public const string InternalServerError = "Internal Server Error";
+        public const string DatabaseMigrationFailed = "Database migration failed.";
     }
 }
