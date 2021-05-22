@@ -10,18 +10,18 @@ namespace SocialEventManager.BLL.Models
         public Guid ExternalId { get; set; }
 
         [Required]
-        [MaxLength(SupportedLengthConstants.Length255)]
-        [MinLength(SupportedLengthConstants.Length2)]
+        [MaxLength(LengthConstants.Length255)]
+        [MinLength(LengthConstants.Length2)]
         public string FirstName { get; set; }
 
         [Required]
-        [MaxLength(SupportedLengthConstants.Length255)]
-        [MinLength(SupportedLengthConstants.Length2)]
+        [MaxLength(LengthConstants.Length255)]
+        [MinLength(LengthConstants.Length2)]
         public string LastName { get; set; }
 
         [Required]
         [EmailAddress]
-        [MaxLength(SupportedLengthConstants.Length100)]
+        [MaxLength(LengthConstants.Length100)]
         public string Email { get; set; }
     }
 }

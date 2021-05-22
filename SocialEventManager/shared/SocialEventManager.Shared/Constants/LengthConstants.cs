@@ -1,6 +1,6 @@
 namespace SocialEventManager.Shared.Constants
 {
-    public static class SupportedLengthConstants
+    public static class LengthConstants
     {
         public const int Length2 = 2;
         public const int Length25 = 25;

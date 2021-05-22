@@ -6,6 +6,9 @@ namespace SocialEventManager.Shared.Constants
         public const string SocialEventManagerApi = "Social Event Manager API";
         public const string FirstVersion = "v1";
         public const string AllowAll = "AllowAll";
+        public const string AspNetCoreEnvironment = "ASPNETCORE_ENVIRONMENT";
+        public const string AppSettings = "appSettings";
+        public const string AppSettingsJson = "appSettings.json";
         public const string ApplicationJson = "application/json";
         public const string StartingHost = "Starting host";
         public const string HostTerminatedUnexpectedly = "Host terminated unexpectedly";
