@@ -12,6 +12,7 @@ using SocialEventManager.BLL.Services;
 using SocialEventManager.DLL.Repositories;
 using SocialEventManager.Infrastructure.Attributes;
 using SocialEventManager.Infrastructure.Filters;
+using SocialEventManager.Infrastructure.Filters.BackgroundJobs;
 using SocialEventManager.Infrastructure.Loggers;
 using SocialEventManager.Infrastructure.Middleware;
 using SocialEventManager.Shared.Constants;
@@ -45,6 +46,7 @@ namespace SocialEventManager.API
             services.AddScoped<IUsersRepository, UsersRepository>();
 
             services.AddControllers(config => config.Filters.Add(typeof(TrackActionPerformanceFilter)));
+            GlobalJobFilters.Filters.Add(new HangfireApplyStateEventsLogAttribute());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
