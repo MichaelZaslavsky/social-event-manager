@@ -46,7 +46,7 @@ namespace SocialEventManager.API
             services.AddScoped<IUsersRepository, UsersRepository>();
 
             services.AddControllers(config => config.Filters.Add(typeof(TrackActionPerformanceFilter)));
-            GlobalJobFilters.Filters.Add(new HangfireApplyStateEventsLogAttribute());
+            GlobalJobFilters.Filters.Add(new HangfireElectStateEventsLogAttribute());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
