@@ -1,4 +1,5 @@
 using System;
+using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -34,6 +35,7 @@ namespace SocialEventManager.API
 
             services.AddSwagger()
                 .AddSqlServer(Configuration)
+                .AddHangfire(Configuration)
                 .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
                 .AddScoped<ValidationFilterAttribute>()
                 .AddSingleton<IScopeInformation, ScopeInformation>();
@@ -54,6 +56,7 @@ namespace SocialEventManager.API
                 options.DetermineLogLevel = ErrorResponseHandler.DetermineLogLevel;
             });
             app.UseHsts();
+            app.UseHangfireDashboard();
 
             if (env.IsDevelopment())
             {
