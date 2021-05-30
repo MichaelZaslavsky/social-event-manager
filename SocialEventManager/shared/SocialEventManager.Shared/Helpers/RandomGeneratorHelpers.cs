@@ -6,16 +6,16 @@ namespace SocialEventManager.Shared.Helpers
 {
     public static class RandomGeneratorHelpers
     {
-        private static readonly RNGCryptoServiceProvider CryptoServiceProvider = new ();
+        private static readonly RNGCryptoServiceProvider _cryptoServiceProvider = new ();
 
         public static string GenerateRandomValue(int length = 50)
         {
             char[] chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*".ToCharArray();
             var data = new byte[1];
 
-            CryptoServiceProvider.GetNonZeroBytes(data);
+            _cryptoServiceProvider.GetNonZeroBytes(data);
             data = new byte[length];
-            CryptoServiceProvider.GetNonZeroBytes(data);
+            _cryptoServiceProvider.GetNonZeroBytes(data);
 
             var builder = new StringBuilder(length);
             foreach (byte b in data)
@@ -37,7 +37,7 @@ namespace SocialEventManager.Shared.Helpers
         private static byte[] GenerateRandomBytes(int bytesNumber)
         {
             var buffer = new byte[bytesNumber];
-            CryptoServiceProvider.GetBytes(buffer);
+            _cryptoServiceProvider.GetBytes(buffer);
 
             return buffer;
         }
