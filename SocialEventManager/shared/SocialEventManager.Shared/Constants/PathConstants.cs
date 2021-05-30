@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace SocialEventManager.Shared.Constants
 {
     public static class PathConstants
