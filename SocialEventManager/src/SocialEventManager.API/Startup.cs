@@ -1,4 +1,5 @@
 using System;
+using AspNetCoreRateLimit;
 using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,6 +32,9 @@ namespace SocialEventManager.API
         {
             services.AddCors(options => options.AddPolicy(ApiConstants.AllowAll, builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()))
                 .AddSwagger()
+                .AddOptions()
+                .AddMemoryCache()
+                .AddRateLimiting(Configuration)
                 .AddSqlServer(Configuration)
                 .AddHangfire(Configuration)
                 .RegisterDi()
@@ -61,6 +65,7 @@ namespace SocialEventManager.API
 
             app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseIpRateLimiting();
 
             app.UseCors(ApiConstants.AllowAll);
 

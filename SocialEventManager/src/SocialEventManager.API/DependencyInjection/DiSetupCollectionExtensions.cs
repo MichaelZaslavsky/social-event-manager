@@ -1,4 +1,5 @@
 using System.Reflection;
+using AspNetCoreRateLimit;
 using Microsoft.Extensions.DependencyInjection;
 using NetCore.AutoRegisterDi;
 using SocialEventManager.Infrastructure.Loggers;
@@ -22,6 +23,7 @@ namespace SocialEventManager.API.DependencyInjection
                 .AsPublicImplementedInterfaces(ServiceLifetime.Scoped);
 
             services.AddSingleton<IScopeInformation, ScopeInformation>();
+            services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
 
             return services;
         }
