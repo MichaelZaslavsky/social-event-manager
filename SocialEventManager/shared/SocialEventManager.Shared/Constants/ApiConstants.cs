@@ -12,5 +12,7 @@ namespace SocialEventManager.Shared.Constants
         public const string ApplicationJson = "application/json";
         public const string StartingHost = "Starting host";
         public const string HostTerminatedUnexpectedly = "Host terminated unexpectedly";
+        public const string IpRateLimiting = "IpRateLimiting";
+        public const string IpRateLimitPolicies = "IpRateLimitPolicies";
     }
 }
