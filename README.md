@@ -21,7 +21,7 @@ A project for leaning purposes built by Michael Zaslavsky
     <li>
       <a href="#roadmap">Roadmap</a>
       <ul>
-        <li><a href="#infrastructures-roadmap">Infrastructures</a></li>
+        <li><a href="#infrastructures">Infrastructures</a></li>
       </ul>
     </li>
     <li><a href="#roadmap">Roadmap</a></li>
@@ -131,7 +131,7 @@ Social Event Manager (SEM) is a social network for organizing events.
 <!-- CONTRIBUTING -->
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
