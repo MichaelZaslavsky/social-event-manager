@@ -1,5 +1,5 @@
 # social-event-manager
-A project for leaning purposes built by Michael Zaslavsky
+A project for leaning purposes built by Michael Zaslavsky.
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
@@ -16,6 +16,7 @@ A project for leaning purposes built by Michael Zaslavsky
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
+        <li><a href="#running-serilog">Running Serilog</a></li>
       </ul>
     </li>
     <li>
@@ -64,40 +65,46 @@ Social Event Manager (SEM) is a social network for organizing events.
    ```sh
    git clone https://github.com/MichaelZaslavsky/social-event-manager.git
    ```
+### Running Serilog
 
+* Install Docker.
+* Follow these steps: https://hub.docker.com/r/datalust/seq
+* Open http://localhost:5341/#/events
 
 
 <!-- ROADMAP -->
 ## Roadmap
 
 ### Infrastructures
-✅ Projects Architecture
+✔️ Projects Architecture
 
-✅ .editorconfig file
+✔️ .editorconfig file
 
-✅ Analyzers including StyleCop & Roslynator analysis
+✔️ Analyzers including StyleCop & Roslynator analysis
 
-✅ Swagger documentation
+✔️ Swagger documentation
 
-✅ .NET Core DI setups
+✔️ .NET Core DI setups
 
-✅ AutoMapper
+✔️ AutoMapper
 
-✅ Logs with Serilog
+✔️ Logs with Serilog
 
-✅ Exceptions Handling
+✔️ Exceptions Handling
 
-✅ Dapper ORM
+✔️ Dapper ORM
 
-✅ Repository pattern
+✔️ Repository pattern
 
-✅ Rate limiting
+✔️ Rate limiting
 
-✅ Evolve migrations
+✔️ Evolve migrations
 
-✅ Hangfire - Background jobs
+✔️ Hangfire - Background jobs
 
-✅ Data annotations middleware
+✔️ Data annotations middleware
+
+✔️ Basic tests with xUnit
 
 ❌ Secrets
 
