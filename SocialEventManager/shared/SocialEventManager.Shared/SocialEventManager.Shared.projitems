@@ -19,6 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Constants\MessageConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\PathConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\SchemaConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\MessageHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Queries\SchemaQueryHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\LengthConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\TableNameConstants.cs" />
