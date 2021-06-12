@@ -1,4 +1,4 @@
-# social-event-manager
+# Social Event Manager
 A project for leaning purposes built by Michael Zaslavsky.
 
 <!-- TABLE OF CONTENTS -->
@@ -15,7 +15,7 @@ A project for leaning purposes built by Michael Zaslavsky.
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#run">Run</a></li>
         <li><a href="#running-serilog">Running Serilog</a></li>
       </ul>
     </li>
@@ -53,18 +53,33 @@ Social Event Manager (SEM) is a social network for organizing events.
 
 ### Prerequisites
 
-* Run script to create the initial database
-  ```sh
-  CREATE DATABASE SocialEventManager;
-  ```
-* Set "SocialEventManager.API" project as startup and run it. It will run the Evolve migrations and HangFire which will create/update the relevant databases.
+1. Install .NET Core
+   ```sh
+   https://dotnet.microsoft.com/download
+   ```
+2. Install SQL Server
+   ```sh
+   https://www.microsoft.com/en-us/sql-server/sql-server-downloads
+   ```
 
-### Installation
+### Run
 
 1. Clone the repo
    ```sh
    git clone https://github.com/MichaelZaslavsky/social-event-manager.git
    ```
+2. Open "Developer Command Prompt" and add the connection strings to the secret key manager:
+	```sh
+   dotnet user-secrets init
+   dotnet user-secrets set ConnectionStrings:SocialEventManager "Data Source=.;Initial Catalog=SocialEventManager;Integrated Security=True;MultipleActiveResultSets=True;"
+   dotnet user-secrets set ConnectionStrings:SocialEventManagerHangfire "Data Source=.;Initial Catalog=SocialEventManagerHangfire;Integrated Security=True;MultipleActiveResultSets=True;"
+   ```
+3. Run script to create the initial database
+   ```sh
+   CREATE DATABASE SocialEventManager;
+   ```
+4. Set "SocialEventManager.API" project as startup and run it. It will run the Evolve migrations and HangFire which will create/update the relevant databases.
+
 ### Running Serilog
 
 * Install Docker.
@@ -106,7 +121,7 @@ Social Event Manager (SEM) is a social network for organizing events.
 
 ✔️ Basic tests with xUnit
 
-❌ Secrets
+✔️ Secrets
 
 ❌ SignalR
 
