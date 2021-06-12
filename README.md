@@ -122,6 +122,8 @@ Social Event Manager (SEM) is a social network for organizing events.
 
 ✔️ Secrets
 
+✔️ UnitOfWork
+
 ❌ SignalR
 
 ❌ Distributed cache with Redis
@@ -129,8 +131,6 @@ Social Event Manager (SEM) is a social network for organizing events.
 ❌ Sentry
 
 ❌ Security checks
-
-❌ UnitOfWork
 
 ❌ Allow media binders
 
