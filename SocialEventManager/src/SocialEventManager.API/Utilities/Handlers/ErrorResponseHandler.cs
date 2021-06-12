@@ -1,12 +1,18 @@
 using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
+using Serilog;
 using SocialEventManager.Infrastructure.Middleware;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Exceptions;
 using SocialEventManager.Shared.Extensions;
+using SocialEventManager.Shared.Helpers;
 using SocialEventManager.Tests.Common.Constants;
 
 namespace SocialEventManager.API.Utilities.Handlers
@@ -28,6 +34,11 @@ namespace SocialEventManager.API.Utilities.Handlers
                 nameof(Exception) => new ApiErrorData(ExceptionConstants.Exception, LinkConstants.Exception),
                 _ => new ApiErrorData(name)
             };
+
+            string requestMessage = MessageHelpers.BuildRequestMessage(context.Request);
+            string responseMessage = MessageHelpers.BuildResponseMessage(error);
+
+            Log.Logger.Information(responseMessage + Environment.NewLine + Environment.NewLine + requestMessage);
         }
 
         public static LogLevel DetermineLogLevel(Exception ex)
