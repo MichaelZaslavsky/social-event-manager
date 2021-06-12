@@ -16,7 +16,7 @@ A project for leaning purposes built by Michael Zaslavsky.
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#run">Run</a></li>
-        <li><a href="#running-serilog">Running Serilog</a></li>
+        <li><a href="#run-serilog">Run Serilog</a></li>
       </ul>
     </li>
     <li>
@@ -25,7 +25,6 @@ A project for leaning purposes built by Michael Zaslavsky.
         <li><a href="#infrastructures">Infrastructures</a></li>
       </ul>
     </li>
-    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -80,7 +79,7 @@ Social Event Manager (SEM) is a social network for organizing events.
    ```
 4. Set "SocialEventManager.API" project as startup and run it. It will run the Evolve migrations and HangFire which will create/update the relevant databases.
 
-### Running Serilog
+### Run Serilog
 
 * Install Docker.
 * Follow these steps: https://hub.docker.com/r/datalust/seq
