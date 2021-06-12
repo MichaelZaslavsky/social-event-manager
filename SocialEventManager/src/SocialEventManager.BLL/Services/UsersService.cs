@@ -4,6 +4,7 @@ using AutoMapper;
 using Microsoft.Extensions.Logging;
 using SocialEventManager.BLL.Models;
 using SocialEventManager.DLL.Entities;
+using SocialEventManager.DLL.Infrastructure;
 using SocialEventManager.DLL.Repositories;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Exceptions;
@@ -14,12 +15,14 @@ namespace SocialEventManager.BLL.Services
     public class UsersService : IUsersService
     {
         private readonly IUsersRepository _usersRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<UsersService> _logger;
         private readonly IMapper _mapper;
 
-        public UsersService(IUsersRepository usersRepository, ILogger<UsersService> logger, IMapper mapper)
+        public UsersService(IUsersRepository usersRepository, IUnitOfWork unitOfWork, ILogger<UsersService> logger, IMapper mapper)
         {
             _usersRepository = usersRepository;
+            _unitOfWork = unitOfWork;
             _logger = logger;
             _mapper = mapper;
         }
@@ -27,7 +30,13 @@ namespace SocialEventManager.BLL.Services
         public async Task<int> CreateUser(UserDto userDto)
         {
             User user = _mapper.Map<User>(userDto);
-            return await _usersRepository.InsertAsync(user);
+
+            // Usage of UnitOfWork just for testing & usage example
+            _unitOfWork.BeginTransaction();
+            int userId = await _usersRepository.InsertAsync(user);
+            _unitOfWork.Commit();
+
+            return userId;
         }
 
         public async Task<UserDto> GetUser(Guid userId)

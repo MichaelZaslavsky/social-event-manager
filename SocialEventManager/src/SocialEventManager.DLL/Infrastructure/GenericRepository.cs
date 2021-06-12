@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Reflection;
 using System.Threading.Tasks;
 using Dapper;
@@ -12,52 +11,33 @@ namespace SocialEventManager.DLL.Infrastructure
     public abstract class GenericRepository<TEntity> : IGenericRepository<TEntity>
         where TEntity : class
     {
-        private readonly IDbConnectionFactory _dbConnectionFactory;
+        private readonly IDbSession _session;
 
-        protected GenericRepository(IDbConnectionFactory dbConnectionFactory)
+        protected GenericRepository(IDbSession session)
         {
-            _dbConnectionFactory = dbConnectionFactory ?? throw new ArgumentNullException(nameof(dbConnectionFactory));
+            _session = session ?? throw new ArgumentNullException(nameof(session));
         }
 
-        public async Task<int> InsertAsync(TEntity entity)
-        {
-            using IDbConnection connection = CreateDbConnection();
-            return await connection.InsertAsync(entity);
-        }
+        public async Task<int> InsertAsync(TEntity entity) =>
+            await _session.Connection.InsertAsync(entity, _session.Transaction);
 
-        public async Task InsertAsync(IEnumerable<TEntity> entities)
-        {
-            using IDbConnection connection = CreateDbConnection();
-            await connection.InsertAsync(entities);
-        }
+        public async Task InsertAsync(IEnumerable<TEntity> entities) =>
+            await _session.Connection.InsertAsync(entities, _session.Transaction);
 
-        public async Task<TEntity> GetAsync(Guid id)
-        {
-            using IDbConnection connection = CreateDbConnection();
-            return await connection.GetAsync<TEntity>(id);
-        }
+        public async Task<TEntity> GetAsync(Guid id) =>
+            await _session.Connection.GetAsync<TEntity>(id, _session.Transaction);
 
-        public async Task<IEnumerable<TEntity>> GetAsync()
-        {
-            using IDbConnection connection = CreateDbConnection();
-            return await connection.GetAllAsync<TEntity>();
-        }
+        public async Task<IEnumerable<TEntity>> GetAsync() =>
+            await _session.Connection.GetAllAsync<TEntity>(_session.Transaction);
 
-        public async Task<bool> UpdateAsync(TEntity entity)
-        {
-            using IDbConnection connection = CreateDbConnection();
-            return await connection.UpdateAsync(entity);
-        }
+        public async Task<bool> UpdateAsync(TEntity entity) =>
+            await _session.Connection.UpdateAsync(entity, _session.Transaction);
 
-        public async Task<bool> DeleteAsync(TEntity entity)
-        {
-            using IDbConnection connection = CreateDbConnection();
-            return await connection.DeleteAsync(entity);
-        }
+        public async Task<bool> DeleteAsync(TEntity entity) =>
+            await _session.Connection.DeleteAsync(entity, _session.Transaction);
 
         public async Task<TEntity> GetSingleOfDefaultAsync<TFilter>(TFilter filterValue, string columnName)
         {
-            using IDbConnection connection = CreateDbConnection();
             string tableName = GetTableName<TEntity>();
 
             string query = $@"
@@ -65,12 +45,11 @@ namespace SocialEventManager.DLL.Infrastructure
                 FROM    {tableName}
                 WHERE   {columnName} = @FilterValue;";
 
-            return await connection.QuerySingleOrDefaultAsync<TEntity>(query, new { FilterValue = filterValue });
+            return await _session.Connection.QuerySingleOrDefaultAsync<TEntity>(query, new { FilterValue = filterValue }, _session.Transaction);
         }
 
         public async Task<bool> DeleteAsync(Guid id)
         {
-            using IDbConnection connection = CreateDbConnection();
             string tableName = GetTableName<TEntity>();
 
             string query = $@"
@@ -79,13 +58,10 @@ namespace SocialEventManager.DLL.Infrastructure
 
                 {QueryConstants.SelectRowCount}";
 
-            return await connection.ExecuteAsync(query, new { Id = id }) > 0;
+            return await _session.Connection.ExecuteAsync(query, new { Id = id }, _session.Transaction) > 0;
         }
 
         #region Private Methods
-
-        private IDbConnection CreateDbConnection() =>
-            _dbConnectionFactory.CreateDbConnection();
 
         private static string GetTableName<T>()
         {
