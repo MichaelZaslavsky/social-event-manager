@@ -2,6 +2,7 @@ using System.Reflection;
 using AspNetCoreRateLimit;
 using Microsoft.Extensions.DependencyInjection;
 using NetCore.AutoRegisterDi;
+using SocialEventManager.DLL.Infrastructure;
 using SocialEventManager.Infrastructure.Loggers;
 using SocialEventManager.Shared.Constants;
 
@@ -22,6 +23,7 @@ namespace SocialEventManager.API.DependencyInjection
                 .Where(c => c.Name.EndsWith(GlobalConstants.Service) || c.Name.EndsWith(GlobalConstants.Repository))
                 .AsPublicImplementedInterfaces(ServiceLifetime.Scoped);
 
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddSingleton<IScopeInformation, ScopeInformation>();
             services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
 

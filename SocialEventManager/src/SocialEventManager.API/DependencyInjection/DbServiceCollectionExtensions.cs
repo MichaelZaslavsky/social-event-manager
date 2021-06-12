@@ -9,8 +9,8 @@ namespace SocialEventManager.API.DependencyInjection
     {
         public static IServiceCollection AddSqlServer(this IServiceCollection services, IConfiguration config)
         {
-            services.AddSingleton<IDbConnectionFactory, SqlServerDbConnectionFactory>(_ =>
-                new SqlServerDbConnectionFactory(config.GetConnectionString(DbConstants.SocialEventManager)));
+            services.AddSingleton<IDbSession, DbSession>(_ =>
+                new DbSession(config.GetConnectionString(DbConstants.SocialEventManager)));
 
             return services;
         }
