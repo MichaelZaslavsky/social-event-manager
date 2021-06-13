@@ -6,7 +6,7 @@ using SocialEventManager.BLL.Models;
 using SocialEventManager.DLL.Entities;
 using SocialEventManager.DLL.Infrastructure;
 using SocialEventManager.DLL.Repositories;
-using SocialEventManager.Shared.Constants;
+using SocialEventManager.Shared.Constants.Validations;
 using SocialEventManager.Shared.Exceptions;
 
 namespace SocialEventManager.BLL.Services
@@ -41,7 +41,7 @@ namespace SocialEventManager.BLL.Services
 
         public async Task<UserDto> GetUser(Guid userId)
         {
-            User user = await _usersRepository.GetSingleOfDefaultAsync(userId, nameof(User.ExternalId));
+            User user = await _usersRepository.GetSingleOrDefaultAsync(userId, nameof(User.ExternalId));
 
             if (user == null)
             {

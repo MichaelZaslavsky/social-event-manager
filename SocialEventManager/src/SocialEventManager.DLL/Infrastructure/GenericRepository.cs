@@ -36,7 +36,7 @@ namespace SocialEventManager.DLL.Infrastructure
         public async Task<bool> DeleteAsync(TEntity entity) =>
             await _session.Connection.DeleteAsync(entity, _session.Transaction);
 
-        public async Task<TEntity> GetSingleOfDefaultAsync<TFilter>(TFilter filterValue, string columnName)
+        public async Task<TEntity> GetSingleOrDefaultAsync<TFilter>(TFilter filterValue, string columnName)
         {
             string tableName = GetTableName<TEntity>();
 

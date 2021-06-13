@@ -41,6 +41,7 @@ namespace SocialEventManager.API
                 .AddSqlServer(Configuration)
                 .AddHangfire(Configuration)
                 .RegisterDi()
+                .AddIdentityConfigurations()
                 .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
                 .AddScoped<ValidationFilterAttribute>();
 
@@ -72,6 +73,9 @@ namespace SocialEventManager.API
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseIpRateLimiting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseCors(ApiConstants.AllowAll);
 

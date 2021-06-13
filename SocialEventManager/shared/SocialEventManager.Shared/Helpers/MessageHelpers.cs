@@ -3,13 +3,12 @@ using System.Text;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Primitives;
 using SocialEventManager.Infrastructure.Middleware;
+using SocialEventManager.Shared.Constants;
 
 namespace SocialEventManager.Shared.Helpers
 {
     public static class MessageHelpers
     {
-        private const int Size = 1000;
-
         public static string BuildRequestMessage(HttpRequest request)
         {
             if (request == null)
@@ -17,7 +16,7 @@ namespace SocialEventManager.Shared.Helpers
                 return null;
             }
 
-            var builder = new StringBuilder(Size);
+            var builder = new StringBuilder(GlobalConstants.Size);
 
             builder
                 .Append("--- REQUEST ")
@@ -56,7 +55,7 @@ namespace SocialEventManager.Shared.Helpers
                 return null;
             }
 
-            var builder = new StringBuilder(Size);
+            var builder = new StringBuilder(GlobalConstants.Size);
 
             builder
                 .Append("--- RESPONSE ")
