@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SocialEventManager.BLL.Models;
 using SocialEventManager.BLL.Models.Identity;
+using SocialEventManager.DLL.Enums;
 using SocialEventManager.Shared.Extensions;
 
 namespace SocialEventManager.API.Controllers
@@ -34,6 +35,7 @@ namespace SocialEventManager.API.Controllers
         [Route("register")]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
         public async Task<IActionResult> Register(RegisterUserDto user)
         {
@@ -48,6 +50,9 @@ namespace SocialEventManager.API.Controllers
                 return BadRequest(errorMessage);
             }
 
+            ApplicationUser currentUser = await _userManager.FindByNameAsync(user.UserName);
+            await _userManager.AddToRoleAsync(currentUser, RoleType.User.GetDescription());
+
             return Ok();
         }
 
@@ -55,6 +60,7 @@ namespace SocialEventManager.API.Controllers
         [Route("login")]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Login(LoginModel loginModel)

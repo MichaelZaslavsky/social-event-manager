@@ -12,9 +12,11 @@ namespace SocialEventManager.API.DependencyInjection
     {
         public static IServiceCollection AddIdentityConfigurations(this IServiceCollection services)
         {
-            services.AddIdentity<ApplicationUser, ApplicationUserRole>()
-                .AddUserStore<CustomUserStoreService>()
-                .AddRoleStore<CustomRoleStoreService>()
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
+                .AddRoles<ApplicationRole>()
+                .AddRoleManager<RoleManager<ApplicationRole>>()
+                .AddUserStore<CustomUsersStore>()
+                .AddRoleStore<CustomRolesStore>()
                 .AddErrorDescriber<IdentityErrorDescriber>()
                 .AddDefaultTokenProviders();
 

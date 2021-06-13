@@ -45,16 +45,28 @@ namespace SocialEventManager.DLL.Infrastructure
                 FROM    {tableName}
                 WHERE   {columnName} = @FilterValue;";
 
-            return await _session.Connection.QuerySingleOrDefaultAsync<TEntity>(query, new { FilterValue = filterValue }, _session.Transaction);
+            return await _session.Connection.QuerySingleOrDefaultAsync<TEntity>(query, new { filterValue }, _session.Transaction);
         }
 
-        public async Task<bool> DeleteAsync(Guid id)
+        public async Task<IEnumerable<TEntity>> GetAsync<TFilter>(IEnumerable<TFilter> filterValues, string columnName)
+        {
+            string tableName = GetTableName<TEntity>();
+
+            string query = $@"
+                SELECT  *
+                FROM    {tableName}
+                WHERE   {columnName} IN @FilterValues;";
+
+            return await _session.Connection.QueryAsync<TEntity>(query, new { filterValues }, _session.Transaction);
+        }
+
+        public async Task<bool> DeleteAsync(Guid id, string columnName)
         {
             string tableName = GetTableName<TEntity>();
 
             string query = $@"
                 DELETE FROM {tableName}
-                WHERE Id = @Id;
+                WHERE {columnName} = @Id;
 
                 {QueryConstants.SelectRowCount}";
 

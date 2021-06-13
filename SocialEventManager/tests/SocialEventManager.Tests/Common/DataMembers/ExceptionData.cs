@@ -17,6 +17,8 @@ namespace SocialEventManager.Tests.Common.DataMembers
                 yield return new object[] { new ValidationException(), (HttpStatusCode.BadRequest, ExceptionConstants.BadRequest) };
                 yield return new object[] { null, (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError) };
                 yield return new object[] { new NullReferenceException(), (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError) };
+                yield return new object[] { new ArgumentNullException(), (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError) };
+                yield return new object[] { new ArgumentException(), (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError) };
                 yield return new object[] { new Exception(), (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError) };
             }
         }
@@ -35,6 +37,7 @@ namespace SocialEventManager.Tests.Common.DataMembers
                 yield return new object[] { null, false };
                 yield return new object[] { new NullReferenceException(), false };
                 yield return new object[] { new ArgumentNullException(), false };
+                yield return new object[] { new ArgumentException(), false };
             }
         }
     }

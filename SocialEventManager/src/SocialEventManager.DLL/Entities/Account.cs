@@ -7,7 +7,8 @@ namespace SocialEventManager.DLL.Entities
     [Table(TableNameConstants.Accounts)]
     public class Account
     {
-        public Guid ExternalId { get; set; }
+        [ExplicitKey]
+        public Guid UserId { get; set; }
 
         public string UserName { get; set; }
 
