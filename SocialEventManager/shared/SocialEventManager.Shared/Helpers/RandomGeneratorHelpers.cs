@@ -6,7 +6,7 @@ namespace SocialEventManager.Shared.Helpers
 {
     public static class RandomGeneratorHelpers
     {
-        private static readonly RNGCryptoServiceProvider _cryptoServiceProvider = new ();
+        private static readonly RNGCryptoServiceProvider _cryptoServiceProvider = new();
 
         public static string GenerateRandomValue(int length = 50)
         {

@@ -25,6 +25,8 @@ namespace SocialEventManager.API.Utilities.Handlers
                 nameof(BadRequestException) => new ApiErrorData(ex.Message, LinkConstants.BadRequestException),
                 nameof(NotFoundException) => new ApiErrorData(ex.Message, LinkConstants.NotFoundException),
                 nameof(NullReferenceException) => new ApiErrorData(ExceptionConstants.NullReferenceException, LinkConstants.NullReferenceException),
+                nameof(ArgumentNullException) => new ApiErrorData(ExceptionConstants.ArgumentNullException, LinkConstants.ArgumentNullException),
+                nameof(ArgumentException) => new ApiErrorData(ExceptionConstants.ArgumentException, LinkConstants.ArgumentException),
                 nameof(TimeoutException) => new ApiErrorData(ExceptionConstants.TimeoutException, LinkConstants.TimeoutException),
                 nameof(SqlException) => new ApiErrorData(ExceptionConstants.SqlException, LinkConstants.SqlException),
                 nameof(Exception) => new ApiErrorData(ExceptionConstants.Exception, LinkConstants.Exception),
