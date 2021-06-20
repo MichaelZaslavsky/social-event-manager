@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using SocialEventManager.DLL.Entities;
 using SocialEventManager.DLL.Infrastructure;
 
-namespace SocialEventManager.DLL.Repositories
+namespace SocialEventManager.DLL.Repositories.Roles
 {
     public interface IRolesRepository : IGenericRepository<Role>
     {

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace SocialEventManager.BLL.Models
+namespace SocialEventManager.BLL.Models.Users
 {
     public class LoginModel
     {

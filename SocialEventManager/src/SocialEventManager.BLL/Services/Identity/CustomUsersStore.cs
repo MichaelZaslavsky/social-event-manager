@@ -5,13 +5,16 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
-using SocialEventManager.BLL.Models;
+using SocialEventManager.BLL.Models.Accounts;
 using SocialEventManager.BLL.Models.Identity;
+using SocialEventManager.BLL.Models.Users;
+using SocialEventManager.BLL.Services.Accounts;
+using SocialEventManager.BLL.Services.Users;
 using SocialEventManager.DLL.Infrastructure;
 using SocialEventManager.Shared.Constants.Validations;
 using SocialEventManager.Shared.Extensions;
 
-namespace SocialEventManager.BLL.Services
+namespace SocialEventManager.BLL.Services.Identity
 {
     public class CustomUsersStore :
         IUserPasswordStore<ApplicationUser>,

@@ -2,13 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SocialEventManager.BLL.Models;
+using SocialEventManager.BLL.Models.Roles;
+using SocialEventManager.BLL.Models.Users;
+using SocialEventManager.BLL.Services.Roles;
 using SocialEventManager.DLL.Entities;
-using SocialEventManager.DLL.Repositories;
+using SocialEventManager.DLL.Repositories.Users;
 using SocialEventManager.Shared.Constants.Validations;
 using SocialEventManager.Shared.Exceptions;
 
-namespace SocialEventManager.BLL.Services
+namespace SocialEventManager.BLL.Services.Users
 {
     public class UserRolesService : IUserRolesService
     {

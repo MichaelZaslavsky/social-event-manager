@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using SocialEventManager.Shared.Constants;
 
-namespace SocialEventManager.BLL.Models
+namespace SocialEventManager.BLL.Models.Users
 {
     public class RegisterUserDto
     {

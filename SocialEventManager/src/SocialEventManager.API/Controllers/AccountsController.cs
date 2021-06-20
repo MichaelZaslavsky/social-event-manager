@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SocialEventManager.BLL.Models;
 using SocialEventManager.BLL.Models.Identity;
 using SocialEventManager.DLL.Enums;
 using SocialEventManager.Shared.Extensions;
@@ -12,6 +11,7 @@ using SocialEventManager.Shared.Extensions;
 namespace SocialEventManager.API.Controllers
 {
     using Microsoft.AspNetCore.Identity;
+    using SocialEventManager.BLL.Models.Users;
 
     [ApiController]
     [Route("api/account")]

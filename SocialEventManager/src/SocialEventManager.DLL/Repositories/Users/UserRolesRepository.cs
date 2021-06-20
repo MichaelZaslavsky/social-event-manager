@@ -8,7 +8,7 @@ using SocialEventManager.DLL.Infrastructure;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Helpers.Queries;
 
-namespace SocialEventManager.DLL.Repositories
+namespace SocialEventManager.DLL.Repositories.Users
 {
     public class UserRolesRepository : GenericRepository<UserRole>, IUserRolesRepository
     {
