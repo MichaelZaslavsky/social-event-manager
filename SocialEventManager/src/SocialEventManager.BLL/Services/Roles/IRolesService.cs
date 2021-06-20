@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using SocialEventManager.BLL.Models;
+using SocialEventManager.BLL.Models.Roles;
 
-namespace SocialEventManager.BLL.Services
+namespace SocialEventManager.BLL.Services.Roles
 {
     public interface IRolesService
     {

@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using SocialEventManager.BLL.Models;
+using SocialEventManager.BLL.Models.Roles;
 using SocialEventManager.DLL.Entities;
-using SocialEventManager.DLL.Repositories;
+using SocialEventManager.DLL.Repositories.Roles;
 
-namespace SocialEventManager.BLL.Services
+namespace SocialEventManager.BLL.Services.Roles
 {
     public class RolesService : IRolesService
     {

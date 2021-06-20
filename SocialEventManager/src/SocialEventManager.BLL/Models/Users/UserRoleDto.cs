@@ -1,6 +1,6 @@
 using System;
 
-namespace SocialEventManager.BLL.Models
+namespace SocialEventManager.BLL.Models.Users
 {
     public class UserRoleDto : BaseUserRoleDto
     {

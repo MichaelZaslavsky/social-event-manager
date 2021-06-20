@@ -6,7 +6,7 @@ using SocialEventManager.DLL.Entities;
 using SocialEventManager.DLL.Infrastructure;
 using SocialEventManager.Shared.Constants;
 
-namespace SocialEventManager.DLL.Repositories
+namespace SocialEventManager.DLL.Repositories.Roles
 {
     public class RolesRepository : GenericRepository<Role>, IRolesRepository
     {

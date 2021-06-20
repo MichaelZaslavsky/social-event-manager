@@ -3,12 +3,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
-using SocialEventManager.BLL.Models;
 using SocialEventManager.BLL.Models.Identity;
+using SocialEventManager.BLL.Models.Roles;
+using SocialEventManager.BLL.Services.Roles;
 using SocialEventManager.DLL.Infrastructure;
 using SocialEventManager.Shared.Constants.Validations;
 
-namespace SocialEventManager.BLL.Services
+namespace SocialEventManager.BLL.Services.Identity
 {
     public class CustomRolesStore : IRoleStore<ApplicationRole>
     {

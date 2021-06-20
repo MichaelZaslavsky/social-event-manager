@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using SocialEventManager.BLL.Models;
+using SocialEventManager.BLL.Models.Accounts;
+using SocialEventManager.BLL.Models.Users;
+using SocialEventManager.BLL.Services.Users;
 using SocialEventManager.DLL.Entities;
-using SocialEventManager.DLL.Repositories;
+using SocialEventManager.DLL.Repositories.Accounts;
 using SocialEventManager.Shared.Constants.Validations;
 using SocialEventManager.Shared.Exceptions;
 using SocialEventManager.Shared.Extensions;
 
-namespace SocialEventManager.BLL.Services
+namespace SocialEventManager.BLL.Services.Accounts
 {
     public class AccountsService : IAccountsService
     {

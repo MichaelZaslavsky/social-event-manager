@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using SocialEventManager.BLL.Models.Identity;
-using SocialEventManager.BLL.Services;
+using SocialEventManager.BLL.Services.Identity;
 
 namespace SocialEventManager.API.DependencyInjection
 {

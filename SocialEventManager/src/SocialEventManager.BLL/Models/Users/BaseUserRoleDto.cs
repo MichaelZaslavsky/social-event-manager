@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Utilities.Attributes;
 
-namespace SocialEventManager.BLL.Models
+namespace SocialEventManager.BLL.Models.Users
 {
     public class BaseUserRoleDto
     {

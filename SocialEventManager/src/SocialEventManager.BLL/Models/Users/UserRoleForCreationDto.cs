@@ -1,4 +1,4 @@
-namespace SocialEventManager.BLL.Models
+namespace SocialEventManager.BLL.Models.Users
 {
     public class UserRoleForCreationDto : BaseUserRoleDto
     {
