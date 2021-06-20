@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.Extensions.Logging;
 using SocialEventManager.BLL.Models;
-using SocialEventManager.DLL.Entities;
-using SocialEventManager.DLL.Infrastructure;
-using SocialEventManager.DLL.Repositories;
+using SocialEventManager.DAL.Entities;
+using SocialEventManager.DAL.Infrastructure;
+using SocialEventManager.DAL.Repositories;
 using SocialEventManager.Shared.Constants.Validations;
 using SocialEventManager.Shared.Exceptions;
 

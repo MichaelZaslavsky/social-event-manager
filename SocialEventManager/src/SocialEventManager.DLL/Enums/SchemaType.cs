@@ -1,9 +1,9 @@
 using System.ComponentModel;
-using SocialEventManager.DLL.Utilities.Enums;
+using SocialEventManager.DAL.Utilities.Enums;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Utilities.Attributes;
 
-namespace SocialEventManager.DLL.Enums
+namespace SocialEventManager.DAL.Enums
 {
     [DbEntity(DbTypes.SocialEventManager)]
     public enum SchemaType

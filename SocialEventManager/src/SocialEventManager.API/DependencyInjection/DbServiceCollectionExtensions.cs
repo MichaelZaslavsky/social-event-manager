@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SocialEventManager.DLL.Infrastructure;
+using SocialEventManager.DAL.Infrastructure;
 using SocialEventManager.Shared.Constants;
 
 namespace SocialEventManager.API.DependencyInjection

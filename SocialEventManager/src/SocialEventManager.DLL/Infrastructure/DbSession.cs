@@ -2,7 +2,7 @@ using System;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace SocialEventManager.DLL.Infrastructure
+namespace SocialEventManager.DAL.Infrastructure
 {
     public sealed class DbSession : IDbSession, IDisposable
     {

@@ -1,7 +1,7 @@
-using SocialEventManager.DLL.Entities;
-using SocialEventManager.DLL.Infrastructure;
+using SocialEventManager.DAL.Entities;
+using SocialEventManager.DAL.Infrastructure;
 
-namespace SocialEventManager.DLL.Repositories
+namespace SocialEventManager.DAL.Repositories
 {
     // Temp class - for test purposes
     public class UsersRepository : GenericRepository<User>, IUsersRepository

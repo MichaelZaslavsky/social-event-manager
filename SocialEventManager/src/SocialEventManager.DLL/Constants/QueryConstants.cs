@@ -1,4 +1,4 @@
-namespace SocialEventManager.DLL.Constants
+namespace SocialEventManager.DAL.Constants
 {
     public static class QueryConstants
     {

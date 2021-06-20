@@ -4,9 +4,9 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Dapper;
 using Dapper.Contrib.Extensions;
-using SocialEventManager.DLL.Constants;
+using SocialEventManager.DAL.Constants;
 
-namespace SocialEventManager.DLL.Infrastructure
+namespace SocialEventManager.DAL.Infrastructure
 {
     public abstract class GenericRepository<TEntity> : IGenericRepository<TEntity>
         where TEntity : class

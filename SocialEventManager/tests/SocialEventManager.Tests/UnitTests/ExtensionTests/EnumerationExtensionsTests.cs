@@ -1,5 +1,5 @@
 using System;
-using SocialEventManager.DLL.Enums;
+using SocialEventManager.DAL.Enums;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
 using Xunit;

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using SocialEventManager.BLL.Models.Identity;
 using SocialEventManager.BLL.Models.Roles;
 using SocialEventManager.BLL.Services.Roles;
-using SocialEventManager.DLL.Infrastructure;
+using SocialEventManager.DAL.Infrastructure;
 using SocialEventManager.Shared.Constants.Validations;
 
 namespace SocialEventManager.BLL.Services.Identity

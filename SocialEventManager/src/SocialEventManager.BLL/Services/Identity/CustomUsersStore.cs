@@ -10,7 +10,7 @@ using SocialEventManager.BLL.Models.Identity;
 using SocialEventManager.BLL.Models.Users;
 using SocialEventManager.BLL.Services.Accounts;
 using SocialEventManager.BLL.Services.Users;
-using SocialEventManager.DLL.Infrastructure;
+using SocialEventManager.DAL.Infrastructure;
 using SocialEventManager.Shared.Constants.Validations;
 using SocialEventManager.Shared.Extensions;
 

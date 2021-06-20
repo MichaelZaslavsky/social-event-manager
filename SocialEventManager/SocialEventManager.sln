@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialEventManager.API", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialEventManager.BLL", "src\SocialEventManager.BLL\SocialEventManager.BLL.csproj", "{3003BB93-8C05-4171-A6E4-2BB22ACC54B3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialEventManager.DLL", "src\SocialEventManager.DLL\SocialEventManager.DLL.csproj", "{BE980493-0840-4E1E-824E-E7ACBB3575CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialEventManager.DAL", "src\SocialEventManager.DLL\SocialEventManager.DAL.csproj", "{BE980493-0840-4E1E-824E-E7ACBB3575CC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialEventManager.Infrastructure", "src\SocialEventManager.Infrastructure\SocialEventManager.Infrastructure.csproj", "{20C3431B-8EC9-461D-B135-1ABB44E05354}"
 EndProject
