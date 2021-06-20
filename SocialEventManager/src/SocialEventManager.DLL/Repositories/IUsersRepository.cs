@@ -1,7 +1,7 @@
-using SocialEventManager.DLL.Entities;
-using SocialEventManager.DLL.Infrastructure;
+using SocialEventManager.DAL.Entities;
+using SocialEventManager.DAL.Infrastructure;
 
-namespace SocialEventManager.DLL.Repositories
+namespace SocialEventManager.DAL.Repositories
 {
     // Temp interface - for test purposes
     public interface IUsersRepository : IGenericRepository<User>

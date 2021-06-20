@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using SocialEventManager.DLL.Entities;
-using SocialEventManager.DLL.Infrastructure;
+using SocialEventManager.DAL.Entities;
+using SocialEventManager.DAL.Infrastructure;
 
-namespace SocialEventManager.DLL.Repositories.Users
+namespace SocialEventManager.DAL.Repositories.Users
 {
     public interface IUserRolesRepository : IGenericRepository<UserRole>
     {

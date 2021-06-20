@@ -2,7 +2,7 @@ using System.Reflection;
 using AspNetCoreRateLimit;
 using Microsoft.Extensions.DependencyInjection;
 using NetCore.AutoRegisterDi;
-using SocialEventManager.DLL.Infrastructure;
+using SocialEventManager.DAL.Infrastructure;
 using SocialEventManager.Infrastructure.Loggers;
 using SocialEventManager.Shared.Constants;
 
@@ -16,7 +16,7 @@ namespace SocialEventManager.API.DependencyInjection
             {
                 Assembly.GetExecutingAssembly(),
                 Assembly.Load($"{nameof(SocialEventManager)}.{nameof(BLL)}"),
-                Assembly.Load($"{nameof(SocialEventManager)}.{nameof(DLL)}"),
+                Assembly.Load($"{nameof(SocialEventManager)}.{nameof(DAL)}"),
             };
 
             services.RegisterAssemblyPublicNonGenericClasses(assembliesToScan)

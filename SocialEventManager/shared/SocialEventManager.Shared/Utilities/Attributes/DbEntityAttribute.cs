@@ -1,5 +1,5 @@
 using System;
-using SocialEventManager.DLL.Utilities.Enums;
+using SocialEventManager.DAL.Utilities.Enums;
 
 namespace SocialEventManager.Shared.Utilities.Attributes
 {

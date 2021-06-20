@@ -7,7 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Serilog;
-using SocialEventManager.DLL.Utilities.Enums;
+using SocialEventManager.DAL.Utilities.Enums;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Shared.Helpers.Queries;
@@ -80,7 +80,7 @@ namespace SocialEventManager.Infrastructure.Migrations
 
         private static IEnumerable<Type> GetEnumTypes(DbTypes dbTypes)
         {
-            Assembly assembly = Assembly.Load($"{nameof(SocialEventManager)}.{nameof(DLL)}");
+            Assembly assembly = Assembly.Load($"{nameof(SocialEventManager)}.{nameof(DAL)}");
             return GetEnumTypes(dbTypes, assembly);
         }
 

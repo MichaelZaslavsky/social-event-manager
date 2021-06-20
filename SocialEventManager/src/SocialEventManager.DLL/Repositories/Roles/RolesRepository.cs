@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Dapper;
-using SocialEventManager.DLL.Entities;
-using SocialEventManager.DLL.Infrastructure;
+using SocialEventManager.DAL.Entities;
+using SocialEventManager.DAL.Infrastructure;
 using SocialEventManager.Shared.Constants;
 
-namespace SocialEventManager.DLL.Repositories.Roles
+namespace SocialEventManager.DAL.Repositories.Roles
 {
     public class RolesRepository : GenericRepository<Role>, IRolesRepository
     {

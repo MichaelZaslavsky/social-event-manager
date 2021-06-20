@@ -1,4 +1,4 @@
-namespace SocialEventManager.DLL.Infrastructure
+namespace SocialEventManager.DAL.Infrastructure
 {
     public sealed class UnitOfWork : IUnitOfWork
     {

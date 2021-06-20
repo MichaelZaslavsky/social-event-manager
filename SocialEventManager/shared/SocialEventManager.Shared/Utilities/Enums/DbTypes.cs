@@ -1,6 +1,6 @@
 using System;
 
-namespace SocialEventManager.DLL.Utilities.Enums
+namespace SocialEventManager.DAL.Utilities.Enums
 {
     [Flags]
     public enum DbTypes

@@ -1,6 +1,6 @@
 using System.Data;
 
-namespace SocialEventManager.DLL.Infrastructure
+namespace SocialEventManager.DAL.Infrastructure
 {
     public interface IDbSession
     {

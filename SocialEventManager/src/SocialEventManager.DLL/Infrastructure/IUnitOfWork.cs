@@ -1,6 +1,6 @@
 using System;
 
-namespace SocialEventManager.DLL.Infrastructure
+namespace SocialEventManager.DAL.Infrastructure
 {
     public interface IUnitOfWork : IDisposable
     {

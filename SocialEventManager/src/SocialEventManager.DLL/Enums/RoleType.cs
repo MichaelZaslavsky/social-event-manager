@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace SocialEventManager.DLL.Enums
+namespace SocialEventManager.DAL.Enums
 {
     public enum RoleType
     {

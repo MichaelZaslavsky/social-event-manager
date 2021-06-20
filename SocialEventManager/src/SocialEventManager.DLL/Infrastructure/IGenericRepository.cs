@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SocialEventManager.DLL.Infrastructure
+namespace SocialEventManager.DAL.Infrastructure
 {
     public interface IGenericRepository<TEntity> : IExtendedRepository<TEntity>
     {

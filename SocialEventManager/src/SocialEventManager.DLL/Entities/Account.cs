@@ -2,7 +2,7 @@ using System;
 using Dapper.Contrib.Extensions;
 using SocialEventManager.Shared.Constants;
 
-namespace SocialEventManager.DLL.Entities
+namespace SocialEventManager.DAL.Entities
 {
     [Table(TableNameConstants.Accounts)]
     public class Account

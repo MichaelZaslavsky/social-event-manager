@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using SocialEventManager.BLL.Models.Roles;
-using SocialEventManager.DLL.Entities;
-using SocialEventManager.DLL.Repositories.Roles;
+using SocialEventManager.DAL.Entities;
+using SocialEventManager.DAL.Repositories.Roles;
 
 namespace SocialEventManager.BLL.Services.Roles
 {
