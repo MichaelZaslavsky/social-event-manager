@@ -19,7 +19,8 @@ namespace SocialEventManager.BLL.Services.Identity
     public class CustomUsersStore :
         IUserPasswordStore<ApplicationUser>,
         IUserEmailStore<ApplicationUser>,
-        IUserRoleStore<ApplicationUser>
+        IUserRoleStore<ApplicationUser>,
+        IUserSecurityStampStore<ApplicationUser>
     {
         private readonly IAccountsService _accountsService;
         private readonly IUserRolesService _userRolesService;
@@ -401,5 +402,35 @@ namespace SocialEventManager.BLL.Services.Identity
         }
 
         #endregion Implement IUserRoleStore
+
+        #region Implement IUserSecurityStampStore
+
+        public Task SetSecurityStampAsync(ApplicationUser user, string stamp, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+
+            user.SecurityStamp = stamp;
+
+            return Task.CompletedTask;
+        }
+
+        public Task<string> GetSecurityStampAsync(ApplicationUser user, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+
+            return Task.FromResult(user.SecurityStamp);
+        }
+
+        #endregion Implement IUserSecurityStampStore
     }
 }
