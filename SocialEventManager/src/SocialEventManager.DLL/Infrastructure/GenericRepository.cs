@@ -4,7 +4,6 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Dapper;
 using Dapper.Contrib.Extensions;
-using SocialEventManager.DAL.Constants;
 
 namespace SocialEventManager.DAL.Infrastructure
 {
@@ -84,9 +83,7 @@ namespace SocialEventManager.DAL.Infrastructure
 
             string query = $@"
                 DELETE FROM {tableName}
-                WHERE {columnName} = @Id;
-
-                {QueryConstants.SelectRowCount}";
+                WHERE {columnName} = @Id;";
 
             return await _session.Connection.ExecuteAsync(query, new DynamicParameters(new { Id = id }), _session.Transaction) > 0;
         }
@@ -97,9 +94,7 @@ namespace SocialEventManager.DAL.Infrastructure
 
             string query = $@"
                 DELETE FROM {tableName}
-                WHERE {columnName} = @Id;
-
-                {QueryConstants.SelectRowCount}";
+                WHERE {columnName} = @Id;";
 
             return await _session.Connection.ExecuteAsync(query, new DynamicParameters(new { Id = id }), _session.Transaction) > 0;
         }

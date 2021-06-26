@@ -1,6 +1,4 @@
 namespace SocialEventManager.BLL.Models.Users
 {
-    public class UserClaimForUpdateDto : UserClaimDto
-    {
-    }
+    public record UserClaimForUpdateDto : UserClaimDto;
 }
