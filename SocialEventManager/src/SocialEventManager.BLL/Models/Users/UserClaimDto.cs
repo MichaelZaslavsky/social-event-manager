@@ -4,7 +4,7 @@ using SocialEventManager.Shared.Utilities.Attributes;
 
 namespace SocialEventManager.BLL.Models.Users
 {
-    public class UserClaimDto : UserClaimBase
+    public record UserClaimDto : UserClaimBase
     {
         [Required]
         [NotDefault]

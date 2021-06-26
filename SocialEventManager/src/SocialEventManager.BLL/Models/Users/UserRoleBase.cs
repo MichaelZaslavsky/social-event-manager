@@ -5,7 +5,7 @@ using SocialEventManager.Shared.Utilities.Attributes;
 
 namespace SocialEventManager.BLL.Models.Users
 {
-    public class UserRoleBase
+    public record UserRoleBase
     {
         public UserRoleBase(string userId, string roleName)
         {
@@ -21,11 +21,11 @@ namespace SocialEventManager.BLL.Models.Users
 
         [Required]
         [NotDefault]
-        public Guid UserId { get; set; }
+        public Guid UserId { get; init; }
 
         [Required(AllowEmptyStrings = false)]
         [MinLength(LengthConstants.Length2)]
         [MaxLength(LengthConstants.Length255)]
-        public string RoleName { get; set; }
+        public string RoleName { get; init; }
     }
 }
