@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -5,13 +7,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SocialEventManager.BLL.Models.Identity;
+using SocialEventManager.BLL.Models.Users;
 using SocialEventManager.DAL.Enums;
 using SocialEventManager.Shared.Extensions;
 
 namespace SocialEventManager.API.Controllers
 {
     using Microsoft.AspNetCore.Identity;
-    using SocialEventManager.BLL.Models.Users;
 
     [ApiController]
     [Route("api/account")]
@@ -51,7 +53,16 @@ namespace SocialEventManager.API.Controllers
             }
 
             ApplicationUser currentUser = await _userManager.FindByNameAsync(user.UserName);
-            await _userManager.AddToRoleAsync(currentUser, RoleType.User.GetDescription());
+
+            string role = RoleType.User.GetDescription();
+            await _userManager.AddToRoleAsync(currentUser, role);
+
+            await _userManager.AddClaimsAsync(applicationUser, new List<Claim>
+            {
+                new Claim(ClaimTypes.Sid, currentUser.Id),
+                new Claim(ClaimTypes.Email, currentUser.Email),
+                new Claim(ClaimTypes.Role, role),
+            });
 
             return Ok();
         }

@@ -1,6 +1,6 @@
 namespace SocialEventManager.BLL.Models.Roles
 {
-    public class RoleDto : BaseRoleDto
+    public class RoleDto : RoleBase
     {
     }
 }

@@ -5,7 +5,7 @@ using SocialEventManager.Shared.Utilities.Attributes;
 
 namespace SocialEventManager.BLL.Models.Roles
 {
-    public class BaseRoleDto
+    public abstract class RoleBase
     {
         [Required]
         [NotDefault]

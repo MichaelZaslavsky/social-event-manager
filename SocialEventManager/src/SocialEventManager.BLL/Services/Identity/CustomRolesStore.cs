@@ -76,12 +76,12 @@ namespace SocialEventManager.BLL.Services.Identity
                 throw new ArgumentNullException(nameof(role));
             }
 
-            if (!Guid.TryParse(role.Id, out Guid id))
+            if (!Guid.TryParse(role.Id, out Guid roleId))
             {
                 throw new ArgumentException(ValidationConstants.NotAValidIdentifier, nameof(role.Id));
             }
 
-            bool isDeleted = await _rolesService.DeleteRole(id);
+            bool isDeleted = await _rolesService.DeleteRole(roleId);
 
             return isDeleted
                 ? IdentityResult.Success

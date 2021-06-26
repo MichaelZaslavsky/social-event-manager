@@ -6,7 +6,7 @@ using SocialEventManager.Shared.Utilities.Attributes;
 
 namespace SocialEventManager.BLL.Models.Accounts
 {
-    public class BaseAccountDto
+    public abstract class AccountBase
     {
         [Required]
         [NotDefault]

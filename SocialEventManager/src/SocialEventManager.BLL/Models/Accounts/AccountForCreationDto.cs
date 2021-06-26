@@ -1,6 +1,6 @@
 namespace SocialEventManager.BLL.Models.Accounts
 {
-    public class AccountForCreationDto : BaseAccountDto
+    public class AccountForCreationDto : AccountBase
     {
     }
 }
