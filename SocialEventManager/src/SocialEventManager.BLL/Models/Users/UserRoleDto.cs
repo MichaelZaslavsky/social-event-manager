@@ -2,7 +2,7 @@ using System;
 
 namespace SocialEventManager.BLL.Models.Users
 {
-    public class UserRoleDto : BaseUserRoleDto
+    public class UserRoleDto : UserRoleBase
     {
         public UserRoleDto(string userId, string roleName)
             : base(userId, roleName)

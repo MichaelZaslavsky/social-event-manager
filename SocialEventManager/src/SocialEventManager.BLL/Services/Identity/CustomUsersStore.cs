@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -20,17 +21,21 @@ namespace SocialEventManager.BLL.Services.Identity
         IUserPasswordStore<ApplicationUser>,
         IUserEmailStore<ApplicationUser>,
         IUserRoleStore<ApplicationUser>,
-        IUserSecurityStampStore<ApplicationUser>
+        IUserSecurityStampStore<ApplicationUser>,
+        IUserClaimStore<ApplicationUser>
     {
         private readonly IAccountsService _accountsService;
         private readonly IUserRolesService _userRolesService;
+        private readonly IUserClaimsService _userClaimsService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public CustomUsersStore(IAccountsService accountsService, IUserRolesService userRolesService, IUnitOfWork unitOfWork, IMapper mapper)
+        public CustomUsersStore(IAccountsService accountsService, IUserRolesService userRolesService, IUserClaimsService userClaimsService,
+            IUnitOfWork unitOfWork, IMapper mapper)
         {
             _accountsService = accountsService;
             _userRolesService = userRolesService;
+            _userClaimsService = userClaimsService;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
@@ -146,12 +151,12 @@ namespace SocialEventManager.BLL.Services.Identity
                 throw new ArgumentNullException(nameof(user));
             }
 
-            if (!Guid.TryParse(user.Id, out Guid id))
+            if (!Guid.TryParse(user.Id, out Guid userId))
             {
                 throw new ArgumentException(ValidationConstants.NotAValidIdentifier, nameof(user.Id));
             }
 
-            bool isDeleted = await _accountsService.DeleteAccount(id);
+            bool isDeleted = await _accountsService.DeleteAccount(userId);
 
             return isDeleted
                 ? IdentityResult.Success
@@ -338,12 +343,12 @@ namespace SocialEventManager.BLL.Services.Identity
                 throw new ArgumentNullException(nameof(user));
             }
 
-            if (!Guid.TryParse(user.Id, out Guid id))
+            if (!Guid.TryParse(user.Id, out Guid userId))
             {
                 throw new ArgumentException(ValidationConstants.NotAValidIdentifier, nameof(user.Id));
             }
 
-            IEnumerable<UserRoleDto> userRoles = await _userRolesService.GetUserRoles(id);
+            IEnumerable<UserRoleDto> userRoles = await _userRolesService.GetUserRoles(userId);
             return userRoles.Select(ur => ur.RoleName).ToList();
         }
 
@@ -374,10 +379,10 @@ namespace SocialEventManager.BLL.Services.Identity
                 throw new ArgumentNullException(nameof(roleName));
             }
 
-            BaseUserRoleDto baseUserRole = new(user.Id, roleName);
+            UserRoleBase userRoleBase = new(user.Id, roleName);
 
             _unitOfWork.BeginTransaction();
-            await _userRolesService.DeleteUserRole(baseUserRole);
+            await _userRolesService.DeleteUserRole(userRoleBase);
             _unitOfWork.Commit();
 
             return;
@@ -432,5 +437,140 @@ namespace SocialEventManager.BLL.Services.Identity
         }
 
         #endregion Implement IUserSecurityStampStore
+
+        #region Implement IUserClaimStore
+
+        public async Task<IList<Claim>> GetClaimsAsync(ApplicationUser user, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+
+            if (!Guid.TryParse(user.Id, out Guid userId))
+            {
+                throw new ArgumentException(ValidationConstants.NotAValidIdentifier, nameof(user.Id));
+            }
+
+            IEnumerable<UserClaimDto> userClaims = await _userClaimsService.GetUserClaims(userId);
+            return userClaims.Select(uc => new Claim(uc.Type, uc.Value)).ToList();
+        }
+
+        public async Task AddClaimsAsync(ApplicationUser user, IEnumerable<Claim> claims, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+
+            if (claims == null)
+            {
+                throw new ArgumentNullException(nameof(claims));
+            }
+
+            if (claims.IsEmpty())
+            {
+                return;
+            }
+
+            if (!Guid.TryParse(user.Id, out Guid userId))
+            {
+                throw new ArgumentException(ValidationConstants.NotAValidIdentifier, nameof(user.Id));
+            }
+
+            IEnumerable<UserClaimForCreationDto> userClaimsForCreation =
+                _mapper.Map<IEnumerable<UserClaimForCreationDto>>(claims, opt => opt.AfterMap((_, dest) =>
+                {
+                    foreach (UserClaimForCreationDto item in dest)
+                    {
+                        item.UserId = userId;
+                    }
+                }));
+
+            _unitOfWork.BeginTransaction();
+            await _userClaimsService.CreateUserClaims(userClaimsForCreation);
+            _unitOfWork.Commit();
+
+            return;
+        }
+
+        public async Task ReplaceClaimAsync(ApplicationUser user, Claim claim, Claim newClaim, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+
+            if (claim == null)
+            {
+                throw new ArgumentNullException(nameof(claim));
+            }
+
+            if (newClaim == null)
+            {
+                throw new ArgumentNullException(nameof(newClaim));
+            }
+
+            if (!Guid.TryParse(user.Id, out Guid userId))
+            {
+                throw new ArgumentException(ValidationConstants.NotAValidIdentifier, nameof(user.Id));
+            }
+
+            UserClaimDto currentUserClaim = _mapper.Map<UserClaimDto>(claim, opt => opt.AfterMap((_, dest) => dest.UserId = userId));
+            UserClaimForUpdateDto newUserClaimForUpdate = _mapper.Map<UserClaimForUpdateDto>(newClaim, opt => opt.AfterMap((_, dest) => dest.UserId = userId));
+
+            await _userClaimsService.ReplaceUserClaim(currentUserClaim, newUserClaimForUpdate);
+
+            return;
+        }
+
+        public async Task RemoveClaimsAsync(ApplicationUser user, IEnumerable<Claim> claims, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+
+            if (claims == null)
+            {
+                throw new ArgumentNullException(nameof(claims));
+            }
+
+            if (claims.IsEmpty())
+            {
+                return;
+            }
+
+            if (!Guid.TryParse(user.Id, out Guid userId))
+            {
+                throw new ArgumentException(ValidationConstants.NotAValidIdentifier, nameof(user.Id));
+            }
+
+            IEnumerable<UserClaimBase> userClaims = _mapper.Map<IEnumerable<UserClaimBase>>(claims);
+            await _userClaimsService.DeleteUserClaims(userClaims, userId);
+
+            return;
+        }
+
+        public async Task<IList<ApplicationUser>> GetUsersForClaimAsync(Claim claim, CancellationToken cancellationToken)
+        {
+            if (claim == null)
+            {
+                throw new ArgumentNullException(nameof(claim));
+            }
+
+            IEnumerable<AccountDto> accounts = await _accountsService.GetAccounts(claim.Value, claim.Value);
+            return _mapper.Map<IList<ApplicationUser>>(accounts);
+        }
+
+        #endregion Implement IUserClaimStore
     }
 }

@@ -17,6 +17,8 @@ namespace SocialEventManager.BLL.Services.Accounts
 
         Task<IEnumerable<AccountDto>> GetAccounts(string roleName);
 
+        Task<IEnumerable<AccountDto>> GetAccounts(string claimType, string claimValue);
+
         Task<bool> UpdateAccount(AccountForUpdateDto accountForUpdate);
 
         Task<bool> DeleteAccount(Guid userId);

@@ -5,15 +5,15 @@ using SocialEventManager.Shared.Utilities.Attributes;
 
 namespace SocialEventManager.BLL.Models.Users
 {
-    public class BaseUserRoleDto
+    public class UserRoleBase
     {
-        public BaseUserRoleDto(string userId, string roleName)
+        public UserRoleBase(string userId, string roleName)
         {
             UserId = Guid.Parse(userId);
             RoleName = roleName;
         }
 
-        public BaseUserRoleDto(Guid userId, string roleName)
+        public UserRoleBase(Guid userId, string roleName)
         {
             UserId = userId;
             RoleName = roleName;

@@ -44,10 +44,30 @@ namespace SocialEventManager.BLL.Services.Users
                 : throw new NotFoundException($"Users of role '{roleName}' {ValidationConstants.WereNotFound}");
         }
 
-        public async Task<bool> DeleteUserRole(BaseUserRoleDto baseUserRole) =>
-            await _userRolesRepository.DeleteUserRole(baseUserRole.UserId, baseUserRole.RoleName);
+        public async Task<bool> DeleteUserRole(UserRoleBase userRoleBase)
+        {
+            await EnsureUserRoleExists(userRoleBase.UserId, userRoleBase.RoleName);
+
+            return await _userRolesRepository.DeleteUserRole(userRoleBase.UserId, userRoleBase.RoleName);
+        }
 
         public async Task<bool> IsInRole(UserRoleDto userRole) =>
             await _userRolesRepository.IsInRole(userRole.UserId, userRole.RoleName);
+
+        #region Private Methods
+
+        private async Task EnsureUserRoleExists(Guid userId, string roleName)
+        {
+            bool isInRole = await IsInRole(new UserRoleDto(userId, roleName));
+
+            if (!isInRole)
+            {
+                throw new NotFoundException($"User '{userId}' role '{roleName}' {ValidationConstants.WasNotFound}");
+            }
+
+            return;
+        }
+
+        #endregion Private Methods
     }
 }

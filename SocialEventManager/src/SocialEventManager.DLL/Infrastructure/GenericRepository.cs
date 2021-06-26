@@ -18,6 +18,8 @@ namespace SocialEventManager.DAL.Infrastructure
             _session = session ?? throw new ArgumentNullException(nameof(session));
         }
 
+        #region Implement IGenericRepository
+
         public async Task<int> InsertAsync(TEntity entity) =>
             await _session.Connection.InsertAsync(entity, _session.Transaction);
 
@@ -36,7 +38,11 @@ namespace SocialEventManager.DAL.Infrastructure
         public async Task<bool> DeleteAsync(TEntity entity) =>
             await _session.Connection.DeleteAsync(entity, _session.Transaction);
 
-        public async Task<TEntity> GetSingleOrDefaultAsync<TFilter>(TFilter filterValue, string columnName)
+        #endregion Implement IGenericRepository
+
+        #region Implement IExtendedRepository
+
+        public async Task<IEnumerable<TEntity>> GetAsync<TFilter>(TFilter filterValue, string columnName)
         {
             string tableName = GetTableName<TEntity>();
 
@@ -45,7 +51,7 @@ namespace SocialEventManager.DAL.Infrastructure
                 FROM    {tableName}
                 WHERE   {columnName} = @FilterValue;";
 
-            return await _session.Connection.QuerySingleOrDefaultAsync<TEntity>(query, new { filterValue }, _session.Transaction);
+            return await _session.Connection.QueryAsync<TEntity>(query, new DynamicParameters(new { filterValue }), _session.Transaction);
         }
 
         public async Task<IEnumerable<TEntity>> GetAsync<TFilter>(IEnumerable<TFilter> filterValues, string columnName)
@@ -57,7 +63,19 @@ namespace SocialEventManager.DAL.Infrastructure
                 FROM    {tableName}
                 WHERE   {columnName} IN @FilterValues;";
 
-            return await _session.Connection.QueryAsync<TEntity>(query, new { filterValues }, _session.Transaction);
+            return await _session.Connection.QueryAsync<TEntity>(query, new DynamicParameters(new { filterValues }), _session.Transaction);
+        }
+
+        public async Task<TEntity> GetSingleOrDefaultAsync<TFilter>(TFilter filterValue, string columnName)
+        {
+            string tableName = GetTableName<TEntity>();
+
+            string query = $@"
+                SELECT  *
+                FROM    {tableName}
+                WHERE   {columnName} = @FilterValue;";
+
+            return await _session.Connection.QuerySingleOrDefaultAsync<TEntity>(query, new DynamicParameters(new { filterValue }), _session.Transaction);
         }
 
         public async Task<bool> DeleteAsync(Guid id, string columnName)
@@ -70,8 +88,23 @@ namespace SocialEventManager.DAL.Infrastructure
 
                 {QueryConstants.SelectRowCount}";
 
-            return await _session.Connection.ExecuteAsync(query, new { Id = id }, _session.Transaction) > 0;
+            return await _session.Connection.ExecuteAsync(query, new DynamicParameters(new { Id = id }), _session.Transaction) > 0;
         }
+
+        public async Task<bool> DeleteAsync(int id, string columnName)
+        {
+            string tableName = GetTableName<TEntity>();
+
+            string query = $@"
+                DELETE FROM {tableName}
+                WHERE {columnName} = @Id;
+
+                {QueryConstants.SelectRowCount}";
+
+            return await _session.Connection.ExecuteAsync(query, new DynamicParameters(new { Id = id }), _session.Transaction) > 0;
+        }
+
+        #endregion Implement IExtendedRepository
 
         #region Private Methods
 

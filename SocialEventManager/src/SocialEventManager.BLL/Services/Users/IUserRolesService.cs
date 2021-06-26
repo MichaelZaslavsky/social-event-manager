@@ -13,7 +13,7 @@ namespace SocialEventManager.BLL.Services.Users
 
         Task<IEnumerable<UserRoleDto>> GetUserRoles(string roleName);
 
-        Task<bool> DeleteUserRole(BaseUserRoleDto baseUserRole);
+        Task<bool> DeleteUserRole(UserRoleBase userRoleBase);
 
         Task<bool> IsInRole(UserRoleDto userRole);
     }
