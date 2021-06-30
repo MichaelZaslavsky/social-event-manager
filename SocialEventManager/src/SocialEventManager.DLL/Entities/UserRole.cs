@@ -9,6 +9,6 @@ namespace SocialEventManager.DAL.Entities
     {
         public Guid UserId { get; set; }
 
-        public int RoleId { get; set; }
+        public Guid RoleId { get; set; }
     }
 }
