@@ -17,5 +17,8 @@ namespace SocialEventManager.Tests.Common.Constants
         public const string BadRequest = "Bad Request";
         public const string InternalServerError = "Internal Server Error";
         public const string DatabaseMigrationFailed = "Database migration failed.";
+        public const string ConversionFailedFromStringToUniqueIdentifier = "Conversion failed when converting from a character string to uniqueidentifier.";
+        public const string UniqueIdentifierIsIncompatibleWithInt = "Operand type clash: uniqueidentifier is incompatible with int";
+        public const string ViolationOfPrimaryKeyConstraint = "Violation of PRIMARY KEY constraint";
     }
 }
