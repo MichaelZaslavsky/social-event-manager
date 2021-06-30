@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Threading.Tasks;
 using Dapper;
 using Dapper.Contrib.Extensions;
@@ -43,7 +42,7 @@ namespace SocialEventManager.DAL.Infrastructure
 
         public async Task<IEnumerable<TEntity>> GetAsync<TFilter>(TFilter filterValue, string columnName)
         {
-            string tableName = GetTableName<TEntity>();
+            string tableName = SqlMapperUtilities.GetTableName<TEntity>();
 
             string query = $@"
                 SELECT  *
@@ -55,7 +54,7 @@ namespace SocialEventManager.DAL.Infrastructure
 
         public async Task<IEnumerable<TEntity>> GetAsync<TFilter>(IEnumerable<TFilter> filterValues, string columnName)
         {
-            string tableName = GetTableName<TEntity>();
+            string tableName = SqlMapperUtilities.GetTableName<TEntity>();
 
             string query = $@"
                 SELECT  *
@@ -67,7 +66,7 @@ namespace SocialEventManager.DAL.Infrastructure
 
         public async Task<TEntity> GetSingleOrDefaultAsync<TFilter>(TFilter filterValue, string columnName)
         {
-            string tableName = GetTableName<TEntity>();
+            string tableName = SqlMapperUtilities.GetTableName<TEntity>();
 
             string query = $@"
                 SELECT  *
@@ -79,7 +78,7 @@ namespace SocialEventManager.DAL.Infrastructure
 
         public async Task<bool> DeleteAsync(Guid id, string columnName)
         {
-            string tableName = GetTableName<TEntity>();
+            string tableName = SqlMapperUtilities.GetTableName<TEntity>();
 
             string query = $@"
                 DELETE FROM {tableName}
@@ -90,7 +89,7 @@ namespace SocialEventManager.DAL.Infrastructure
 
         public async Task<bool> DeleteAsync(int id, string columnName)
         {
-            string tableName = GetTableName<TEntity>();
+            string tableName = SqlMapperUtilities.GetTableName<TEntity>();
 
             string query = $@"
                 DELETE FROM {tableName}
@@ -100,27 +99,5 @@ namespace SocialEventManager.DAL.Infrastructure
         }
 
         #endregion Implement IExtendedRepository
-
-        #region Private Methods
-
-        private static string GetTableName<T>()
-        {
-            if (SqlMapperExtensions.TableNameMapper != null)
-            {
-                return SqlMapperExtensions.TableNameMapper(typeof(T));
-            }
-
-            const string getTableName = "GetTableName";
-            MethodInfo getTableNameMethod = typeof(SqlMapperExtensions).GetMethod(getTableName, BindingFlags.NonPublic | BindingFlags.Static);
-
-            if (getTableNameMethod == null)
-            {
-                throw new ArgumentOutOfRangeException($"Method '{getTableName}' is not found in '{nameof(SqlMapperExtensions)}' class.");
-            }
-
-            return getTableNameMethod.Invoke(null, new object[] { typeof(T) }) as string;
-        }
-
-        #endregion Private Methods
     }
 }

@@ -4,5 +4,6 @@ namespace SocialEventManager.Shared.Constants
     {
         public const string SocialEventManager = "SocialEventManager";
         public const string SocialEventManagerHangfire = "SocialEventManagerHangfire";
+        public const string SocialEventManagerTest = "SocialEventManagerTest";
     }
 }
