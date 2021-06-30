@@ -124,6 +124,10 @@ Social Event Manager (SEM) is a social network for organizing events.
 
 ✔️ UnitOfWork
 
+✔️ In memory database tests
+
+❌ Authorization / Authentication
+
 ❌ SignalR
 
 ❌ Distributed cache with Redis
@@ -134,8 +138,6 @@ Social Event Manager (SEM) is a social network for organizing events.
 
 ❌ Allow media binders
 
-❌ Authorization / Authentication
-
 ❌ REST
 
 ❌ Versioning
@@ -143,8 +145,6 @@ Social Event Manager (SEM) is a social network for organizing events.
 ❌ [Hangfire with Redis](https://github.com/marcoCasamento/Hangfire.Redis.StackExchange)
 
 ❌ Extend Swagger documentation
-
-❌ In memory database tests
 
 
 
