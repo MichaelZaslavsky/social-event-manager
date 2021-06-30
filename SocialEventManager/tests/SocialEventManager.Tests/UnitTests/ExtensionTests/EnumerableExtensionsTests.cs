@@ -15,7 +15,7 @@ namespace SocialEventManager.Tests.UnitTests.ExtensionTests
     {
         [Theory]
         [MemberData(nameof(EnumerableData.EmptyData), MemberType = typeof(EnumerableData))]
-        public void IsEmpty<T>(IEnumerable<T> enumerable, bool expectedResult)
+        public void IsEmpty(IEnumerable<int> enumerable, bool expectedResult)
         {
             bool actualResult = enumerable.IsEmpty();
             Assert.Equal(expectedResult, actualResult);
@@ -31,7 +31,7 @@ namespace SocialEventManager.Tests.UnitTests.ExtensionTests
 
         [Theory]
         [MemberData(nameof(EnumerableData.NullOrEmptyData), MemberType = typeof(EnumerableData))]
-        public void IsNullOrEmpty<T>(IEnumerable<T> enumerable, bool expectedResult)
+        public void IsNullOrEmpty(IEnumerable<int> enumerable, bool expectedResult)
         {
             bool actualResult = enumerable.IsNullOrEmpty();
             Assert.Equal(expectedResult, actualResult);
@@ -39,7 +39,7 @@ namespace SocialEventManager.Tests.UnitTests.ExtensionTests
 
         [Theory]
         [MemberData(nameof(EnumerableData.NotNullAndAnyData), MemberType = typeof(EnumerableData))]
-        public void IsNotNullAndAny<T>(IEnumerable<T> enumerable, bool expectedResult)
+        public void IsNotNullAndAny(IEnumerable<int> enumerable, bool expectedResult)
         {
             bool actualResult = enumerable.IsNotNullAndAny();
             Assert.Equal(expectedResult, actualResult);
