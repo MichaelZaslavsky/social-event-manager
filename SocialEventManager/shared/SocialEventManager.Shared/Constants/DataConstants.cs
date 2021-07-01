@@ -4,5 +4,6 @@ namespace SocialEventManager.Shared.Constants
     {
         public const string LocalhostSerilogUrl = "http://localhost:5341";
         public const string RandomText = "Random Text";
+        public const string PhoneNumber = "+972 123456789";
     }
 }

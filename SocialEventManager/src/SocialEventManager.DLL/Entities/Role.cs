@@ -1,10 +1,12 @@
 using System;
 using Dapper.Contrib.Extensions;
+using ServiceStack.DataAnnotations;
 using SocialEventManager.Shared.Constants;
 
 namespace SocialEventManager.DAL.Entities
 {
     [Table(TableNameConstants.Roles)]
+    [CompositeIndex(true, nameof(Name))]
     public class Role
     {
         [ExplicitKey]
