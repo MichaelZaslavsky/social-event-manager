@@ -49,7 +49,8 @@ namespace SocialEventManager.DAL.Repositories.Users
             string cmd = $@"
                 DELETE  UR
                 FROM    {TableNameConstants.UserRoles} UR
-                WHERE   {RoleQueryHelpers.ExistsByRoleName()};";
+                WHERE   UR.UserId = @UserId
+                        AND {RoleQueryHelpers.ExistsByRoleName()};";
 
             return await _session.Connection.ExecuteAsync(cmd, new DynamicParameters(new { userId, roleName }), _session.Transaction) > 0;
         }

@@ -9,6 +9,7 @@
     <Import_RootNamespace>SocialEventManager.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Constants\AliasConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\ApiConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\CategoryConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\DataConstants.cs" />

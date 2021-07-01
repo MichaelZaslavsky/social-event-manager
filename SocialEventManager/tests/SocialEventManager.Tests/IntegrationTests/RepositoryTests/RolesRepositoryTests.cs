@@ -34,7 +34,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         {
             Guid roleId = await Repository.InsertRole(role);
 
-            Role actualRole = await Repository.GetAsync(roleId);
+            Role actualRole = await Db.SingleWhereAsync<Role>(nameof(role.Id), roleId);
             Assert.True(actualRole.IsDeepEqual(role));
         }
 
@@ -60,7 +60,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         {
             await Db.InsertAsync(role);
             SqlException ex = await Assert.ThrowsAsync<SqlException>(() => Db.InsertAsync(role));
-            Assert.StartsWith($"{ExceptionConstants.ViolationOfPrimaryKeyConstraint} 'PK__Roles", ex.Message);
+            Assert.StartsWith($"{ExceptionConstants.ViolationOfPrimaryKeyConstraint} 'PK__{AliasConstants.Roles}", ex.Message);
         }
 
         [Theory]
@@ -68,21 +68,20 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         public async Task InsertDuplicateRoleName_ShouldReturnException(IEnumerable<Role> roles)
         {
             SqlException ex = await Assert.ThrowsAsync<SqlException>(() => Db.InsertAsync(roles));
-            Assert.Equal(ExceptionConstants.CannotInsertDuplicateKey(TableNameConstants.Roles, "uidx_roles_name", "User"), ex.Message);
+            Assert.StartsWith($"{ExceptionConstants.ViolationOfUniqueKeyConstraint} 'UQ__{AliasConstants.Roles}", ex.Message);
         }
 
         [Theory]
         [MemberData(nameof(RoleData.Role), MemberType = typeof(RoleData))]
         public async Task GetByUserIdAsync_ShouldReturnRole(Role role)
         {
+            await Db.CreateTableIfNotExistsAsync<Account>();
             await Db.CreateTableIfNotExistsAsync<UserRole>();
 
-            var userRole = new UserRole
-            {
-                RoleId = role.Id,
-                UserId = Guid.NewGuid(),
-            };
+            Account account = AccountData.GetMockAccount();
+            UserRole userRole = UserRoleData.GetMockUserRole(role.Id, account.UserId);
 
+            await Db.InsertAsync(account);
             await Db.InsertAsync(role);
             await Db.InsertAsync(userRole);
 
@@ -93,6 +92,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         [Fact]
         public async Task GetByUserIdAsync_ShouldReturnEmpty()
         {
+            await Db.CreateTableIfNotExistsAsync<Account>();
             await Db.CreateTableIfNotExistsAsync<UserRole>();
 
             IEnumerable<Role> actualRoles = await Repository.GetByUserIdAsync(Guid.NewGuid());

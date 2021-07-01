@@ -1,3 +1,5 @@
+using SocialEventManager.Shared.Constants;
+
 namespace SocialEventManager.Tests.Common.Constants
 {
     public static class ExceptionConstants
@@ -19,9 +21,18 @@ namespace SocialEventManager.Tests.Common.Constants
         public const string DatabaseMigrationFailed = "Database migration failed.";
         public const string ConversionFailedFromStringToUniqueIdentifier = "Conversion failed when converting from a character string to uniqueidentifier.";
         public const string UniqueIdentifierIsIncompatibleWithInt = "Operand type clash: uniqueidentifier is incompatible with int";
-        public const string ViolationOfPrimaryKeyConstraint = "Violation of PRIMARY KEY constraint";
 
-        public static string CannotInsertDuplicateKey(string tableName, string indexName, string value) =>
-            $"Cannot insert duplicate key row in object '{tableName}' with unique index '{indexName}'. The duplicate key value is ({value}).\r\nThe statement has been terminated.";
+        public static string ForeignKeyConstraintConflict(string foriegnKeyName, string tableName, string columnName, string dbName = DbConstants.SocialEventManagerTest) =>
+            $"The INSERT statement conflicted with the FOREIGN KEY constraint \"{foriegnKeyName}\". " +
+            $"The conflict occurred in database \"{dbName}\", table \"{tableName}\", column '{columnName}'.{TheStatementHasBeenTerminatedWithSpace}";
+
+        public static string ViolationOfPrimaryKeyConstraint => ViolationOfKeyConstraint("PRIMARY");
+
+        public static string ViolationOfUniqueKeyConstraint => ViolationOfKeyConstraint("UNIQUE");
+
+        private const string TheStatementHasBeenTerminatedWithSpace = "\r\nThe statement has been terminated.";
+
+        private static string ViolationOfKeyConstraint(string keyType) =>
+            $"Violation of {keyType} KEY constraint";
     }
 }

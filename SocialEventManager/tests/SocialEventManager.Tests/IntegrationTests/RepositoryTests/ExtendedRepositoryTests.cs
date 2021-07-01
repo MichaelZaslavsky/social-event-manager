@@ -167,7 +167,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
             bool isDeleted = await Repository.DeleteAsync(role.Id, nameof(Role.Id));
             Assert.True(isDeleted);
 
-            Role actualRole = await Repository.GetAsync(role.Id);
+            Role actualRole = await Db.SingleWhereAsync<Role>(nameof(Role.Id), role.Id);
             Assert.Null(actualRole);
         }
 
