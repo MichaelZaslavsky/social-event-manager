@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using SocialEventManager.DAL.Entities;
+using SocialEventManager.DAL.Enums;
+using SocialEventManager.Shared.Extensions;
 
 namespace SocialEventManager.Tests.Common.DataMembers
 {
@@ -10,8 +12,8 @@ namespace SocialEventManager.Tests.Common.DataMembers
         {
             get
             {
-                yield return new object[] { GetMockRole("User") };
-                yield return new object[] { GetMockRole("Admin") };
+                yield return new object[] { GetMockRole(RoleType.User.GetDescription()) };
+                yield return new object[] { GetMockRole(RoleType.Admin.GetDescription()) };
             }
         }
 
@@ -23,8 +25,8 @@ namespace SocialEventManager.Tests.Common.DataMembers
                 {
                     new List<Role>
                     {
-                        GetMockRole("User"),
-                        GetMockRole("Admin"),
+                        GetMockRole(RoleType.User.GetDescription()),
+                        GetMockRole(RoleType.Admin.GetDescription()),
                     },
                 };
             }
@@ -38,8 +40,8 @@ namespace SocialEventManager.Tests.Common.DataMembers
                 {
                     new List<Role>
                     {
-                        GetMockRole("User"),
-                        GetMockRole("User"),
+                        GetMockRole(RoleType.User.GetDescription()),
+                        GetMockRole(RoleType.User.GetDescription()),
                     },
                 };
             }

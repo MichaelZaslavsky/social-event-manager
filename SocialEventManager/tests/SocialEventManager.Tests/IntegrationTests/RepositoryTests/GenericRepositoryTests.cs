@@ -33,7 +33,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         {
             await Repository.InsertAsync(role);
 
-            IEnumerable<Role> actualRoles = await Repository.GetAsync();
+            IEnumerable<Role> actualRoles = await Db.WhereAsync<Role>(nameof(role.Id), role.Id);
             AssertHelpers.AssertSingleEqual(role, actualRoles);
         }
 
@@ -59,7 +59,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         {
             await Repository.InsertAsync(roles);
 
-            IEnumerable<Role> actualRoles = await Repository.GetAsync();
+            IEnumerable<Role> actualRoles = await Db.SelectAsync<Role>();
             Assert.True(actualRoles.OrderBy(r => r.Id).IsDeepEqual(roles.OrderBy(r => r.Id)));
         }
 
@@ -153,7 +153,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
             bool isUpdated = await Repository.UpdateAsync(role);
             Assert.True(isUpdated);
 
-            Role actualRole = await Repository.GetAsync(role.Id);
+            Role actualRole = await Db.SingleWhereAsync<Role>(nameof(Role.Id), role.Id);
             Assert.True(actualRole.IsDeepEqual(role));
         }
 
@@ -190,7 +190,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
             bool isDeleted = await Repository.DeleteAsync(role);
             Assert.True(isDeleted);
 
-            Role actualRole = await Repository.GetAsync(role.Id);
+            Role actualRole = await Db.SingleWhereAsync<Role>(nameof(role.Id), role.Id);
             Assert.Null(actualRole);
         }
 

@@ -13,7 +13,7 @@ namespace SocialEventManager.Tests.IntegrationTests.Infrastructure
             Repository = repository;
             MockRepository = new Mock<TInterface>();
 
-            db.CreateTableIfNotExistsAsync<TEntity>().GetAwaiter().GetResult();
+            db.CreateRelevantTablesIfNotExistAsync<TEntity>().GetAwaiter().GetResult();
         }
 
         protected TInterface Repository { get; }

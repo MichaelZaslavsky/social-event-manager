@@ -6,8 +6,10 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Dapper.Contrib.Extensions;
+using ServiceStack.DataAnnotations;
 using ServiceStack.OrmLite;
-using SocialEventManager.DAL.Infrastructure;
+using SocialEventManager.Shared.Extensions;
+using SocialEventManager.Shared.Helpers.Queries;
 
 namespace SocialEventManager.Tests.IntegrationTests.Infrastructure
 {
@@ -28,58 +30,77 @@ namespace SocialEventManager.Tests.IntegrationTests.Infrastructure
         public async Task InsertAsync<T>(T item)
         {
             using IDbConnection db = await OpenConnectionAsync();
-
-            string tableName = SqlMapperUtilities.GetTableName<T>(includeSchema: false);
-            await db.InsertAsync(tableName, item);
+            await db.InsertAsync(item);
         }
 
         public async Task InsertAsync<T>(IEnumerable<T> items)
         {
             using IDbConnection db = await OpenConnectionAsync();
 
-            string tableName = SqlMapperUtilities.GetTableName<T>(includeSchema: false);
-
             foreach (T item in items)
             {
-                await db.InsertAsync(tableName, item);
+                await db.InsertAsync(item);
             }
         }
 
-        public async Task CreateTableIfNotExistsAsync<T>()
+        public async Task<IEnumerable<T>> SelectAsync<T>()
         {
             using IDbConnection db = await OpenConnectionAsync();
-
-            string tableName = SqlMapperUtilities.GetTableName<T>(includeSchema: false);
-            await db.CreateTableIfNotExistsAsync<T>(tableName);
+            return (await db.SelectAsync<T>()).AsEnumerable();
         }
+
+        public async Task<IEnumerable<T>> WhereAsync<T>(string columnName, object value)
+        {
+            using IDbConnection db = await OpenConnectionAsync();
+            return (await db.WhereAsync<T>(columnName, value)).AsEnumerable();
+        }
+
+        public async Task<T> SingleWhereAsync<T>(string columnName, object value)
+        {
+            using IDbConnection db = await OpenConnectionAsync();
+            return await db.SingleWhereAsync<T>(columnName, value);
+        }
+
+        public async Task CreateTableIfNotExistsAsync<T>() =>
+            await CreateTableIfNotExistsAsync(typeof(T));
+
+        public async Task CreateTableIfNotExistsAsync(Type type)
+        {
+            using IDbConnection db = await OpenConnectionAsync();
+            db.CreateTableIfNotExists(type);
+        }
+
+        public async Task CreateRelevantTablesIfNotExistAsync<T>() =>
+            await CreateRelevantTablesIfNotExistAsync(typeof(T));
 
         public async Task CleanupAsync()
         {
             using IDbConnection db = await OpenConnectionAsync();
+            await db.ExecuteNonQueryAsync(TableQueryHelpers.SafelyDropAllTables());
 
-            Assembly assembly = Assembly.Load($"{nameof(SocialEventManager)}.{nameof(DAL)}");
-            IEnumerable<Type> types = GetTypes(assembly);
-            await DropTablesAsync(db, types);
+            return;
         }
 
         #region Private Methods
 
-        private static IEnumerable<Type> GetTypes(Assembly assembly)
+        private async Task CreateRelevantTablesIfNotExistAsync(Type type)
         {
-            return assembly
-                .GetTypes()
-                .Where(t => string.Equals(t.Namespace, $"{nameof(SocialEventManager)}.{nameof(DAL)}.{nameof(DAL.Entities)}", StringComparison.Ordinal)
-                    && t.IsClass
-                    && (t.GetCustomAttributes(typeof(TableAttribute), inherit: true).Length != 0));
-        }
+            IEnumerable<PropertyInfo> properties = type.GetProperties().Where(prop => Attribute.IsDefined(prop, typeof(ForeignKeyAttribute)));
 
-        private static async Task DropTablesAsync(IDbConnection db, IEnumerable<Type> types)
-        {
-            foreach (Type type in types)
+            if (properties.IsEmpty())
             {
-                string tableName = SqlMapperUtilities.GetTableName(type, includeSchema: false);
-                await db.DropTableAsync(type, tableName);
+                await CreateTableIfNotExistsAsync(type);
+                return;
             }
+
+            foreach (PropertyInfo property in properties)
+            {
+                Type foreignKeyType = property.GetCustomAttribute<ForeignKeyAttribute>().Type;
+                await CreateRelevantTablesIfNotExistAsync(foreignKeyType);
+            }
+
+            await CreateTableIfNotExistsAsync(type);
+            return;
         }
 
         #endregion Private Methods
