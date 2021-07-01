@@ -64,6 +64,14 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
+        [MemberData(nameof(RoleData.RolesWithSameName), MemberType = typeof(RoleData))]
+        public async Task InsertDuplicateRoleName_ShouldReturnException(IEnumerable<Role> roles)
+        {
+            SqlException ex = await Assert.ThrowsAsync<SqlException>(() => Db.InsertAsync(roles));
+            Assert.Equal(ExceptionConstants.CannotInsertDuplicateKey(TableNameConstants.Roles, "uidx_roles_name", "User"), ex.Message);
+        }
+
+        [Theory]
         [MemberData(nameof(RoleData.Role), MemberType = typeof(RoleData))]
         public async Task GetByUserIdAsync_ShouldReturnRole(Role role)
         {

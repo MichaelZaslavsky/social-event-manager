@@ -45,11 +45,7 @@ namespace SocialEventManager.Tests.Common.DataMembers
             }
         }
 
-        #region Private Methods
-
-        private static Role GetMockRole(string name) =>
+        public static Role GetMockRole(string name = "User") =>
             new() { Id = Guid.NewGuid(), ConcurrencyStamp = Guid.NewGuid().ToString().ToLower(), Name = name, NormalizedName = name.ToUpper() };
-
-        #endregion Private Methods
     }
 }
