@@ -22,7 +22,7 @@ namespace SocialEventManager.DAL.Repositories.Users
 
         public async Task<int> InsertAsync(Guid userId, string roleName)
         {
-            string cmd = $@"
+            string sql = $@"
                 INSERT  INTO {TableNameConstants.UserRoles} (UserId, RoleId)
                 SELECT  @UserId,
                         R.Id
@@ -31,33 +31,33 @@ namespace SocialEventManager.DAL.Repositories.Users
 
                 {QueryConstants.SelectIdentity}";
 
-            return await _session.Connection.ExecuteAsync(cmd, new DynamicParameters(new { userId, roleName }), _session.Transaction);
+            return await _session.Connection.ExecuteAsync(sql, new DynamicParameters(new { userId, roleName }), _session.Transaction);
         }
 
         public async Task<IEnumerable<UserRole>> GetUserRoles(string roleName)
         {
-            string cmd = $@"
+            string sql = $@"
                 SELECT  UR.*
                 FROM    {TableNameConstants.UserRoles} UR
                 WHERE   {RoleQueryHelpers.ExistsByRoleName()};";
 
-            return await _session.Connection.QueryAsync<UserRole>(cmd, new DynamicParameters(new { roleName }), _session.Transaction);
+            return await _session.Connection.QueryAsync<UserRole>(sql, new DynamicParameters(new { roleName }), _session.Transaction);
         }
 
         public async Task<bool> DeleteUserRole(Guid userId, string roleName)
         {
-            string cmd = $@"
+            string sql = $@"
                 DELETE  UR
                 FROM    {TableNameConstants.UserRoles} UR
                 WHERE   UR.UserId = @UserId
                         AND {RoleQueryHelpers.ExistsByRoleName()};";
 
-            return await _session.Connection.ExecuteAsync(cmd, new DynamicParameters(new { userId, roleName }), _session.Transaction) > 0;
+            return await _session.Connection.ExecuteAsync(sql, new DynamicParameters(new { userId, roleName }), _session.Transaction) > 0;
         }
 
         public async Task<bool> IsInRole(Guid userId, string roleName)
         {
-            string cmd = $@"
+            string sql = $@"
                 IF EXISTS
                 (
                     SELECT  TOP 1 1
@@ -74,7 +74,7 @@ namespace SocialEventManager.DAL.Repositories.Users
                     SELECT 0;
                 END";
 
-            return await _session.Connection.QuerySingleAsync<bool>(cmd, new DynamicParameters(new { userId, roleName }), _session.Transaction);
+            return await _session.Connection.QuerySingleAsync<bool>(sql, new DynamicParameters(new { userId, roleName }), _session.Transaction);
         }
     }
 }
