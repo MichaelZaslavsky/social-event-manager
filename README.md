@@ -72,6 +72,7 @@ Social Event Manager (SEM) is a social network for organizing events.
    dotnet user-secrets init
    dotnet user-secrets set ConnectionStrings:SocialEventManager "Data Source=.;Initial Catalog=SocialEventManager;Integrated Security=True;MultipleActiveResultSets=True;"
    dotnet user-secrets set ConnectionStrings:SocialEventManagerHangfire "Data Source=.;Initial Catalog=SocialEventManagerHangfire;Integrated Security=True;MultipleActiveResultSets=True;"
+   dotnet user-secrets set ConnectionStrings:SocialEventManagerTest "Data Source=.;Initial Catalog=SocialEventManagerTest;Integrated Security=True;MultipleActiveResultSets=True;"
    ```
 3. Run script to create the initial database
    ```sh
