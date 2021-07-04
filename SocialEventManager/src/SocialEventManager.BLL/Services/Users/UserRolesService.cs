@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using SocialEventManager.BLL.Models.Roles;
 using SocialEventManager.BLL.Models.Users;
+using SocialEventManager.BLL.Services.Infrastructure;
 using SocialEventManager.BLL.Services.Roles;
 using SocialEventManager.DAL.Entities;
 using SocialEventManager.DAL.Repositories.Users;
@@ -12,19 +13,18 @@ using SocialEventManager.Shared.Exceptions;
 
 namespace SocialEventManager.BLL.Services.Users
 {
-    public class UserRolesService : IUserRolesService
+    public class UserRolesService : ServiceBase<IUserRolesRepository, UserRole>, IUserRolesService
     {
-        private readonly IUserRolesRepository _userRolesRepository;
         private readonly IRolesService _rolesService;
 
         public UserRolesService(IUserRolesRepository userRolesRepository, IRolesService rolesService)
+            : base(userRolesRepository)
         {
-            _userRolesRepository = userRolesRepository;
             _rolesService = rolesService;
         }
 
         public async Task<int> CreateUserRole(UserRoleForCreationDto userRoleForCreation) =>
-            await _userRolesRepository.InsertAsync(userRoleForCreation.UserId, userRoleForCreation.RoleName);
+            await Repository.InsertAsync(userRoleForCreation.UserId, userRoleForCreation.RoleName);
 
         public async Task<IEnumerable<UserRoleDto>> GetUserRoles(Guid userId)
         {
@@ -37,7 +37,7 @@ namespace SocialEventManager.BLL.Services.Users
 
         public async Task<IEnumerable<UserRoleDto>> GetUserRoles(string roleName)
         {
-            IEnumerable<UserRole> userRoles = await _userRolesRepository.GetUserRoles(roleName);
+            IEnumerable<UserRole> userRoles = await Repository.GetUserRoles(roleName);
 
             return userRoles.Any()
                 ? userRoles.Select(ur => new UserRoleDto(ur.UserId, roleName))
@@ -48,11 +48,11 @@ namespace SocialEventManager.BLL.Services.Users
         {
             await EnsureUserRoleExists(userRoleBase.UserId, userRoleBase.RoleName);
 
-            return await _userRolesRepository.DeleteUserRole(userRoleBase.UserId, userRoleBase.RoleName);
+            return await Repository.DeleteUserRole(userRoleBase.UserId, userRoleBase.RoleName);
         }
 
         public async Task<bool> IsInRole(UserRoleDto userRole) =>
-            await _userRolesRepository.IsInRole(userRole.UserId, userRole.RoleName);
+            await Repository.IsInRole(userRole.UserId, userRole.RoleName);
 
         #region Private Methods
 

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using SocialEventManager.BLL.Models.Accounts;
 using SocialEventManager.BLL.Models.Users;
+using SocialEventManager.BLL.Services.Infrastructure;
 using SocialEventManager.BLL.Services.Users;
 using SocialEventManager.DAL.Entities;
 using SocialEventManager.DAL.Repositories.Accounts;
@@ -14,43 +15,40 @@ using SocialEventManager.Shared.Extensions;
 
 namespace SocialEventManager.BLL.Services.Accounts
 {
-    public class AccountsService : IAccountsService
+    public class AccountsService : ServiceBase<IAccountsRepository, Account>, IAccountsService
     {
-        private readonly IAccountsRepository _accountsRepository;
         private readonly IUserClaimsService _userClaimsService;
         private readonly IUserRolesService _userRolesService;
-        private readonly IMapper _mapper;
 
         public AccountsService(IAccountsRepository accountsRepository, IUserClaimsService userClaimsService, IUserRolesService userRolesService, IMapper mapper)
+            : base(accountsRepository, mapper)
         {
-            _accountsRepository = accountsRepository;
             _userClaimsService = userClaimsService;
             _userRolesService = userRolesService;
-            _mapper = mapper;
         }
 
         public async Task<int> CreateAccount(AccountForCreationDto accountForCreation)
         {
-            Account account = _mapper.Map<Account>(accountForCreation);
-            return await _accountsRepository.InsertAsync(account);
+            Account account = Mapper.Map<Account>(accountForCreation);
+            return await Repository.InsertAsync(account);
         }
 
         public async Task<AccountDto> GetAccount(Guid userId)
         {
-            Account account = await _accountsRepository.GetSingleOrDefaultAsync(userId, nameof(Account.UserId));
-            return _mapper.Map<AccountDto>(account);
+            Account account = await Repository.GetSingleOrDefaultAsync(userId, nameof(Account.UserId));
+            return Mapper.Map<AccountDto>(account);
         }
 
         public async Task<AccountDto> GetAccountByUserName(string userName)
         {
-            Account account = await _accountsRepository.GetSingleOrDefaultAsync(userName, nameof(Account.UserName));
-            return _mapper.Map<AccountDto>(account);
+            Account account = await Repository.GetSingleOrDefaultAsync(userName, nameof(Account.UserName));
+            return Mapper.Map<AccountDto>(account);
         }
 
         public async Task<AccountDto> GetAccountByEmail(string email)
         {
-            Account account = await _accountsRepository.GetSingleOrDefaultAsync(email, nameof(Account.Email));
-            return _mapper.Map<AccountDto>(account);
+            Account account = await Repository.GetSingleOrDefaultAsync(email, nameof(Account.Email));
+            return Mapper.Map<AccountDto>(account);
         }
 
         public async Task<IEnumerable<AccountDto>> GetAccounts(string roleName)
@@ -63,9 +61,9 @@ namespace SocialEventManager.BLL.Services.Accounts
             }
 
             IEnumerable<Guid> userIds = userRoles.Select(ur => ur.UserId).Distinct();
-            IEnumerable<Account> accounts = await _accountsRepository.GetAsync(userIds, nameof(Account.UserId));
+            IEnumerable<Account> accounts = await Repository.GetAsync(userIds, nameof(Account.UserId));
 
-            return _mapper.Map<IEnumerable<AccountDto>>(accounts);
+            return Mapper.Map<IEnumerable<AccountDto>>(accounts);
         }
 
         public async Task<IEnumerable<AccountDto>> GetAccounts(string claimType, string claimValue)
@@ -78,24 +76,24 @@ namespace SocialEventManager.BLL.Services.Accounts
             }
 
             IEnumerable<Guid> userIds = userClaims.Select(uc => uc.UserId).Distinct();
-            IEnumerable<Account> accounts = await _accountsRepository.GetAsync(userIds, nameof(Account.UserId));
+            IEnumerable<Account> accounts = await Repository.GetAsync(userIds, nameof(Account.UserId));
 
-            return _mapper.Map<IEnumerable<AccountDto>>(accounts);
+            return Mapper.Map<IEnumerable<AccountDto>>(accounts);
         }
 
         public async Task<bool> UpdateAccount(AccountForUpdateDto accountForUpdate)
         {
             await EnsureAccountExists(accountForUpdate.UserId);
 
-            Account account = _mapper.Map<Account>(accountForUpdate);
-            return await _accountsRepository.UpdateAsync(account);
+            Account account = Mapper.Map<Account>(accountForUpdate);
+            return await Repository.UpdateAsync(account);
         }
 
         public async Task<bool> DeleteAccount(Guid userId)
         {
             await EnsureAccountExists(userId);
 
-            return await _accountsRepository.DeleteAsync(userId, nameof(Account.UserId));
+            return await Repository.DeleteAsync(userId, nameof(Account.UserId));
         }
 
         #region Private Methods

@@ -3,21 +3,21 @@ using SocialEventManager.DAL.Infrastructure;
 
 namespace SocialEventManager.Tests.IntegrationTests.Infrastructure
 {
-    public class RepositoryTestBase<TInterface, TEntity> : TestBase
-        where TInterface : class, IGenericRepository<TEntity>
+    public class RepositoryTestBase<TIRepository, TEntity> : TestBase
+        where TIRepository : class, IGenericRepository<TEntity>
         where TEntity : class
     {
-        protected RepositoryTestBase(IInMemoryDatabase db, TInterface repository)
+        protected RepositoryTestBase(IInMemoryDatabase db, TIRepository repository)
             : base(db)
         {
             Repository = repository;
-            MockRepository = new Mock<TInterface>();
+            MockRepository = new Mock<TIRepository>();
 
             db.CreateRelevantTablesIfNotExistAsync<TEntity>().GetAwaiter().GetResult();
         }
 
-        protected TInterface Repository { get; }
+        protected TIRepository Repository { get; }
 
-        protected Mock<TInterface> MockRepository { get; }
+        protected Mock<TIRepository> MockRepository { get; }
     }
 }
