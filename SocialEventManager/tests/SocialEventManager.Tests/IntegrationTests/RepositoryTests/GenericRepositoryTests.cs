@@ -8,6 +8,7 @@ using Moq;
 using SocialEventManager.DAL.Entities;
 using SocialEventManager.DAL.Repositories.Roles;
 using SocialEventManager.Shared.Constants;
+using SocialEventManager.Tests.Common.Constants;
 using SocialEventManager.Tests.Common.DataMembers;
 using SocialEventManager.Tests.Common.Helpers;
 using SocialEventManager.Tests.IntegrationTests.Infrastructure;
@@ -216,6 +217,13 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         {
             await MockRepository.Object.DeleteAsync(role);
             MockRepository.Verify(r => r.DeleteAsync(role), Times.Once);
+        }
+
+        [Fact]
+        public void InitializeConstructorWithNullDbSession_ShouldReturnException()
+        {
+            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() => new RolesRepository(null));
+            Assert.Equal(ExceptionConstants.ValueCannotBeNull("session"), ex.Message);
         }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoFixture.Xunit2;
 using DeepEqual.Syntax;
@@ -9,6 +10,7 @@ using SocialEventManager.DAL.Entities;
 using SocialEventManager.DAL.Infrastructure;
 using SocialEventManager.DAL.Repositories.Roles;
 using SocialEventManager.Shared.Constants;
+using SocialEventManager.Shared.Helpers;
 using SocialEventManager.Tests.Common.Constants;
 using SocialEventManager.Tests.Common.DataMembers;
 using SocialEventManager.Tests.Common.Helpers;
@@ -60,7 +62,19 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         {
             await Db.InsertAsync(role);
             SqlException ex = await Assert.ThrowsAsync<SqlException>(() => Db.InsertAsync(role));
-            Assert.StartsWith($"{ExceptionConstants.ViolationOfPrimaryKeyConstraint} 'PK__{AliasConstants.Roles}", ex.Message);
+            Assert.StartsWith(ExceptionConstants.ViolationOfPrimaryKeyConstraint($"PK__{AliasConstants.Roles}__"), ex.Message);
+        }
+
+        [Theory]
+        [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
+        public async Task InsertDuplicateRoleId_ShouldReturnException(Role role)
+        {
+            await Db.InsertAsync(role);
+
+            Role duplicatedIdRole = RoleData.GetMockRole(RandomGeneratorHelpers.GenerateRandomValue(), role.Id);
+            SqlException ex = await Assert.ThrowsAsync<SqlException>(() => Db.InsertAsync(duplicatedIdRole));
+
+            Assert.StartsWith(ExceptionConstants.ViolationOfPrimaryKeyConstraint($"PK__{AliasConstants.Roles}__"), ex.Message);
         }
 
         [Theory]
@@ -68,7 +82,11 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         public async Task InsertDuplicateRoleName_ShouldReturnException(IEnumerable<Role> roles)
         {
             SqlException ex = await Assert.ThrowsAsync<SqlException>(() => Db.InsertAsync(roles));
-            Assert.StartsWith($"{ExceptionConstants.ViolationOfUniqueKeyConstraint} 'UQ__{AliasConstants.Roles}", ex.Message);
+
+            string uniqueConstraintName = $"UC_{AliasConstants.Roles}_{nameof(Role.Name)}";
+            string duplicateKeyValue = roles.First().Name;
+
+            Assert.Equal(ex.Message, ExceptionConstants.ViolationOfUniqueKeyConstraint(uniqueConstraintName, TableNameConstants.Roles, duplicateKeyValue));
         }
 
         [Theory]

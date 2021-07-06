@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using SocialEventManager.DAL.Entities;
 using SocialEventManager.DAL.Enums;
 using SocialEventManager.Shared.Extensions;
-using SocialEventManager.Shared.Helpers;
 
 namespace SocialEventManager.Tests.Common.DataMembers
 {
@@ -61,7 +60,7 @@ namespace SocialEventManager.Tests.Common.DataMembers
         {
             return new UserRole
             {
-                Id = RandomGeneratorHelpers.NextInt32(),
+                Id = 1,
                 RoleId = roleId ?? Guid.NewGuid(),
                 UserId = userId ?? Guid.NewGuid(),
             };
