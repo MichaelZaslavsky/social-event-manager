@@ -11,9 +11,11 @@ namespace SocialEventManager.Tests.IntegrationTests.Infrastructure
 
         public IDbTransaction OpenTransaction();
 
-        Task InsertAsync<T>(T item);
+        Task<int> InsertAsync<T>(T item);
 
         Task InsertAsync<T>(IEnumerable<T> items);
+
+        Task DeleteAsync<T>(T item);
 
         Task<IEnumerable<T>> SelectAsync<T>();
 

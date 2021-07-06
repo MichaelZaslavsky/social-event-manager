@@ -262,6 +262,28 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
             MockRepository.Verify(r => r.IsInRole(userId, roleName), Times.Once);
         }
 
+        [Theory]
+        [MemberData(nameof(UserRoleData.UserRoleRelatedData), MemberType = typeof(UserRoleData))]
+        public async Task DeleteUser_ShouldDeleteRelatedUserRole(Account account, Role role)
+        {
+            UserRole userRole = await CreateUserRoleAndRelatedData(account, role);
+            await Db.DeleteAsync(account);
+
+            UserRole userRoleAfterDeletion = await Db.SingleWhereAsync<UserRole>(nameof(UserRole.Id), userRole.Id);
+            Assert.Null(userRoleAfterDeletion);
+        }
+
+        [Theory]
+        [MemberData(nameof(UserRoleData.UserRoleRelatedData), MemberType = typeof(UserRoleData))]
+        public async Task DeleteRole_ShouldDeleteRelatedUserRole(Account account, Role role)
+        {
+            UserRole userRole = await CreateUserRoleAndRelatedData(account, role);
+            await Db.DeleteAsync(role);
+
+            UserRole userRoleAfterDeletion = await Db.SingleWhereAsync<UserRole>(nameof(UserRole.Id), userRole.Id);
+            Assert.Null(userRoleAfterDeletion);
+        }
+
         #region Private Methods
 
         private async Task<UserRole> CreateUserRoleAndRelatedData(Account account, Role role)
@@ -270,7 +292,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
             await Db.InsertAsync(role);
 
             UserRole userRole = UserRoleData.GetMockUserRole(role.Id, account.UserId);
-            await Db.InsertAsync(userRole);
+            userRole.Id = await Db.InsertAsync(userRole);
 
             return userRole;
         }

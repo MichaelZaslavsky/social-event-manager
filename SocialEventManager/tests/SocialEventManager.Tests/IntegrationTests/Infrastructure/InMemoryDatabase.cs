@@ -27,10 +27,10 @@ namespace SocialEventManager.Tests.IntegrationTests.Infrastructure
 
         public IDbTransaction OpenTransaction() => _dbFactory.AlwaysReturnTransaction;
 
-        public async Task InsertAsync<T>(T item)
+        public async Task<int> InsertAsync<T>(T item)
         {
             using IDbConnection db = await OpenConnectionAsync();
-            await db.InsertAsync(item);
+            return (int)await db.InsertAsync(item);
         }
 
         public async Task InsertAsync<T>(IEnumerable<T> items)
@@ -41,6 +41,12 @@ namespace SocialEventManager.Tests.IntegrationTests.Infrastructure
             {
                 await db.InsertAsync(item);
             }
+        }
+
+        public async Task DeleteAsync<T>(T item)
+        {
+            using IDbConnection db = await OpenConnectionAsync();
+            await db.DeleteAsync(item);
         }
 
         public async Task<IEnumerable<T>> SelectAsync<T>()
