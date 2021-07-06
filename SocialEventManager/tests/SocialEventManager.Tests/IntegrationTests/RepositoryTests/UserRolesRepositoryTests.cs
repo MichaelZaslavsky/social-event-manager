@@ -91,8 +91,10 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
             SqlException ex = await Assert.ThrowsAsync<SqlException>(() => Db.InsertAsync(userRole));
 
-            string uniqueConstraintName = $"'UC_{AliasConstants.UserRoles}_{nameof(UserRole.UserId)}_{nameof(UserRole.RoleId)}'";
-            Assert.StartsWith($"{ExceptionConstants.ViolationOfUniqueKeyConstraint} {uniqueConstraintName}", ex.Message);
+            string uniqueConstraintName = $"UC_{AliasConstants.UserRoles}_{nameof(UserRole.UserId)}_{nameof(UserRole.RoleId)}";
+            string duplicateKeyValue = $"{userRole.UserId}, {userRole.RoleId}";
+
+            Assert.Equal(ex.Message, ExceptionConstants.ViolationOfUniqueKeyConstraint(uniqueConstraintName, TableNameConstants.UserRoles, duplicateKeyValue));
         }
 
         [Theory]
@@ -102,7 +104,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
             UserRole userRole = await CreateUserRoleAndRelatedData(account, role);
 
             IEnumerable<UserRole> actualUserRoles = await Repository.GetUserRoles(role.Name);
-            AssertHelpers.AssertSingleEqual(userRole, actualUserRoles, nameof(UserRole.Id));
+            AssertHelpers.AssertSingleEqual(userRole, actualUserRoles);
         }
 
         [Theory]
@@ -184,7 +186,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [InlineAutoData]
-        public async Task DeleteAsync_ShouldReturnFalse(Guid userId, string roleName)
+        public async Task DeleteUserRole_ShouldReturnFalse(Guid userId, string roleName)
         {
             bool isDeleted = await Repository.DeleteUserRole(userId, roleName);
             Assert.False(isDeleted);

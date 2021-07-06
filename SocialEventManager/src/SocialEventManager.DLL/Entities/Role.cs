@@ -7,6 +7,7 @@ namespace SocialEventManager.DAL.Entities
 {
     [Table(TableNameConstants.Roles)]
     [Alias(AliasConstants.Roles)]
+    [UniqueConstraint(nameof(Name))]
     public class Role
     {
         [Required]
@@ -20,7 +21,6 @@ namespace SocialEventManager.DAL.Entities
 
         [Required]
         [StringLength(LengthConstants.Length255)]
-        [Unique]
         public string Name { get; set; }
 
         [Required]

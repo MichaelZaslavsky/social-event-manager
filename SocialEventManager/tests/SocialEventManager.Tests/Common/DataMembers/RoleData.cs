@@ -11,7 +11,7 @@ namespace SocialEventManager.Tests.Common.DataMembers
 {
     public static class RoleData
     {
-        private const string RolesTableName = TableNameConstants.Roles;
+        private const string TableName = TableNameConstants.Roles;
 
         public static IEnumerable<object[]> ValidRole
         {
@@ -59,17 +59,17 @@ namespace SocialEventManager.Tests.Common.DataMembers
                 yield return new object[]
                 {
                     GetMockRole(nullifyConcurrencyStamp: true),
-                    ExceptionConstants.CannotInsertTheValueNull(nameof(Role.ConcurrencyStamp), RolesTableName),
+                    ExceptionConstants.CannotInsertTheValueNull(nameof(Role.ConcurrencyStamp), TableName),
                 };
                 yield return new object[]
                 {
                     GetMockRole(nullifyName: true),
-                    ExceptionConstants.CannotInsertTheValueNull(nameof(Role.Name), RolesTableName),
+                    ExceptionConstants.CannotInsertTheValueNull(nameof(Role.Name), TableName),
                 };
                 yield return new object[]
                 {
                     GetMockRole(nullifyNormalizedName: true),
-                    ExceptionConstants.CannotInsertTheValueNull(nameof(Role.NormalizedName), RolesTableName),
+                    ExceptionConstants.CannotInsertTheValueNull(nameof(Role.NormalizedName), TableName),
                 };
             }
         }

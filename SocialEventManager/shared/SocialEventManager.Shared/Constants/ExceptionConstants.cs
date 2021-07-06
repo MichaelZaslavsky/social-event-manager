@@ -4,7 +4,6 @@ namespace SocialEventManager.Tests.Common.Constants
 {
     public static class ExceptionConstants
     {
-        public const string ValueCannotBeNull = "Value cannot be null. (Parameter 'source')";
         public const string AnErrorOccurred = "An error occurred";
         public const string ExceptionWasA = "Exception was a ";
         public const string NullReferenceException = ExceptionWasA + "null reference exception.";
@@ -31,9 +30,15 @@ namespace SocialEventManager.Tests.Common.Constants
             $"The INSERT statement conflicted with the FOREIGN KEY constraint \"{foriegnKeyName}\". " +
             $"The conflict occurred in database \"{dbName}\", table \"{tableName}\", column '{columnName}'.{TheStatementHasBeenTerminatedWithSpace}";
 
-        public static string ViolationOfPrimaryKeyConstraint => ViolationOfKeyConstraint("PRIMARY");
+        public static string ViolationOfPrimaryKeyConstraint(string partialConstraintName) =>
+            $"{ViolationOfKeyConstraint("PRIMARY")} '{partialConstraintName}";
 
-        public static string ViolationOfUniqueKeyConstraint => ViolationOfKeyConstraint("UNIQUE");
+        public static string ViolationOfUniqueKeyConstraint(string constraintName, string tableName, string duplicateKeyValue) =>
+            $"{ViolationOfKeyConstraint("UNIQUE")} '{constraintName}'. Cannot insert duplicate key in object '{tableName}'. " +
+            $"The duplicate key value is ({duplicateKeyValue}).{TheStatementHasBeenTerminatedWithSpace}";
+
+        public static string ValueCannotBeNull(string parameterName) =>
+            $"Value cannot be null. (Parameter '{parameterName}')";
 
         private const string TheStatementHasBeenTerminatedWithSpace = "\r\nThe statement has been terminated.";
 

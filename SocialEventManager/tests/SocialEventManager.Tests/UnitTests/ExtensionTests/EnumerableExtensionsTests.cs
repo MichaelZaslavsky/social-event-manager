@@ -26,7 +26,7 @@ namespace SocialEventManager.Tests.UnitTests.ExtensionTests
         public void IsEmpty_Expect_ArgumentNullException<T>(IEnumerable<T> enumerable)
         {
             ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() => enumerable.IsEmpty());
-            Assert.Equal(ExceptionConstants.ValueCannotBeNull, exception.Message);
+            Assert.Equal(ExceptionConstants.ValueCannotBeNull("source"), exception.Message);
         }
 
         [Theory]
