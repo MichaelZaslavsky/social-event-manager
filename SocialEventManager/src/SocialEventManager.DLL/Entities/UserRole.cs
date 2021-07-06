@@ -16,9 +16,11 @@ namespace SocialEventManager.DAL.Entities
         [AutoIncrement]
         public int Id { get; set; }
 
+        [Required]
         [ForeignKey(typeof(Account), OnDelete = GlobalConstants.Cascade)]
         public Guid UserId { get; set; }
 
+        [Required]
         [ForeignKey(typeof(Role), OnDelete = GlobalConstants.Cascade)]
         public Guid RoleId { get; set; }
     }

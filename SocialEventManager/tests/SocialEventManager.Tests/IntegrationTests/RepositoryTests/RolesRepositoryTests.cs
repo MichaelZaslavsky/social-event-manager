@@ -29,7 +29,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Role), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
         public async Task InsertRole(Role role)
         {
             Guid roleId = await Repository.InsertRole(role);
@@ -39,7 +39,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Role), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
         public async Task InsertRole_VerifyNeverCalled(Role role)
         {
             await MockRepository.Object.InsertRole(role);
@@ -47,7 +47,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Role), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
         public async Task InsertRole_VerifyCalledOnce(Role role)
         {
             await MockRepository.Object.InsertRole(role);
@@ -55,7 +55,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Role), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
         public async Task InsertDuplicateRole_ShouldReturnException(Role role)
         {
             await Db.InsertAsync(role);
@@ -72,7 +72,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Role), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
         public async Task GetByUserIdAsync_ShouldReturnRole(Role role)
         {
             await Db.CreateTableIfNotExistsAsync<Account>();
@@ -122,6 +122,22 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         {
             await MockRepository.Object.GetByUserIdAsync(userId);
             MockRepository.Verify(r => r.GetByUserIdAsync(userId), Times.Once);
+        }
+
+        [Theory]
+        [MemberData(nameof(RoleData.RoleWithValidLength), MemberType = typeof(RoleData))]
+        public async Task InsertAsync_ValidData(Role role)
+        {
+            await Db.InsertAsync(role);
+        }
+
+        [Theory]
+        [MemberData(nameof(RoleData.RoleWithMissingRequiredFields), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.RoleWithExceededLength), MemberType = typeof(RoleData))]
+        public async Task InsertAsync_InvalidData(Role role, string expectedResult)
+        {
+            SqlException ex = await Assert.ThrowsAsync<SqlException>(() => Db.InsertAsync(role));
+            Assert.Equal(expectedResult, ex.Message);
         }
     }
 }

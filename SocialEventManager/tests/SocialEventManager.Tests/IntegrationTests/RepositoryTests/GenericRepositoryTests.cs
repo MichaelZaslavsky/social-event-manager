@@ -28,7 +28,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Role), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
         public async Task InsertAsync(Role role)
         {
             await Repository.InsertAsync(role);
@@ -38,7 +38,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Role), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
         public async Task InsertAsync_VerifyNeverCalled(Role role)
         {
             await MockRepository.Object.InsertAsync(role);
@@ -46,7 +46,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Role), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
         public async Task InsertAsync_VerifyCalledOnce(Role role)
         {
             await MockRepository.Object.InsertAsync(role);
@@ -54,7 +54,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Roles), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRoles), MemberType = typeof(RoleData))]
         public async Task InsertAsync_Multiple(IEnumerable<Role> roles)
         {
             await Repository.InsertAsync(roles);
@@ -64,7 +64,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Roles), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRoles), MemberType = typeof(RoleData))]
         public async Task InsertAsync_Multiple_VerifyNeverCalled(IEnumerable<Role> roles)
         {
             await MockRepository.Object.InsertAsync(roles);
@@ -72,7 +72,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Roles), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRoles), MemberType = typeof(RoleData))]
         public async Task InsertAsync_Multiple_VerifyCalledOnce(IEnumerable<Role> roles)
         {
             await MockRepository.Object.InsertAsync(roles);
@@ -80,7 +80,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Role), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
         public async Task GetAsync_ShouldReturnRole(Role role)
         {
             await Db.InsertAsync(role);
@@ -113,7 +113,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Roles), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRoles), MemberType = typeof(RoleData))]
         public async Task GetAsync_Multiple_ShouldReturnRoles(IEnumerable<Role> roles)
         {
             await Db.InsertAsync(roles);
@@ -143,7 +143,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Role), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
         public async Task UpdateAsync_ShouldReturnTrue(Role role)
         {
             await Db.InsertAsync(role);
@@ -158,7 +158,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Role), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
         public async Task UpdateAsync_ShouldReturnFalse(Role role)
         {
             bool isUpdated = await Repository.UpdateAsync(role);
@@ -166,7 +166,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Role), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
         public async Task UpdateAsync_VerifyNeverCalled(Role role)
         {
             await MockRepository.Object.UpdateAsync(role);
@@ -174,7 +174,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Role), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
         public async Task UpdateAsync_VerifyCalledOnce(Role role)
         {
             await MockRepository.Object.UpdateAsync(role);
@@ -182,7 +182,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Role), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
         public async Task DeleteAsync_ShouldReturnTrue(Role role)
         {
             await Db.InsertAsync(role);
@@ -195,7 +195,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Role), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
         public async Task DeleteAsync_ShouldReturnFalse(Role role)
         {
             bool isDeleted = await Repository.DeleteAsync(role);
@@ -203,7 +203,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Role), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
         public async Task DeleteAsync_VerifyNeverCalled(Role role)
         {
             await MockRepository.Object.DeleteAsync(role);
@@ -211,7 +211,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Role), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
         public async Task DeleteAsync_VerifyCalledOnce(Role role)
         {
             await MockRepository.Object.DeleteAsync(role);
