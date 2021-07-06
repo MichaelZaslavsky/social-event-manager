@@ -102,23 +102,23 @@ namespace SocialEventManager.Tests.Common.DataMembers
             {
                 yield return new object[]
                 {
-                    GetMockRole(concurrencyStampLength: LengthConstants.Length255)
+                    GetMockRole(concurrencyStampLength: LengthConstants.Length255),
                 };
                 yield return new object[]
                 {
-                    GetMockRole(nameLength: LengthConstants.Length255)
+                    GetMockRole(nameLength: LengthConstants.Length255),
                 };
                 yield return new object[]
                 {
-                    GetMockRole(normalizedNameLength: LengthConstants.Length255)
+                    GetMockRole(normalizedNameLength: LengthConstants.Length255),
                 };
             }
         }
 
-        public static Role GetMockRole(string name = "User") =>
+        public static Role GetMockRole(string name = "User", Guid? id = null) =>
             new()
             {
-                Id = Guid.NewGuid(),
+                Id = id ?? Guid.NewGuid(),
                 ConcurrencyStamp = Guid.NewGuid().ToString().ToLower(),
                 Name = name,
                 NormalizedName = name.ToUpper(),

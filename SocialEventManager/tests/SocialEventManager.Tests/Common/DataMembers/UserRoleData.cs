@@ -9,6 +9,14 @@ namespace SocialEventManager.Tests.Common.DataMembers
 {
     public static class UserRoleData
     {
+        public static IEnumerable<object[]> UserRole
+        {
+            get
+            {
+                yield return new object[] { GetMockUserRole() };
+            }
+        }
+
         public static IEnumerable<object[]> UserRoleRelatedData
         {
             get
@@ -49,13 +57,13 @@ namespace SocialEventManager.Tests.Common.DataMembers
             }
         }
 
-        public static UserRole GetMockUserRole(Guid roleId, Guid userId)
+        public static UserRole GetMockUserRole(Guid? roleId = null, Guid? userId = null)
         {
             return new UserRole
             {
                 Id = RandomGeneratorHelpers.NextInt32(),
-                RoleId = roleId,
-                UserId = userId,
+                RoleId = roleId ?? Guid.NewGuid(),
+                UserId = userId ?? Guid.NewGuid(),
             };
         }
     }

@@ -44,12 +44,11 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(UserRoleData.UserRoleRelatedData), MemberType = typeof(UserRoleData))]
-        public async Task InsertAsync_NonExistingUserId_ShouldReturnException(Account account, Role role)
+        [MemberData(nameof(UserRoleData.UserRole), MemberType = typeof(UserRoleData))]
+        public async Task InsertAsync_NonExistingUserId_ShouldReturnException(UserRole userRole)
         {
-            await Db.InsertAsync(role);
+            await Db.InsertAsync(RoleData.GetMockRole(id: userRole.RoleId));
 
-            UserRole userRole = UserRoleData.GetMockUserRole(role.Id, account.UserId);
             SqlException ex = await Assert.ThrowsAsync<SqlException>(() => Db.InsertAsync(userRole));
 
             string foriegnKeyName = $"FK_{AliasConstants.UserRoles}_{AliasConstants.Accounts}_{nameof(UserRole.UserId)}";
@@ -57,12 +56,11 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(UserRoleData.UserRoleRelatedData), MemberType = typeof(UserRoleData))]
-        public async Task InsertAsync_NonExistingRoleId_ShouldReturnException(Account account, Role role)
+        [MemberData(nameof(UserRoleData.UserRole), MemberType = typeof(UserRoleData))]
+        public async Task InsertAsync_NonExistingRoleId_ShouldReturnException(UserRole userRole)
         {
-            await Db.InsertAsync(account);
+            await Db.InsertAsync(AccountData.GetMockAccount(userRole.UserId));
 
-            UserRole userRole = UserRoleData.GetMockUserRole(role.Id, account.UserId);
             SqlException ex = await Assert.ThrowsAsync<SqlException>(() => Db.InsertAsync(userRole));
 
             string foriegnKeyName = $"FK_{AliasConstants.UserRoles}_{AliasConstants.Roles}_{nameof(UserRole.RoleId)}";
@@ -70,26 +68,26 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(UserRoleData.UserRoleRelatedData), MemberType = typeof(UserRoleData))]
-        public async Task InsertAsync_VerifyNeverCalled(Account account, Role role)
+        [InlineAutoData]
+        public async Task InsertAsync_VerifyNeverCalled(Guid userId, string roleName)
         {
-            await MockRepository.Object.InsertAsync(account.UserId, role.Name);
-            MockRepository.Verify(r => r.InsertAsync(Guid.NewGuid(), role.Name), Times.Never);
+            await MockRepository.Object.InsertAsync(userId, roleName);
+            MockRepository.Verify(r => r.InsertAsync(Guid.NewGuid(), roleName), Times.Never);
         }
 
         [Theory]
-        [MemberData(nameof(UserRoleData.UserRoleRelatedData), MemberType = typeof(UserRoleData))]
-        public async Task InsertAsync_VerifyCalledOnce(Account account, Role role)
+        [InlineAutoData]
+        public async Task InsertAsync_VerifyCalledOnce(Guid userId, string roleName)
         {
-            await MockRepository.Object.InsertAsync(account.UserId, role.Name);
-            MockRepository.Verify(r => r.InsertAsync(account.UserId, role.Name), Times.Once);
+            await MockRepository.Object.InsertAsync(userId, roleName);
+            MockRepository.Verify(r => r.InsertAsync(userId, roleName), Times.Once);
         }
 
         [Theory]
-        [MemberData(nameof(UserRoleData.UserRoleRelatedData), MemberType = typeof(UserRoleData))]
-        public async Task InsertDuplicateUserRoles_ShouldReturnException(Account account, Role role)
+        [MemberData(nameof(UserRoleData.UserRole), MemberType = typeof(UserRoleData))]
+        public async Task InsertDuplicateUserRoles_ShouldReturnException(UserRole userRole)
         {
-            UserRole userRole = await CreateUserRoleAndRelatedData(account, role);
+            userRole.Id = await CreateUserRoleAndRelatedData(userRole);
 
             SqlException ex = await Assert.ThrowsAsync<SqlException>(() => Db.InsertAsync(userRole));
 
@@ -285,6 +283,14 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         #region Private Methods
+
+        private async Task<int> CreateUserRoleAndRelatedData(UserRole userRole)
+        {
+            await Db.InsertAsync(AccountData.GetMockAccount(userRole.UserId));
+            await Db.InsertAsync(RoleData.GetMockRole(id: userRole.RoleId));
+
+            return await Db.InsertAsync(userRole);
+        }
 
         private async Task<UserRole> CreateUserRoleAndRelatedData(Account account, Role role)
         {

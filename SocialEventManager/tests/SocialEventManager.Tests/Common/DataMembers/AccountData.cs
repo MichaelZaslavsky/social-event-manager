@@ -7,7 +7,7 @@ namespace SocialEventManager.Tests.Common.DataMembers
 {
     public static class AccountData
     {
-        public static Account GetMockAccount(string userName = null, string passwordHash = null, string email = null, bool emailConfirmed = false,
+        public static Account GetMockAccount(Guid? userId = null, string userName = null, string passwordHash = null, string email = null, bool emailConfirmed = false,
             string phoneNumber = null, bool phoneNumberConfirmed = false, DateTime? lockoutEnd = null, bool lockoutEnabled = false, int accessFailedCount = 0,
             string concurrencyStamp = null, string securityStamp = null, bool twoFactorEnabled = false)
         {
@@ -16,7 +16,7 @@ namespace SocialEventManager.Tests.Common.DataMembers
 
             return new Account
             {
-                UserId = Guid.NewGuid(),
+                UserId = userId ?? Guid.NewGuid(),
                 UserName = userName,
                 PasswordHash = passwordHash ?? Guid.NewGuid().ToString(),
                 Email = email,
