@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Dapper.Contrib.Extensions;
 using ServiceStack.DataAnnotations;
 using ServiceStack.OrmLite;
+using ServiceStack.OrmLite.Converters;
 using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Shared.Helpers.Queries;
 
@@ -20,6 +21,9 @@ namespace SocialEventManager.Tests.IntegrationTests.Infrastructure
         public InMemoryDatabase(string connectionString)
         {
             _dbFactory = new(connectionString, SqlServerDialect.Provider);
+
+            StringConverter converter = OrmLiteConfig.DialectProvider.GetStringConverter();
+            converter.UseUnicode = true;
         }
 
         public async Task<IDbConnection> OpenConnectionAsync() =>

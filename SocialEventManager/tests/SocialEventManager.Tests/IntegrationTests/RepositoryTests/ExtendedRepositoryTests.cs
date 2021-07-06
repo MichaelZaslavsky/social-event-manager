@@ -31,7 +31,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Role), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
         public async Task GetAsync_ByColumnName_ShouldReturnRole(Role role)
         {
             await Db.InsertAsync(role);
@@ -41,7 +41,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Role), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
         public async Task GetAsync_ByColumnName_ShouldReturnEmpty(Role role)
         {
             IEnumerable<Role> actualRoles = await Repository.GetAsync(role.Name, nameof(Role.Name));
@@ -49,7 +49,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Role), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
         public async Task GetAsync_ByIncompatibleColumnName_ShouldReturnException(Role role)
         {
             SqlException ex = await Assert.ThrowsAsync<SqlException>(() => Repository.GetAsync(role.Name, nameof(Role.Id)));
@@ -57,7 +57,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Role), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
         public async Task GetAsync_ByColumnName_VerifyNeverCalled(Role role)
         {
             await MockRepository.Object.GetAsync(role.Name, nameof(Role.Name));
@@ -65,7 +65,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Role), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
         public async Task GetAsync_ByColumnName_VerifyCalledOnce(Role role)
         {
             await MockRepository.Object.GetAsync(role.Name, nameof(Role.Name));
@@ -73,7 +73,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Roles), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRoles), MemberType = typeof(RoleData))]
         public async Task GetAsync_ByColumnName_Multiple_ShouldReturnRoles(IEnumerable<Role> roles)
         {
             await Db.InsertAsync(roles);
@@ -83,7 +83,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Roles), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRoles), MemberType = typeof(RoleData))]
         public async Task GetAsync_ByColumnName_Multiple_ShouldReturnEmpty(IEnumerable<Role> roles)
         {
             IEnumerable<Role> actualRoles = await Repository.GetAsync(roles.Select(role => role.Name), nameof(Role.Name));
@@ -91,7 +91,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Roles), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRoles), MemberType = typeof(RoleData))]
         public async Task GetAsync_ByIncompatibleColumnName_Multiple_ShouldReturnException(IEnumerable<Role> roles)
         {
             SqlException ex = await Assert.ThrowsAsync<SqlException>(() => Repository.GetAsync(roles.Select(role => role.Name), nameof(Role.Id)));
@@ -99,7 +99,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Roles), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRoles), MemberType = typeof(RoleData))]
         public async Task GetAsync_ByColumnName_Multiple_VerifyNeverCalled(IEnumerable<Role> roles)
         {
             await MockRepository.Object.GetAsync(roles.Select(role => role.Name), nameof(Role.Name));
@@ -107,7 +107,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Roles), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRoles), MemberType = typeof(RoleData))]
         public async Task GetAsync_ByColumnName_Multiple_VerifyCalledOnce(IEnumerable<Role> roles)
         {
             IEnumerable<string> names = roles.Select(role => role.Name);
@@ -117,7 +117,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Role), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
         public async Task GetSingleOrDefaultAsync_ByColumnName_ShouldReturnRole(Role role)
         {
             await Db.InsertAsync(role);
@@ -127,7 +127,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Role), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
         public async Task GetSingleOrDefaultAsync_ByColumnName_ShouldReturnNull(Role role)
         {
             Role actualRole = await Repository.GetSingleOrDefaultAsync(role.Name, nameof(Role.Name));
@@ -135,7 +135,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Role), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
         public async Task GetSingleOrDefaultAsync_ByIncompatibleColumnName_ShouldReturnException(Role role)
         {
             SqlException ex = await Assert.ThrowsAsync<SqlException>(() => Repository.GetSingleOrDefaultAsync(role.Name, nameof(Role.Id)));
@@ -143,7 +143,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Role), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
         public async Task GetSingleOrDefaultAsync_ByColumnName_VerifyNeverCalled(Role role)
         {
             await MockRepository.Object.GetSingleOrDefaultAsync(role.Name, nameof(Role.Name));
@@ -151,7 +151,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Role), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
         public async Task GetSingleOrDefaultAsync_ByColumnName_VerifyCalledOnce(Role role)
         {
             await MockRepository.Object.GetSingleOrDefaultAsync(role.Name, nameof(Role.Name));
@@ -159,7 +159,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Theory]
-        [MemberData(nameof(RoleData.Role), MemberType = typeof(RoleData))]
+        [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
         public async Task DeleteAsync_ByColumnName_ShouldReturnTrue(Role role)
         {
             await Db.InsertAsync(role);
