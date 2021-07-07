@@ -16,7 +16,7 @@ using Xunit.Categories;
 
 namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 {
-    [Collection(nameof(RolesRepositoryTests))]
+    [Collection(DataConstants.RepositoryTests)]
     [IntegrationTest]
     [Category(CategoryConstants.Identity)]
     public class UserClaimsRepositoryTests : RepositoryTestBase<IUserClaimsRepository, UserClaim>
@@ -185,7 +185,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
             string uniqueConstraintName = $"UC_{AliasConstants.UserClaims}_{nameof(UserClaim.UserId)}_{nameof(UserClaim.Type)}";
             string duplicateKeyValue = $"{firstUserClaim.UserId}, {firstUserClaim.Type}";
-            Assert.Equal(ex.Message, ExceptionConstants.ViolationOfUniqueKeyConstraint(uniqueConstraintName, TableNameConstants.UserClaims, duplicateKeyValue));
+            Assert.Equal(ExceptionConstants.ViolationOfUniqueKeyConstraint(uniqueConstraintName, TableNameConstants.UserClaims, duplicateKeyValue), ex.Message);
         }
 
         [Theory]

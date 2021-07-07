@@ -20,7 +20,7 @@ using Xunit.Categories;
 namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 {
     // Test GenericRepository through RolesRepository
-    [Collection(nameof(RolesRepositoryTests))]
+    [Collection(DataConstants.RepositoryTests)]
     [IntegrationTest]
     [Category(CategoryConstants.Infrastructure)]
     public class ExtendedRepositoryTests : RepositoryTestBase<IRolesRepository, Role>
