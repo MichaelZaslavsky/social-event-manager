@@ -52,6 +52,25 @@ namespace SocialEventManager.Tests.Common.DataMembers
             }
         }
 
+        public static IEnumerable<object[]> RoleWithValidLength
+        {
+            get
+            {
+                yield return new object[]
+                {
+                    GetMockRole(concurrencyStampLength: LengthConstants.Length255),
+                };
+                yield return new object[]
+                {
+                    GetMockRole(nameLength: LengthConstants.Length255),
+                };
+                yield return new object[]
+                {
+                    GetMockRole(normalizedNameLength: LengthConstants.Length255),
+                };
+            }
+        }
+
         public static IEnumerable<object[]> RoleWithMissingRequiredFields
         {
             get
@@ -92,25 +111,6 @@ namespace SocialEventManager.Tests.Common.DataMembers
                 {
                     GetMockRole(normalizedNameLength: LengthConstants.Length255 + 1),
                     ExceptionConstants.StringExccedsMaximumLengthAllowed,
-                };
-            }
-        }
-
-        public static IEnumerable<object[]> RoleWithValidLength
-        {
-            get
-            {
-                yield return new object[]
-                {
-                    GetMockRole(concurrencyStampLength: LengthConstants.Length255),
-                };
-                yield return new object[]
-                {
-                    GetMockRole(nameLength: LengthConstants.Length255),
-                };
-                yield return new object[]
-                {
-                    GetMockRole(normalizedNameLength: LengthConstants.Length255),
                 };
             }
         }

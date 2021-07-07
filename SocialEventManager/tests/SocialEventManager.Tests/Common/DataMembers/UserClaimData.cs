@@ -60,6 +60,10 @@ namespace SocialEventManager.Tests.Common.DataMembers
                 {
                     GetMockUserClaim(typeLength: LengthConstants.Length255),
                 };
+                yield return new object[]
+                {
+                    GetMockUserClaim(valueLength: LengthConstants.LengthMax),
+                };
             }
         }
 
@@ -136,13 +140,13 @@ namespace SocialEventManager.Tests.Common.DataMembers
                 Value = nullifyValue ? null : RandomGeneratorHelpers.GenerateRandomValue(),
             };
 
-        private static UserClaim GetMockUserClaim(int typeLength = LengthConstants.Length255) =>
+        private static UserClaim GetMockUserClaim(int typeLength = LengthConstants.Length255, int valueLength = LengthConstants.Length255) =>
             new()
             {
                 Id = RandomGeneratorHelpers.NextInt32(),
                 UserId = Guid.NewGuid(),
                 Type = RandomGeneratorHelpers.GenerateRandomValue(typeLength),
-                Value = RandomGeneratorHelpers.GenerateRandomValue(),
+                Value = RandomGeneratorHelpers.GenerateRandomValue(valueLength),
             };
 
         #endregion Private Methods

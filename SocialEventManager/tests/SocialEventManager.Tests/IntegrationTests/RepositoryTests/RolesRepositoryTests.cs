@@ -20,7 +20,7 @@ using Xunit.Categories;
 
 namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 {
-    [Collection(nameof(RolesRepositoryTests))]
+    [Collection(DataConstants.RepositoryTests)]
     [IntegrationTest]
     [Category(CategoryConstants.Identity)]
     public class RolesRepositoryTests : RepositoryTestBase<IRolesRepository, Role>
@@ -86,7 +86,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
             string uniqueConstraintName = $"UC_{AliasConstants.Roles}_{nameof(Role.Name)}";
             string duplicateKeyValue = roles.First().Name;
 
-            Assert.Equal(ex.Message, ExceptionConstants.ViolationOfUniqueKeyConstraint(uniqueConstraintName, TableNameConstants.Roles, duplicateKeyValue));
+            Assert.Equal(ExceptionConstants.ViolationOfUniqueKeyConstraint(uniqueConstraintName, TableNameConstants.Roles, duplicateKeyValue), ex.Message);
         }
 
         [Theory]
