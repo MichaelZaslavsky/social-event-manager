@@ -1,5 +1,5 @@
 # Social Event Manager
-A project for leaning purposes built by Michael Zaslavsky.
+A project for learning purposes built by Michael Zaslavsky.
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
