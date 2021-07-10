@@ -24,6 +24,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Constants\Validations\UserValidationConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\EnumerationExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\IdentityErrorExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\TypeExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\HashingHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\MessageHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Queries\RoleQueryHelpers.cs" />
