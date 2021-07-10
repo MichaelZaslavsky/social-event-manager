@@ -7,29 +7,20 @@ namespace SocialEventManager.DAL.Infrastructure
 {
     public static class SqlMapperUtilities
     {
-        public static string GetTableName<T>(bool includeSchema = true) =>
-            GetTableName(typeof(T), includeSchema);
+        public static string GetTableName<T>() =>
+            GetTableName(typeof(T));
 
-        public static string GetTableName(Type type, bool includeSchema = true)
+        public static string GetTableName(Type type)
         {
             if (SqlMapperExtensions.TableNameMapper != null)
             {
                 return SqlMapperExtensions.TableNameMapper(type);
             }
 
-            const string getTableName = "GetTableName";
-            MethodInfo getTableNameMethod = typeof(SqlMapperExtensions).GetMethod(getTableName, BindingFlags.NonPublic | BindingFlags.Static);
+            const string methodName = "GetTableName";
+            MethodInfo getTableNameMethod = typeof(SqlMapperExtensions).GetNonPublicStaticMethod(methodName);
 
-            if (getTableNameMethod == null)
-            {
-                throw new ArgumentOutOfRangeException($"Method '{getTableName}' is not found in '{nameof(SqlMapperExtensions)}' class.");
-            }
-
-            string tableName = getTableNameMethod.Invoke(null, new object[] { type }) as string;
-
-            return includeSchema
-                ? tableName
-                : tableName.TakeAfterFirst(".");
+            return getTableNameMethod.Invoke(null, new object[] { type }) as string;
         }
     }
 }

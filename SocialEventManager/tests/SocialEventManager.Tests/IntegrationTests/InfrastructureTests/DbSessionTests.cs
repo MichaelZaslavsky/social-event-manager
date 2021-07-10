@@ -31,7 +31,7 @@ namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests
         }
 
         [Fact]
-        public void InitDbSession_OpenConnection_Fail()
+        public void InitDbSession_OpenConnection_ShouldReturnException()
         {
             string connectionString = RandomGeneratorHelpers.GenerateRandomValue();
             ArgumentException ex = Assert.Throws<ArgumentException>(() => new DbSession(connectionString));
