@@ -12,7 +12,7 @@ namespace SocialEventManager.Shared.Extensions
 
             if (methodInfo == null)
             {
-                throw new ArgumentOutOfRangeException(ExceptionConstants.MethodIsNotFound(methodName, nameof(type)));
+                throw new ArgumentOutOfRangeException(methodName, ExceptionConstants.MethodIsNotFound(methodName, nameof(type)));
             }
 
             return methodInfo;
