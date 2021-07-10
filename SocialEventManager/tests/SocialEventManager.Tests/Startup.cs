@@ -25,6 +25,7 @@ namespace SocialEventManager.Tests
             services.AddLogging(builder => builder.SetMinimumLevel(LogLevel.Debug))
                 .AddSingleton<IInMemoryDatabase, InMemoryDatabase>(_ =>
                     new InMemoryDatabase(Configuration.GetConnectionString(DbConstants.SocialEventManagerTest)))
+                .AddSingleton(Configuration)
                 .RegisterServices();
 
             services.AddScoped(sp =>
