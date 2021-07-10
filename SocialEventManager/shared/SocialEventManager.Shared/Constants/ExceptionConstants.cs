@@ -41,6 +41,8 @@ namespace SocialEventManager.Tests.Common.Constants
         public static string ValueCannotBeNull(string parameterName) =>
             $"Value cannot be null. (Parameter '{parameterName}')";
 
+        public static string MethodIsNotFound(string methodName, string className) => $"Method '{methodName}' is not found in '{className}' class.";
+
         private const string TheStatementHasBeenTerminatedWithSpace = "\r\nThe statement has been terminated.";
 
         private static string ViolationOfKeyConstraint(string keyType) =>
