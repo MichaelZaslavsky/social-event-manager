@@ -12,6 +12,6 @@ issueConfigs:
 # Example 2: feature request
   - "Use Case"
   - "Expected Behavior"
-  - "Other Information"
+  - "Additional Context"
 # The issue is judged to be legal if it includes all keywords from any of these two configs.
 # Or it will be closed by the app.
