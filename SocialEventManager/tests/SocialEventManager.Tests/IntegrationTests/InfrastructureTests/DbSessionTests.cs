@@ -46,5 +46,16 @@ namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests
             using IDbTransaction transaction = session.Connection.BeginTransaction();
             Assert.NotNull(transaction);
         }
+
+        [Fact]
+        public void InitDbSession_DisposeTransaction()
+        {
+            string connectionString = _configuration.GetConnectionString(DbConstants.SocialEventManagerTest);
+            var session = new DbSession(connectionString);
+            using IDbTransaction transaction = session.Connection.BeginTransaction();
+            transaction.Dispose();
+
+            Assert.Null(transaction.Connection);
+        }
     }
 }

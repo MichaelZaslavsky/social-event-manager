@@ -96,16 +96,28 @@ namespace SocialEventManager.Tests.Common.DataMembers
             }
         }
 
+        public static IEnumerable<object[]> UserClaimsWithDifferentIds
+        {
+            get
+            {
+                yield return new object[]
+                {
+                    GetMockUserClaim(Guid.Empty, value: DataConstants.RandomText, id: 1),
+                    GetMockUserClaim(Guid.Empty, value: DataConstants.RandomText, id: 2),
+                };
+            }
+        }
+
         #region Private Methods
 
-        private static UserClaim GetMockUserClaim(Guid? userId = null, string type = ClaimTypes.Name)
+        private static UserClaim GetMockUserClaim(Guid? userId = null, string type = ClaimTypes.Name, string value = null, int id = 1)
         {
             return new UserClaim
             {
-                Id = RandomGeneratorHelpers.NextInt32(),
+                Id = id,
                 UserId = userId ?? Guid.NewGuid(),
                 Type = type,
-                Value = RandomGeneratorHelpers.GenerateRandomValue(),
+                Value = value ?? RandomGeneratorHelpers.GenerateRandomValue(),
             };
         }
 
