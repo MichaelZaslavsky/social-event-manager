@@ -53,7 +53,7 @@ namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests
             string connectionString = _configuration.GetConnectionString(DbConstants.SocialEventManagerTest);
             var session = new DbSession(connectionString);
             using IDbTransaction transaction = session.Connection.BeginTransaction();
-            transaction.Dispose();
+            session.Dispose();
 
             Assert.Null(transaction.Connection);
         }
