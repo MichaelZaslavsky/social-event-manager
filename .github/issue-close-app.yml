@@ -10,7 +10,7 @@ issueConfigs:
   - "Detailed Description"
 - content:
 # Example 2: feature request
-  - "Motivation / Use Case"
+  - "Use Case"
   - "Expected Behavior"
   - "Other Information"
 # The issue is judged to be legal if it includes all keywords from any of these two configs.
