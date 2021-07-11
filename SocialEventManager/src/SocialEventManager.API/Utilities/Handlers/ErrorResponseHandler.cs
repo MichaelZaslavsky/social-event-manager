@@ -33,14 +33,10 @@ namespace SocialEventManager.API.Utilities.Handlers
                 _ => new ApiErrorData(name)
             };
 
-            string requestMessage = MessageHelpers.BuildRequestMessage(context.Request);
-            string responseMessage = MessageHelpers.BuildResponseMessage(error);
+            string requestMessage = MessageHelpers.BuildRequestMessage(context.Request).Replace(Environment.NewLine, string.Empty);
+            string responseMessage = MessageHelpers.BuildResponseMessage(error).Replace(Environment.NewLine, string.Empty);
 
-            Log.Logger.Information(
-                responseMessage.Replace(Environment.NewLine, string.Empty) +
-                Environment.NewLine +
-                Environment.NewLine +
-                requestMessage.Replace(Environment.NewLine, string.Empty));
+            Log.Logger.Information(responseMessage + Environment.NewLine + Environment.NewLine + requestMessage);
         }
 
         public static LogLevel DetermineLogLevel(Exception ex)
