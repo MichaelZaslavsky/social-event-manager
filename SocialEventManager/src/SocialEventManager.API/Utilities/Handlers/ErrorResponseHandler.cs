@@ -36,7 +36,11 @@ namespace SocialEventManager.API.Utilities.Handlers
             string requestMessage = MessageHelpers.BuildRequestMessage(context.Request);
             string responseMessage = MessageHelpers.BuildResponseMessage(error);
 
-            Log.Logger.Information(responseMessage + Environment.NewLine + Environment.NewLine + requestMessage);
+            Log.Logger.Information(
+                responseMessage.Replace(Environment.NewLine, string.Empty) +
+                Environment.NewLine +
+                Environment.NewLine +
+                requestMessage.Replace(Environment.NewLine, string.Empty));
         }
 
         public static LogLevel DetermineLogLevel(Exception ex)
