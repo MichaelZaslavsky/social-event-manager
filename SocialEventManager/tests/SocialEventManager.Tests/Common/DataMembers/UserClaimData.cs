@@ -108,6 +108,23 @@ namespace SocialEventManager.Tests.Common.DataMembers
             }
         }
 
+        public static IEnumerable<object[]> UserClaimsWithOneNull
+        {
+            get
+            {
+                yield return new object[]
+                {
+                    GetMockUserClaim(userId: Guid.NewGuid()),
+                    null,
+                };
+                yield return new object[]
+                {
+                    null,
+                    GetMockUserClaim(userId: Guid.NewGuid()),
+                };
+            }
+        }
+
         #region Private Methods
 
         private static UserClaim GetMockUserClaim(Guid? userId = null, string type = ClaimTypes.Name, string value = null, int id = 1)
