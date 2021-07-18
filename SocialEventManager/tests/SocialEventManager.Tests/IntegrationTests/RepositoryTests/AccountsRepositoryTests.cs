@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentAssertions;
 using SocialEventManager.DAL.Entities;
 using SocialEventManager.DAL.Repositories.Accounts;
 using SocialEventManager.Shared.Constants;
@@ -25,38 +27,40 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(AccountData.AccountWithSameUserId), MemberType = typeof(AccountData))]
-        public async Task InsertDuplicateAccountUserId_ShouldReturnException(IEnumerable<Account> accounts)
+        public async Task InsertDuplicateAccountUserId_Should_Return_SqlException(IEnumerable<Account> accounts)
         {
-            SqlException ex = await Assert.ThrowsAsync<SqlException>(() => Db.InsertAsync(accounts));
-            Assert.StartsWith(ExceptionConstants.ViolationOfPrimaryKeyConstraint("PK__Accounts__"), ex.Message);
+            Func<Task> func = async () => await Db.InsertAsync(accounts);
+            string message = (await func.Should().ThrowAsync<SqlException>()).Subject.First().Message;
+            message.Should().StartWith(ExceptionConstants.ViolationOfPrimaryKeyConstraint("PK__Accounts__"));
         }
 
         [Theory]
         [MemberData(nameof(AccountData.AccountWithValidLength), MemberType = typeof(AccountData))]
         [MemberData(nameof(AccountData.AccountWithNonRequiredNullField), MemberType = typeof(AccountData))]
-        public async Task InsertAsync_ValidData(Account account)
+        public async Task InsertAsync_ValidData_Should_Succeed(Account account)
         {
             await Db.InsertAsync(account);
         }
 
         [Theory]
         [MemberData(nameof(AccountData.AccountWithSameEmail), MemberType = typeof(AccountData))]
-        public async Task InsertDuplicateAccountEmail_ShouldReturnException(IEnumerable<Account> accounts)
+        public async Task InsertDuplicateAccountEmail_Should_Return_SqlException(IEnumerable<Account> accounts)
         {
-            SqlException ex = await Assert.ThrowsAsync<SqlException>(() => Db.InsertAsync(accounts));
-
             string uniqueConstraintName = $"UC_{AliasConstants.Accounts}_{nameof(Account.Email)}";
             string duplicateKeyValue = $"{accounts.First().Email}";
-            Assert.Equal(ExceptionConstants.ViolationOfUniqueKeyConstraint(uniqueConstraintName, TableNameConstants.Accounts, duplicateKeyValue), ex.Message);
+            string expectedMessage = ExceptionConstants.ViolationOfUniqueKeyConstraint(uniqueConstraintName, TableNameConstants.Accounts, duplicateKeyValue);
+
+            Func<Task> func = async () => await Db.InsertAsync(accounts);
+            await func.Should().ThrowAsync<SqlException>().WithMessage(expectedMessage);
         }
 
         [Theory]
         [MemberData(nameof(AccountData.AccountWithMissingRequiredFields), MemberType = typeof(AccountData))]
         [MemberData(nameof(AccountData.AccountWithExceededLength), MemberType = typeof(AccountData))]
-        public async Task InsertAsync_InvalidData(Account account, string expectedResult)
+        public async Task InsertAsync_InvalidData_Should_Return_SqlException(Account account, string expectedMessage)
         {
-            SqlException ex = await Assert.ThrowsAsync<SqlException>(() => Db.InsertAsync(account));
-            Assert.Equal(expectedResult, ex.Message);
+            Func<Task> func = async () => await Db.InsertAsync(account);
+            await func.Should().ThrowAsync<SqlException>().WithMessage(expectedMessage);
         }
     }
 }

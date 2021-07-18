@@ -9,7 +9,6 @@
     <PackageReference Include="Evolve" Version="3.0.0" />
     <PackageReference Include="FluentValidation" Version="10.3.0" />
     <PackageReference Include="Hangfire.Core" Version="1.7.24" />
-    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.RazorPages" Version="2.2.5" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />

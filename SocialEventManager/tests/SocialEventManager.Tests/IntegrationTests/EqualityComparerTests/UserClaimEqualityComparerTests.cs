@@ -1,4 +1,5 @@
 using AutoFixture.Xunit2;
+using FluentAssertions;
 using SocialEventManager.DAL.Entities;
 using SocialEventManager.DAL.EqualityComparers;
 using SocialEventManager.Tests.Common.DataMembers;
@@ -10,54 +11,54 @@ namespace SocialEventManager.Tests.IntegrationTests.EqualityComparerTests
     {
         [Theory]
         [InlineAutoData]
-        public void CompareUserClaims_ShouldReturnTrue(UserClaim userClaim)
+        public void CompareUserClaims_Should_Return_True(UserClaim userClaim)
         {
             var comparer = new UserClaimEqualityComparer();
             bool isEqual = comparer.Equals(userClaim, userClaim);
-            Assert.True(isEqual);
+            isEqual.Should().BeTrue();
         }
 
         [Theory]
         [MemberData(nameof(UserClaimData.UserClaimsWithDifferentIds), MemberType = typeof(UserClaimData))]
-        public void CompareUserClaims_DifferentId_ShouldReturnTrue(UserClaim userClaim, UserClaim otherUserClaim)
+        public void CompareUserClaims_DifferentId_Should_Return_True(UserClaim userClaim, UserClaim otherUserClaim)
         {
             var comparer = new UserClaimEqualityComparer();
             bool isEqual = comparer.Equals(userClaim, otherUserClaim);
-            Assert.True(isEqual);
+            isEqual.Should().BeTrue();
         }
 
         [Fact]
-        public void CompareUserClaims_BothNulls_ShouldReturnTrue()
+        public void CompareUserClaims_BothNulls_Should_Return_True()
         {
             var comparer = new UserClaimEqualityComparer();
             bool isEqual = comparer.Equals(null, null);
-            Assert.True(isEqual);
+            isEqual.Should().BeTrue();
         }
 
         [Theory]
         [InlineAutoData]
         [MemberData(nameof(UserClaimData.UserClaimsWithOneNull), MemberType = typeof(UserClaimData))]
-        public void CompareUserClaims_ShouldReturnFalse(UserClaim userClaim, UserClaim otherUserClaim)
+        public void CompareUserClaims_Should_Return_False(UserClaim userClaim, UserClaim otherUserClaim)
         {
             var comparer = new UserClaimEqualityComparer();
             bool isEqual = comparer.Equals(userClaim, otherUserClaim);
-            Assert.False(isEqual);
+            isEqual.Should().BeFalse();
         }
 
         [Theory]
         [MemberData(nameof(UserClaimData.UserClaimsWithDifferentIds), MemberType = typeof(UserClaimData))]
-        public void CompareUserClaims_GetHashCode_DifferentId_ShouldReturnSameHash(UserClaim userClaim, UserClaim otherUserClaim)
+        public void CompareUserClaims_GetHashCode_DifferentId_Should_Return_SameHash(UserClaim userClaim, UserClaim otherUserClaim)
         {
             var comparer = new UserClaimEqualityComparer();
-            Assert.Equal(comparer.GetHashCode(userClaim), comparer.GetHashCode(otherUserClaim));
+            comparer.GetHashCode(userClaim).Should().Be(comparer.GetHashCode(otherUserClaim));
         }
 
         [Theory]
         [InlineAutoData]
-        public void CompareUserClaims_GetHashCode_ShouldReturnDifferentHash(UserClaim userClaim, UserClaim otherUserClaim)
+        public void CompareUserClaims_GetHashCode_Should_Return_DifferentHash(UserClaim userClaim, UserClaim otherUserClaim)
         {
             var comparer = new UserClaimEqualityComparer();
-            Assert.NotEqual(comparer.GetHashCode(userClaim), comparer.GetHashCode(otherUserClaim));
+            comparer.GetHashCode(userClaim).Should().NotBe(comparer.GetHashCode(otherUserClaim));
         }
     }
 }

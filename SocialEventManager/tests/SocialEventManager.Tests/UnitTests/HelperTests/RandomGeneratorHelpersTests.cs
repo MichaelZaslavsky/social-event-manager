@@ -1,4 +1,5 @@
 using AutoFixture.Xunit2;
+using FluentAssertions;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Helpers;
 using Xunit;
@@ -12,14 +13,14 @@ namespace SocialEventManager.Tests.UnitTests.HelperTests
     {
         [Theory]
         [InlineAutoData]
-        public void GenerateRandomValue(int length)
+        public void GenerateRandomValue_Should_Return_Value_Of_Requested_Length(int length)
         {
             string value = RandomGeneratorHelpers.GenerateRandomValue(length);
-            Assert.Equal(length, value.Length);
+            value.Length.Should().Be(length);
         }
 
         [Fact]
-        public void NextInt32() =>
+        public void NextInt32_Should_Succeed() =>
             RandomGeneratorHelpers.NextInt32();
     }
 }

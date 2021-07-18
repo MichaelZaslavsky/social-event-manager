@@ -1,4 +1,5 @@
 using System;
+using FluentAssertions;
 using SocialEventManager.DAL.Enums;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
@@ -15,10 +16,10 @@ namespace SocialEventManager.Tests.UnitTests.ExtensionTests
         [InlineData(RoleType.Admin, "Admin")]
         [InlineData(RoleType.User, "User")]
         [InlineData((RoleType)(-1), "-1")]
-        public void GetDescription(Enum value, string expectedResult)
+        public void GetDescription_Should_Return_Description(Enum value, string expectedDescription)
         {
             string actualResult = value.GetDescription();
-            Assert.Equal(expectedResult, actualResult);
+            actualResult.Should().Be(expectedDescription);
         }
     }
 }

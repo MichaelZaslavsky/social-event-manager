@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoFixture.Xunit2;
 using DeepEqual.Syntax;
+using FluentAssertions;
 using Moq;
 using SocialEventManager.DAL.Entities;
 using SocialEventManager.DAL.Repositories.Roles;
@@ -12,7 +13,6 @@ using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Helpers;
 using SocialEventManager.Tests.Common.Constants;
 using SocialEventManager.Tests.Common.DataMembers;
-using SocialEventManager.Tests.Common.Helpers;
 using SocialEventManager.Tests.IntegrationTests.Infrastructure;
 using Xunit;
 using Xunit.Categories;
@@ -32,33 +32,33 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
-        public async Task GetAsync_ByColumnName_ShouldReturnRole(Role role)
+        public async Task GetAsync_ByColumnName_Should_Return_Roles(Role role)
         {
             await Db.InsertAsync(role);
 
             IEnumerable<Role> actualRoles = await Repository.GetAsync(role.Name, nameof(Role.Name));
-            AssertHelpers.AssertSingleEqual(role, actualRoles);
+            actualRoles.Should().ContainSingle(r => r.IsDeepEqual(role));
         }
 
         [Theory]
         [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
-        public async Task GetAsync_ByColumnName_ShouldReturnEmpty(Role role)
+        public async Task GetAsync_ByColumnName_Should_Return_Empty_Roles(Role role)
         {
             IEnumerable<Role> actualRoles = await Repository.GetAsync(role.Name, nameof(Role.Name));
-            Assert.Empty(actualRoles);
+            actualRoles.Should().BeEmpty();
         }
 
         [Theory]
         [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
-        public async Task GetAsync_ByIncompatibleColumnName_ShouldReturnException(Role role)
+        public async Task GetAsync_ByIncompatibleColumnName_Should_Return_SqlException(Role role)
         {
-            SqlException ex = await Assert.ThrowsAsync<SqlException>(() => Repository.GetAsync(role.Name, nameof(Role.Id)));
-            Assert.Equal(ExceptionConstants.ConversionFailedFromStringToUniqueIdentifier, ex.Message);
+            Func<Task> func = async () => await Repository.GetAsync(role.Name, nameof(Role.Id));
+            await func.Should().ThrowAsync<SqlException>().WithMessage(ExceptionConstants.ConversionFailedFromStringToUniqueIdentifier);
         }
 
         [Theory]
         [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
-        public async Task GetAsync_ByColumnName_VerifyNeverCalled(Role role)
+        public async Task GetAsync_ByColumnName_Verify_NeverCalled(Role role)
         {
             await MockRepository.Object.GetAsync(role.Name, nameof(Role.Name));
             MockRepository.Verify(r => r.GetAsync($"Different {role.Name}", nameof(Role.Name)), Times.Never);
@@ -66,7 +66,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
-        public async Task GetAsync_ByColumnName_VerifyCalledOnce(Role role)
+        public async Task GetAsync_ByColumnName_Verify_CalledOnce(Role role)
         {
             await MockRepository.Object.GetAsync(role.Name, nameof(Role.Name));
             MockRepository.Verify(r => r.GetAsync(role.Name, nameof(Role.Name)), Times.Once);
@@ -74,33 +74,33 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(RoleData.ValidRoles), MemberType = typeof(RoleData))]
-        public async Task GetAsync_ByColumnName_Multiple_ShouldReturnRoles(IEnumerable<Role> roles)
+        public async Task GetAsync_ByColumnName_Multiple_Should_Return_Roles(IEnumerable<Role> roles)
         {
             await Db.InsertAsync(roles);
 
             IEnumerable<Role> actualRoles = await Repository.GetAsync(roles.Select(role => role.Name), nameof(Role.Name));
-            Assert.True(actualRoles.OrderBy(r => r.Id).IsDeepEqual(roles.OrderBy(r => r.Id)));
+            actualRoles.Should().BeEquivalentTo(roles);
         }
 
         [Theory]
         [MemberData(nameof(RoleData.ValidRoles), MemberType = typeof(RoleData))]
-        public async Task GetAsync_ByColumnName_Multiple_ShouldReturnEmpty(IEnumerable<Role> roles)
+        public async Task GetAsync_ByColumnName_Multiple_Should_Return_Empty_Roles(IEnumerable<Role> roles)
         {
             IEnumerable<Role> actualRoles = await Repository.GetAsync(roles.Select(role => role.Name), nameof(Role.Name));
-            Assert.Empty(actualRoles);
+            actualRoles.Should().BeEmpty();
         }
 
         [Theory]
         [MemberData(nameof(RoleData.ValidRoles), MemberType = typeof(RoleData))]
-        public async Task GetAsync_ByIncompatibleColumnName_Multiple_ShouldReturnException(IEnumerable<Role> roles)
+        public async Task GetAsync_ByIncompatibleColumnName_Multiple_Should_Return_SqlException(IEnumerable<Role> roles)
         {
-            SqlException ex = await Assert.ThrowsAsync<SqlException>(() => Repository.GetAsync(roles.Select(role => role.Name), nameof(Role.Id)));
-            Assert.Equal(ExceptionConstants.ConversionFailedFromStringToUniqueIdentifier, ex.Message);
+            Func<Task> func = async () => await Repository.GetAsync(roles.Select(role => role.Name), nameof(Role.Id));
+            await func.Should().ThrowAsync<SqlException>().WithMessage(ExceptionConstants.ConversionFailedFromStringToUniqueIdentifier);
         }
 
         [Theory]
         [MemberData(nameof(RoleData.ValidRoles), MemberType = typeof(RoleData))]
-        public async Task GetAsync_ByColumnName_Multiple_VerifyNeverCalled(IEnumerable<Role> roles)
+        public async Task GetAsync_ByColumnName_Multiple_Verify_NeverCalled(IEnumerable<Role> roles)
         {
             await MockRepository.Object.GetAsync(roles.Select(role => role.Name), nameof(Role.Name));
             MockRepository.Verify(r => r.GetAsync($"Different {roles.Select(role => role.Name)}", nameof(Role.Name)), Times.Never);
@@ -108,7 +108,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(RoleData.ValidRoles), MemberType = typeof(RoleData))]
-        public async Task GetAsync_ByColumnName_Multiple_VerifyCalledOnce(IEnumerable<Role> roles)
+        public async Task GetAsync_ByColumnName_Multiple_Verify_CalledOnce(IEnumerable<Role> roles)
         {
             IEnumerable<string> names = roles.Select(role => role.Name);
 
@@ -118,33 +118,33 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
-        public async Task GetSingleOrDefaultAsync_ByColumnName_ShouldReturnRole(Role role)
+        public async Task GetSingleOrDefaultAsync_ByColumnName_Should_Return_Role(Role role)
         {
             await Db.InsertAsync(role);
 
             Role actualRole = await Repository.GetSingleOrDefaultAsync(role.Name, nameof(Role.Name));
-            Assert.True(actualRole.IsDeepEqual(role));
+            actualRole.Should().BeEquivalentTo(role);
         }
 
         [Theory]
         [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
-        public async Task GetSingleOrDefaultAsync_ByColumnName_ShouldReturnNull(Role role)
+        public async Task GetSingleOrDefaultAsync_ByColumnName_Should_Return_Null(Role role)
         {
             Role actualRole = await Repository.GetSingleOrDefaultAsync(role.Name, nameof(Role.Name));
-            Assert.Null(actualRole);
+            actualRole.Should().BeNull();
         }
 
         [Theory]
         [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
-        public async Task GetSingleOrDefaultAsync_ByIncompatibleColumnName_ShouldReturnException(Role role)
+        public async Task GetSingleOrDefaultAsync_ByIncompatibleColumnName_Should_Return_SqlException(Role role)
         {
-            SqlException ex = await Assert.ThrowsAsync<SqlException>(() => Repository.GetSingleOrDefaultAsync(role.Name, nameof(Role.Id)));
-            Assert.Equal(ExceptionConstants.ConversionFailedFromStringToUniqueIdentifier, ex.Message);
+            Func<Task> func = async () => await Repository.GetSingleOrDefaultAsync(role.Name, nameof(Role.Id));
+            await func.Should().ThrowAsync<SqlException>().WithMessage(ExceptionConstants.ConversionFailedFromStringToUniqueIdentifier);
         }
 
         [Theory]
         [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
-        public async Task GetSingleOrDefaultAsync_ByColumnName_VerifyNeverCalled(Role role)
+        public async Task GetSingleOrDefaultAsync_ByColumnName_Verify_NeverCalled(Role role)
         {
             await MockRepository.Object.GetSingleOrDefaultAsync(role.Name, nameof(Role.Name));
             MockRepository.Verify(r => r.GetSingleOrDefaultAsync($"Different {role.Name}", nameof(Role.Name)), Times.Never);
@@ -152,7 +152,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
-        public async Task GetSingleOrDefaultAsync_ByColumnName_VerifyCalledOnce(Role role)
+        public async Task GetSingleOrDefaultAsync_ByColumnName_Verify_CalledOnce(Role role)
         {
             await MockRepository.Object.GetSingleOrDefaultAsync(role.Name, nameof(Role.Name));
             MockRepository.Verify(r => r.GetSingleOrDefaultAsync(role.Name, nameof(Role.Name)), Times.Once);
@@ -160,34 +160,34 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
-        public async Task DeleteAsync_ByColumnName_ShouldReturnTrue(Role role)
+        public async Task DeleteAsync_ByColumnName_Should_Return_True(Role role)
         {
             await Db.InsertAsync(role);
 
             bool isDeleted = await Repository.DeleteAsync(role.Id, nameof(Role.Id));
-            Assert.True(isDeleted);
+            isDeleted.Should().BeTrue();
 
             Role actualRole = await Db.SingleWhereAsync<Role>(nameof(Role.Id), role.Id);
-            Assert.Null(actualRole);
+            actualRole.Should().BeNull();
         }
 
         [Fact]
-        public async Task DeleteAsync_ByColumnName_ShouldReturnFalse()
+        public async Task DeleteAsync_ByColumnName_Should_Return_False()
         {
             bool isDeleted = await Repository.DeleteAsync(Guid.NewGuid(), nameof(Role.Id));
-            Assert.False(isDeleted);
+            isDeleted.Should().BeFalse();
         }
 
         [Fact]
-        public async Task DeleteAsync_ByColumnName_ShouldReturnSqlException()
+        public async Task DeleteAsync_ByColumnName_Should_Return_SqlException()
         {
-            SqlException ex = await Assert.ThrowsAsync<SqlException>(() => Repository.DeleteAsync(RandomGeneratorHelpers.NextInt32(), nameof(Role.Id)));
-            Assert.Equal(ExceptionConstants.UniqueIdentifierIsIncompatibleWithInt, ex.Message);
+            Func<Task> func = async () => await Repository.DeleteAsync(RandomGeneratorHelpers.NextInt32(), nameof(Role.Id));
+            await func.Should().ThrowAsync<SqlException>().WithMessage(ExceptionConstants.UniqueIdentifierIsIncompatibleWithInt);
         }
 
         [Theory]
         [InlineAutoData]
-        public async Task DeleteAsync_ByColumnName_VerifyNeverCalled(Guid roleId)
+        public async Task DeleteAsync_ByColumnName_Verify_NeverCalled(Guid roleId)
         {
             await MockRepository.Object.DeleteAsync(roleId, nameof(Role.Id));
             MockRepository.Verify(r => r.DeleteAsync(Guid.NewGuid(), nameof(Role.Id)), Times.Never);
@@ -195,7 +195,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [InlineAutoData]
-        public async Task DeleteAsync_ByColumnName_VerifyCalledOnce(Guid roleId)
+        public async Task DeleteAsync_ByColumnName_Verify_CalledOnce(Guid roleId)
         {
             await MockRepository.Object.DeleteAsync(roleId, nameof(Role.Id));
             MockRepository.Verify(r => r.DeleteAsync(roleId, nameof(Role.Id)), Times.Once);

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using FluentAssertions;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Tests.Common.Constants;
@@ -15,34 +16,34 @@ namespace SocialEventManager.Tests.UnitTests.ExtensionTests
     {
         [Theory]
         [MemberData(nameof(EnumerableData.EmptyData), MemberType = typeof(EnumerableData))]
-        public void IsEmpty(IEnumerable<int> enumerable, bool expectedResult)
+        public void IsEmpty_Should_Return_Expected_Result(IEnumerable<int> enumerable, bool expectedResult)
         {
             bool actualResult = enumerable.IsEmpty();
-            Assert.Equal(expectedResult, actualResult);
+            actualResult.Should().Be(expectedResult);
         }
 
         [Theory]
         [InlineData(null)]
-        public void IsEmpty_Expect_ArgumentNullException<T>(IEnumerable<T> enumerable)
+        public void IsEmpty_Should_Return_ArgumentNullException<T>(IEnumerable<T> enumerable)
         {
-            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() => enumerable.IsEmpty());
-            Assert.Equal(ExceptionConstants.ValueCannotBeNull("source"), exception.Message);
+            Action action = () => enumerable.IsEmpty();
+            action.Should().Throw<ArgumentNullException>().WithMessage(ExceptionConstants.ValueCannotBeNull("source"));
         }
 
         [Theory]
         [MemberData(nameof(EnumerableData.NullOrEmptyData), MemberType = typeof(EnumerableData))]
-        public void IsNullOrEmpty(IEnumerable<int> enumerable, bool expectedResult)
+        public void IsNullOrEmpty_Should_Return_Expected_Result(IEnumerable<int> enumerable, bool expectedResult)
         {
             bool actualResult = enumerable.IsNullOrEmpty();
-            Assert.Equal(expectedResult, actualResult);
+            actualResult.Should().Be(expectedResult);
         }
 
         [Theory]
         [MemberData(nameof(EnumerableData.NotNullAndAnyData), MemberType = typeof(EnumerableData))]
-        public void IsNotNullAndAny(IEnumerable<int> enumerable, bool expectedResult)
+        public void IsNotNullAndAny_Should_Return_Expected_Result(IEnumerable<int> enumerable, bool expectedResult)
         {
             bool actualResult = enumerable.IsNotNullAndAny();
-            Assert.Equal(expectedResult, actualResult);
+            actualResult.Should().Be(expectedResult);
         }
     }
 }

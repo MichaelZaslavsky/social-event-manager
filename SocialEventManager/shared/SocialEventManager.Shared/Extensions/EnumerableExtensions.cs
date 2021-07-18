@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -34,6 +35,15 @@ namespace SocialEventManager.Shared.Extensions
             }
 
             return dataTable;
+        }
+
+        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> enumeration, Action<T> action)
+        {
+            foreach (T item in enumeration.ToList())
+            {
+                action(item);
+                yield return item;
+            }
         }
     }
 }

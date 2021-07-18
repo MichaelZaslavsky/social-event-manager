@@ -1,5 +1,6 @@
 using System;
 using Dapper.Contrib.Extensions;
+using FluentAssertions;
 using SocialEventManager.DAL.Entities;
 using SocialEventManager.DAL.Infrastructure;
 using SocialEventManager.Shared.Constants;
@@ -10,10 +11,10 @@ namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests
     public class SqlMapperUtilitiesTests
     {
         [Fact]
-        public void GetTableName()
+        public void GetTableName_Should_Return_TableName()
         {
             string tableName = SqlMapperUtilities.GetTableName<Role>();
-            Assert.Equal(TableNameConstants.Roles, tableName);
+            tableName.Should().Be(TableNameConstants.Roles);
         }
 
         [Theory]
@@ -21,20 +22,20 @@ namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests
         [InlineData(typeof(Role), TableNameConstants.Roles)]
         [InlineData(typeof(UserRole), TableNameConstants.UserRoles)]
         [InlineData(typeof(UserClaim), TableNameConstants.UserClaims)]
-        public void GetTableName_ByType(Type type, string expectedResult)
+        public void GetTableName_ByType_Should_Return_TableName(Type type, string expectedTableName)
         {
             string actualTableName = SqlMapperUtilities.GetTableName(type);
-            Assert.Equal(expectedResult, actualTableName);
+            actualTableName.Should().Be(expectedTableName);
         }
 
         [Theory]
         [InlineData(typeof(ClaimBase))]
-        public void GetTableName_ByTableNameMapper(Type type)
+        public void GetTableName_ByTableNameMapper_Should_Return_TableName(Type type)
         {
             SqlMapperExtensions.TableNameMapper = (type) => type.Name;
 
             string actualTableName = SqlMapperUtilities.GetTableName(type);
-            Assert.Equal(type.Name, actualTableName);
+            actualTableName.Should().Be(type.Name);
 
             SqlMapperExtensions.TableNameMapper = null;
         }

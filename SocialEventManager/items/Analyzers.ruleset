@@ -2,6 +2,7 @@
 <RuleSet Name="StyleCop rules for Core Application" Description="Custom Rules" ToolsVersion="10.0">
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
     <Rule Id="CA1016" Action="None" />
+    <Rule Id="CA1806" Action="None" />
     <Rule Id="CA2208" Action="None" />
   </Rules>
   <Rules AnalyzerId="Roslynator.CSharp.Analyzers" RuleNamespace="Roslynator.CSharp.Analyzers">

@@ -24,6 +24,8 @@ namespace SocialEventManager.Tests.Common.Constants
         public const string InvalidConnectionString = "Format of the initialization string does not conform to specification starting at index 0.";
         public const string RoleNameIsInvalid = "Role name '' is invalid.(InvalidRoleName)\r\n";
 
+        public static string InvalidObjectName(string objectName) => $"Invalid object name '{objectName}'.";
+
         public static string CannotInsertTheValueNull(string columnName, string tableName, string databaseName = DbConstants.SocialEventManagerTest) =>
             $"Cannot insert the value NULL into column '{columnName}', table '{databaseName}.{tableName}'; " +
             $"column does not allow nulls. INSERT fails.{TheStatementHasBeenTerminatedWithSpace}";
@@ -39,8 +41,7 @@ namespace SocialEventManager.Tests.Common.Constants
             $"{ViolationOfKeyConstraint("UNIQUE")} '{constraintName}'. Cannot insert duplicate key in object '{tableName}'. " +
             $"The duplicate key value is ({duplicateKeyValue}).{TheStatementHasBeenTerminatedWithSpace}";
 
-        public static string ValueCannotBeNull(string parameterName) =>
-            $"Value cannot be null. (Parameter '{parameterName}')";
+        public static string ValueCannotBeNull(string parameterName) => $"Value cannot be null. (Parameter '{parameterName}')";
 
         public static string MethodIsNotFound(string methodName, string className) => $"Method '{methodName}' is not found in '{className}' class.";
 
