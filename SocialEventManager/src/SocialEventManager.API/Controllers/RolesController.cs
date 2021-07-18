@@ -4,12 +4,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SocialEventManager.BLL.Models.Identity;
+using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
 
 namespace SocialEventManager.API.Controllers
 {
     [ApiController]
-    [Route("api/roles")]
+    [Route(ApiPathConstants.Roles)]
     public class RolesController : ControllerBase
     {
         private readonly RoleManager<ApplicationRole> _roleManager;
@@ -24,7 +25,7 @@ namespace SocialEventManager.API.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(string))]
         public async Task<IActionResult> Create(ApplicationRole role)
         {
             IdentityResult result = await _roleManager.CreateAsync(role);

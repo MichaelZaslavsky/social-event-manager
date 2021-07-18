@@ -14,15 +14,15 @@ namespace SocialEventManager.Tests.IntegrationTests.Fixtures.Stubs
 
         public Task<bool> DeleteAsync(int id, string columnName) => Task.FromResult(false);
 
-        public Task<TEntity> GetAsync(Guid id) => Task.FromResult(default(TEntity));
+        public Task<TEntity> GetAsync(Guid id) => Task.FromResult<TEntity>(null);
 
-        public Task<IEnumerable<TEntity>> GetAsync() => Task.FromResult(default(IEnumerable<TEntity>));
+        public Task<IEnumerable<TEntity>> GetAsync() => Task.FromResult<IEnumerable<TEntity>>(null);
 
-        public Task<IEnumerable<TEntity>> GetAsync<TFilter>(TFilter filterValue, string columnName) => Task.FromResult(default(IEnumerable<TEntity>));
+        public Task<IEnumerable<TEntity>> GetAsync<TFilter>(TFilter filterValue, string columnName) => Task.FromResult<IEnumerable<TEntity>>(null);
 
-        public Task<IEnumerable<TEntity>> GetAsync<TFilter>(IEnumerable<TFilter> filterValues, string columnName) => Task.FromResult(default(IEnumerable<TEntity>));
+        public Task<IEnumerable<TEntity>> GetAsync<TFilter>(IEnumerable<TFilter> filterValues, string columnName) => Task.FromResult<IEnumerable<TEntity>>(null);
 
-        public Task<TEntity> GetSingleOrDefaultAsync<TFilter>(TFilter filterValue, string columnName) => Task.FromResult(default(TEntity));
+        public Task<TEntity> GetSingleOrDefaultAsync<TFilter>(TFilter filterValue, string columnName) => Task.FromResult<TEntity>(null);
 
         public Task<int> InsertAsync(TEntity entity) => Task.FromResult(0);
 

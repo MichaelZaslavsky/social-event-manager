@@ -22,6 +22,7 @@ namespace SocialEventManager.Tests.Common.Constants
         public const string UniqueIdentifierIsIncompatibleWithInt = "Operand type clash: uniqueidentifier is incompatible with int";
         public const string StringExccedsMaximumLengthAllowed = "String or binary data would be truncated." + TheStatementHasBeenTerminatedWithSpace;
         public const string InvalidConnectionString = "Format of the initialization string does not conform to specification starting at index 0.";
+        public const string RoleNameIsInvalid = "Role name '' is invalid.(InvalidRoleName)\r\n";
 
         public static string CannotInsertTheValueNull(string columnName, string tableName, string databaseName = DbConstants.SocialEventManagerTest) =>
             $"Cannot insert the value NULL into column '{columnName}', table '{databaseName}.{tableName}'; " +
@@ -43,9 +44,17 @@ namespace SocialEventManager.Tests.Common.Constants
 
         public static string MethodIsNotFound(string methodName, string className) => $"Method '{methodName}' is not found in '{className}' class.";
 
+        public static string DuplicateRoleName(string roleName) => $"Role name '{roleName}' {IsAlreadyTaken}(DuplicateRoleName)\r\n";
+
+        #region Private Fields
+
         private const string TheStatementHasBeenTerminatedWithSpace = "\r\nThe statement has been terminated.";
 
         private static string ViolationOfKeyConstraint(string keyType) =>
             $"Violation of {keyType} KEY constraint";
+
+        private const string IsAlreadyTaken = "is already taken.";
+
+        #endregion Private Fields
     }
 }

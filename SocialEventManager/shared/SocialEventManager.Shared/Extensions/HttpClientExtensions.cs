@@ -1,3 +1,4 @@
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -16,6 +17,14 @@ namespace SocialEventManager.Shared.Extensions
             response.EnsureSuccessStatusCode();
 
             return response;
+        }
+
+        public static async Task<(HttpStatusCode statusCode, string message)> CreateAsyncWithError<T>(this HttpClient client, string requestUri, T obj)
+        {
+            using HttpResponseMessage response = await client.PostAsJsonAsync(requestUri, obj);
+            string message = await response.Content.ReadAsStringAsync();
+
+            return (response.StatusCode, message);
         }
 
         public static async Task<TResult> CreateAndDeserializeAsync<T, TResult>(this HttpClient client, string requestUri, T obj)
