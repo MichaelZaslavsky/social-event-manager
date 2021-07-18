@@ -4,6 +4,8 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoFixture.Xunit2;
+using DeepEqual.Syntax;
+using FluentAssertions;
 using Moq;
 using SocialEventManager.DAL.Entities;
 using SocialEventManager.DAL.Repositories.Users;
@@ -11,7 +13,6 @@ using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Helpers;
 using SocialEventManager.Tests.Common.Constants;
 using SocialEventManager.Tests.Common.DataMembers;
-using SocialEventManager.Tests.Common.Helpers;
 using SocialEventManager.Tests.IntegrationTests.Infrastructure;
 using Xunit;
 using Xunit.Categories;
@@ -30,7 +31,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(UserRoleData.UserRoleRelatedData), MemberType = typeof(UserRoleData))]
-        public async Task InsertAsync(Account account, Role role)
+        public async Task InsertAsync_Should_Return_UserRoleId(Account account, Role role)
         {
             await Db.InsertAsync(account);
             await Db.InsertAsync(role);
@@ -38,38 +39,40 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
             int userRoleId = await Repository.InsertAsync(account.UserId, role.Name);
             UserRole actualUserRole = await Db.SingleWhereAsync<UserRole>(nameof(UserRole.Id), userRoleId);
 
-            Assert.True(userRoleId > 0);
-            Assert.Equal(role.Id, actualUserRole.RoleId);
-            Assert.Equal(account.UserId, actualUserRole.UserId);
+            userRoleId.Should().BeGreaterThan(0);
+            actualUserRole.RoleId.Should().Be(role.Id);
+            actualUserRole.UserId.Should().Be(account.UserId);
         }
 
         [Theory]
         [MemberData(nameof(UserRoleData.UserRole), MemberType = typeof(UserRoleData))]
-        public async Task InsertAsync_NonExistingUserId_ShouldReturnException(UserRole userRole)
+        public async Task InsertAsync_NonExistingUserId_Should_Return_SqlException(UserRole userRole)
         {
             await Db.InsertAsync(RoleData.GetMockRole(id: userRole.RoleId));
 
-            SqlException ex = await Assert.ThrowsAsync<SqlException>(() => Db.InsertAsync(userRole));
-
             string foriegnKeyName = $"FK_{AliasConstants.UserRoles}_{AliasConstants.Accounts}_{nameof(UserRole.UserId)}";
-            Assert.Equal(ExceptionConstants.ForeignKeyConstraintConflict(foriegnKeyName, TableNameConstants.Accounts, nameof(UserRole.UserId)), ex.Message);
+            string expectedMessage = ExceptionConstants.ForeignKeyConstraintConflict(foriegnKeyName, TableNameConstants.Accounts, nameof(UserRole.UserId));
+
+            Func<Task> func = async () => await Db.InsertAsync(userRole);
+            await func.Should().ThrowAsync<SqlException>().WithMessage(expectedMessage);
         }
 
         [Theory]
         [MemberData(nameof(UserRoleData.UserRole), MemberType = typeof(UserRoleData))]
-        public async Task InsertAsync_NonExistingRoleId_ShouldReturnException(UserRole userRole)
+        public async Task InsertAsync_NonExistingRoleId_Should_Return_SqlException(UserRole userRole)
         {
             await Db.InsertAsync(AccountData.GetMockAccount(userRole.UserId));
 
-            SqlException ex = await Assert.ThrowsAsync<SqlException>(() => Db.InsertAsync(userRole));
-
             string foriegnKeyName = $"FK_{AliasConstants.UserRoles}_{AliasConstants.Roles}_{nameof(UserRole.RoleId)}";
-            Assert.Equal(ExceptionConstants.ForeignKeyConstraintConflict(foriegnKeyName, TableNameConstants.Roles, nameof(Role.Id)), ex.Message);
+            string expectedMessage = ExceptionConstants.ForeignKeyConstraintConflict(foriegnKeyName, TableNameConstants.Roles, nameof(Role.Id));
+
+            Func<Task> func = async () => await Db.InsertAsync(userRole);
+            await func.Should().ThrowAsync<SqlException>().WithMessage(expectedMessage);
         }
 
         [Theory]
         [InlineAutoData]
-        public async Task InsertAsync_VerifyNeverCalled(Guid userId, string roleName)
+        public async Task InsertAsync_Verify_NeverCalled(Guid userId, string roleName)
         {
             await MockRepository.Object.InsertAsync(userId, roleName);
             MockRepository.Verify(r => r.InsertAsync(Guid.NewGuid(), roleName), Times.Never);
@@ -77,7 +80,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [InlineAutoData]
-        public async Task InsertAsync_VerifyCalledOnce(Guid userId, string roleName)
+        public async Task InsertAsync_Verify_CalledOnce(Guid userId, string roleName)
         {
             await MockRepository.Object.InsertAsync(userId, roleName);
             MockRepository.Verify(r => r.InsertAsync(userId, roleName), Times.Once);
@@ -85,39 +88,39 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(UserRoleData.UserRole), MemberType = typeof(UserRoleData))]
-        public async Task InsertDuplicateUserRoles_ShouldReturnException(UserRole userRole)
+        public async Task InsertDuplicateUserRoles_Should_Return_SqlException(UserRole userRole)
         {
             userRole.Id = await CreateUserRoleAndRelatedData(userRole);
 
-            SqlException ex = await Assert.ThrowsAsync<SqlException>(() => Db.InsertAsync(userRole));
-
             string uniqueConstraintName = $"UC_{AliasConstants.UserRoles}_{nameof(UserRole.UserId)}_{nameof(UserRole.RoleId)}";
             string duplicateKeyValue = $"{userRole.UserId}, {userRole.RoleId}";
+            string expectedMessage = ExceptionConstants.ViolationOfUniqueKeyConstraint(uniqueConstraintName, TableNameConstants.UserRoles, duplicateKeyValue);
 
-            Assert.Equal(ExceptionConstants.ViolationOfUniqueKeyConstraint(uniqueConstraintName, TableNameConstants.UserRoles, duplicateKeyValue), ex.Message);
+            Func<Task> func = async () => await Db.InsertAsync(userRole);
+            await func.Should().ThrowAsync<SqlException>().WithMessage(expectedMessage);
         }
 
         [Theory]
         [MemberData(nameof(UserRoleData.UserRoleRelatedData), MemberType = typeof(UserRoleData))]
-        public async Task GetUserRoles_ShouldReturnUserRole(Account account, Role role)
+        public async Task GetUserRoles_Should_Return_UserRoles(Account account, Role role)
         {
             UserRole userRole = await CreateUserRoleAndRelatedData(account, role);
 
             IEnumerable<UserRole> actualUserRoles = await Repository.GetUserRoles(role.Name);
-            AssertHelpers.AssertSingleEqual(userRole, actualUserRoles);
+            actualUserRoles.Should().ContainSingle(actualUserRole => actualUserRole.IsDeepEqual(userRole));
         }
 
         [Theory]
         [InlineAutoData]
-        public async Task GetUserRoles_ShouldReturnEmpty(string roleName)
+        public async Task GetUserRoles_Should_Return_Empty_UserRoles(string roleName)
         {
             IEnumerable<UserRole> actualUserRoles = await Repository.GetUserRoles(roleName);
-            Assert.Empty(actualUserRoles);
+            actualUserRoles.Should().BeEmpty();
         }
 
         [Theory]
         [InlineAutoData]
-        public async Task GetUserRoles_VerifyNeverCalled(string roleName)
+        public async Task GetUserRoles_Verify_NeverCalled(string roleName)
         {
             await MockRepository.Object.GetUserRoles(roleName);
             MockRepository.Verify(r => r.GetUserRoles(null), Times.Never);
@@ -125,7 +128,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [InlineAutoData]
-        public async Task GetUserRoles_VerifyCalledOnce(string roleName)
+        public async Task GetUserRoles_Verify_CalledOnce(string roleName)
         {
             await MockRepository.Object.GetUserRoles(roleName);
             MockRepository.Verify(r => r.GetUserRoles(roleName), Times.Once);
@@ -133,20 +136,20 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(UserRoleData.UserRoleRelatedData), MemberType = typeof(UserRoleData))]
-        public async Task DeleteUserRole_ShouldReturnTrue(Account account, Role role)
+        public async Task DeleteUserRole_Should_Return_True(Account account, Role role)
         {
             await CreateUserRoleAndRelatedData(account, role);
 
             bool isDeleted = await Repository.DeleteUserRole(account.UserId, role.Name);
-            Assert.True(isDeleted);
+            isDeleted.Should().BeTrue();
 
             bool isInRole = await Repository.IsInRole(account.UserId, role.Name);
-            Assert.False(isInRole);
+            isInRole.Should().BeFalse();
         }
 
         [Theory]
         [MemberData(nameof(UserRoleData.UserRoleRelatedDataWithMultipleRoles), MemberType = typeof(UserRoleData))]
-        public async Task DeleteUserRole_WithMultipleRoles_ShouldReturnTrue(Account account, IEnumerable<Role> roles)
+        public async Task DeleteUserRole_WithMultipleRoles_Should_Return_True(Account account, IEnumerable<Role> roles)
         {
             await Db.InsertAsync(account);
             await Db.InsertAsync(roles);
@@ -158,15 +161,15 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
             await Db.InsertAsync(secondUserRole);
 
             bool isDeleted = await Repository.DeleteUserRole(account.UserId, roles.First().Name);
-            Assert.True(isDeleted);
+            isDeleted.Should().BeTrue();
 
             bool isInRole = await Repository.IsInRole(account.UserId, roles.Last().Name);
-            Assert.True(isInRole);
+            isInRole.Should().BeTrue();
         }
 
         [Theory]
         [MemberData(nameof(UserRoleData.UserRoleRelatedDataWithMultipleAccounts), MemberType = typeof(UserRoleData))]
-        public async Task DeleteUserRole_WithSomeUsers_ShouldReturnTrue(IEnumerable<Account> accounts, Role role)
+        public async Task DeleteUserRole_WithSomeUsers_Should_Return_True(IEnumerable<Account> accounts, Role role)
         {
             await Db.InsertAsync(accounts);
             await Db.InsertAsync(role);
@@ -178,23 +181,23 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
             await Db.InsertAsync(secondUserRole);
 
             bool isDeleted = await Repository.DeleteUserRole(firstUserRole.UserId, role.Name);
-            Assert.True(isDeleted);
+            isDeleted.Should().BeTrue();
 
             bool isInRole = await Repository.IsInRole(secondUserRole.UserId, role.Name);
-            Assert.True(isInRole);
+            isInRole.Should().BeTrue();
         }
 
         [Theory]
         [InlineAutoData]
-        public async Task DeleteUserRole_ShouldReturnFalse(Guid userId, string roleName)
+        public async Task DeleteUserRole_Should_Return_False(Guid userId, string roleName)
         {
             bool isDeleted = await Repository.DeleteUserRole(userId, roleName);
-            Assert.False(isDeleted);
+            isDeleted.Should().BeFalse();
         }
 
         [Theory]
         [InlineAutoData]
-        public async Task DeleteUserRole_VerifyNeverCalled(Guid userId, string roleName)
+        public async Task DeleteUserRole_Verify_NeverCalled(Guid userId, string roleName)
         {
             await MockRepository.Object.DeleteUserRole(userId, roleName);
             MockRepository.Verify(r => r.DeleteUserRole(userId, null), Times.Never);
@@ -202,7 +205,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [InlineAutoData]
-        public async Task DeleteUserRole_VerifyCalledOnce(Guid userId, string roleName)
+        public async Task DeleteUserRole_Verify_CalledOnce(Guid userId, string roleName)
         {
             await MockRepository.Object.DeleteUserRole(userId, roleName);
             MockRepository.Verify(r => r.DeleteUserRole(userId, roleName), Times.Once);
@@ -210,45 +213,45 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(UserRoleData.UserRoleRelatedData), MemberType = typeof(UserRoleData))]
-        public async Task IsInRole_ShouldReturnTrue(Account account, Role role)
+        public async Task IsInRole_Should_Return_True(Account account, Role role)
         {
             await CreateUserRoleAndRelatedData(account, role);
 
             bool isInRole = await Repository.IsInRole(account.UserId, role.Name);
-            Assert.True(isInRole);
+            isInRole.Should().BeTrue();
         }
 
         [Theory]
         [InlineAutoData]
-        public async Task IsInRole_EmptyUserRoles_ShouldReturnFalse(Guid userId, string roleName)
+        public async Task IsInRole_EmptyUserRoles_Should_Return_False(Guid userId, string roleName)
         {
             bool isInRole = await Repository.IsInRole(userId, roleName);
-            Assert.False(isInRole);
+            isInRole.Should().BeFalse();
         }
 
         [Theory]
         [MemberData(nameof(UserRoleData.UserRoleRelatedData), MemberType = typeof(UserRoleData))]
-        public async Task IsInRole_FilterByNonExistingUserId_ShouldReturnFalse(Account account, Role role)
+        public async Task IsInRole_FilterByNonExistingUserId_Should_Return_False(Account account, Role role)
         {
             await CreateUserRoleAndRelatedData(account, role);
 
             bool isInRole = await Repository.IsInRole(Guid.NewGuid(), role.Name);
-            Assert.False(isInRole);
+            isInRole.Should().BeFalse();
         }
 
         [Theory]
         [MemberData(nameof(UserRoleData.UserRoleRelatedData), MemberType = typeof(UserRoleData))]
-        public async Task IsInRole_FilterByNonExistingRoleName_ShouldReturnFalse(Account account, Role role)
+        public async Task IsInRole_FilterByNonExistingRoleName_Should_Return_False(Account account, Role role)
         {
             await CreateUserRoleAndRelatedData(account, role);
 
             bool isInRole = await Repository.IsInRole(account.UserId, RandomGeneratorHelpers.GenerateRandomValue());
-            Assert.False(isInRole);
+            isInRole.Should().BeFalse();
         }
 
         [Theory]
         [InlineAutoData]
-        public async Task IsInRole_VerifyNeverCalled(Guid userId, string roleName)
+        public async Task IsInRole_Verify_NeverCalled(Guid userId, string roleName)
         {
             await MockRepository.Object.IsInRole(userId, roleName);
             MockRepository.Verify(r => r.IsInRole(userId, null), Times.Never);
@@ -256,7 +259,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [InlineAutoData]
-        public async Task IsInRole_VerifyCalledOnce(Guid userId, string roleName)
+        public async Task IsInRole_Verify_CalledOnce(Guid userId, string roleName)
         {
             await MockRepository.Object.IsInRole(userId, roleName);
             MockRepository.Verify(r => r.IsInRole(userId, roleName), Times.Once);
@@ -264,24 +267,24 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(UserRoleData.UserRoleRelatedData), MemberType = typeof(UserRoleData))]
-        public async Task DeleteUser_ShouldDeleteRelatedUserRole(Account account, Role role)
+        public async Task DeleteUser_Should_Delete_Related_UserRole(Account account, Role role)
         {
             UserRole userRole = await CreateUserRoleAndRelatedData(account, role);
             await Db.DeleteAsync(account);
 
             UserRole userRoleAfterDeletion = await Db.SingleWhereAsync<UserRole>(nameof(UserRole.Id), userRole.Id);
-            Assert.Null(userRoleAfterDeletion);
+            userRoleAfterDeletion.Should().BeNull();
         }
 
         [Theory]
         [MemberData(nameof(UserRoleData.UserRoleRelatedData), MemberType = typeof(UserRoleData))]
-        public async Task DeleteRole_ShouldDeleteRelatedUserRole(Account account, Role role)
+        public async Task DeleteRole_Should_Delete_Related_UserRole(Account account, Role role)
         {
             UserRole userRole = await CreateUserRoleAndRelatedData(account, role);
             await Db.DeleteAsync(role);
 
             UserRole userRoleAfterDeletion = await Db.SingleWhereAsync<UserRole>(nameof(UserRole.Id), userRole.Id);
-            Assert.Null(userRoleAfterDeletion);
+            userRoleAfterDeletion.Should().BeNull();
         }
 
         #region Private Methods

@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using Dapper.Contrib.Extensions;
+using FluentAssertions;
 using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Shared.Helpers;
 using SocialEventManager.Tests.Common.Constants;
@@ -11,22 +12,23 @@ namespace SocialEventManager.Tests.UnitTests.ExtensionTests
     public class TypeExtensionsTests
     {
         [Fact]
-        public void GetNonPublicStaticMethod_ShouldReturnMethod()
+        public void GetNonPublicStaticMethod_Should_Return_Method()
         {
             const string methodName = "GetTableName";
             MethodInfo getTableNameMethod = typeof(SqlMapperExtensions).GetNonPublicStaticMethod(methodName);
 
-            Assert.NotNull(getTableNameMethod);
+            getTableNameMethod.Should().NotBeNull();
         }
 
         [Fact]
-        public void GetNonPublicStaticMethod_ShouldReturnException()
+        public void GetNonPublicStaticMethod_Should_Return_ArgumentOutOfRangeException()
         {
             string methodName = RandomGeneratorHelpers.GenerateRandomValue();
             Type type = typeof(SqlMapperExtensions);
 
-            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() => type.GetNonPublicStaticMethod(methodName));
-            Assert.Equal($"{ExceptionConstants.MethodIsNotFound(methodName, nameof(type))} (Parameter '{methodName}')", ex.Message);
+            Action action = () => type.GetNonPublicStaticMethod(methodName);
+            action.Should().Throw<ArgumentOutOfRangeException>()
+                .WithMessage($"{ExceptionConstants.MethodIsNotFound(methodName, nameof(type))} (Parameter '{methodName}')");
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Data;
+using FluentAssertions;
 using Microsoft.Extensions.Configuration;
 using SocialEventManager.DAL.Infrastructure;
 using SocialEventManager.Shared.Constants;
@@ -19,43 +20,44 @@ namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests
         }
 
         [Fact]
-        public void InitDbSession_OpenConnection()
+        public void InitDbSession_OpenConnection_Should_Return_Valid_Session()
         {
             string connectionString = _configuration.GetConnectionString(DbConstants.SocialEventManagerTest);
             var session = new DbSession(connectionString);
 
-            Assert.NotNull(session);
-            Assert.NotNull(session.Connection);
-            Assert.Equal(connectionString, session.Connection.ConnectionString);
-            Assert.Null(session.Transaction);
+            session.Should().NotBeNull();
+            session.Connection.Should().NotBeNull();
+            session.Connection.ConnectionString.Should().Be(connectionString);
+            session.Transaction.Should().BeNull();
         }
 
         [Fact]
-        public void InitDbSession_OpenConnection_ShouldReturnException()
+        public void InitDbSession_OpenConnection_Should_Return_Exception()
         {
             string connectionString = RandomGeneratorHelpers.GenerateRandomValue();
-            ArgumentException ex = Assert.Throws<ArgumentException>(() => new DbSession(connectionString));
-            Assert.Equal(ExceptionConstants.InvalidConnectionString, ex.Message);
+            Action action = () => new DbSession(connectionString);
+            action.Should().Throw<ArgumentException>().WithMessage(ExceptionConstants.InvalidConnectionString);
         }
 
         [Fact]
-        public void InitDbSession_OpenTransaction()
+        public void InitDbSession_OpenTransaction_Should_Return_Transaction()
         {
             string connectionString = _configuration.GetConnectionString(DbConstants.SocialEventManagerTest);
             var session = new DbSession(connectionString);
             using IDbTransaction transaction = session.Connection.BeginTransaction();
-            Assert.NotNull(transaction);
+
+            transaction.Should().NotBeNull();
         }
 
         [Fact]
-        public void InitDbSession_DisposeTransaction()
+        public void InitDbSession_DisposeTransaction_Should_Return_Null_Connection()
         {
             string connectionString = _configuration.GetConnectionString(DbConstants.SocialEventManagerTest);
             var session = new DbSession(connectionString);
             using IDbTransaction transaction = session.Connection.BeginTransaction();
             session.Dispose();
 
-            Assert.Null(transaction.Connection);
+            transaction.Connection.Should().BeNull();
         }
     }
 }

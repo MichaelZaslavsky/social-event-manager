@@ -1,3 +1,4 @@
+using FluentAssertions;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Utilities.Attributes;
 using SocialEventManager.Tests.Common.DataMembers;
@@ -17,10 +18,12 @@ namespace SocialEventManager.Tests.UnitTests.AttributeTests
         [InlineData(new int[] { 1 }, true)]
         [InlineData(0, false)]
         [MemberData(nameof(GuidData.NotDefaultGuidData), MemberType = typeof(GuidData))]
-        public void IsValid(object value, bool expectedResult)
+        public void IsValid_Should_Return_Expected_Result(object value, bool expectedResult)
         {
             var notDefaultAttribute = new NotDefaultAttribute();
-            Assert.Equal(expectedResult, notDefaultAttribute.IsValid(value));
+            bool actualResult = notDefaultAttribute.IsValid(value);
+
+            actualResult.Should().Be(expectedResult);
         }
     }
 }
