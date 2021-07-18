@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 namespace SocialEventManager.DAL.Infrastructure
 {
     public interface IExtendedRepository<TEntity>
+        where TEntity : class
     {
         Task<IEnumerable<TEntity>> GetAsync<TFilter>(TFilter filterValue, string columnName);
 

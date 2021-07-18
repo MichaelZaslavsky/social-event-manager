@@ -9,7 +9,9 @@
 
   <ItemGroup>
     <PackageReference Include="AutoFixture.Xunit2" Version="4.17.0" />
+    <PackageReference Include="DeepCloner" Version="0.10.2" />
     <PackageReference Include="DeepEqual" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="5.0.8" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
@@ -35,12 +37,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\SocialEventManager.API\SocialEventManager.API.csproj" />
     <ProjectReference Include="..\..\src\SocialEventManager.BLL\SocialEventManager.BLL.csproj" />
     <ProjectReference Include="..\..\src\SocialEventManager.DLL\SocialEventManager.DAL.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="IntegrationTests\ControllerTests\" />
   </ItemGroup>
   
 </Project>
