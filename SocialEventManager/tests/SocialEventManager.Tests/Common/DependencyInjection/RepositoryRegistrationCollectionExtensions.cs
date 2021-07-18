@@ -19,8 +19,8 @@ namespace SocialEventManager.Tests.Common.DependencyInjection
             Assembly testsAssembly = Assembly.Load($"{nameof(SocialEventManager)}.{nameof(Tests)}");
             IDictionary<string, Type> stubsPerTypeName = testsAssembly
                 .GetTypes()
-                .Where(t => t.IsClass && t.Name.EndsWith(GlobalConstants.RepositoryStub))
-                .ToDictionary(t => t.Name.TakeUntilLast(GlobalConstants.RepositoryStub));
+                .Where(t => t.IsClass && t.Name.EndsWith(GlobalConstants.Stub))
+                .ToDictionary(t => t.Name.TakeUntilLast(GlobalConstants.Stub));
 
             foreach (Type repository in repositories)
             {
