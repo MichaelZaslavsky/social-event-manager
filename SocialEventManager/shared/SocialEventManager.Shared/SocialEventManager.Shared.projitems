@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Constants\AliasConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\ApiConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants\ApiPathConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\CategoryConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\DataConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\DbConstants.cs" />
@@ -23,6 +24,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Constants\Validations\RoleValidationConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\Validations\UserValidationConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\EnumerationExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\HttpClientExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\IdentityErrorExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TypeExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\HashingHelpers.cs" />

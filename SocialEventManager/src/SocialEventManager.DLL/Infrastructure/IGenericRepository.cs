@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 namespace SocialEventManager.DAL.Infrastructure
 {
     public interface IGenericRepository<TEntity> : IExtendedRepository<TEntity>
+        where TEntity : class
     {
         Task<int> InsertAsync(TEntity entity);
 
