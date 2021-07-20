@@ -37,9 +37,9 @@ namespace SocialEventManager.Shared.Extensions
             return dataTable;
         }
 
-        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> enumeration, Action<T> action)
+        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> enumerable, Action<T> action)
         {
-            foreach (T item in enumeration.ToList())
+            foreach (T item in enumerable.ToList())
             {
                 action(item);
                 yield return item;

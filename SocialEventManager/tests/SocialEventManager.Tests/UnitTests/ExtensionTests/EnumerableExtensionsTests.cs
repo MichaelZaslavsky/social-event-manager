@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using FluentAssertions;
+using SocialEventManager.DAL.Entities;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Tests.Common.Constants;
@@ -44,6 +45,21 @@ namespace SocialEventManager.Tests.UnitTests.ExtensionTests
         {
             bool actualResult = enumerable.IsNotNullAndAny();
             actualResult.Should().Be(expectedResult);
+        }
+
+        [Theory]
+        [MemberData(nameof(EnumerableData.UpdateInForEachData), MemberType = typeof(EnumerableData))]
+        public void ForEach_Should_Update_All_Values(IEnumerable<Role> roles, string roleName)
+        {
+            foreach (Role actualRole in roles.ForEach(r => r.Name = roleName))
+            {
+                actualRole.Name.Should().Be(roleName);
+            }
+
+            foreach (Role role in roles)
+            {
+                role.Name.Should().Be(roleName);
+            }
         }
     }
 }
