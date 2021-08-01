@@ -12,6 +12,13 @@ namespace SocialEventManager.Tests.Common.DataMembers
     {
         private const string TableName = TableNameConstants.UserClaims;
 
+        private static readonly string Length256;
+
+        static UserClaimData()
+        {
+            Length256 = DataConstants.Length256;
+        }
+
         public static IEnumerable<object[]> ValidUserClaim
         {
             get
@@ -90,8 +97,9 @@ namespace SocialEventManager.Tests.Common.DataMembers
             {
                 yield return new object[]
                 {
-                    GetMockUserClaim(typeLength: LengthConstants.Length255 + 1),
-                    ExceptionConstants.StringExccedsMaximumLengthAllowed,
+                    GetMockUserClaim(type: Length256),
+                    ExceptionConstants.ExceedMaximumAllowedLength(
+                        $"{DbConstants.SocialEventManagerTest}.{TableName}", nameof(UserClaim.Type), Length256.Substring(0, 100)),
                 };
             }
         }

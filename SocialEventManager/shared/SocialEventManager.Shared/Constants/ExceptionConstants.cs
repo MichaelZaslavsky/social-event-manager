@@ -20,9 +20,8 @@ namespace SocialEventManager.Tests.Common.Constants
         public const string DatabaseMigrationFailed = "Database migration failed.";
         public const string ConversionFailedFromStringToUniqueIdentifier = "Conversion failed when converting from a character string to uniqueidentifier.";
         public const string UniqueIdentifierIsIncompatibleWithInt = "Operand type clash: uniqueidentifier is incompatible with int";
-        public const string StringExccedsMaximumLengthAllowed = "String or binary data would be truncated." + TheStatementHasBeenTerminatedWithSpace;
         public const string InvalidConnectionString = "Format of the initialization string does not conform to specification starting at index 0.";
-        public const string RoleNameIsInvalid = "Role name '' is invalid.(InvalidRoleName)\r\n";
+        public const string RoleNameIsInvalid = "Role name '' is invalid.(InvalidRoleName)\n";
 
         public static string InvalidObjectName(string objectName) => $"Invalid object name '{objectName}'.";
 
@@ -30,7 +29,8 @@ namespace SocialEventManager.Tests.Common.Constants
             $"Cannot insert the value NULL into column '{columnName}', table '{databaseName}.{tableName}'; " +
             $"column does not allow nulls. INSERT fails.{TheStatementHasBeenTerminatedWithSpace}";
 
-        public static string ForeignKeyConstraintConflict(string foriegnKeyName, string tableName, string columnName, string dbName = DbConstants.SocialEventManagerTest) =>
+        public static string ForeignKeyConstraintConflict(
+            string foriegnKeyName, string tableName, string columnName, string dbName = DbConstants.SocialEventManagerTest) =>
             $"The INSERT statement conflicted with the FOREIGN KEY constraint \"{foriegnKeyName}\". " +
             $"The conflict occurred in database \"{dbName}\", table \"{tableName}\", column '{columnName}'.{TheStatementHasBeenTerminatedWithSpace}";
 
@@ -45,7 +45,11 @@ namespace SocialEventManager.Tests.Common.Constants
 
         public static string MethodIsNotFound(string methodName, string className) => $"Method '{methodName}' is not found in '{className}' class.";
 
-        public static string DuplicateRoleName(string roleName) => $"Role name '{roleName}' {IsAlreadyTaken}(DuplicateRoleName)\r\n";
+        public static string DuplicateRoleName(string roleName) => $"Role name '{roleName}' {IsAlreadyTaken}(DuplicateRoleName)\n";
+
+        public static string ExceedMaximumAllowedLength(string tableName, string columnName, string value) =>
+            $"String or binary data would be truncated in table '{tableName}', column '{columnName}'. " +
+            $"Truncated value: '{value}'.{TheStatementHasBeenTerminatedWithSpace}";
 
         #region Private Fields
 

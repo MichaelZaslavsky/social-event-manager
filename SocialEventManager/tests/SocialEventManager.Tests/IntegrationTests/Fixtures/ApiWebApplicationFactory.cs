@@ -15,7 +15,8 @@ namespace SocialEventManager.Tests.IntegrationTests.Fixtures
             builder.ConfigureAppConfiguration(config =>
             {
                 Configuration = new ConfigurationBuilder()
-                  .Build();
+                    .AddEnvironmentVariables()
+                    .Build();
 
                 config.AddConfiguration(Configuration);
             });

@@ -17,10 +17,9 @@ namespace SocialEventManager.Tests
 
         public void ConfigureServices(IServiceCollection services)
         {
-            IConfigurationBuilder configBuilder = new ConfigurationBuilder()
-                .AddUserSecrets<Startup>();
-
-            Configuration = configBuilder.Build();
+            Configuration = new ConfigurationBuilder()
+                .AddEnvironmentVariables()
+                .Build();
 
             services.AddLogging(builder => builder.SetMinimumLevel(LogLevel.Debug))
                 .AddSingleton<IInMemoryDatabase, InMemoryDatabase>(_ =>

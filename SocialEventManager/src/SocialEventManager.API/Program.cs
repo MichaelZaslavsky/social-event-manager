@@ -1,9 +1,11 @@
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using SocialEventManager.Infrastructure.Migrations;
 using SocialEventManager.Shared.Constants;
 
 namespace SocialEventManager.API
@@ -26,7 +28,7 @@ namespace SocialEventManager.API
 
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(Configuration)
-                .WriteTo.Seq(DataConstants.LocalhostSerilogUrl)
+                .WriteTo.Seq(DataConstants.SerilogUrl)
                 .CreateLogger();
         }
 
@@ -49,15 +51,10 @@ namespace SocialEventManager.API
 
         public static IHostBuilder CreateHostBuilder(string[] args)
         {
-            return Host
-                .CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration((hostContext, builder) =>
-                {
-                    if (hostContext.HostingEnvironment.IsDevelopment())
-                    {
-                        builder.AddUserSecrets<Startup>();
-                    }
-                })
+            Task.Run(() => new DbMigrations(Configuration)
+                .Migrate(EnvironmentName)).GetAwaiter().GetResult();
+
+            return Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>().UseSerilog());
         }
     }

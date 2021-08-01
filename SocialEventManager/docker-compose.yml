@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+  socialeventmanager.api:
+    build:
+      context: .
+      dockerfile: src/SocialEventManager.API/Dockerfile
+    ports:
+      - "8080:80"
+    networks:
+      - backend
+    env_file:
+      - .env
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - seq-analysis
+      - sql-server-database 
+
+  seq-analysis:
+    image: datalust/seq
+    ports:
+      - '8005:80'
+    networks:
+      - backend
+    environment:
+      - ACCEPT_EULA=Y
+
+  sql-server-database:
+    container_name: sql-server-database
+    build:
+      context: .
+      dockerfile: items/sql/sql.Dockerfile
+    restart: always
+    ports:
+      - "1440:1433"
+    networks:
+      - backend
+    env_file:
+      - .env
+    environment:
+      - ACCEPT_EULA=Y
+      - ASPNETCORE_ENVIRONMENT=Development
+      - SA_PASSWORD=${SA_PASSWORD}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - ConnectionStrings__SocialEventManager=${ConnectionStrings__SocialEventManager}
+      - ConnectionStrings__SocialEventManagerHangfire=${ConnectionStrings__SocialEventManagerHangfire}
+      - ConnectionStrings__SocialEventManagerTest=${ConnectionStrings__SocialEventManagerTest}
+
+  socialeventmanager.tests:
+    container_name: socialeventmanager.tests
+    image: mcr.microsoft.com/dotnet/sdk:5.0
+    networks:
+      - backend
+    env_file:
+      - .env
+    volumes:
+      - .:/src
+      - .:/tests
+    working_dir: /src
+    command:
+      [
+        "/bin/bash",
+        "items/sql/wait-for-it.sh",
+        "sql-server-database:1433",
+        "--",
+        "dotnet",
+        "test",
+        "tests/SocialEventManager.Tests/SocialEventManager.Tests.csproj"
+      ]
+    depends_on:
+      - sql-server-database
+
+networks:
+  backend:
+    driver: bridge

@@ -16,7 +16,6 @@ A project for learning purposes built by Michael Zaslavsky.
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#run">Run</a></li>
-        <li><a href="#run-serilog">Run Serilog</a></li>
       </ul>
     </li>
     <li>
@@ -60,6 +59,10 @@ Social Event Manager (SEM) is a social network for organizing events.
    ```sh
    https://www.microsoft.com/en-us/sql-server/sql-server-downloads
    ```
+3. Install Docker 19.03.0+
+   ```sh
+   https://docs.docker.com/engine/install/
+   ```
 
 ### Run
 
@@ -67,24 +70,33 @@ Social Event Manager (SEM) is a social network for organizing events.
    ```sh
    git clone https://github.com/MichaelZaslavsky/social-event-manager.git
    ```
-2. Open "Developer Command Prompt" and add the connection strings to the secret key manager:
-	```sh
-   dotnet user-secrets init
-   dotnet user-secrets set ConnectionStrings:SocialEventManager "Data Source=.;Initial Catalog=SocialEventManager;Integrated Security=True;MultipleActiveResultSets=True;"
-   dotnet user-secrets set ConnectionStrings:SocialEventManagerHangfire "Data Source=.;Initial Catalog=SocialEventManagerHangfire;Integrated Security=True;MultipleActiveResultSets=True;"
-   dotnet user-secrets set ConnectionStrings:SocialEventManagerTest "Data Source=.;Initial Catalog=SocialEventManagerTest;Integrated Security=True;MultipleActiveResultSets=True;"
+2. Open folder `%APPDATA%/Microsoft/UserSecrets`
+   - Create a folder called `80a155b1-fb7a-44de-8788-4f5759c60ff6`
+   - Go into the created folder and create a file `secrets.json`
+   - Edit the created file. You need to add `Kestrel:Certificates` key \
+	 For example:
+	
+	 ```json
+	 {
+		"Kestrel:Certificates:Development:Password": "5cb62bfd-2da5-44f2-964f-d2b0c9af935d"
+	 }
+	 ```
+		
+3. Create `.env` file in the same folder where `docker-compose.yml` file is and add the following keys
+   (`<SomeDBUser>` with any DB user name you want and `<SomePassword1>` & `<SomePassord2>` with any password you want):
+   ```yml
+	SA_PASSWORD=<SomePassword1>
+	DB_USER=<SomeDBUser>
+	DB_PASSWORD=<SomePassord2>
+	ConnectionStrings__SocialEventManager=Server=sql-server-database;Database=SocialEventManager;User Id=db_admin;Password=${DB_ADMIN_PASSWORD}
+	ConnectionStrings__SocialEventManagerHangfire=Server=sql-server-database;Database=SocialEventManagerHangfire;User Id=db_admin;Password=${DB_ADMIN_PASSWORD}
+	ConnectionStrings__SocialEventManagerTest=Server=sql-server-database;Database=SocialEventManagerTest;User Id=sa;Password=${SA_PASSWORD}
    ```
-3. Run script to create the initial database
-   ```sh
-   CREATE DATABASE SocialEventManager;
-   ```
-4. Set "SocialEventManager.API" project as startup and run it. It will run the Evolve migrations and HangFire which will create/update the relevant databases.
-
-### Run Serilog
-
-* Install Docker.
-* Follow these steps: https://hub.docker.com/r/datalust/seq
-* Open http://localhost:5341/#/events
+   
+4. Make sure Docker is installed in your computer and is running
+4. Set docker-compose as startup project and run it
+   - You may open the Swagger https://localhost:8080/swagger/index.html
+   - You may open Serilog http://localhost:5341/#/events
 
 
 <!-- ROADMAP -->
@@ -126,6 +138,10 @@ Social Event Manager (SEM) is a social network for organizing events.
 ✔️ UnitOfWork
 
 ✔️ In memory database tests
+
+✔️ Docker
+
+✔️ Docker Compose
 
 ❌ Authorization / Authentication
 
