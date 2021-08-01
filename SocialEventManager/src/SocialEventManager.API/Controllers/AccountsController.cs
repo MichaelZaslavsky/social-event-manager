@@ -5,7 +5,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Serilog;
 using SocialEventManager.BLL.Models.Identity;
 using SocialEventManager.BLL.Models.Users;
 using SocialEventManager.DAL.Enums;
@@ -21,15 +21,12 @@ namespace SocialEventManager.API.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly ILogger<AccountsController> _logger;
         private readonly IMapper _mapper;
 
-        public AccountsController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
-            ILogger<AccountsController> logger, IMapper mapper)
+        public AccountsController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IMapper mapper)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _logger = logger;
             _mapper = mapper;
         }
 
@@ -47,7 +44,7 @@ namespace SocialEventManager.API.Controllers
             if (!result.Succeeded)
             {
                 string errorMessage = result.Errors.ToErrorMessage();
-                _logger.LogInformation(errorMessage);
+                Log.Information(errorMessage);
 
                 return BadRequest(errorMessage);
             }

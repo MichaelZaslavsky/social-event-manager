@@ -2,8 +2,9 @@ using System;
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Serilog;
+using Serilog.Events;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Tests.Common.Constants;
@@ -13,13 +14,11 @@ namespace SocialEventManager.Infrastructure.Middleware
     public class ApiExceptionMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ILogger<ApiExceptionMiddleware> _logger;
         private readonly ApiExceptionOptions _options;
 
-        public ApiExceptionMiddleware(ApiExceptionOptions options, RequestDelegate next, ILogger<ApiExceptionMiddleware> logger)
+        public ApiExceptionMiddleware(ApiExceptionOptions options, RequestDelegate next)
         {
             _next = next;
-            _logger = logger;
             _options = options;
         }
 
@@ -52,8 +51,8 @@ namespace SocialEventManager.Infrastructure.Middleware
 
             string message = GetInnermostExceptionMessage(ex);
 
-            LogLevel level = _options.DetermineLogLevel?.Invoke(ex) ?? LogLevel.Error;
-            _logger.Log(level, ex, $"{ExceptionConstants.AnErrorOccurred}: {message} -- {error.Id}.");
+            LogEventLevel level = _options.DetermineLogLevel?.Invoke(ex) ?? LogEventLevel.Error;
+            Log.Write(level, ex, $"{ExceptionConstants.AnErrorOccurred}: {message} -- {error.Id}.");
 
             string result = JsonConvert.SerializeObject(error);
             context.Response.ContentType = ApiConstants.ApplicationJson;

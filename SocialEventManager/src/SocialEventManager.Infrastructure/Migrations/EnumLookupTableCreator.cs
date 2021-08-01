@@ -18,18 +18,16 @@ namespace SocialEventManager.Infrastructure.Migrations
     public class EnumLookupTableCreator
     {
         private const string TypeName = "LoadedValues";
-        private static ILogger _logger;
         private static SqlConnection _connection;
 
-        public EnumLookupTableCreator(ILogger logger, SqlConnection connection)
+        public EnumLookupTableCreator(SqlConnection connection)
         {
-            _logger = logger;
             _connection = connection;
         }
 
         public async Task Run()
         {
-            _logger.Debug($"[{_connection.Database}]: Checking for {SchemaConstants.Enum}...");
+            Log.Debug($"[{_connection.Database}]: Checking for {SchemaConstants.Enum}...");
 
             await EnsureSchemaExists();
             HashSet<string> enumTableNames = await GetEnumTableNames();
@@ -39,7 +37,7 @@ namespace SocialEventManager.Infrastructure.Migrations
 
             await Task.WhenAll(upsertLookupTasks);
 
-            _logger.Debug($"[{_connection.Database}]: Synced all platform enum tables.");
+            Log.Debug($"[{_connection.Database}]: Synced all platform enum tables.");
         }
 
         #region Private Methods
@@ -52,19 +50,19 @@ namespace SocialEventManager.Infrastructure.Migrations
 
         private static async Task CreateSchemaIfNotExists()
         {
-            _logger.Debug($"[{_connection.Database}]: Checking for {SchemaConstants.Enum}...");
+            Log.Debug($"[{_connection.Database}]: Checking for {SchemaConstants.Enum}...");
 
             int rowCount = await _connection.ExecuteScalarAsync<int>(SchemaQueryHelpers.CreateSchemaIfNotExists(SchemaConstants.Enum));
 
             if (rowCount == 1)
             {
-                _logger.Debug($"[{_connection.Database}]: Created schema {SchemaConstants.Enum}.");
+                Log.Debug($"[{_connection.Database}]: Created schema {SchemaConstants.Enum}.");
             }
         }
 
         private static async Task RecreateType()
         {
-            _logger.Debug($"[{_connection.Database}]: Recreating {SchemaConstants.Enum}.{TypeName}...");
+            Log.Debug($"[{_connection.Database}]: Recreating {SchemaConstants.Enum}.{TypeName}...");
             await _connection.ExecuteNonQueryAsync(TableQueryHelpers.RecreateType(SchemaConstants.Enum, TypeName));
         }
 
@@ -123,12 +121,12 @@ namespace SocialEventManager.Infrastructure.Migrations
 
         private static async Task CreateTable(string tableName)
         {
-            _logger.Debug($"[{_connection.Database}]: Creating table {SchemaConstants.Enum}.{tableName}...");
+            Log.Debug($"[{_connection.Database}]: Creating table {SchemaConstants.Enum}.{tableName}...");
 
             string command = TableQueryHelpers.CreateBasicTable(SchemaConstants.Enum, tableName);
             await _connection.ExecuteNonQueryAsync(command);
 
-            _logger.Debug($"[{_connection.Database}]: Created table {SchemaConstants.Enum}.{tableName}.");
+            Log.Debug($"[{_connection.Database}]: Created table {SchemaConstants.Enum}.{tableName}.");
         }
 
         private static void MergeValues(Type type, string tableName)
@@ -163,7 +161,7 @@ namespace SocialEventManager.Infrastructure.Migrations
 
             cmd.ExecuteNonQuery();
 
-            _logger.Debug($"Synced enums values for {tableName}.");
+            Log.Debug($"Synced enums values for {tableName}.");
         }
 
         #endregion Private Methods

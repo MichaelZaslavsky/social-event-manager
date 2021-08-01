@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Serilog;
 using SocialEventManager.BLL.Models.Identity;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
@@ -14,12 +14,10 @@ namespace SocialEventManager.API.Controllers
     public class RolesController : ControllerBase
     {
         private readonly RoleManager<ApplicationRole> _roleManager;
-        private readonly ILogger<AccountsController> _logger;
 
-        public RolesController(RoleManager<ApplicationRole> roleManager, ILogger<AccountsController> logger)
+        public RolesController(RoleManager<ApplicationRole> roleManager)
         {
             _roleManager = roleManager;
-            _logger = logger;
         }
 
         [HttpPost]
@@ -33,7 +31,7 @@ namespace SocialEventManager.API.Controllers
             if (!result.Succeeded)
             {
                 string errorMessage = result.Errors.ToErrorMessage();
-                _logger.LogInformation(errorMessage);
+                Log.Information(errorMessage);
 
                 return BadRequest(errorMessage);
             }

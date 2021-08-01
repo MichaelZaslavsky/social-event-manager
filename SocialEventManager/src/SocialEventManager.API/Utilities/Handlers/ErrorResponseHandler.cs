@@ -1,9 +1,9 @@
 using System;
 using System.Data.SqlClient;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Serilog;
+using Serilog.Events;
 using SocialEventManager.Infrastructure.Middleware;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Exceptions;
@@ -39,11 +39,11 @@ namespace SocialEventManager.API.Utilities.Handlers
             Log.Logger.Information(responseMessage + Environment.NewLine + Environment.NewLine + requestMessage);
         }
 
-        public static LogLevel DetermineLogLevel(Exception ex)
+        public static LogEventLevel DetermineLogLevel(Exception ex)
         {
             return ex.IsCritical()
-                ? LogLevel.Critical
-                : LogLevel.Error;
+                ? LogEventLevel.Fatal
+                : LogEventLevel.Error;
         }
     }
 }

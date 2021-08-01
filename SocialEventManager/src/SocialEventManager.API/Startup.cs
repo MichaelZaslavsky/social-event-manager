@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Serilog;
 using SocialEventManager.API.DependencyInjection;
 using SocialEventManager.API.Utilities.Handlers;
 using SocialEventManager.Infrastructure.Attributes;
@@ -52,7 +51,7 @@ namespace SocialEventManager.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            Task.Run(() => new DbMigrations(Configuration, Log.Logger)
+            Task.Run(() => new DbMigrations(Configuration)
                 .Migrate(env.EnvironmentName)).GetAwaiter().GetResult();
 
             app.UseApiExceptionHandler(options =>
