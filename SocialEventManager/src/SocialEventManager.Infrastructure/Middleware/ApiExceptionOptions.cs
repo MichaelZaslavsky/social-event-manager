@@ -1,6 +1,6 @@
 using System;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
+using Serilog.Events;
 
 namespace SocialEventManager.Infrastructure.Middleware
 {
@@ -8,6 +8,6 @@ namespace SocialEventManager.Infrastructure.Middleware
     {
         public Action<HttpContext, Exception, ApiError> AddResponseDetails { get; set; }
 
-        public Func<Exception, LogLevel> DetermineLogLevel { get; set; }
+        public Func<Exception, LogEventLevel> DetermineLogLevel { get; set; }
     }
 }

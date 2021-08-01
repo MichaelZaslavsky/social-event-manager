@@ -12,12 +12,10 @@ namespace SocialEventManager.Infrastructure.Migrations
     public class DbMigrations
     {
         private static IConfiguration _config;
-        private static ILogger _logger;
 
-        public DbMigrations(IConfiguration config, ILogger logger)
+        public DbMigrations(IConfiguration config)
         {
             _config = config;
-            _logger = logger;
         }
 
         public async Task Migrate(string environmentName)
@@ -28,7 +26,7 @@ namespace SocialEventManager.Infrastructure.Migrations
 
             try
             {
-                await new EnumLookupTableCreator(_logger, connection).Run();
+                await new EnumLookupTableCreator(connection).Run();
 
                 var evolve = new Evolve.Evolve(connection, msg => Log.Information(msg))
                 {
@@ -43,7 +41,7 @@ namespace SocialEventManager.Infrastructure.Migrations
             }
             catch (Exception ex)
             {
-                _logger.Error(ExceptionConstants.DatabaseMigrationFailed, ex);
+                Log.Error(ExceptionConstants.DatabaseMigrationFailed, ex);
                 throw;
             }
         }
@@ -52,7 +50,7 @@ namespace SocialEventManager.Infrastructure.Migrations
 
         private static string GetLocation(string environmentName)
         {
-            // exclude db/datasets from production and staging environments
+            // Exclude db/datasets from production and staging environments
             return environmentName == Environments.Production || environmentName == Environments.Staging
                 ? PathConstants.Migrations
                 : PathConstants.Db;
