@@ -4,6 +4,7 @@ using FluentAssertions;
 using Microsoft.Extensions.Configuration;
 using SocialEventManager.DAL.Infrastructure;
 using SocialEventManager.Shared.Constants;
+using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Shared.Helpers;
 using SocialEventManager.Tests.Common.Constants;
 using Xunit;
@@ -27,7 +28,7 @@ namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests
 
             session.Should().NotBeNull();
             session.Connection.Should().NotBeNull();
-            session.Connection.ConnectionString.Should().Be(connectionString);
+            session.Connection.ConnectionString.TakeUntilLast(DataConstants.Password).Should().Be(connectionString.TakeUntilLast(DataConstants.Password));
             session.Transaction.Should().BeNull();
         }
 

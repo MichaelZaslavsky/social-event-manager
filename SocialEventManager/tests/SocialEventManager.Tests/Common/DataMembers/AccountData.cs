@@ -11,6 +11,13 @@ namespace SocialEventManager.Tests.Common.DataMembers
     {
         private const string TableName = TableNameConstants.Accounts;
 
+        private static readonly string Length256;
+
+        static AccountData()
+        {
+            Length256 = DataConstants.Length256;
+        }
+
         public static IEnumerable<object[]> AccountWithSameUserId
         {
             get
@@ -120,35 +127,41 @@ namespace SocialEventManager.Tests.Common.DataMembers
             {
                 yield return new object[]
                 {
-                    GetMockAccount(emailLength: LengthConstants.Length255 + 1),
-                    ExceptionConstants.StringExccedsMaximumLengthAllowed,
+                    GetMockAccount(email: Length256),
+                    ExceptionConstants.ExceedMaximumAllowedLength(
+                        $"{DbConstants.SocialEventManagerTest}.{TableName}", nameof(Account.Email), Length256.Substring(0, 100)),
                 };
                 yield return new object[]
                 {
-                    GetMockAccount(normalizedEmailLength: LengthConstants.Length255 + 1),
-                    ExceptionConstants.StringExccedsMaximumLengthAllowed,
+                    GetMockAccount(normalizedEmail: Length256),
+                    ExceptionConstants.ExceedMaximumAllowedLength(
+                        $"{DbConstants.SocialEventManagerTest}.{TableName}", nameof(Account.NormalizedEmail), Length256.Substring(0, 100)),
                 };
                 yield return new object[]
                 {
-                    GetMockAccount(userNameLength: LengthConstants.Length255 + 1),
-                    ExceptionConstants.StringExccedsMaximumLengthAllowed,
+                    GetMockAccount(userName: Length256),
+                    ExceptionConstants.ExceedMaximumAllowedLength(
+                        $"{DbConstants.SocialEventManagerTest}.{TableName}", nameof(Account.UserName), Length256.Substring(0, 100)),
                 };
                 yield return new object[]
                 {
-                    GetMockAccount(normalizedUserNameLength: LengthConstants.Length255 + 1),
-                    ExceptionConstants.StringExccedsMaximumLengthAllowed,
+                    GetMockAccount(normalizedUserName: Length256),
+                    ExceptionConstants.ExceedMaximumAllowedLength(
+                        $"{DbConstants.SocialEventManagerTest}.{TableName}", nameof(Account.NormalizedUserName), Length256.Substring(0, 100)),
                 };
                 yield return new object[]
                 {
-                    GetMockAccount(concurrencyStampLength: LengthConstants.Length255 + 1),
-                    ExceptionConstants.StringExccedsMaximumLengthAllowed,
+                    GetMockAccount(concurrencyStamp: Length256),
+                    ExceptionConstants.ExceedMaximumAllowedLength(
+                        $"{DbConstants.SocialEventManagerTest}.{TableName}", nameof(Account.ConcurrencyStamp), Length256.Substring(0, 100)),
                 };
             }
         }
 
         public static Account GetMockAccount(Guid? userId = null, int id = 1, string userName = null, string passwordHash = null, string email = null,
             bool emailConfirmed = false, string phoneNumber = null, bool phoneNumberConfirmed = false, DateTime? lockoutEnd = null, bool lockoutEnabled = false,
-            int accessFailedCount = 0, string concurrencyStamp = null, string securityStamp = null, bool twoFactorEnabled = false)
+            int accessFailedCount = 0, string concurrencyStamp = null, string securityStamp = null, bool twoFactorEnabled = false,
+            string normalizedEmail = null, string normalizedUserName = null)
         {
             email ??= $"{RandomGeneratorHelpers.GenerateRandomValue()}@gmail.com";
             userName ??= RandomGeneratorHelpers.GenerateRandomValue();
@@ -166,8 +179,8 @@ namespace SocialEventManager.Tests.Common.DataMembers
                 LockoutEnd = lockoutEnd,
                 LockoutEnabled = lockoutEnabled,
                 AccessFailedCount = accessFailedCount,
-                NormalizedEmail = email.ToUpper(),
-                NormalizedUserName = userName.ToUpper(),
+                NormalizedEmail = normalizedEmail ?? email.ToUpper(),
+                NormalizedUserName = normalizedUserName ?? userName.ToUpper(),
                 ConcurrencyStamp = concurrencyStamp ?? Guid.NewGuid().ToString(),
                 SecurityStamp = securityStamp ?? Guid.NewGuid().ToString(),
                 TwoFactorEnabled = twoFactorEnabled,

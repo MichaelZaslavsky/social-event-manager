@@ -13,6 +13,13 @@ namespace SocialEventManager.Tests.Common.DataMembers
     {
         private const string TableName = TableNameConstants.Roles;
 
+        private static readonly string Length256;
+
+        static RoleData()
+        {
+            Length256 = DataConstants.Length256;
+        }
+
         public static IEnumerable<object[]> ValidRole
         {
             get
@@ -99,29 +106,32 @@ namespace SocialEventManager.Tests.Common.DataMembers
             {
                 yield return new object[]
                 {
-                    GetMockRole(concurrencyStampLength: LengthConstants.Length255 + 1),
-                    ExceptionConstants.StringExccedsMaximumLengthAllowed,
+                    GetMockRole(concurrencyStamp: Length256),
+                    ExceptionConstants.ExceedMaximumAllowedLength(
+                        $"{DbConstants.SocialEventManagerTest}.{TableName}", nameof(Role.ConcurrencyStamp), Length256.Substring(0, 100)),
                 };
                 yield return new object[]
                 {
-                    GetMockRole(nameLength: LengthConstants.Length255 + 1),
-                    ExceptionConstants.StringExccedsMaximumLengthAllowed,
+                    GetMockRole(name: Length256),
+                    ExceptionConstants.ExceedMaximumAllowedLength(
+                        $"{DbConstants.SocialEventManagerTest}.{TableName}", nameof(Role.Name), Length256.Substring(0, 100)),
                 };
                 yield return new object[]
                 {
-                    GetMockRole(normalizedNameLength: LengthConstants.Length255 + 1),
-                    ExceptionConstants.StringExccedsMaximumLengthAllowed,
+                    GetMockRole(normalizedName: Length256),
+                    ExceptionConstants.ExceedMaximumAllowedLength(
+                        $"{DbConstants.SocialEventManagerTest}.{TableName}", nameof(Role.NormalizedName), Length256.Substring(0, 100)),
                 };
             }
         }
 
-        public static Role GetMockRole(string name = "User", Guid? id = null) =>
+        public static Role GetMockRole(string name = "User", Guid? id = null, string concurrencyStamp = null, string normalizedName = null) =>
             new()
             {
                 Id = id ?? Guid.NewGuid(),
-                ConcurrencyStamp = Guid.NewGuid().ToString().ToLower(),
+                ConcurrencyStamp = concurrencyStamp ?? Guid.NewGuid().ToString().ToLower(),
                 Name = name,
-                NormalizedName = name.ToUpper(),
+                NormalizedName = normalizedName ?? name.ToUpper(),
             };
 
         #region Private Methods

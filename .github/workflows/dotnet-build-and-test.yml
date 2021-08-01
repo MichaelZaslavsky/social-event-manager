@@ -1,0 +1,35 @@
+name: .NET package
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build-and-test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Restore dependencies
+      working-directory: ./SocialEventManager/src/SocialEventManager.API
+      run: dotnet restore
+    - name: Build
+      working-directory: ./SocialEventManager/src/SocialEventManager.API
+      run: dotnet build --configuration Release --no-restore
+    - name: Run Tests
+      working-directory: ./SocialEventManager
+      run: docker-compose up --exit-code-from socialeventmanager.tests socialeventmanager.tests
+      env:
+        SA_PASSWORD: ${{ secrets.SA_PASSWORD }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        DB_USER: ${{ secrets.DB_USER }}
+        ConnectionStrings__SocialEventManager: ${{ secrets.ConnectionStrings__SocialEventManager }}
+        ConnectionStrings__SocialEventManagerHangfire: ${{ secrets.ConnectionStrings__SocialEventManagerHangfire }}
+        ConnectionStrings__SocialEventManagerTest: ${{ secrets.ConnectionStrings__SocialEventManagerTest }}
