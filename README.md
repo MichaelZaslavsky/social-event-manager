@@ -143,6 +143,8 @@ Social Event Manager (SEM) is a social network for organizing events.
 
 ✔️ Docker Compose
 
+✔️ Health Checks
+
 ❌ Authorization / Authentication
 
 ❌ SignalR
