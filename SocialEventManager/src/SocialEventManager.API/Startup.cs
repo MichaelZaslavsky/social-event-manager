@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SocialEventManager.API.DependencyInjection;
+using SocialEventManager.API.Health_Checks;
 using SocialEventManager.API.Utilities.Handlers;
 using SocialEventManager.Infrastructure.Attributes;
 using SocialEventManager.Infrastructure.Filters;
@@ -41,7 +42,8 @@ namespace SocialEventManager.API
                 .RegisterDi()
                 .AddIdentityConfigurations()
                 .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
-                .AddScoped<ValidationFilterAttribute>();
+                .AddScoped<ValidationFilterAttribute>()
+                .AddHealthChecks(Configuration);
 
             services.AddControllers(config => config.Filters.Add(typeof(TrackActionPerformanceFilter)));
             GlobalJobFilters.Filters.Add(new HangfireElectStateEventsLogAttribute());
@@ -85,6 +87,7 @@ namespace SocialEventManager.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGet("/", async context => await context.Response.WriteAsync("Success"));
+                endpoints.MapHealthChecks();
                 endpoints.MapControllers();
             });
         }
