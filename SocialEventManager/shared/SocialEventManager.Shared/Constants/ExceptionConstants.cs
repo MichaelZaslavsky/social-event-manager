@@ -1,6 +1,6 @@
 using SocialEventManager.Shared.Constants;
 
-namespace SocialEventManager.Tests.Common.Constants
+namespace SocialEventManager.Shared.Common.Constants
 {
     public static class ExceptionConstants
     {

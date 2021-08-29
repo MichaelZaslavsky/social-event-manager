@@ -1,8 +1,8 @@
 using System;
 using System.Net;
 using System.Threading;
+using SocialEventManager.Shared.Common.Constants;
 using SocialEventManager.Shared.Exceptions;
-using SocialEventManager.Tests.Common.Constants;
 
 namespace SocialEventManager.Shared.Extensions
 {

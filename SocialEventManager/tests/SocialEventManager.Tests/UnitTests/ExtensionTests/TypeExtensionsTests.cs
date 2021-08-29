@@ -2,9 +2,9 @@ using System;
 using System.Reflection;
 using Dapper.Contrib.Extensions;
 using FluentAssertions;
+using SocialEventManager.Shared.Common.Constants;
 using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Shared.Helpers;
-using SocialEventManager.Tests.Common.Constants;
 using Xunit;
 
 namespace SocialEventManager.Tests.UnitTests.ExtensionTests

@@ -5,11 +5,11 @@ using Newtonsoft.Json;
 using Serilog;
 using Serilog.Events;
 using SocialEventManager.Infrastructure.Middleware;
+using SocialEventManager.Shared.Common.Constants;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Exceptions;
 using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Shared.Helpers;
-using SocialEventManager.Tests.Common.Constants;
 
 namespace SocialEventManager.API.Utilities.Handlers
 {

@@ -1,6 +1,6 @@
 using System;
 using System.Reflection;
-using SocialEventManager.Tests.Common.Constants;
+using SocialEventManager.Shared.Common.Constants;
 
 namespace SocialEventManager.Shared.Extensions
 {

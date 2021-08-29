@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using SocialEventManager.DAL.Entities;
 using SocialEventManager.DAL.Enums;
+using SocialEventManager.Shared.Common.Constants;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Shared.Helpers;
-using SocialEventManager.Tests.Common.Constants;
 
 namespace SocialEventManager.Tests.Common.DataMembers
 {
