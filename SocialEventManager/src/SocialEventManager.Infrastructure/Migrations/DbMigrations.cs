@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using SocialEventManager.Shared.Common.Constants;
 using SocialEventManager.Shared.Constants;
-using SocialEventManager.Tests.Common.Constants;
 
 namespace SocialEventManager.Infrastructure.Migrations
 {

@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using SocialEventManager.Shared.Common.Constants;
 using SocialEventManager.Shared.Exceptions;
-using SocialEventManager.Tests.Common.Constants;
 
 namespace SocialEventManager.Tests.Common.DataMembers
 {

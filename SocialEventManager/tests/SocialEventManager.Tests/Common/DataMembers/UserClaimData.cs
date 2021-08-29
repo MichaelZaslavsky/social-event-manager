@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using SocialEventManager.DAL.Entities;
+using SocialEventManager.Shared.Common.Constants;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Helpers;
-using SocialEventManager.Tests.Common.Constants;
 
 namespace SocialEventManager.Tests.Common.DataMembers
 {
