@@ -24,6 +24,13 @@ namespace SocialEventManager.API.Health_Checks
                 Predicate = (check) => check.Tags.Contains(ApiPathConstants.Ready),
                 AllowCachingResponses = false,
             });
+
+            endpoints.MapHealthChecks(ApiPathConstants.HealthLive, new HealthCheckOptions()
+            {
+                Predicate = (check) => !check.Tags.Contains(ApiPathConstants.Ready),
+                ResponseWriter = HealthCheckHelpers.WriteHealthCheckLiveResponse,
+                AllowCachingResponses = false,
+            });
         }
     }
 }
