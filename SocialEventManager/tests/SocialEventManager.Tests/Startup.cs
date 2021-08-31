@@ -2,6 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Moq;
+using SocialEventManager.API.DependencyInjection;
 using SocialEventManager.BLL.Services.DependencyInjection;
 using SocialEventManager.DAL.Infrastructure;
 using SocialEventManager.Shared.Constants;
@@ -25,7 +26,8 @@ namespace SocialEventManager.Tests
                 .AddSingleton<IInMemoryDatabase, InMemoryDatabase>(_ =>
                     new InMemoryDatabase(Configuration.GetConnectionString(DbConstants.SocialEventManagerTest)))
                 .AddSingleton(Configuration)
-                .RegisterServices();
+                .RegisterServices()
+                .AddRedisClients(Configuration);
 
             services.AddScoped(sp =>
             {

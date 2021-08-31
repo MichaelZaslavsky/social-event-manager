@@ -41,6 +41,7 @@ namespace SocialEventManager.API
                 .AddHangfire(Configuration)
                 .RegisterDi()
                 .AddIdentityConfigurations()
+                .AddRedisClients(Configuration)
                 .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
                 .AddScoped<ValidationFilterAttribute>()
                 .AddHealthChecks(Configuration);

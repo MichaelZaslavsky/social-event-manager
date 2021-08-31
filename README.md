@@ -83,7 +83,7 @@ Social Event Manager (SEM) is a social network for organizing events.
 	 ```
 		
 3. Create `.env` file in the same folder where `docker-compose.yml` file is and add the following keys
-   (`<SomeDBUser>` with any DB user name you want and `<SomePassword1>` & `<SomePassord2>` with any password you want):
+   (`<SomeDBUser>` with any DB user name you want and `<SomePassword1>`, `<SomePassord2>`, `<SomePassord3>`, `<SomePassord4>` with any password you want):
    ```yml
 	SA_PASSWORD=<SomePassword1>
 	DB_USER=<SomeDBUser>
@@ -91,6 +91,8 @@ Social Event Manager (SEM) is a social network for organizing events.
 	ConnectionStrings__SocialEventManager=Server=sql-server-database;Database=SocialEventManager;User Id=db_admin;Password=${DB_ADMIN_PASSWORD}
 	ConnectionStrings__SocialEventManagerHangfire=Server=sql-server-database;Database=SocialEventManagerHangfire;User Id=db_admin;Password=${DB_ADMIN_PASSWORD}
 	ConnectionStrings__SocialEventManagerTest=Server=sql-server-database;Database=SocialEventManagerTest;User Id=sa;Password=${SA_PASSWORD}
+	REDIS_MASTER_PASSWORD=<SomePassword3>
+	REDIS_REPLICA_PASSWORD=<SomePassword4>
    ```
    
 4. Make sure Docker is installed in your computer and is running
@@ -145,11 +147,11 @@ Social Event Manager (SEM) is a social network for organizing events.
 
 ✔️ Health Checks
 
+✔️ Distributed cache with Redis
+
 ❌ Authorization / Authentication
 
 ❌ SignalR
-
-❌ Distributed cache with Redis
 
 ❌ Sentry
 

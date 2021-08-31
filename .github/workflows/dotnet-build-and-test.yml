@@ -33,3 +33,5 @@ jobs:
         ConnectionStrings__SocialEventManager: ${{ secrets.ConnectionStrings__SocialEventManager }}
         ConnectionStrings__SocialEventManagerHangfire: ${{ secrets.ConnectionStrings__SocialEventManagerHangfire }}
         ConnectionStrings__SocialEventManagerTest: ${{ secrets.ConnectionStrings__SocialEventManagerTest }}
+        REDIS_MASTER_PASSWORD: ${{ secrets.REDIS_MASTER_PASSWORD }}
+        REDIS_REPLICA_PASSWORD: ${{ secrets.REDIS_REPLICA_PASSWORD }}
