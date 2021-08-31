@@ -6,23 +6,26 @@ services:
       context: .
       dockerfile: src/SocialEventManager.API/Dockerfile
     ports:
-      - "8080:80"
+      - '8080:80'
     networks:
-      - backend
+      - aspnet
     env_file:
       - .env
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - Redis__0=redis-master:6379
+      - Redis__1=redis-replica:6379
     depends_on:
       - seq-analysis
       - sql-server-database 
+      - redis-master
 
   seq-analysis:
     image: datalust/seq
     ports:
       - '8005:80'
     networks:
-      - backend
+      - aspnet
     environment:
       - ACCEPT_EULA=Y
 
@@ -33,9 +36,9 @@ services:
       dockerfile: items/sql/sql.Dockerfile
     restart: always
     ports:
-      - "1440:1433"
+      - '1440:1433'
     networks:
-      - backend
+      - aspnet
     env_file:
       - .env
     environment:
@@ -48,11 +51,41 @@ services:
       - ConnectionStrings__SocialEventManagerHangfire=${ConnectionStrings__SocialEventManagerHangfire}
       - ConnectionStrings__SocialEventManagerTest=${ConnectionStrings__SocialEventManagerTest}
 
+  redis-master:
+    image: 'bitnami/redis:latest'
+    ports:
+      - '6379:6379'
+    networks:
+      - aspnet
+    environment:
+      - REDIS_REPLICATION_MODE=master
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - ./data/redis:/bitnami
+      - ./data/redis/conf/redis.conf:/opt/bitnami/redis/conf/redis.conf
+
+  redis-replica:
+    image: 'bitnami/redis:latest'
+    ports:
+      - '6380:6379'
+    depends_on:
+      - redis-master
+    networks:
+      - aspnet
+    environment:
+      - REDIS_REPLICATION_MODE=slave
+      - REDIS_MASTER_HOST=redis-master
+      - REDIS_MASTER_PORT_NUMBER=6379
+      - ALLOW_EMPTY_PASSWORD=yes
+    deploy:
+      replicas: 1
+
+
   socialeventmanager.tests:
     container_name: socialeventmanager.tests
     image: mcr.microsoft.com/dotnet/sdk:5.0
     networks:
-      - backend
+      - aspnet
     env_file:
       - .env
     volumes:
@@ -61,17 +94,17 @@ services:
     working_dir: /src
     command:
       [
-        "/bin/bash",
-        "items/sql/wait-for-it.sh",
-        "sql-server-database:1433",
-        "--",
-        "dotnet",
-        "test",
-        "tests/SocialEventManager.Tests/SocialEventManager.Tests.csproj"
+        '/bin/bash',
+        'items/sql/wait-for-it.sh',
+        'sql-server-database:1433',
+        '--',
+        'dotnet',
+        'test',
+        'tests/SocialEventManager.Tests/SocialEventManager.Tests.csproj'
       ]
     depends_on:
       - sql-server-database
 
 networks:
-  backend:
+  aspnet:
     driver: bridge

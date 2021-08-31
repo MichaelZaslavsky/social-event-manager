@@ -14,5 +14,6 @@ namespace SocialEventManager.Shared.Constants
         public const string HostTerminatedUnexpectedly = "Host terminated unexpectedly";
         public const string IpRateLimiting = "IpRateLimiting";
         public const string IpRateLimitPolicies = "IpRateLimitPolicies";
+        public const string Redis = "Redis";
     }
 }
