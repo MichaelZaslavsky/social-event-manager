@@ -90,6 +90,10 @@ services:
       - aspnet
     env_file:
       - .env
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - Redis__0=redis-master:6379
+      - Redis__1=redis-replica:6379
     volumes:
       - .:/src
       - .:/tests
@@ -106,6 +110,7 @@ services:
       ]
     depends_on:
       - sql-server-database
+      - redis-master
 
 networks:
   aspnet:
