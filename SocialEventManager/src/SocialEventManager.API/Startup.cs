@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SocialEventManager.API.DependencyInjection;
-using SocialEventManager.API.Health_Checks;
+using SocialEventManager.API.HealthChecks;
 using SocialEventManager.API.Utilities.Handlers;
 using SocialEventManager.Infrastructure.Attributes;
 using SocialEventManager.Infrastructure.Filters;
