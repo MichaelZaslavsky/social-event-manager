@@ -6,7 +6,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Helpers;
 
-namespace SocialEventManager.API.Health_Checks
+namespace SocialEventManager.API.HealthChecks
 {
     public static class HealthCheckEndpoints
     {
