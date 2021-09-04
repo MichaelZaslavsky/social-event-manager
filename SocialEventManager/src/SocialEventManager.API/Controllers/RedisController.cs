@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using SocialEventManager.Infrastructure.Cache.Redis;
+using ServiceStack.Caching;
 
 namespace SocialEventManager.API.Controllers
 {

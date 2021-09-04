@@ -16,7 +16,6 @@ services:
       - Redis__0=redis-master:6379
       - Redis__1=redis-replica:6379
       - Redis__2=redis-replica:6379
-      - Redis__3=redis-replica:6379
     depends_on:
       - seq-analysis
       - sql-server-database 
@@ -69,7 +68,7 @@ services:
   redis-replica:
     image: 'bitnami/redis:latest'
     ports:
-      - '6380-6382:6379'
+      - '6380:6379'
     depends_on:
       - redis-master
     networks:
@@ -80,7 +79,7 @@ services:
       - REDIS_MASTER_PORT_NUMBER=6379
       - ALLOW_EMPTY_PASSWORD=yes
     deploy:
-      replicas: 3
+      replicas: 1
 
 
   socialeventmanager.tests:
@@ -111,6 +110,7 @@ services:
     depends_on:
       - sql-server-database
       - redis-master
+      - redis-replica
 
 networks:
   aspnet:

@@ -1,38 +1,43 @@
+using System.Threading.Tasks;
 using AutoFixture.Xunit2;
 using FluentAssertions;
-using SocialEventManager.Infrastructure.Cache.Redis;
+using ServiceStack.Redis;
 using Xunit;
 
 namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests
 {
     public class RedisCacheClientTests
     {
-        private readonly ICacheClient _cache;
+        private readonly IRedisClientsManagerAsync _manager;
 
-        public RedisCacheClientTests(ICacheClient cache)
+        public RedisCacheClientTests(IRedisClientsManagerAsync manager)
         {
-            _cache = cache;
+            _manager = manager;
         }
 
         [Theory]
         [InlineAutoData]
-        public void RedisCache_Set_Get_Delete_Should_Succeed(string key, string obj)
+        public async Task RedisCache_Set_Get_Delete_Should_Succeed(string key, string obj)
         {
-            bool isSetSucceeded = _cache.Set(key, obj);
+            await using IRedisClientAsync cache = await _manager.GetClientAsync();
+
+            bool isSetSucceeded = await cache.SetAsync(key, obj);
             isSetSucceeded.Should().BeTrue();
 
-            object objFromCache = _cache.Get<object>(key);
+            object objFromCache = await cache.GetAsync<object>(key);
             objFromCache.Should().NotBeNull().And.Be(obj);
 
-            bool isDeleteSucceeded = _cache.Delete<object>(key);
+            bool isDeleteSucceeded = await cache.RemoveAsync(key);
             isDeleteSucceeded.Should().BeTrue();
         }
 
         [Theory]
         [InlineAutoData]
-        public void RedisCache_Get_Should_Return_Null(string key)
+        public async Task RedisCache_Get_Should_Return_Null(string key)
         {
-            object objFromCache = _cache.Get<object>(key);
+            await using IRedisClientAsync cache = await _manager.GetClientAsync();
+
+            object objFromCache = await cache.GetAsync<object>(key);
             objFromCache.Should().BeNull();
         }
     }
