@@ -9,6 +9,7 @@ using Serilog;
 using SocialEventManager.BLL.Models.Identity;
 using SocialEventManager.BLL.Models.Users;
 using SocialEventManager.DAL.Enums;
+using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
 
 namespace SocialEventManager.API.Controllers
@@ -16,7 +17,7 @@ namespace SocialEventManager.API.Controllers
     using Microsoft.AspNetCore.Identity;
 
     [ApiController]
-    [Route("api/account")]
+    [Route(ApiPathConstants.ApiController)]
     public class AccountsController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
