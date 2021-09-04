@@ -29,7 +29,7 @@ namespace SocialEventManager.DAL.Repositories.Users
                 FROM    {TableNameConstants.Roles} R
                 WHERE   R.NormalizedName = @RoleName;
 
-                {QueryConstants.SelectIdentity}";
+                {QueryConstants.SelectScopeIdentity}";
 
             return await _session.Connection.ExecuteAsync(sql, new DynamicParameters(new { userId, roleName }), _session.Transaction);
         }
