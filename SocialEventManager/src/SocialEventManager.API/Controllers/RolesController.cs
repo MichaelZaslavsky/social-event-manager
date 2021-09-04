@@ -10,7 +10,7 @@ using SocialEventManager.Shared.Extensions;
 namespace SocialEventManager.API.Controllers
 {
     [ApiController]
-    [Route(ApiPathConstants.Roles)]
+    [Route(ApiPathConstants.ApiController)]
     public class RolesController : ControllerBase
     {
         private readonly RoleManager<ApplicationRole> _roleManager;
