@@ -28,7 +28,9 @@ namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests
 
             session.Should().NotBeNull();
             session.Connection.Should().NotBeNull();
-            session.Connection.ConnectionString.TakeUntilLast(DataConstants.Password).Should().Be(connectionString.TakeUntilLast(DataConstants.Password));
+            session.Connection.ConnectionString.TakeUntilLast(DataConstants.Password)
+                .Should().Be(connectionString.TakeUntilLast(DataConstants.Password) + DataConstants.MultipleActiveResultSetsTrue);
+
             session.Transaction.Should().BeNull();
         }
 

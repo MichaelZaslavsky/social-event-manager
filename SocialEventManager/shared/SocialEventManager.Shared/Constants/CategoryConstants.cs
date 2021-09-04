@@ -7,5 +7,6 @@ namespace SocialEventManager.Shared.Constants
         public const string Attributes = "Attributes";
         public const string Identity = "Identity";
         public const string Infrastructure = "Infrastructure";
+        public const string HealthChecks = "HealthChecks";
     }
 }
