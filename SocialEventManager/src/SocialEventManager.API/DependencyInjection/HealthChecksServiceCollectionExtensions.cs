@@ -11,7 +11,7 @@ namespace SocialEventManager.API.DependencyInjection
         public static IServiceCollection AddHealthChecks(this IServiceCollection services, IConfiguration config)
         {
             services.AddHealthChecks()
-                .AddSqlServer(config.GetConnectionString(DbConstants.SocialEventManager), failureStatus: HealthStatus.Unhealthy, tags: new[] { "ready" });
+                .AddSqlServer(config.GetConnectionString(DbConstants.SocialEventManager), failureStatus: HealthStatus.Unhealthy, tags: new[] { ApiPathConstants.Ready });
 
             return services;
         }
