@@ -64,14 +64,14 @@ namespace SocialEventManager.API
             {
                 options.AddResponseDetails = ErrorResponseHandler.UpdateApiErrorResponse;
                 options.DetermineLogLevel = ErrorResponseHandler.DetermineLogLevel;
-            });
-            app.UseResponseCompression();
-            app.UseHsts();
+            })
+            .UseResponseCompression()
+            .UseHsts()
 
             // TODO: Currently, the Hangfire dashboard is opened to all users. Need to implement an authorization scenario.
             // A helpful link for implementing it:
             // https://sahansera.dev/securing-hangfire-dashboard-with-endpoint-routing-auth-policy-aspnetcore/
-            app.UseHangfireDashboard("/hangfire", new DashboardOptions()
+            .UseHangfireDashboard("/hangfire", new DashboardOptions()
             {
                 Authorization = new[] { new AllowAllConnectionsFilter() },
                 IgnoreAntiforgeryToken = true,
@@ -79,21 +79,18 @@ namespace SocialEventManager.API
 
             if (env.IsDevelopment())
             {
-                app.UseSwagger();
-                app.UseSwaggerUI(c =>
+                app.UseSwagger()
+                .UseSwaggerUI(c =>
                     c.SwaggerEndpoint($"/{ApiConstants.Swagger}/{ApiConstants.FirstVersion}/{ApiConstants.Swagger}.json", ApiConstants.SocialEventManagerApi));
             }
 
-            app.UseHttpsRedirection();
-            app.UseRouting();
-            app.UseIpRateLimiting();
-
-            app.UseAuthentication();
-            app.UseAuthorization();
-
-            app.UseCors(ApiConstants.AllowAll);
-
-            app.UseEndpoints(endpoints =>
+            app.UseHttpsRedirection()
+            .UseRouting()
+            .UseIpRateLimiting()
+            .UseAuthentication()
+            .UseAuthorization()
+            .UseCors(ApiConstants.AllowAll)
+            .UseEndpoints(endpoints =>
             {
                 endpoints.MapGet("/", async context => await context.Response.WriteAsync("Success"));
                 endpoints.MapHealthChecks();
