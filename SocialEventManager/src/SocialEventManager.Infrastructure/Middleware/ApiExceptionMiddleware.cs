@@ -55,7 +55,7 @@ namespace SocialEventManager.Infrastructure.Middleware
             Log.Write(level, ex, $"{ExceptionConstants.AnErrorOccurred}: {message} -- {error.Id}.");
 
             string result = JsonConvert.SerializeObject(error);
-            context.Response.ContentType = ApiConstants.ApplicationJson;
+            context.Response.ContentType = MimeTypeConstants.ApplicationJson;
             context.Response.StatusCode = (int)httpStatusCode;
 
             return context.Response.WriteAsync(result);

@@ -1,10 +1,12 @@
 using System;
+using System.Linq;
 using AspNetCoreRateLimit;
 using Hangfire;
 using Hangfire.Dashboard;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -44,7 +46,12 @@ namespace SocialEventManager.API
                 .AddRedisClients(Configuration)
                 .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
                 .AddScoped<ValidationFilterAttribute>()
-                .AddHealthChecks(Configuration);
+                .AddHealthChecks(Configuration)
+                .AddResponseCompression(options =>
+                {
+                    options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
+                        new[] { MimeTypeConstants.ApplicationOctetStream });
+                });
 
             services.AddControllers(config => config.Filters.Add(typeof(TrackActionPerformanceFilter)));
             GlobalJobFilters.Filters.Add(new HangfireElectStateEventsLogAttribute());
@@ -58,6 +65,7 @@ namespace SocialEventManager.API
                 options.AddResponseDetails = ErrorResponseHandler.UpdateApiErrorResponse;
                 options.DetermineLogLevel = ErrorResponseHandler.DetermineLogLevel;
             });
+            app.UseResponseCompression();
             app.UseHsts();
 
             // TODO: Currently, the Hangfire dashboard is opened to all users. Need to implement an authorization scenario.
