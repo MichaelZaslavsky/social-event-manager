@@ -9,7 +9,6 @@ namespace SocialEventManager.Shared.Constants
         public const string AspNetCoreEnvironment = "ASPNETCORE_ENVIRONMENT";
         public const string AppSettings = "appsettings";
         public const string AppSettingsJson = "appsettings.json";
-        public const string ApplicationJson = "application/json";
         public const string StartingHost = "Starting host";
         public const string HostTerminatedUnexpectedly = "Host terminated unexpectedly";
         public const string IpRateLimiting = "IpRateLimiting";
