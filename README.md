@@ -151,9 +151,9 @@ Social Event Manager (SEM) is a social network for organizing events.
 
 ✔️ Response compression
 
-❌ Authorization / Authentication
+✔️ SignalR
 
-❌ SignalR
+❌ Authorization / Authentication
 
 ❌ Sentry
 
