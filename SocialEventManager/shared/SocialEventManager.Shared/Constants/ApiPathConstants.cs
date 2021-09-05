@@ -7,6 +7,7 @@ namespace SocialEventManager.Shared.Constants
         public const string Ready = "ready";
         public const string HealthReady = "/" + Health + Ready;
         public const string HealthLive = "/" + Health + "live";
+        public const string ChatHub = "/chathub";
 
         private const string Api = "api/";
         private const string Controller = "[controller]";

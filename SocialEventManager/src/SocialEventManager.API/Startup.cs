@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SocialEventManager.API.DependencyInjection;
 using SocialEventManager.API.HealthChecks;
+using SocialEventManager.API.Hubs;
 using SocialEventManager.API.Utilities.Handlers;
 using SocialEventManager.Infrastructure.Attributes;
 using SocialEventManager.Infrastructure.Filters;
@@ -51,7 +53,8 @@ namespace SocialEventManager.API
                 {
                     options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
                         new[] { MimeTypeConstants.ApplicationOctetStream });
-                });
+                })
+                .AddSignalR().AddHubOptions<ChatHub>(options => options.AddFilter<ChatHubLogFilter>());
 
             services.AddControllers(config => config.Filters.Add(typeof(TrackActionPerformanceFilter)));
             GlobalJobFilters.Filters.Add(new HangfireElectStateEventsLogAttribute());
@@ -95,6 +98,7 @@ namespace SocialEventManager.API
                 endpoints.MapGet("/", async context => await context.Response.WriteAsync("Success"));
                 endpoints.MapHealthChecks();
                 endpoints.MapControllers();
+                endpoints.MapHub<ChatHub>(ApiPathConstants.ChatHub);
             });
         }
 
