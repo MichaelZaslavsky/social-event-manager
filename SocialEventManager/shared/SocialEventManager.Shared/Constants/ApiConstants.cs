@@ -15,5 +15,8 @@ namespace SocialEventManager.Shared.Constants
         public const string IpRateLimitPolicies = "IpRateLimitPolicies";
         public const string Redis = "Redis";
         public const string ReceiveMessage = "ReceiveMessage";
+        public const string ApiVersion = "x-api-version";
+        public const string Version = "version";
+        public const string Ver = "ver";
     }
 }
