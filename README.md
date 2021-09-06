@@ -153,6 +153,8 @@ Social Event Manager (SEM) is a social network for organizing events.
 
 ✔️ SignalR
 
+✔️ Versioning
+
 ❌ Authorization / Authentication
 
 ❌ Sentry
@@ -162,8 +164,6 @@ Social Event Manager (SEM) is a social network for organizing events.
 ❌ Allow media binders
 
 ❌ REST
-
-❌ Versioning
 
 ❌ [Hangfire with Redis](https://github.com/marcoCasamento/Hangfire.Redis.StackExchange)
 
