@@ -54,8 +54,9 @@ namespace SocialEventManager.API
                     options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
                         new[] { MimeTypeConstants.ApplicationOctetStream });
                 })
-                .AddSignalR().AddHubOptions<ChatHub>(options => options.AddFilter<ChatHubLogFilter>());
+                .AddSupportedApiVersioning();
 
+            services.AddSignalR().AddHubOptions<ChatHub>(options => options.AddFilter<ChatHubLogFilter>());
             services.AddControllers(config => config.Filters.Add(typeof(TrackActionPerformanceFilter)));
             GlobalJobFilters.Filters.Add(new HangfireElectStateEventsLogAttribute());
         }
