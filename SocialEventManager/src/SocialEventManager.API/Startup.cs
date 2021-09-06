@@ -83,9 +83,10 @@ namespace SocialEventManager.API
 
             if (env.IsDevelopment())
             {
-                app.UseSwagger()
-                .UseSwaggerUI(c =>
-                    c.SwaggerEndpoint($"/{ApiConstants.Swagger}/{ApiConstants.FirstVersion}/{ApiConstants.Swagger}.json", ApiConstants.SocialEventManagerApi));
+                app.UseDeveloperExceptionPage()
+                    .UseSwagger()
+                    .UseSwaggerUI(c =>
+                        c.SwaggerEndpoint($"/{ApiConstants.Swagger}/{ApiConstants.FirstVersion}/{ApiConstants.Swagger}.json", ApiConstants.SocialEventManagerApi));
             }
 
             app.UseHttpsRedirection()
