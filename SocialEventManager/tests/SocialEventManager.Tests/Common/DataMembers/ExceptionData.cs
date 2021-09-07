@@ -14,7 +14,7 @@ namespace SocialEventManager.Tests.Common.DataMembers
             {
                 yield return new object[] { new NotFoundException(), (HttpStatusCode.NotFound, ExceptionConstants.NotFound) };
                 yield return new object[] { new BadRequestException(), (HttpStatusCode.BadRequest, ExceptionConstants.BadRequest) };
-                yield return new object[] { new ValidationException(), (HttpStatusCode.BadRequest, ExceptionConstants.BadRequest) };
+                yield return new object[] { new ValidationException(), (HttpStatusCode.UnprocessableEntity, ExceptionConstants.UnprocessableEntity) };
                 yield return new object[] { null, (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError) };
                 yield return new object[] { new NullReferenceException(), (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError) };
                 yield return new object[] { new ArgumentNullException(), (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError) };

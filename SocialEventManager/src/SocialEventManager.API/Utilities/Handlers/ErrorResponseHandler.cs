@@ -21,7 +21,7 @@ namespace SocialEventManager.API.Utilities.Handlers
 
             error.Data = name switch
             {
-                nameof(ValidationException) => new ApiErrorData(JsonConvert.SerializeObject(((ValidationException)ex).ValdationErrors)),
+                nameof(ValidationException) => new ApiErrorData(JsonConvert.SerializeObject(((ValidationException)ex).ValdationErrors), LinkConstants.UnprocessableEntity),
                 nameof(BadRequestException) => new ApiErrorData(ex.Message, LinkConstants.BadRequestException),
                 nameof(NotFoundException) => new ApiErrorData(ex.Message, LinkConstants.NotFoundException),
                 nameof(NullReferenceException) => new ApiErrorData(ExceptionConstants.NullReferenceException, LinkConstants.NullReferenceException),
