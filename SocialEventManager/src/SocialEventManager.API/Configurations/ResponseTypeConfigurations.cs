@@ -4,15 +4,8 @@ using SocialEventManager.Shared.Constants;
 
 namespace SocialEventManager.API.Configurations
 {
-    /// <summary>
-    /// Represents API response type configurations.
-    /// </summary>
     public static class ResponseTypeConfigurations
     {
-        /// <summary>
-        /// Configuring global response type attributes.
-        /// </summary>
-        /// <param name="config">The options to set its filters.</param>
         public static void ConfigureGlobalResponseTypeAttributes(this MvcOptions config)
         {
             config.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status400BadRequest));

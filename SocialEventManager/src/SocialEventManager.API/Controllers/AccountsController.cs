@@ -16,6 +16,9 @@ namespace SocialEventManager.API.Controllers
 {
     using Microsoft.AspNetCore.Identity;
 
+    /// <summary>
+    /// Represents user accounts.
+    /// </summary>
     [ApiController]
     [Route(ApiPathConstants.ApiController)]
     public class AccountsController : ControllerBase
@@ -24,6 +27,12 @@ namespace SocialEventManager.API.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IMapper _mapper;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountsController"/> class.
+        /// </summary>
+        /// <param name="userManager">Provides the APIs for managing user in a persistence store.</param>
+        /// <param name="signInManager">Provides the APIs for user sign in.</param>
+        /// <param name="mapper">Provides objects mappings.</param>
         public AccountsController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IMapper mapper)
         {
             _userManager = userManager;
@@ -31,6 +40,11 @@ namespace SocialEventManager.API.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Registers user to the application.
+        /// </summary>
+        /// <param name="user">The user to register.</param>
+        /// <returns>An empty ActionResult.</returns>
         [HttpPost]
         [Route("register")]
         [AllowAnonymous]
@@ -64,6 +78,11 @@ namespace SocialEventManager.API.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Logins the specified user into the application.
+        /// </summary>
+        /// <param name="loginModel">The user and password for login.</param>
+        /// <returns>An empty ActionResult.</returns>
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
@@ -80,6 +99,10 @@ namespace SocialEventManager.API.Controllers
                     : BadRequest();
         }
 
+        /// <summary>
+        /// Logouts the current user from the application.
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         [Route("logout")]
         public async Task<IActionResult> LogOut()
