@@ -38,6 +38,26 @@ A project for learning purposes built by Michael Zaslavsky.
 
 Social Event Manager (SEM) is a social network for organizing events.
 
+Some images for demonstration:
+
+
+Create Event:
+![Create Event](https://user-images.githubusercontent.com/6709378/132340254-dce9e42e-c743-48ce-8a88-d1f489a33608.jpg)
+
+
+Events Page:
+![Main](https://user-images.githubusercontent.com/6709378/132339995-296b005e-16ba-4093-9b25-3cc3bd2001ee.jpg)
+
+
+Search Events:
+![Search Events](https://user-images.githubusercontent.com/6709378/132340171-039d242f-6c11-4c3d-9c50-77aaa373e02d.jpg)
+
+
+My Events:
+![My Events](https://user-images.githubusercontent.com/6709378/132340196-03c27622-a973-45cd-8161-445bff4f689b.jpg)
+
+
+
 ### Built With
 
 * [.NET Core](https://en.wikipedia.org/wiki/.NET_Core)
