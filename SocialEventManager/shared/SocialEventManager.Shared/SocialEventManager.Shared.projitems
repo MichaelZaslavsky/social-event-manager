@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Constants\AliasConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\ApiConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\ApiPathConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants\AuthConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\CategoryConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\DataConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\DbConstants.cs" />
@@ -22,6 +23,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Constants\MediaTypeConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\PathConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\SchemaConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants\Validations\AuthValidationConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\Validations\RoleValidationConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\Validations\UserValidationConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\EnumerationExtensions.cs" />

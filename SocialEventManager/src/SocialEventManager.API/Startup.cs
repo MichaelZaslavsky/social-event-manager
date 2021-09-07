@@ -4,15 +4,18 @@ using System.Linq;
 using AspNetCoreRateLimit;
 using Hangfire;
 using Hangfire.Dashboard;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SocialEventManager.API.Authentication;
 using SocialEventManager.API.Configurations;
 using SocialEventManager.API.DependencyInjection;
 using SocialEventManager.API.HealthChecks;
@@ -42,10 +45,9 @@ namespace SocialEventManager.API
             services.AddControllers(options =>
             {
                 options.Filters.Add(typeof(TrackActionPerformanceFilter));
+                options.Filters.Add(new AuthorizeFilter());
                 options.ConfigureGlobalResponseTypeAttributes();
-
                 options.ReturnHttpNotAcceptable = true;
-
                 options.OutputFormatters.RemoveType<StringOutputFormatter>();
                 options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
             });
@@ -68,7 +70,9 @@ namespace SocialEventManager.API
                     options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
                         new[] { MediaTypeConstants.ApplicationOctetStream });
                 })
-                .AddSupportedApiVersioning();
+                .AddSupportedApiVersioning()
+                .AddAuthentication(AuthConstants.AuthenticationScheme)
+                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>(AuthConstants.AuthenticationScheme, null);
 
             services.AddSignalR().AddHubOptions<ChatHub>(options => options.AddFilter<ChatHubLogFilter>());
             GlobalJobFilters.Filters.Add(new HangfireElectStateEventsLogAttribute());
