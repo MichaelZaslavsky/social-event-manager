@@ -22,8 +22,6 @@ namespace SocialEventManager.API.Controllers
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(string))]
         public async Task<IActionResult> Create(ApplicationRole role)
         {
             IdentityResult result = await _roleManager.CreateAsync(role);

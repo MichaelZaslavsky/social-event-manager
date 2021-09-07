@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SocialEventManager.API.Configurations;
 using SocialEventManager.API.DependencyInjection;
 using SocialEventManager.API.HealthChecks;
 using SocialEventManager.API.Hubs;
@@ -36,6 +37,12 @@ namespace SocialEventManager.API
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers(config =>
+            {
+                config.Filters.Add(typeof(TrackActionPerformanceFilter));
+                config.ConfigureGlobalResponseTypeAttributes();
+            });
+
             services.AddCors(options => options.AddPolicy(ApiConstants.AllowAll, builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()))
                 .AddSwagger()
                 .AddOptions()
@@ -57,7 +64,6 @@ namespace SocialEventManager.API
                 .AddSupportedApiVersioning();
 
             services.AddSignalR().AddHubOptions<ChatHub>(options => options.AddFilter<ChatHubLogFilter>());
-            services.AddControllers(config => config.Filters.Add(typeof(TrackActionPerformanceFilter)));
             GlobalJobFilters.Filters.Add(new HangfireElectStateEventsLogAttribute());
         }
 
