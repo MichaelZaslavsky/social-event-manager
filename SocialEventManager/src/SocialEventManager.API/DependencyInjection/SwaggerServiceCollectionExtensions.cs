@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +18,28 @@ namespace SocialEventManager.API.DependencyInjection
                 {
                     Version = ApiConstants.FirstVersion,
                     Title = ApiConstants.SocialEventManagerApi,
+                });
+
+                options.AddSecurityDefinition(AuthConstants.BasicAuth, new OpenApiSecurityScheme()
+                {
+                    Type = SecuritySchemeType.Http,
+                    Scheme = AuthConstants.AuthScheme,
+                    Description = AuthConstants.SwaggerAuthenticationDescription,
+                });
+
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = AuthConstants.BasicAuth,
+                            },
+                        },
+                        new List<string>()
+                    },
                 });
 
                 var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
