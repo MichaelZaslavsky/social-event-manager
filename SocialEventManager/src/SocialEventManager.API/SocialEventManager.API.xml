@@ -4,5 +4,56 @@
         <name>SocialEventManager.API</name>
     </assembly>
     <members>
+        <member name="T:SocialEventManager.API.Controllers.AccountsController">
+            <summary>
+            Represents user accounts.
+            </summary>
+        </member>
+        <member name="M:SocialEventManager.API.Controllers.AccountsController.#ctor(Microsoft.AspNetCore.Identity.UserManager{SocialEventManager.BLL.Models.Identity.ApplicationUser},Microsoft.AspNetCore.Identity.SignInManager{SocialEventManager.BLL.Models.Identity.ApplicationUser},AutoMapper.IMapper)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SocialEventManager.API.Controllers.AccountsController"/> class.
+            </summary>
+            <param name="userManager">Provides the APIs for managing user in a persistence store.</param>
+            <param name="signInManager">Provides the APIs for user sign in.</param>
+            <param name="mapper">Provides objects mappings.</param>
+        </member>
+        <member name="M:SocialEventManager.API.Controllers.AccountsController.Register(SocialEventManager.BLL.Models.Users.RegisterUserDto)">
+            <summary>
+            Registers user to the application.
+            </summary>
+            <param name="user">The user to register.</param>
+            <returns>An empty ActionResult.</returns>
+        </member>
+        <member name="M:SocialEventManager.API.Controllers.AccountsController.Login(SocialEventManager.BLL.Models.Users.LoginModel)">
+            <summary>
+            Logins the specified user into the application.
+            </summary>
+            <param name="loginModel">The user and password for login.</param>
+            <returns>An empty ActionResult.</returns>
+        </member>
+        <member name="M:SocialEventManager.API.Controllers.AccountsController.LogOut">
+            <summary>
+            Logouts the current user from the application.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SocialEventManager.API.Controllers.RolesController">
+            <summary>
+            Represents roles.
+            </summary>
+        </member>
+        <member name="M:SocialEventManager.API.Controllers.RolesController.#ctor(Microsoft.AspNetCore.Identity.RoleManager{SocialEventManager.BLL.Models.Identity.ApplicationRole})">
+            <summary>
+            Initializes a new instance of the <see cref="T:SocialEventManager.API.Controllers.RolesController"/> class.
+            </summary>
+            <param name="roleManager">Provides the APIs for managing roles in a persistence store.</param>
+        </member>
+        <member name="M:SocialEventManager.API.Controllers.RolesController.Create(SocialEventManager.BLL.Models.Identity.ApplicationRole)">
+            <summary>
+            Creates a new role.
+            </summary>
+            <param name="role">The role to create.</param>
+            <returns>An empty ActionResult.</returns>
+        </member>
     </members>
 </doc>

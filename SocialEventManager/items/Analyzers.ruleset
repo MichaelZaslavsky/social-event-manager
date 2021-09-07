@@ -1,12 +1,15 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<RuleSet Name="StyleCop rules for Core Application" Description="Custom Rules" ToolsVersion="10.0">
-  <Rules AnalyzerId="Microsoft.AspNetCore.Mvc.Api.Analyzers.ApiConventionAnalyzer" RuleNamespace="Microsoft.AspNetCore.Mvc.Api.Analyzers">
-    <Rule Id="AD0001" Action="None" />
-  </Rules>
+<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="StyleCop rules for Core Application" Description="Custom Rules" ToolsVersion="16.0">
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
     <Rule Id="CA1016" Action="None" />
     <Rule Id="CA1806" Action="None" />
     <Rule Id="CA2208" Action="None" />
+  </Rules>
+  <Rules AnalyzerId="Microsoft.AspNetCore.Mvc.Api.Analyzers.ApiConventionAnalyzer" RuleNamespace="Microsoft.AspNetCore.Mvc.Api.Analyzers">
+    <Rule Id="AD0001" Action="None" />
+  </Rules>
+  <Rules AnalyzerId="Microsoft.CodeAnalysis.CSharp" RuleNamespace="Microsoft.CodeAnalysis.CSharp">
+    <Rule Id="CS1591" Action="None" />
   </Rules>
   <Rules AnalyzerId="Roslynator.CSharp.Analyzers" RuleNamespace="Roslynator.CSharp.Analyzers">
     <Rule Id="RCS1090" Action="None" />
