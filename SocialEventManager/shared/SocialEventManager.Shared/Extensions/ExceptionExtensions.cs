@@ -18,7 +18,8 @@ namespace SocialEventManager.Shared.Extensions
             return ex switch
             {
                 NotFoundException => (HttpStatusCode.NotFound, ExceptionConstants.NotFound),
-                BadRequestException or ValidationException => (HttpStatusCode.BadRequest, ExceptionConstants.BadRequest),
+                BadRequestException => (HttpStatusCode.BadRequest, ExceptionConstants.BadRequest),
+                ValidationException => (HttpStatusCode.UnprocessableEntity, ExceptionConstants.UnprocessableEntity),
                 _ => (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError),
             };
         }

@@ -17,7 +17,7 @@ namespace SocialEventManager.Infrastructure.Attributes
 
             if (!context.ModelState.IsValid)
             {
-                context.Result = new BadRequestObjectResult(context.ModelState);
+                context.Result = new UnprocessableEntityObjectResult(context.ModelState);
             }
 
             await next();
