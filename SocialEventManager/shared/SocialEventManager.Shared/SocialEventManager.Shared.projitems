@@ -19,7 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Constants\GlobalConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\LinkConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\MessageConstants.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Constants\MimeTypeConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants\MediaTypeConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\PathConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\SchemaConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\Validations\RoleValidationConstants.cs" />

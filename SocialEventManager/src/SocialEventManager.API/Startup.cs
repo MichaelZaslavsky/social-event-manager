@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Linq;
 using AspNetCoreRateLimit;
 using Hangfire;
@@ -6,6 +7,7 @@ using Hangfire.Dashboard;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
@@ -37,10 +39,15 @@ namespace SocialEventManager.API
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers(config =>
+            services.AddControllers(options =>
             {
-                config.Filters.Add(typeof(TrackActionPerformanceFilter));
-                config.ConfigureGlobalResponseTypeAttributes();
+                options.Filters.Add(typeof(TrackActionPerformanceFilter));
+                options.ConfigureGlobalResponseTypeAttributes();
+
+                options.ReturnHttpNotAcceptable = true;
+
+                options.OutputFormatters.RemoveType<StringOutputFormatter>();
+                options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
             });
 
             services.AddCors(options => options.AddPolicy(ApiConstants.AllowAll, builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()))
@@ -59,7 +66,7 @@ namespace SocialEventManager.API
                 .AddResponseCompression(options =>
                 {
                     options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
-                        new[] { MimeTypeConstants.ApplicationOctetStream });
+                        new[] { MediaTypeConstants.ApplicationOctetStream });
                 })
                 .AddSupportedApiVersioning();
 
@@ -100,17 +107,17 @@ namespace SocialEventManager.API
             }
 
             app.UseRouting()
-            .UseIpRateLimiting()
-            .UseAuthentication()
-            .UseAuthorization()
-            .UseCors(ApiConstants.AllowAll)
-            .UseEndpoints(endpoints =>
-            {
-                endpoints.MapGet("/", async context => await context.Response.WriteAsync("Success"));
-                endpoints.MapHealthChecks();
-                endpoints.MapControllers();
-                endpoints.MapHub<ChatHub>(ApiPathConstants.ChatHub);
-            });
+                .UseIpRateLimiting()
+                .UseAuthentication()
+                .UseAuthorization()
+                .UseCors(ApiConstants.AllowAll)
+                .UseEndpoints(endpoints =>
+                {
+                    endpoints.MapGet("/", async context => await context.Response.WriteAsync("Success"));
+                    endpoints.MapHealthChecks();
+                    endpoints.MapControllers();
+                    endpoints.MapHub<ChatHub>(ApiPathConstants.ChatHub);
+                });
         }
 
         // A temporary solution for allowing the HangFire dashboard to work with Docker.
