@@ -70,7 +70,7 @@ namespace SocialEventManager.API
                 options.DetermineLogLevel = ErrorResponseHandler.DetermineLogLevel;
             })
             .UseResponseCompression()
-            .UseHsts()
+            .UseHttpsRedirection()
 
             // TODO: Currently, the Hangfire dashboard is opened to all users. Need to implement an authorization scenario.
             // A helpful link for implementing it:
@@ -88,9 +88,12 @@ namespace SocialEventManager.API
                     .UseSwaggerUI(c =>
                         c.SwaggerEndpoint($"/{ApiConstants.Swagger}/{ApiConstants.FirstVersion}/{ApiConstants.Swagger}.json", ApiConstants.SocialEventManagerApi));
             }
+            else
+            {
+                app.UseHsts();
+            }
 
-            app.UseHttpsRedirection()
-            .UseRouting()
+            app.UseRouting()
             .UseIpRateLimiting()
             .UseAuthentication()
             .UseAuthorization()
