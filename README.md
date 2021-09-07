@@ -22,6 +22,7 @@ A project for learning purposes built by Michael Zaslavsky.
       <a href="#roadmap">Roadmap</a>
       <ul>
         <li><a href="#infrastructures">Infrastructures</a></li>
+		<li><a href="#features">Features</a></li>
       </ul>
     </li>
     <li><a href="#contributing">Contributing</a></li>
@@ -163,6 +164,21 @@ Social Event Manager (SEM) is a social network for organizing events.
 
 ❌ REST
 
+❌ Elasticsearch
+
+### Features
+
+❌ User profile
+
+❌ Event
+
+❌ Category
+
+❌ Business house
+
+❌ Facebook login
+
+❌ Google Maps
 
 
 
