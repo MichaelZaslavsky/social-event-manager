@@ -45,7 +45,6 @@ namespace SocialEventManager.API
             services.AddControllers(options =>
             {
                 options.Filters.Add(typeof(TrackActionPerformanceFilter));
-                options.Filters.Add(new AuthorizeFilter());
                 options.ConfigureGlobalResponseTypeAttributes();
                 options.ReturnHttpNotAcceptable = true;
                 options.OutputFormatters.RemoveType<StringOutputFormatter>();
@@ -54,6 +53,10 @@ namespace SocialEventManager.API
 
             services.AddCors(options => options.AddPolicy(ApiConstants.AllowAll, builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()))
                 .AddVersionedApiExplorer(options => options.GroupNameFormat = "'v'VV")
+                .AddAuthentication(AuthConstants.AuthenticationScheme)
+                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>(AuthConstants.AuthenticationScheme, null);
+
+            services.AddSupportedApiVersioning()
                 .AddSwagger()
                 .AddOptions()
                 .AddMemoryCache()
@@ -66,10 +69,7 @@ namespace SocialEventManager.API
                 .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
                 .AddScoped<ValidationFilterAttribute>()
                 .AddHealthChecks(Configuration)
-                .AddResponseCompression(options => options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { MediaTypeConstants.ApplicationOctetStream }))
-                .AddSupportedApiVersioning()
-                .AddAuthentication(AuthConstants.AuthenticationScheme)
-                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>(AuthConstants.AuthenticationScheme, null);
+                .AddResponseCompression(options => options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { MediaTypeConstants.ApplicationOctetStream }));
 
             services.AddSignalR().AddHubOptions<ChatHub>(options => options.AddFilter<ChatHubLogFilter>());
             GlobalJobFilters.Filters.Add(new HangfireElectStateEventsLogAttribute());
@@ -84,7 +84,6 @@ namespace SocialEventManager.API
                 options.DetermineLogLevel = ErrorResponseHandler.DetermineLogLevel;
             })
             .UseResponseCompression()
-            .UseHttpsRedirection()
 
             // TODO: Currently, the Hangfire dashboard is opened to all users. Need to implement an authorization scenario.
             // A helpful link for implementing it:
@@ -97,24 +96,25 @@ namespace SocialEventManager.API
 
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage()
-                    .UseSwagger()
-                    .UseSwaggerUI(options =>
-                    {
-                        foreach (ApiVersionDescription description in apiVersionDescriptionProvider.ApiVersionDescriptions)
-                        {
-                            options.SwaggerEndpoint(
-                                $"/{ApiConstants.Swagger}/{ApiConstants.SocialEventManagerApi}{description.GroupName}/{ApiConstants.Swagger}.json",
-                                description.GroupName.ToUpperInvariant());
-                        }
-                    });
-            }
+                app.UseDeveloperExceptionPage();
+           }
             else
             {
                 app.UseHsts();
             }
 
-            app.UseRouting()
+            app.UseHttpsRedirection()
+                .UseSwagger()
+                .UseSwaggerUI(options =>
+                {
+                    foreach (ApiVersionDescription description in apiVersionDescriptionProvider.ApiVersionDescriptions)
+                    {
+                        options.SwaggerEndpoint(
+                            $"/{ApiConstants.Swagger}/{ApiConstants.SocialEventManagerApi}{description.GroupName}/{ApiConstants.Swagger}.json",
+                            description.GroupName.ToUpperInvariant());
+                    }
+                })
+                .UseRouting()
                 .UseIpRateLimiting()
                 .UseAuthentication()
                 .UseAuthorization()

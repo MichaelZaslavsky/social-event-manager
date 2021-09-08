@@ -5,7 +5,7 @@ namespace SocialEventManager.Shared.Constants
         public const string AuthenticationScheme = "Basic";
         public const string Authorization = "Authorization";
         public const string BasicAuth = "basicAuth";
-        public const string AuthScheme = "basic";
+        public const string Scheme = "basic";
         public const string SwaggerAuthenticationDescription = "Input your username and password to access this API";
     }
 }
