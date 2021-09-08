@@ -38,8 +38,8 @@ namespace SocialEventManager.API.DependencyInjection
                         : actionApiVersionModel.ImplementedApiVersions.Any(version => $"{ApiConstants.SocialEventManagerApi}v{version}" == documentName));
                 });
 
-                var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
+                string xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                string xmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
 
                 options.IncludeXmlComments(xmlCommentsFullPath);
             });
@@ -75,7 +75,7 @@ namespace SocialEventManager.API.DependencyInjection
             options.AddSecurityDefinition(AuthConstants.BasicAuth, new OpenApiSecurityScheme()
             {
                 Type = SecuritySchemeType.Http,
-                Scheme = AuthConstants.AuthScheme,
+                Scheme = AuthConstants.Scheme,
                 Description = AuthConstants.SwaggerAuthenticationDescription,
             });
 
