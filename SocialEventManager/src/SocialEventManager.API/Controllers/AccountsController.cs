@@ -17,11 +17,12 @@ namespace SocialEventManager.API.Controllers
     using Microsoft.AspNetCore.Identity;
 
     /// <summary>
-    /// Represents user accounts.
+    /// Represent user accounts.
     /// </summary>
     [ApiController]
     [Route(ApiPathConstants.ApiController)]
     [ApiVersion("1.0")]
+    [Consumes(MediaTypeConstants.ApplicationJson)]
     public class AccountsController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;

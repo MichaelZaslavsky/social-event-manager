@@ -15,6 +15,7 @@ namespace SocialEventManager.API.Configurations
             config.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status500InternalServerError));
             config.Filters.Add(new ProducesDefaultResponseTypeAttribute());
             config.Filters.Add(new ProducesAttribute(MediaTypeConstants.ApplicationJson, MediaTypeConstants.ApplicationXml));
+            config.Filters.Add(new ConsumesAttribute(MediaTypeConstants.ApplicationJson));
         }
     }
 }

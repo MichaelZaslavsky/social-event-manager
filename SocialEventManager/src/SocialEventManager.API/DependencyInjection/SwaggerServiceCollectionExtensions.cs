@@ -80,19 +80,19 @@ namespace SocialEventManager.API.DependencyInjection
             });
 
             options.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
                 {
+                    new OpenApiSecurityScheme
                     {
-                        new OpenApiSecurityScheme
+                        Reference = new OpenApiReference
                         {
-                            Reference = new OpenApiReference
-                            {
-                                Type = ReferenceType.SecurityScheme,
-                                Id = AuthConstants.BasicAuth,
-                            },
+                            Type = ReferenceType.SecurityScheme,
+                            Id = AuthConstants.BasicAuth,
                         },
-                        new List<string>()
                     },
-                });
+                    new List<string>()
+                },
+            });
         }
 
         #endregion Private Methods
