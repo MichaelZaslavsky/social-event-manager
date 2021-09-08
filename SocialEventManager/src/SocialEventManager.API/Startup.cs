@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -53,6 +54,7 @@ namespace SocialEventManager.API
             });
 
             services.AddCors(options => options.AddPolicy(ApiConstants.AllowAll, builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()))
+                .AddVersionedApiExplorer(options => options.GroupNameFormat = "'v'VV")
                 .AddSwagger()
                 .AddOptions()
                 .AddMemoryCache()
@@ -79,7 +81,7 @@ namespace SocialEventManager.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider apiVersionDescriptionProvider)
         {
             app.UseApiExceptionHandler(options =>
             {
@@ -92,7 +94,7 @@ namespace SocialEventManager.API
             // TODO: Currently, the Hangfire dashboard is opened to all users. Need to implement an authorization scenario.
             // A helpful link for implementing it:
             // https://sahansera.dev/securing-hangfire-dashboard-with-endpoint-routing-auth-policy-aspnetcore/
-            .UseHangfireDashboard("/hangfire", new DashboardOptions()
+            .UseHangfireDashboard(ApiPathConstants.Hangfire, new DashboardOptions()
             {
                 Authorization = new[] { new AllowAllConnectionsFilter() },
                 IgnoreAntiforgeryToken = true,
@@ -102,8 +104,15 @@ namespace SocialEventManager.API
             {
                 app.UseDeveloperExceptionPage()
                     .UseSwagger()
-                    .UseSwaggerUI(c =>
-                        c.SwaggerEndpoint($"/{ApiConstants.Swagger}/{ApiConstants.FirstVersion}/{ApiConstants.Swagger}.json", ApiConstants.SocialEventManagerApi));
+                    .UseSwaggerUI(options =>
+                    {
+                        foreach (ApiVersionDescription description in apiVersionDescriptionProvider.ApiVersionDescriptions)
+                        {
+                            options.SwaggerEndpoint(
+                                $"/{ApiConstants.Swagger}/{ApiConstants.SocialEventManagerApi}{description.GroupName}/{ApiConstants.Swagger}.json",
+                                description.GroupName.ToUpperInvariant());
+                        }
+                    });
             }
             else
             {

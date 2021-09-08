@@ -21,6 +21,7 @@ namespace SocialEventManager.API.Controllers
     /// </summary>
     [ApiController]
     [Route(ApiPathConstants.ApiController)]
+    [ApiVersion("1.0")]
     public class AccountsController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;

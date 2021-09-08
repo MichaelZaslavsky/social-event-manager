@@ -14,6 +14,7 @@ namespace SocialEventManager.API.Controllers
     /// </summary>
     [ApiController]
     [Route(ApiPathConstants.ApiController)]
+    [ApiVersion("1.0")]
     public class RolesController : ControllerBase
     {
         private readonly RoleManager<ApplicationRole> _roleManager;
