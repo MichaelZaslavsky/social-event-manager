@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using System.Linq;
 using AspNetCoreRateLimit;
 using Hangfire;
@@ -67,11 +66,7 @@ namespace SocialEventManager.API
                 .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
                 .AddScoped<ValidationFilterAttribute>()
                 .AddHealthChecks(Configuration)
-                .AddResponseCompression(options =>
-                {
-                    options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
-                        new[] { MediaTypeConstants.ApplicationOctetStream });
-                })
+                .AddResponseCompression(options => options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { MediaTypeConstants.ApplicationOctetStream }))
                 .AddSupportedApiVersioning()
                 .AddAuthentication(AuthConstants.AuthenticationScheme)
                 .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>(AuthConstants.AuthenticationScheme, null);
