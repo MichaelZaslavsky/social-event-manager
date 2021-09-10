@@ -31,7 +31,7 @@ namespace SocialEventManager.API.Utilities.Attributes
                 throw new ArgumentException(nameof(mediaType));
             }
 
-            foreach (var otherMediaType in otherMediaTypes)
+            foreach (string otherMediaType in otherMediaTypes)
             {
                 if (MediaTypeHeaderValue.TryParse(otherMediaType, out MediaTypeHeaderValue parsedOtherMediaType))
                 {
@@ -60,12 +60,12 @@ namespace SocialEventManager.API.Utilities.Attributes
                 return false;
             }
 
-            var parsedRequestMediaType = new MediaType(requestHeaders[_requestHeaderToMatch]);
+            MediaType parsedRequestMediaType = new(requestHeaders[_requestHeaderToMatch]);
 
             // If one of the media types matches, return true.
-            foreach (var mediaType in _mediaTypes)
+            foreach (string mediaType in _mediaTypes)
             {
-                var parsedMediaType = new MediaType(mediaType);
+                MediaType parsedMediaType = new(mediaType);
                 if (parsedRequestMediaType.Equals(parsedMediaType))
                 {
                     return true;

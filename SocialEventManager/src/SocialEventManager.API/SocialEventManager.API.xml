@@ -6,7 +6,7 @@
     <members>
         <member name="T:SocialEventManager.API.Controllers.AccountsController">
             <summary>
-            Represent user accounts.
+            Represents user accounts.
             </summary>
         </member>
         <member name="M:SocialEventManager.API.Controllers.AccountsController.#ctor(Microsoft.AspNetCore.Identity.UserManager{SocialEventManager.BLL.Models.Identity.ApplicationUser},Microsoft.AspNetCore.Identity.SignInManager{SocialEventManager.BLL.Models.Identity.ApplicationUser},AutoMapper.IMapper)">
@@ -39,7 +39,7 @@
         </member>
         <member name="T:SocialEventManager.API.Controllers.RolesController">
             <summary>
-            Represent roles.
+            Represents roles.
             </summary>
         </member>
         <member name="M:SocialEventManager.API.Controllers.RolesController.#ctor(Microsoft.AspNetCore.Identity.RoleManager{SocialEventManager.BLL.Models.Identity.ApplicationRole})">

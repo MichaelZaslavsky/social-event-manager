@@ -20,7 +20,7 @@ namespace SocialEventManager.Tests.UnitTests.AttributeTests
         [MemberData(nameof(GuidData.NotDefaultGuidData), MemberType = typeof(GuidData))]
         public void IsValid_Should_Return_Expected_Result(object value, bool expectedResult)
         {
-            var notDefaultAttribute = new NotDefaultAttribute();
+            NotDefaultAttribute notDefaultAttribute = new();
             bool actualResult = notDefaultAttribute.IsValid(value);
 
             actualResult.Should().Be(expectedResult);

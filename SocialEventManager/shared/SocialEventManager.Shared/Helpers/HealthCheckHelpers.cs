@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SocialEventManager.Shared.Constants;
 
 namespace SocialEventManager.Shared.Helpers
 {
@@ -13,9 +14,9 @@ namespace SocialEventManager.Shared.Helpers
 
         public static Task WriteHealthCheckReadyResponse(HttpContext httpContext, HealthReport result)
         {
-            httpContext.Response.ContentType = "application/json";
+            httpContext.Response.ContentType = MediaTypeConstants.ApplicationJson;
 
-            var json = new JObject(
+            JObject json = new(
                 new JProperty("OverallStatus", result.Status.ToString()),
                 new JProperty("TotalChecksDuration", result.TotalDuration.TotalSeconds.ToString(SecondsPattern)),
                 new JProperty("DependencyHealthChecks", new JObject(result.Entries.Select(item =>
@@ -31,9 +32,9 @@ namespace SocialEventManager.Shared.Helpers
 
         public static Task WriteHealthCheckLiveResponse(HttpContext httpContext, HealthReport result)
         {
-            httpContext.Response.ContentType = "application/json";
+            httpContext.Response.ContentType = MediaTypeConstants.ApplicationJson;
 
-            var json = new JObject(
+            JObject json = new(
                 new JProperty("OverallStatus", result.Status.ToString()),
                 new JProperty("TotalChecksDuration", result.TotalDuration.TotalSeconds.ToString(SecondsPattern)));
 

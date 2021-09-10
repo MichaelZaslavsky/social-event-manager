@@ -17,7 +17,7 @@ namespace SocialEventManager.Shared.Helpers
             data = new byte[length];
             _cryptoServiceProvider.GetNonZeroBytes(data);
 
-            var builder = new StringBuilder(length);
+            StringBuilder builder = new(length);
             foreach (byte b in data)
             {
                 builder.Append(chars[b % chars.Length]);
