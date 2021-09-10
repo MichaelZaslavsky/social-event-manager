@@ -7,7 +7,7 @@ namespace SocialEventManager.Tests.IntegrationTests.Infrastructure
     {
         public static Mock<IDbSession> GetMockDbSession(this IInMemoryDatabase db)
         {
-            var mock = new Mock<IDbSession>();
+            Mock<IDbSession> mock = new();
 
             mock.Setup(c => c.Connection).Returns(db.OpenConnectionAsync().GetAwaiter().GetResult());
             mock.Setup(c => c.Transaction).Returns(db.OpenTransaction());

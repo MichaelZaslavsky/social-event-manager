@@ -24,7 +24,7 @@ namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests
         public void InitDbSession_OpenConnection_Should_Return_Valid_Session()
         {
             string connectionString = _configuration.GetConnectionString(DbConstants.SocialEventManagerTest);
-            var session = new DbSession(connectionString);
+            DbSession session = new(connectionString);
 
             session.Should().NotBeNull();
             session.Connection.Should().NotBeNull();
@@ -46,7 +46,7 @@ namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests
         public void InitDbSession_OpenTransaction_Should_Return_Transaction()
         {
             string connectionString = _configuration.GetConnectionString(DbConstants.SocialEventManagerTest);
-            var session = new DbSession(connectionString);
+            DbSession session = new(connectionString);
             using IDbTransaction transaction = session.Connection.BeginTransaction();
 
             transaction.Should().NotBeNull();
@@ -56,7 +56,7 @@ namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests
         public void InitDbSession_DisposeTransaction_Should_Return_Null_Connection()
         {
             string connectionString = _configuration.GetConnectionString(DbConstants.SocialEventManagerTest);
-            var session = new DbSession(connectionString);
+            DbSession session = new(connectionString);
             using IDbTransaction transaction = session.Connection.BeginTransaction();
             session.Dispose();
 

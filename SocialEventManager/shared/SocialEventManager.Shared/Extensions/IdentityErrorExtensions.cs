@@ -14,7 +14,7 @@ namespace SocialEventManager.Shared.Extensions
                 return null;
             }
 
-            var builder = new StringBuilder(GlobalConstants.Size);
+            StringBuilder builder = new(GlobalConstants.Size);
 
             foreach (IdentityError error in errors)
             {

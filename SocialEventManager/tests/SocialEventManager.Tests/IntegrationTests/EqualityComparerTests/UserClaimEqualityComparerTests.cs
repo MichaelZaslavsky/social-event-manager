@@ -13,7 +13,7 @@ namespace SocialEventManager.Tests.IntegrationTests.EqualityComparerTests
         [InlineAutoData]
         public void CompareUserClaims_Should_Return_True(UserClaim userClaim)
         {
-            var comparer = new UserClaimEqualityComparer();
+            UserClaimEqualityComparer comparer = new();
             bool isEqual = comparer.Equals(userClaim, userClaim);
             isEqual.Should().BeTrue();
         }
@@ -22,7 +22,7 @@ namespace SocialEventManager.Tests.IntegrationTests.EqualityComparerTests
         [MemberData(nameof(UserClaimData.UserClaimsWithDifferentIds), MemberType = typeof(UserClaimData))]
         public void CompareUserClaims_DifferentId_Should_Return_True(UserClaim userClaim, UserClaim otherUserClaim)
         {
-            var comparer = new UserClaimEqualityComparer();
+            UserClaimEqualityComparer comparer = new();
             bool isEqual = comparer.Equals(userClaim, otherUserClaim);
             isEqual.Should().BeTrue();
         }
@@ -30,7 +30,7 @@ namespace SocialEventManager.Tests.IntegrationTests.EqualityComparerTests
         [Fact]
         public void CompareUserClaims_BothNulls_Should_Return_True()
         {
-            var comparer = new UserClaimEqualityComparer();
+            UserClaimEqualityComparer comparer = new();
             bool isEqual = comparer.Equals(null, null);
             isEqual.Should().BeTrue();
         }
@@ -40,7 +40,7 @@ namespace SocialEventManager.Tests.IntegrationTests.EqualityComparerTests
         [MemberData(nameof(UserClaimData.UserClaimsWithOneNull), MemberType = typeof(UserClaimData))]
         public void CompareUserClaims_Should_Return_False(UserClaim userClaim, UserClaim otherUserClaim)
         {
-            var comparer = new UserClaimEqualityComparer();
+            UserClaimEqualityComparer comparer = new();
             bool isEqual = comparer.Equals(userClaim, otherUserClaim);
             isEqual.Should().BeFalse();
         }
@@ -49,7 +49,7 @@ namespace SocialEventManager.Tests.IntegrationTests.EqualityComparerTests
         [MemberData(nameof(UserClaimData.UserClaimsWithDifferentIds), MemberType = typeof(UserClaimData))]
         public void CompareUserClaims_GetHashCode_DifferentId_Should_Return_SameHash(UserClaim userClaim, UserClaim otherUserClaim)
         {
-            var comparer = new UserClaimEqualityComparer();
+            UserClaimEqualityComparer comparer = new();
             comparer.GetHashCode(userClaim).Should().Be(comparer.GetHashCode(otherUserClaim));
         }
 
@@ -57,7 +57,7 @@ namespace SocialEventManager.Tests.IntegrationTests.EqualityComparerTests
         [InlineAutoData]
         public void CompareUserClaims_GetHashCode_Should_Return_DifferentHash(UserClaim userClaim, UserClaim otherUserClaim)
         {
-            var comparer = new UserClaimEqualityComparer();
+            UserClaimEqualityComparer comparer = new();
             comparer.GetHashCode(userClaim).Should().NotBe(comparer.GetHashCode(otherUserClaim));
         }
     }

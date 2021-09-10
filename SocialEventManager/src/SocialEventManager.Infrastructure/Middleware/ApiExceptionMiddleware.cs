@@ -40,7 +40,7 @@ namespace SocialEventManager.Infrastructure.Middleware
         {
             (HttpStatusCode httpStatusCode, string title) = ex.ToHttpStatusCodeAndTitle();
 
-            var error = new ApiError
+            ApiError error = new()
             {
                 Id = Guid.NewGuid().ToString(),
                 Status = (short)httpStatusCode,

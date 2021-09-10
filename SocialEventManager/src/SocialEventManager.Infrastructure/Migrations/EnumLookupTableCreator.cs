@@ -70,7 +70,7 @@ namespace SocialEventManager.Infrastructure.Migrations
         {
             string query = TableQueryHelpers.GetTableNames(SchemaConstants.Enum);
 
-            using var cmd = new SqlCommand(query, _connection);
+            using SqlCommand cmd = new(query, _connection);
             using SqlDataReader reader = await cmd.ExecuteReaderAsync();
 
             return reader.Cast<IDataRecord>().Select(r => (string)r[0]).ToHashSet();

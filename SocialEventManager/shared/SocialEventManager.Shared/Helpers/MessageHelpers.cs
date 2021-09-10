@@ -16,7 +16,7 @@ namespace SocialEventManager.Shared.Helpers
                 return null;
             }
 
-            var builder = new StringBuilder(GlobalConstants.Size);
+            StringBuilder builder = new(GlobalConstants.Size);
 
             builder
                 .Append("--- REQUEST ")
@@ -55,7 +55,7 @@ namespace SocialEventManager.Shared.Helpers
                 return null;
             }
 
-            var builder = new StringBuilder(GlobalConstants.Size);
+            StringBuilder builder = new(GlobalConstants.Size);
 
             builder
                 .Append("--- RESPONSE ")

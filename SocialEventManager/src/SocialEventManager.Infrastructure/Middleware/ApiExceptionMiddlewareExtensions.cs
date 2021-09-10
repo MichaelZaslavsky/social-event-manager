@@ -7,7 +7,7 @@ namespace SocialEventManager.Infrastructure.Middleware
     {
         public static IApplicationBuilder UseApiExceptionHandler(this IApplicationBuilder builder, Action<ApiExceptionOptions> configureOptions)
         {
-            var options = new ApiExceptionOptions();
+            ApiExceptionOptions options = new();
             configureOptions(options);
 
             return builder.UseMiddleware<ApiExceptionMiddleware>(options);

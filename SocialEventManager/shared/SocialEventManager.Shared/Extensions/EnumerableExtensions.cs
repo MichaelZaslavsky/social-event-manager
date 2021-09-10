@@ -19,7 +19,7 @@ namespace SocialEventManager.Shared.Extensions
 
         public static DataTable ToDataTable<T>(this IEnumerable<T> enumerable)
         {
-            var dataTable = new DataTable();
+            DataTable dataTable = new();
 
             PropertyInfo[] properties = typeof(T).GetProperties();
 

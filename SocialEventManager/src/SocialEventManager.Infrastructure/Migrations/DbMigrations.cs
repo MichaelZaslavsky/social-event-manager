@@ -21,14 +21,14 @@ namespace SocialEventManager.Infrastructure.Migrations
         public async Task Migrate(string environmentName)
         {
             string location = GetLocation(environmentName);
-            var connection = new SqlConnection(_config.GetConnectionString(DbConstants.SocialEventManager));
+            SqlConnection connection = new(_config.GetConnectionString(DbConstants.SocialEventManager));
             connection.Open();
 
             try
             {
                 await new EnumLookupTableCreator(connection).Run();
 
-                var evolve = new Evolve.Evolve(connection, msg => Log.Information(msg))
+                Evolve.Evolve evolve = new(connection, msg => Log.Information(msg))
                 {
                     Locations = new[] { location },
                     IsEraseDisabled = true,
