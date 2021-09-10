@@ -17,7 +17,7 @@ namespace SocialEventManager.API.Controllers
     using Microsoft.AspNetCore.Identity;
 
     /// <summary>
-    /// Represent user accounts.
+    /// Represents user accounts.
     /// </summary>
     [ApiController]
     [Route(ApiPathConstants.ApiController)]
