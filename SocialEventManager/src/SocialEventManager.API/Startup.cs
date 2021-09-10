@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.SignalR;
@@ -42,14 +41,15 @@ namespace SocialEventManager.API
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers(options =>
-            {
-                options.Filters.Add(typeof(TrackActionPerformanceFilter));
-                options.ConfigureGlobalResponseTypeAttributes();
-                options.ReturnHttpNotAcceptable = true;
-                options.OutputFormatters.RemoveType<StringOutputFormatter>();
-                options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
-            });
+            services.Configure<BasicAuthenticationConfiguration>(Configuration.GetSection(AuthConstants.BasicAuthentication))
+                .AddControllers(options =>
+                {
+                    options.Filters.Add(typeof(TrackActionPerformanceFilter));
+                    options.ConfigureGlobalResponseTypeAttributes();
+                    options.ReturnHttpNotAcceptable = true;
+                    options.OutputFormatters.RemoveType<StringOutputFormatter>();
+                    options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
+                });
 
             services.AddCors(options => options.AddPolicy(ApiConstants.AllowAll, builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()))
                 .AddVersionedApiExplorer(options => options.GroupNameFormat = "'v'VV")
