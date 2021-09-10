@@ -10,7 +10,7 @@ using SocialEventManager.Shared.Extensions;
 namespace SocialEventManager.API.Controllers
 {
     /// <summary>
-    /// Represent roles.
+    /// Represents roles.
     /// </summary>
     [ApiController]
     [Route(ApiPathConstants.ApiController)]
