@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using SocialEventManager.API.Configurations;
 using SocialEventManager.BLL.Models.Users;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Constants.Validations;
@@ -16,9 +17,13 @@ namespace SocialEventManager.API.Authentication
     // Temporary implementation of basic authentication until there is an authentication in the application.
     public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {
-        public BasicAuthenticationHandler(IOptionsMonitor<AuthenticationSchemeOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock)
+        private readonly IOptions<BasicAuthenticationConfiguration> _authenticationConfig;
+
+        public BasicAuthenticationHandler(IOptionsMonitor<AuthenticationSchemeOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock,
+            IOptions<BasicAuthenticationConfiguration> authenticationConfig)
             : base(options, logger, encoder, clock)
         {
+            _authenticationConfig = authenticationConfig;
         }
 
         protected override Task<AuthenticateResult> HandleAuthenticateAsync()
@@ -32,7 +37,7 @@ namespace SocialEventManager.API.Authentication
             {
                 LoginModel login = GetLoginCredentials();
 
-                if (login.UserName == "TempUser" && login.Password == "TempPassword")
+                if (login.UserName == _authenticationConfig.Value.UserName && login.Password == _authenticationConfig.Value.Password)
                 {
                     Claim[] claims = new[]
                     {
