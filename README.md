@@ -103,8 +103,7 @@ My Events:
 	 }
 	 ```
 		
-3. Create `.env` file in the same folder where `docker-compose.yml` file is and add the following keys
-   (`<SomeDBUser>` with any DB user name you want and `<SomePassword1>`, `<SomePassord2>`, `<SomePassord3>`, `<SomePassord4>` with any password you want):
+3. Create `.env` file in the same folder where `docker-compose.yml` file is and add the following keys:
    ```yml
 	SA_PASSWORD=<SomePassword1>
 	DB_USER=<SomeDBUser>
@@ -114,6 +113,8 @@ My Events:
 	ConnectionStrings__SocialEventManagerTest=Server=sql-server-database;Database=SocialEventManagerTest;User Id=sa;Password=${SA_PASSWORD}
 	REDIS_MASTER_PASSWORD=<SomePassword3>
 	REDIS_REPLICA_PASSWORD=<SomePassword4>
+	BasicAuthentication__UserName=<SomeSwaggerUserName>,
+	BasicAuthentication__Password=<SomePassword5>
    ```
    
 4. Make sure Docker is installed in your computer and is running
