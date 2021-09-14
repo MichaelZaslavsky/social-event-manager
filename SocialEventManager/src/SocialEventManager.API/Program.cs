@@ -55,7 +55,12 @@ namespace SocialEventManager.API
                 .Migrate(EnvironmentName)).GetAwaiter().GetResult();
 
             return Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>().UseSerilog());
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.ConfigureKestrel(options => options.AddServerHeader = false)
+                        .UseStartup<Startup>()
+                        .UseSerilog();
+                });
         }
     }
 }
