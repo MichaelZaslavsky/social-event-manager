@@ -103,7 +103,7 @@ namespace SocialEventManager.API
                 app.UseHsts();
             }
 
-            app.UseSecurityHeaders()
+            app.UseSecurityHeaders(SecurityPolicyConfigurations.GetPermissionPolicies())
                 .UseHttpsRedirection()
                 .UseSwagger()
                 .UseSwaggerUI(options =>
