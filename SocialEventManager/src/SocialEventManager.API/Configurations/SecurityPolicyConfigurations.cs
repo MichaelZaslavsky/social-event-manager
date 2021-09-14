@@ -24,6 +24,12 @@ namespace SocialEventManager.API.Configurations
                     builder.AddSyncXHR().None();
                     builder.AddUsb().None();
                     builder.AddVR().None();
+                })
+                .AddContentSecurityPolicy(builder =>
+                {
+                    builder.AddDefaultSrc().Self(); // Only allow loading resources from this app by default
+                    builder.AddStyleSrc().Self().WithNonce();
+                    builder.AddScriptSrc().Self().WithNonce();
                 });
         }
     }
