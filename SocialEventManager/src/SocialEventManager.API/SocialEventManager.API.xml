@@ -55,5 +55,12 @@
             <param name="role">The role to create.</param>
             <returns>An empty ActionResult.</returns>
         </member>
+        <member name="M:SocialEventManager.API.DependencyInjection.SwaggerServiceCollectionExtensions.SecureSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Fix &lt;script&gt; tag and inline &lt;script&gt; tags used by Swagger by modifying the content dynamically for each HTTP request
+            Read more here - https://purple.telstra.com/blog/locking-down-csp-with-aspnet-core-and-swashbuckle.
+            </summary>
+            <param name="services">Specifies the contract for a collection of service descriptors.</param>
+        </member>
     </members>
 </doc>
