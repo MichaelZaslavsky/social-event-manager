@@ -21,5 +21,7 @@ namespace SocialEventManager.Shared.Constants
         public const string Ver = "ver";
         public const string License = "GPL-3.0 License";
         public const string LicenseUrl = "https://github.com/MichaelZaslavsky/social-event-manager/blob/master/LICENSE";
+        public const string SeqServerUrlSettingPath = "Serilog:SeqServerUrl";
+        public const string Assembly = "Assembly";
     }
 }
