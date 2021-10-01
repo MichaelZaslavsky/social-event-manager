@@ -4,7 +4,6 @@ namespace SocialEventManager.Shared.Constants
 {
     public static class DataConstants
     {
-        public const string SerilogUrl = "http://seq-analysis:5341";
         public const string RandomText = "Random Text";
         public const string PhoneNumber = "+972 123456789";
         public const string RepositoryTests = "RepositoryTests";
