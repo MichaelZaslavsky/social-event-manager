@@ -116,10 +116,10 @@ namespace SocialEventManager.API
                     }
                 })
                 .UseRouting()
+                .UseCors(ApiConstants.AllowAll)
                 .UseIpRateLimiting()
                 .UseAuthentication()
                 .UseAuthorization()
-                .UseCors(ApiConstants.AllowAll)
                 .UseEndpoints(endpoints =>
                 {
                     endpoints.MapGet("/", async context => await context.Response.WriteAsync("Success"));
