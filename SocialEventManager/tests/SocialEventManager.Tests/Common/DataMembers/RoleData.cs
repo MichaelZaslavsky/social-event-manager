@@ -107,20 +107,17 @@ namespace SocialEventManager.Tests.Common.DataMembers
                 yield return new object[]
                 {
                     GetMockRole(concurrencyStamp: Length256),
-                    ExceptionConstants.ExceedMaximumAllowedLength(
-                        $"{DbConstants.SocialEventManagerTest}.{TableName}", nameof(Role.ConcurrencyStamp), Length256.Substring(0, 100)),
+                    ExceptionConstants.ExceedMaximumAllowedLength,
                 };
                 yield return new object[]
                 {
                     GetMockRole(name: Length256),
-                    ExceptionConstants.ExceedMaximumAllowedLength(
-                        $"{DbConstants.SocialEventManagerTest}.{TableName}", nameof(Role.Name), Length256.Substring(0, 100)),
+                    ExceptionConstants.ExceedMaximumAllowedLength,
                 };
                 yield return new object[]
                 {
                     GetMockRole(normalizedName: Length256),
-                    ExceptionConstants.ExceedMaximumAllowedLength(
-                        $"{DbConstants.SocialEventManagerTest}.{TableName}", nameof(Role.NormalizedName), Length256.Substring(0, 100)),
+                    ExceptionConstants.ExceedMaximumAllowedLength,
                 };
             }
         }

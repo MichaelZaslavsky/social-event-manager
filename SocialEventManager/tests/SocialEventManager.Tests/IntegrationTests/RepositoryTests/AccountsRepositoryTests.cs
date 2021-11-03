@@ -56,11 +56,18 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(AccountData.AccountWithMissingRequiredFields), MemberType = typeof(AccountData))]
-        [MemberData(nameof(AccountData.AccountWithExceededLength), MemberType = typeof(AccountData))]
-        public async Task InsertAsync_InvalidData_Should_Return_SqlException(Account account, string expectedMessage)
+        public async Task InsertAsync_MissingRequiredFields_Should_Return_SqlException(Account account, string expectedMessage)
         {
             Func<Task> func = async () => await Db.InsertAsync(account);
             await func.Should().ThrowAsync<SqlException>().WithMessage(expectedMessage);
+        }
+
+        [Theory]
+        [MemberData(nameof(AccountData.AccountWithExceededLength), MemberType = typeof(AccountData))]
+        public async Task InsertAsync_ExceedLength_Should_Return_SqlException(Account account, string expectedMessage)
+        {
+            Func<Task> func = async () => await Db.InsertAsync(account);
+            (await func.Should().ThrowAsync<SqlException>()).And.Message.Should().StartWith(expectedMessage);
         }
     }
 }

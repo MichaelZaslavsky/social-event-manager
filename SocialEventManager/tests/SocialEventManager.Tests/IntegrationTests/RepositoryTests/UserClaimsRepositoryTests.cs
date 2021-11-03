@@ -229,13 +229,22 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(UserClaimData.UserClaimWithMissingRequiredFields), MemberType = typeof(UserClaimData))]
-        [MemberData(nameof(UserClaimData.UserClaimWithExceededLength), MemberType = typeof(UserClaimData))]
-        public async Task InsertAsync_InvalidData_Should_Return_SqlException(UserClaim userClaim, string expectedMessage)
+        public async Task InsertAsync_MissingRequiredFields_Should_Return_SqlException(UserClaim userClaim, string expectedMessage)
         {
             await Db.InsertAsync(AccountData.GetMockAccount(userClaim.UserId));
 
             Func<Task> func = async () => await Db.InsertAsync(userClaim);
             await func.Should().ThrowAsync<SqlException>().WithMessage(expectedMessage);
+        }
+
+        [Theory]
+        [MemberData(nameof(UserClaimData.UserClaimWithExceededLength), MemberType = typeof(UserClaimData))]
+        public async Task InsertAsync_ExceedLength_Should_Return_SqlException(UserClaim userClaim, string expectedMessage)
+        {
+            await Db.InsertAsync(AccountData.GetMockAccount(userClaim.UserId));
+
+            Func<Task> func = async () => await Db.InsertAsync(userClaim);
+            (await func.Should().ThrowAsync<SqlException>()).And.Message.Should().StartWith(expectedMessage);
         }
 
         #region Private Methods

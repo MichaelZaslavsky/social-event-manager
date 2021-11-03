@@ -98,8 +98,7 @@ namespace SocialEventManager.Tests.Common.DataMembers
                 yield return new object[]
                 {
                     GetMockUserClaim(type: Length256),
-                    ExceptionConstants.ExceedMaximumAllowedLength(
-                        $"{DbConstants.SocialEventManagerTest}.{TableName}", nameof(UserClaim.Type), Length256.Substring(0, 100)),
+                    ExceptionConstants.ExceedMaximumAllowedLength,
                 };
             }
         }

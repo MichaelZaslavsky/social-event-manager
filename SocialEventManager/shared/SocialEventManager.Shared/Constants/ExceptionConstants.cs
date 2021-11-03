@@ -22,7 +22,8 @@ namespace SocialEventManager.Shared.Common.Constants
         public const string ConversionFailedFromStringToUniqueIdentifier = "Conversion failed when converting from a character string to uniqueidentifier.";
         public const string UniqueIdentifierIsIncompatibleWithInt = "Operand type clash: uniqueidentifier is incompatible with int";
         public const string InvalidConnectionString = "Format of the initialization string does not conform to specification starting at index 0.";
-        public const string RoleNameIsInvalid = "\"Role name '' is invalid.(InvalidRoleName)\\n\"";
+        public const string RoleNameIsInvalid = "\"Role name '' is invalid.(InvalidRoleName)\"";
+        public const string ExceedMaximumAllowedLength = "String or binary data would be truncated";
 
         public static string InvalidObjectName(string objectName) => $"Invalid object name '{objectName}'.";
 
@@ -46,11 +47,7 @@ namespace SocialEventManager.Shared.Common.Constants
 
         public static string MethodIsNotFound(string methodName, string className) => $"Method '{methodName}' is not found in '{className}' class.";
 
-        public static string DuplicateRoleName(string roleName) => $"\"Role name '{roleName}' {IsAlreadyTaken}(DuplicateRoleName)\\n\"";
-
-        public static string ExceedMaximumAllowedLength(string tableName, string columnName, string value) =>
-            $"String or binary data would be truncated in table '{tableName}', column '{columnName}'. " +
-            $"Truncated value: '{value}'.{TheStatementHasBeenTerminatedWithSpace}";
+        public static string DuplicateRoleName(string roleName) => $"\"Role name '{roleName}' {IsAlreadyTaken}(DuplicateRoleName)\"";
 
         #region Private Fields
 
