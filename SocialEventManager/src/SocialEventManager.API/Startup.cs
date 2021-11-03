@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using AspNetCoreRateLimit;
 using Hangfire;
 using Hangfire.Dashboard;
@@ -24,6 +25,7 @@ using SocialEventManager.Infrastructure.Attributes;
 using SocialEventManager.Infrastructure.Filters;
 using SocialEventManager.Infrastructure.Filters.BackgroundJobs;
 using SocialEventManager.Infrastructure.Middleware;
+using SocialEventManager.Infrastructure.Migrations;
 using SocialEventManager.Shared.Constants;
 
 namespace SocialEventManager.API
@@ -78,6 +80,8 @@ namespace SocialEventManager.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider apiVersionDescriptionProvider)
         {
+            Task.Run(() => new DbMigrations(Configuration).Migrate(env.EnvironmentName)).GetAwaiter().GetResult();
+
             app.UseApiExceptionHandler(options =>
             {
                 options.AddResponseDetails = ErrorResponseHandler.UpdateApiErrorResponse;

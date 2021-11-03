@@ -20,6 +20,7 @@ namespace SocialEventManager.Tests
         {
             Configuration = new ConfigurationBuilder()
                 .AddEnvironmentVariables()
+                .AddUserSecrets<Startup>()
                 .Build();
 
             services.AddLogging(builder => builder.SetMinimumLevel(LogLevel.Debug))
