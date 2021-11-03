@@ -8,7 +8,7 @@
   <ItemGroup>
     <PackageReference Include="Evolve" Version="3.0.0" />
     <PackageReference Include="FluentValidation" Version="10.3.3" />
-    <PackageReference Include="Hangfire.Core" Version="1.7.25" />
+    <PackageReference Include="Hangfire.Core" Version="1.7.26" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.RazorPages" Version="2.2.5" />
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.2">
