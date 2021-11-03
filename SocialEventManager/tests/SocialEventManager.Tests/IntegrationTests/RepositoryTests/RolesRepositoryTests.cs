@@ -154,11 +154,18 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(RoleData.RoleWithMissingRequiredFields), MemberType = typeof(RoleData))]
-        [MemberData(nameof(RoleData.RoleWithExceededLength), MemberType = typeof(RoleData))]
-        public async Task InsertAsync_InvalidData_Should_Return_SqlException(Role role, string expectedMessage)
+        public async Task InsertAsync_MissingRequiredFields_Should_Return_SqlException(Role role, string expectedMessage)
         {
             Func<Task> func = async () => await Db.InsertAsync(role);
-            await func.Should().ThrowAsync<SqlException>().WithMessage(expectedMessage);
+            (await func.Should().ThrowAsync<SqlException>()).WithMessage(expectedMessage);
+        }
+
+        [Theory]
+        [MemberData(nameof(RoleData.RoleWithExceededLength), MemberType = typeof(RoleData))]
+        public async Task InsertAsync_ExceedLength_Should_Return_SqlException(Role role, string expectedMessage)
+        {
+            Func<Task> func = async () => await Db.InsertAsync(role);
+            (await func.Should().ThrowAsync<SqlException>()).And.Message.Should().StartWith(expectedMessage);
         }
     }
 }

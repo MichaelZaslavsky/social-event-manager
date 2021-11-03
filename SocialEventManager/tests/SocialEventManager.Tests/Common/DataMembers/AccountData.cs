@@ -128,32 +128,27 @@ namespace SocialEventManager.Tests.Common.DataMembers
                 yield return new object[]
                 {
                     GetMockAccount(email: Length256),
-                    ExceptionConstants.ExceedMaximumAllowedLength(
-                        $"{DbConstants.SocialEventManagerTest}.{TableName}", nameof(Account.Email), Length256.Substring(0, 100)),
+                    ExceptionConstants.ExceedMaximumAllowedLength,
                 };
                 yield return new object[]
                 {
                     GetMockAccount(normalizedEmail: Length256),
-                    ExceptionConstants.ExceedMaximumAllowedLength(
-                        $"{DbConstants.SocialEventManagerTest}.{TableName}", nameof(Account.NormalizedEmail), Length256.Substring(0, 100)),
+                    ExceptionConstants.ExceedMaximumAllowedLength,
                 };
                 yield return new object[]
                 {
                     GetMockAccount(userName: Length256),
-                    ExceptionConstants.ExceedMaximumAllowedLength(
-                        $"{DbConstants.SocialEventManagerTest}.{TableName}", nameof(Account.UserName), Length256.Substring(0, 100)),
+                    ExceptionConstants.ExceedMaximumAllowedLength,
                 };
                 yield return new object[]
                 {
                     GetMockAccount(normalizedUserName: Length256),
-                    ExceptionConstants.ExceedMaximumAllowedLength(
-                        $"{DbConstants.SocialEventManagerTest}.{TableName}", nameof(Account.NormalizedUserName), Length256.Substring(0, 100)),
+                    ExceptionConstants.ExceedMaximumAllowedLength,
                 };
                 yield return new object[]
                 {
                     GetMockAccount(concurrencyStamp: Length256),
-                    ExceptionConstants.ExceedMaximumAllowedLength(
-                        $"{DbConstants.SocialEventManagerTest}.{TableName}", nameof(Account.ConcurrencyStamp), Length256.Substring(0, 100)),
+                    ExceptionConstants.ExceedMaximumAllowedLength,
                 };
             }
         }

@@ -39,7 +39,7 @@ namespace SocialEventManager.API.Utilities.Extensions
                 ? null
                 : new ContextInformation
                 {
-                    RemoteIpAddress = context.Connection.RemoteIpAddress.ToString(),
+                    RemoteIpAddress = context.Connection.RemoteIpAddress?.ToString(),
                     Host = context.Request.Host.ToString(),
                     Method = context.Request.Method,
                     Protocol = context.Request.Protocol,

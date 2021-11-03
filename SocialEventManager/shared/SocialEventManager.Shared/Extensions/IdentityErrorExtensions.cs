@@ -25,7 +25,7 @@ namespace SocialEventManager.Shared.Extensions
                     .AppendLine(")");
             }
 
-            return builder.ToString();
+            return builder.ToString().TrimEnd();
         }
     }
 }
