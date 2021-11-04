@@ -27,7 +27,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(AccountData.AccountWithSameUserId), MemberType = typeof(AccountData))]
-        public async Task InsertDuplicateAccountUserId_Should_Return_SqlException(IEnumerable<Account> accounts)
+        public async Task InsertDuplicateAccountUserId_Should_Throw_SqlException(IEnumerable<Account> accounts)
         {
             Func<Task> func = async () => await Db.InsertAsync(accounts);
             string message = (await func.Should().ThrowAsync<SqlException>()).Subject.First().Message;
@@ -44,7 +44,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(AccountData.AccountWithSameEmail), MemberType = typeof(AccountData))]
-        public async Task InsertDuplicateAccountEmail_Should_Return_SqlException(IEnumerable<Account> accounts)
+        public async Task InsertDuplicateAccountEmail_Should_Throw_SqlException(IEnumerable<Account> accounts)
         {
             string uniqueConstraintName = $"UC_{AliasConstants.Accounts}_{nameof(Account.Email)}";
             string duplicateKeyValue = $"{accounts.First().Email}";
@@ -56,7 +56,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(AccountData.AccountWithMissingRequiredFields), MemberType = typeof(AccountData))]
-        public async Task InsertAsync_MissingRequiredFields_Should_Return_SqlException(Account account, string expectedMessage)
+        public async Task InsertAsync_MissingRequiredFields_Should_Throw_SqlException(Account account, string expectedMessage)
         {
             Func<Task> func = async () => await Db.InsertAsync(account);
             await func.Should().ThrowAsync<SqlException>().WithMessage(expectedMessage);
@@ -64,7 +64,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(AccountData.AccountWithExceededLength), MemberType = typeof(AccountData))]
-        public async Task InsertAsync_ExceedLength_Should_Return_SqlException(Account account, string expectedMessage)
+        public async Task InsertAsync_ExceedLength_Should_Throw_SqlException(Account account, string expectedMessage)
         {
             Func<Task> func = async () => await Db.InsertAsync(account);
             (await func.Should().ThrowAsync<SqlException>()).And.Message.Should().StartWith(expectedMessage);

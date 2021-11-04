@@ -50,7 +50,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
-        public async Task GetAsync_ByIncompatibleColumnName_Should_Return_SqlException(Role role)
+        public async Task GetAsync_ByIncompatibleColumnName_Should_Throw_SqlException(Role role)
         {
             Func<Task> func = async () => await Repository.GetAsync(role.Name, nameof(Role.Id));
             await func.Should().ThrowAsync<SqlException>().WithMessage(ExceptionConstants.ConversionFailedFromStringToUniqueIdentifier);
@@ -92,7 +92,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(RoleData.ValidRoles), MemberType = typeof(RoleData))]
-        public async Task GetAsync_ByIncompatibleColumnName_Multiple_Should_Return_SqlException(IEnumerable<Role> roles)
+        public async Task GetAsync_ByIncompatibleColumnName_Multiple_Should_Throw_SqlException(IEnumerable<Role> roles)
         {
             Func<Task> func = async () => await Repository.GetAsync(roles.Select(role => role.Name), nameof(Role.Id));
             await func.Should().ThrowAsync<SqlException>().WithMessage(ExceptionConstants.ConversionFailedFromStringToUniqueIdentifier);
@@ -136,7 +136,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
-        public async Task GetSingleOrDefaultAsync_ByIncompatibleColumnName_Should_Return_SqlException(Role role)
+        public async Task GetSingleOrDefaultAsync_ByIncompatibleColumnName_Should_Throw_SqlException(Role role)
         {
             Func<Task> func = async () => await Repository.GetSingleOrDefaultAsync(role.Name, nameof(Role.Id));
             await func.Should().ThrowAsync<SqlException>().WithMessage(ExceptionConstants.ConversionFailedFromStringToUniqueIdentifier);
@@ -179,7 +179,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Fact]
-        public async Task DeleteAsync_ByColumnName_Should_Return_SqlException()
+        public async Task DeleteAsync_ByColumnName_Should_Throw_SqlException()
         {
             Func<Task> func = async () => await Repository.DeleteAsync(RandomGeneratorHelpers.NextInt32(), nameof(Role.Id));
             await func.Should().ThrowAsync<SqlException>().WithMessage(ExceptionConstants.UniqueIdentifierIsIncompatibleWithInt);
