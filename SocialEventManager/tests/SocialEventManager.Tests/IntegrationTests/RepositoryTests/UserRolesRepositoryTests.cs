@@ -46,7 +46,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(UserRoleData.UserRole), MemberType = typeof(UserRoleData))]
-        public async Task InsertAsync_NonExistingUserId_Should_Return_SqlException(UserRole userRole)
+        public async Task InsertAsync_NonExistingUserId_Should_Throw_SqlException(UserRole userRole)
         {
             await Db.InsertAsync(RoleData.GetMockRole(id: userRole.RoleId));
 
@@ -59,7 +59,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(UserRoleData.UserRole), MemberType = typeof(UserRoleData))]
-        public async Task InsertAsync_NonExistingRoleId_Should_Return_SqlException(UserRole userRole)
+        public async Task InsertAsync_NonExistingRoleId_Should_Throw_SqlException(UserRole userRole)
         {
             await Db.InsertAsync(AccountData.GetMockAccount(userRole.UserId));
 
@@ -88,7 +88,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(UserRoleData.UserRole), MemberType = typeof(UserRoleData))]
-        public async Task InsertDuplicateUserRoles_Should_Return_SqlException(UserRole userRole)
+        public async Task InsertDuplicateUserRoles_Should_Throw_SqlException(UserRole userRole)
         {
             userRole.Id = await CreateUserRoleAndRelatedData(userRole);
 

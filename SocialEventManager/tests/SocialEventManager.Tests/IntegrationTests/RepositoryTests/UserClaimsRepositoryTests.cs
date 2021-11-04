@@ -180,7 +180,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(UserClaimData.UserClaimsWithSameUserAndType), MemberType = typeof(UserClaimData))]
-        public async Task InsertDuplicateUserAndTypeClaims_Should_Return_SqlException(IEnumerable<UserClaim> userClaims)
+        public async Task InsertDuplicateUserAndTypeClaims_Should_Throw_SqlException(IEnumerable<UserClaim> userClaims)
         {
             UserClaim firstUserClaim = userClaims.First();
             await Db.InsertAsync(AccountData.GetMockAccount(firstUserClaim.UserId));
@@ -195,7 +195,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(UserClaimData.ValidUserClaim), MemberType = typeof(UserClaimData))]
-        public async Task InsertAsync_NonExistingUserId_Should_Return_SqlException(UserClaim userClaim)
+        public async Task InsertAsync_NonExistingUserId_Should_Throw_SqlException(UserClaim userClaim)
         {
             string foriegnKeyName = $"FK_{AliasConstants.UserClaims}_{AliasConstants.Accounts}_{nameof(UserClaim.UserId)}";
             string expectedMessage = ExceptionConstants.ForeignKeyConstraintConflict(foriegnKeyName, TableNameConstants.Accounts, nameof(UserClaim.UserId));
@@ -229,7 +229,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(UserClaimData.UserClaimWithMissingRequiredFields), MemberType = typeof(UserClaimData))]
-        public async Task InsertAsync_MissingRequiredFields_Should_Return_SqlException(UserClaim userClaim, string expectedMessage)
+        public async Task InsertAsync_MissingRequiredFields_Should_Throw_SqlException(UserClaim userClaim, string expectedMessage)
         {
             await Db.InsertAsync(AccountData.GetMockAccount(userClaim.UserId));
 
@@ -239,7 +239,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(UserClaimData.UserClaimWithExceededLength), MemberType = typeof(UserClaimData))]
-        public async Task InsertAsync_ExceedLength_Should_Return_SqlException(UserClaim userClaim, string expectedMessage)
+        public async Task InsertAsync_ExceedLength_Should_Throw_SqlException(UserClaim userClaim, string expectedMessage)
         {
             await Db.InsertAsync(AccountData.GetMockAccount(userClaim.UserId));
 

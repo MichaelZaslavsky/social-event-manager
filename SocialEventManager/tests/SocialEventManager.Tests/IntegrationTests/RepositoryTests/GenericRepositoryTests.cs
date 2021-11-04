@@ -220,7 +220,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Fact]
-        public void InitializeConstructorWithNullDbSession_Should_Return_SqlException()
+        public void InitializeConstructorWithNullDbSession_Should_Throw_SqlException()
         {
             Action action = () => new RolesRepository(null);
             action.Should().Throw<ArgumentNullException>().WithMessage(ExceptionConstants.ValueCannotBeNull("session"));

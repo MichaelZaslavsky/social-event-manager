@@ -58,7 +58,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
-        public async Task InsertDuplicateRole_Should_Return_SqlException(Role role)
+        public async Task InsertDuplicateRole_Should_Throw_SqlException(Role role)
         {
             await Db.InsertAsync(role);
 
@@ -69,7 +69,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
-        public async Task InsertDuplicateRoleId_Should_Return_SqlException(Role role)
+        public async Task InsertDuplicateRoleId_Should_Throw_SqlException(Role role)
         {
             await Db.InsertAsync(role);
 
@@ -82,7 +82,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(RoleData.RolesWithSameName), MemberType = typeof(RoleData))]
-        public async Task InsertDuplicateRoleName_Should_Return_SqlException(IEnumerable<Role> roles)
+        public async Task InsertDuplicateRoleName_Should_Throw_SqlException(IEnumerable<Role> roles)
         {
             string uniqueConstraintName = $"UC_{AliasConstants.Roles}_{nameof(Role.Name)}";
             string duplicateKeyValue = roles.First().Name;
@@ -121,7 +121,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Fact]
-        public async Task GetByUserIdAsync_Should_Return_SqlException()
+        public async Task GetByUserIdAsync_Should_Throw_SqlException()
         {
             string tableName = SqlMapperUtilities.GetTableName<UserRole>();
 
@@ -154,7 +154,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(RoleData.RoleWithMissingRequiredFields), MemberType = typeof(RoleData))]
-        public async Task InsertAsync_MissingRequiredFields_Should_Return_SqlException(Role role, string expectedMessage)
+        public async Task InsertAsync_MissingRequiredFields_Should_Throw_SqlException(Role role, string expectedMessage)
         {
             Func<Task> func = async () => await Db.InsertAsync(role);
             (await func.Should().ThrowAsync<SqlException>()).WithMessage(expectedMessage);
@@ -162,7 +162,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(RoleData.RoleWithExceededLength), MemberType = typeof(RoleData))]
-        public async Task InsertAsync_ExceedLength_Should_Return_SqlException(Role role, string expectedMessage)
+        public async Task InsertAsync_ExceedLength_Should_Throw_SqlException(Role role, string expectedMessage)
         {
             Func<Task> func = async () => await Db.InsertAsync(role);
             (await func.Should().ThrowAsync<SqlException>()).And.Message.Should().StartWith(expectedMessage);
