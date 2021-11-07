@@ -65,10 +65,12 @@ My Events:
     ```sh
     https://dotnet.microsoft.com/download
     ```
+	
 2.  Install SQL Server
     ```sh
     https://www.microsoft.com/en-us/sql-server/sql-server-downloads
     ```
+	
 3.  Install Docker 19.03.0+
     ```sh
     https://docs.docker.com/engine/install/
@@ -83,7 +85,9 @@ My Events:
 2.  Open folder `%APPDATA%/Microsoft/UserSecrets`
 
     - Create a folder called `80a155b1-fb7a-44de-8788-4f5759c60ff6`
+	
     - Go into the created folder and create a file `secrets.json`
+	
     - Edit the created file. You need to add `Kestrel:Certificates` key \
       For example:
 
