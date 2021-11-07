@@ -52,10 +52,10 @@ My Events:
 
 ### Built With
 
--   [.NET Core](https://en.wikipedia.org/wiki/.NET_Core)
--   [C#](<https://en.wikipedia.org/wiki/C_Sharp_(programming_language)>)
--   [MSSQL](https://en.wikipedia.org/wiki/Microsoft_SQL_Server)
--   [Web API](https://en.wikipedia.org/wiki/Web_API)
+- [.NET Core](https://en.wikipedia.org/wiki/.NET_Core)
+- [C#](<https://en.wikipedia.org/wiki/C_Sharp_(programming_language)>)
+- [MSSQL](https://en.wikipedia.org/wiki/Microsoft_SQL_Server)
+- [Web API](https://en.wikipedia.org/wiki/Web_API)
 
 ## Getting Started
 
