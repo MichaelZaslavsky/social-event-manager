@@ -11,7 +11,7 @@ namespace SocialEventManager.Tests.IntegrationTests.Data
         {
             string name = RandomGeneratorHelpers.GenerateRandomValue();
 
-            Roles = new List<Role>()
+            Roles = new List<Role>
             {
                 new Role
                 {
