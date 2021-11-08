@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/mssql/server 
+FROM mcr.microsoft.com/mssql/server
 
 ARG PROJECT_DIR=/tmp/devdatabase
 RUN mkdir -p $PROJECT_DIR
