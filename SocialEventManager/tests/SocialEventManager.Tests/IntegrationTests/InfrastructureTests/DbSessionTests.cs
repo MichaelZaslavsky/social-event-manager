@@ -13,7 +13,7 @@ namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests
 {
     public class DbSessionTests
     {
-        private static IConfiguration _configuration;
+        private readonly IConfiguration _configuration;
 
         public DbSessionTests(IConfiguration configuration)
         {

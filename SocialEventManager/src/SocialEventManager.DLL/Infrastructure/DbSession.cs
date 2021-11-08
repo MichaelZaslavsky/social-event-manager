@@ -6,13 +6,9 @@ namespace SocialEventManager.DAL.Infrastructure
 {
     public sealed class DbSession : IDbSession, IDisposable
     {
-        private readonly string _connectionString;
-
         public DbSession(string connectionString)
         {
-            _connectionString = connectionString;
-
-            Connection = new SqlConnection(_connectionString);
+            Connection = new SqlConnection(connectionString);
             Connection.Open();
         }
 
