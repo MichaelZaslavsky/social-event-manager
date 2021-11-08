@@ -11,5 +11,6 @@ COPY items/sql/setup.sh ./
 USER root
 RUN chmod +x ./setup.sh
 RUN chmod +x ./wait-for-it.sh
+USER guest
 
 CMD ["/bin/bash", "entrypoint.sh"]
