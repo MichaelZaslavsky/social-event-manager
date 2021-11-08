@@ -18,7 +18,7 @@ namespace SocialEventManager.Infrastructure.Migrations
     public class EnumLookupTableCreator
     {
         private const string TypeName = "LoadedValues";
-        private static SqlConnection _connection;
+        private readonly SqlConnection _connection;
 
         public EnumLookupTableCreator(SqlConnection connection)
         {
@@ -42,13 +42,13 @@ namespace SocialEventManager.Infrastructure.Migrations
 
         #region Private Methods
 
-        private static async Task EnsureSchemaExists()
+        private async Task EnsureSchemaExists()
         {
             await CreateSchemaIfNotExists();
             await RecreateType();
         }
 
-        private static async Task CreateSchemaIfNotExists()
+        private async Task CreateSchemaIfNotExists()
         {
             Log.Debug($"[{_connection.Database}]: Checking for {SchemaConstants.Enum}...");
 
@@ -60,13 +60,13 @@ namespace SocialEventManager.Infrastructure.Migrations
             }
         }
 
-        private static async Task RecreateType()
+        private async Task RecreateType()
         {
             Log.Debug($"[{_connection.Database}]: Recreating {SchemaConstants.Enum}.{TypeName}...");
             await _connection.ExecuteNonQueryAsync(TableQueryHelpers.RecreateType(SchemaConstants.Enum, TypeName));
         }
 
-        private static async Task<HashSet<string>> GetEnumTableNames()
+        private async Task<HashSet<string>> GetEnumTableNames()
         {
             string query = TableQueryHelpers.GetTableNames(SchemaConstants.Enum);
 
@@ -107,7 +107,7 @@ namespace SocialEventManager.Infrastructure.Migrations
             }
         }
 
-        private static async Task MergeLookup(Type type, HashSet<string> tableNames)
+        private async Task MergeLookup(Type type, HashSet<string> tableNames)
         {
             string tableName = type.Name;
 
@@ -119,7 +119,7 @@ namespace SocialEventManager.Infrastructure.Migrations
             MergeValues(type, tableName);
         }
 
-        private static async Task CreateTable(string tableName)
+        private async Task CreateTable(string tableName)
         {
             Log.Debug($"[{_connection.Database}]: Creating table {SchemaConstants.Enum}.{tableName}...");
 
@@ -129,7 +129,7 @@ namespace SocialEventManager.Infrastructure.Migrations
             Log.Debug($"[{_connection.Database}]: Created table {SchemaConstants.Enum}.{tableName}.");
         }
 
-        private static void MergeValues(Type type, string tableName)
+        private void MergeValues(Type type, string tableName)
         {
             using SqlCommand cmd = _connection.CreateCommand();
             cmd.CommandText = $@"

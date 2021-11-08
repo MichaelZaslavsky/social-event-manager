@@ -11,7 +11,7 @@ namespace SocialEventManager.Infrastructure.Migrations
 {
     public class DbMigrations
     {
-        private static IConfiguration _config;
+        private readonly IConfiguration _config;
 
         public DbMigrations(IConfiguration config)
         {
