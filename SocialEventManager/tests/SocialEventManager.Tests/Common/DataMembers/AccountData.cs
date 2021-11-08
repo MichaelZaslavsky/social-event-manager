@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using SocialEventManager.DAL.Entities;
 using SocialEventManager.Shared.Common.Constants;
 using SocialEventManager.Shared.Constants;
@@ -174,8 +175,8 @@ namespace SocialEventManager.Tests.Common.DataMembers
                 LockoutEnd = lockoutEnd,
                 LockoutEnabled = lockoutEnabled,
                 AccessFailedCount = accessFailedCount,
-                NormalizedEmail = normalizedEmail ?? email.ToUpper(),
-                NormalizedUserName = normalizedUserName ?? userName.ToUpper(),
+                NormalizedEmail = normalizedEmail ?? email.ToUpper(CultureInfo.InvariantCulture),
+                NormalizedUserName = normalizedUserName ?? userName.ToUpper(CultureInfo.InvariantCulture),
                 ConcurrencyStamp = concurrencyStamp ?? Guid.NewGuid().ToString(),
                 SecurityStamp = securityStamp ?? Guid.NewGuid().ToString(),
                 TwoFactorEnabled = twoFactorEnabled,
@@ -203,7 +204,7 @@ namespace SocialEventManager.Tests.Common.DataMembers
             bool nullifyNormalizedUserName = false, bool nullifyConcurrencyStamp = false, bool nullifySecurityStamp = false, bool nullifyPasswordHash = false)
         {
             string email = nullifyEmail ? null : $"{RandomGeneratorHelpers.GenerateRandomValue()}@gmail.com";
-            string normalizedEmail = nullifyNormalizedEmail ? null : $"{RandomGeneratorHelpers.GenerateRandomValue()}@gmail.com".ToUpper();
+            string normalizedEmail = nullifyNormalizedEmail ? null : $"{RandomGeneratorHelpers.GenerateRandomValue()}@gmail.com".ToUpper(CultureInfo.InvariantCulture);
             string userName = nullifyUserName ? null : RandomGeneratorHelpers.GenerateRandomValue();
             string normalizedUserName = nullifyNormalizedUserName ? null : RandomGeneratorHelpers.GenerateRandomValue();
             string concurrencyStamp = nullifyConcurrencyStamp ? null : Guid.NewGuid().ToString();
@@ -238,7 +239,10 @@ namespace SocialEventManager.Tests.Common.DataMembers
         {
             const int numberOfEmailExtensionCharacters = 10;
             string email = $"{RandomGeneratorHelpers.GenerateRandomValue(emailLength - numberOfEmailExtensionCharacters)}@gmail.com";
-            string normalizedEmail = $"{RandomGeneratorHelpers.GenerateRandomValue(normalizedEmailLength - numberOfEmailExtensionCharacters)}@gmail.com".ToUpper();
+
+            string normalizedEmail = $"{RandomGeneratorHelpers.GenerateRandomValue(normalizedEmailLength - numberOfEmailExtensionCharacters)}@gmail.com"
+                .ToUpper(CultureInfo.InvariantCulture);
+
             string userName = RandomGeneratorHelpers.GenerateRandomValue(userNameLength);
             string normalizedUserName = RandomGeneratorHelpers.GenerateRandomValue(normalizedUserNameLength);
             string concurrencyStamp = RandomGeneratorHelpers.GenerateRandomValue(concurrencyStampLength);

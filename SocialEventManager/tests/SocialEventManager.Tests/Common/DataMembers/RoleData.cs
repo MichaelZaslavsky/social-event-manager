@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using SocialEventManager.DAL.Entities;
 using SocialEventManager.DAL.Enums;
 using SocialEventManager.Shared.Common.Constants;
@@ -126,9 +127,9 @@ namespace SocialEventManager.Tests.Common.DataMembers
             new()
             {
                 Id = id ?? Guid.NewGuid(),
-                ConcurrencyStamp = concurrencyStamp ?? Guid.NewGuid().ToString().ToLower(),
+                ConcurrencyStamp = concurrencyStamp ?? Guid.NewGuid().ToString().ToLower(CultureInfo.InvariantCulture),
                 Name = name,
-                NormalizedName = normalizedName ?? name.ToUpper(),
+                NormalizedName = normalizedName ?? name.ToUpper(CultureInfo.InvariantCulture),
             };
 
         #region Private Methods
@@ -137,9 +138,9 @@ namespace SocialEventManager.Tests.Common.DataMembers
             new()
             {
                 Id = Guid.NewGuid(),
-                ConcurrencyStamp = nullifyConcurrencyStamp ? null : Guid.NewGuid().ToString().ToLower(),
+                ConcurrencyStamp = nullifyConcurrencyStamp ? null : Guid.NewGuid().ToString().ToLower(CultureInfo.InvariantCulture),
                 Name = nullifyName ? null : RoleType.User.GetDescription(),
-                NormalizedName = nullifyNormalizedName ? null : RoleType.User.GetDescription().ToUpper(),
+                NormalizedName = nullifyNormalizedName ? null : RoleType.User.GetDescription().ToUpper(CultureInfo.InvariantCulture),
             };
 
         private static Role GetMockRole(
