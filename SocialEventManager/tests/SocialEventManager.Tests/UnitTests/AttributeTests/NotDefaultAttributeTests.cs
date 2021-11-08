@@ -15,7 +15,7 @@ namespace SocialEventManager.Tests.UnitTests.AttributeTests
         [InlineData(null, true)]
         [InlineData(1, true)]
         [InlineData(DataConstants.RandomText, true)]
-        [InlineData(new int[] { 1 }, true)]
+        [InlineData(new[] { 1 }, true)]
         [InlineData(0, false)]
         [MemberData(nameof(GuidData.NotDefaultGuidData), MemberType = typeof(GuidData))]
         public void IsValid_Should_Return_Expected_Result(object value, bool expectedResult)
