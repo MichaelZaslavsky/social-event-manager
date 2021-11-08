@@ -92,18 +92,18 @@ namespace SocialEventManager.API.DependencyInjection
 
         private static OpenApiInfo BuildOpenApiInfo(ApiVersionDescription description)
         {
-            return new OpenApiInfo()
+            return new OpenApiInfo
             {
                 Title = ApiConstants.SocialEventManagerApiTitle,
                 Version = description.ApiVersion.ToString(),
                 Description = ApiConstants.SocialEventManagerApiDescription,
-                Contact = new OpenApiContact()
+                Contact = new OpenApiContact
                 {
                     Email = ContactConstants.Email,
                     Name = ContactConstants.Name,
                     Url = new Uri(ContactConstants.Url),
                 },
-                License = new OpenApiLicense()
+                License = new OpenApiLicense
                 {
                     Name = ApiConstants.License,
                     Url = new Uri(ApiConstants.LicenseUrl),
@@ -113,7 +113,7 @@ namespace SocialEventManager.API.DependencyInjection
 
         private static void AddSecurity(this SwaggerGenOptions options)
         {
-            options.AddSecurityDefinition(AuthConstants.BasicAuth, new OpenApiSecurityScheme()
+            options.AddSecurityDefinition(AuthConstants.BasicAuth, new OpenApiSecurityScheme
             {
                 Type = SecuritySchemeType.Http,
                 Scheme = AuthConstants.Scheme,

@@ -12,7 +12,7 @@ namespace SocialEventManager.API.HealthChecks
     {
         public static void MapHealthChecks(this IEndpointRouteBuilder endpoints)
         {
-            endpoints.MapHealthChecks(ApiPathConstants.HealthReady, new HealthCheckOptions()
+            endpoints.MapHealthChecks(ApiPathConstants.HealthReady, new HealthCheckOptions
             {
                 ResultStatusCodes =
                 {
@@ -25,7 +25,7 @@ namespace SocialEventManager.API.HealthChecks
                 AllowCachingResponses = false,
             });
 
-            endpoints.MapHealthChecks(ApiPathConstants.HealthLive, new HealthCheckOptions()
+            endpoints.MapHealthChecks(ApiPathConstants.HealthLive, new HealthCheckOptions
             {
                 Predicate = (check) => !check.Tags.Contains(ApiPathConstants.Ready),
                 ResponseWriter = HealthCheckHelpers.WriteHealthCheckLiveResponse,
