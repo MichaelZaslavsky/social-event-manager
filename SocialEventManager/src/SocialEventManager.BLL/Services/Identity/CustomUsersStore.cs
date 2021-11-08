@@ -42,6 +42,7 @@ namespace SocialEventManager.BLL.Services.Identity
 
         public void Dispose()
         {
+            GC.SuppressFinalize(this);
         }
 
         #region Implement IUserStore
