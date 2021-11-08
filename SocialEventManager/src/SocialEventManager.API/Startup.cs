@@ -92,7 +92,7 @@ namespace SocialEventManager.API
             // TODO: Currently, the Hangfire dashboard is opened to all users. Need to implement an authorization scenario.
             // A helpful link for implementing it:
             // https://sahansera.dev/securing-hangfire-dashboard-with-endpoint-routing-auth-policy-aspnetcore/
-            .UseHangfireDashboard(ApiPathConstants.Hangfire, new DashboardOptions()
+            .UseHangfireDashboard(ApiPathConstants.Hangfire, new DashboardOptions
             {
                 Authorization = new[] { new AllowAllConnectionsFilter() },
                 IgnoreAntiforgeryToken = true,
