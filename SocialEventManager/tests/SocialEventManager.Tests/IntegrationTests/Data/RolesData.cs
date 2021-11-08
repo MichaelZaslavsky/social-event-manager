@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using SocialEventManager.DAL.Entities;
 using SocialEventManager.Shared.Helpers;
 
@@ -18,7 +19,7 @@ namespace SocialEventManager.Tests.IntegrationTests.Data
                     Id = Guid.NewGuid(),
                     ConcurrencyStamp = RandomGeneratorHelpers.GenerateRandomValue(),
                     Name = RandomGeneratorHelpers.GenerateRandomValue(),
-                    NormalizedName = name.ToUpper(),
+                    NormalizedName = name.ToUpper(CultureInfo.InvariantCulture),
                 },
             };
         }
