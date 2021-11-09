@@ -17,7 +17,7 @@ namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests
 
         [Theory]
         [InlineAutoData]
-        public async Task RedisCache_Set_Get_Delete_Should_Succeed(string key, string obj)
+        public async Task RedisCache_Set_Get_Delete_Should_Succeed_When_DataIsValid(string key, string obj)
         {
             await using IRedisClientAsync cache = await _manager.GetClientAsync();
 
@@ -33,7 +33,7 @@ namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests
 
         [Theory]
         [InlineAutoData]
-        public async Task RedisCache_Get_Should_Return_Null(string key)
+        public async Task RedisCache_Get_Should_ReturnNull_When_KeyNotExists(string key)
         {
             await using IRedisClientAsync cache = await _manager.GetClientAsync();
 

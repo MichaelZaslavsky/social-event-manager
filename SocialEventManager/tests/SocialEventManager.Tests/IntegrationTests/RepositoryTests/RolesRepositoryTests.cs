@@ -32,7 +32,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
-        public async Task InsertRole_Should_Return_RoleId(Role role)
+        public async Task InsertRole_Should_ReturnRoleId_When_RoleIsValid(Role role)
         {
             Guid roleId = await Repository.InsertRole(role);
 
@@ -42,7 +42,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
-        public async Task InsertRole_Verify_NeverCalled(Role role)
+        public async Task InsertRole_Should_VerifyNeverCalled_When_RoleHasDifferentValue(Role role)
         {
             await MockRepository.Object.InsertRole(role);
             MockRepository.Verify(r => r.InsertRole(null), Times.Never);
@@ -50,7 +50,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
-        public async Task InsertRole_Verify_CalledOnce(Role role)
+        public async Task InsertRole_Should_VerifyCalledOnce_When_RoleHasSameValue(Role role)
         {
             await MockRepository.Object.InsertRole(role);
             MockRepository.Verify(r => r.InsertRole(role), Times.Once);
@@ -58,7 +58,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
-        public async Task InsertDuplicateRole_Should_Throw_SqlException(Role role)
+        public async Task InsertAsync_Should_ThrowSqlException_When_RoleIsDuplicated(Role role)
         {
             await Db.InsertAsync(role);
 
@@ -69,7 +69,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
-        public async Task InsertDuplicateRoleId_Should_Throw_SqlException(Role role)
+        public async Task InsertAsync_Should_ThrowSqlException_When_RoleIdIsDuplicated(Role role)
         {
             await Db.InsertAsync(role);
 
@@ -82,7 +82,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(RoleData.RolesWithSameName), MemberType = typeof(RoleData))]
-        public async Task InsertDuplicateRoleName_Should_Throw_SqlException(IEnumerable<Role> roles)
+        public async Task InsertAsync_Should_ThrowSqlException_When_RoleNameIsDuplicated(IEnumerable<Role> roles)
         {
             string uniqueConstraintName = $"UC_{AliasConstants.Roles}_{nameof(Role.Name)}";
             string duplicateKeyValue = roles.First().Name;
@@ -94,7 +94,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
-        public async Task GetByUserIdAsync_Should_Return_Roles(Role role)
+        public async Task GetByUserIdAsync_Should_ReturnRoles_When_FilteringByExistingUserWithRole(Role role)
         {
             await Db.CreateTableIfNotExistsAsync<Account>();
             await Db.CreateTableIfNotExistsAsync<UserRole>();
@@ -111,7 +111,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Fact]
-        public async Task GetByUserIdAsync_Should_Return_Empty_Roles()
+        public async Task GetByUserIdAsync_Should_ReturnEmptyRoles_When_FilteringByNonExistingUser()
         {
             await Db.CreateTableIfNotExistsAsync<Account>();
             await Db.CreateTableIfNotExistsAsync<UserRole>();
@@ -121,7 +121,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         }
 
         [Fact]
-        public async Task GetByUserIdAsync_Should_Throw_SqlException()
+        public async Task GetByUserIdAsync_Should_ThrowSqlException_When_UserRoleTableWasNotCreated()
         {
             string tableName = SqlMapperUtilities.GetTableName<UserRole>();
 
@@ -131,7 +131,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [InlineAutoData]
-        public async Task GetByUserIdAsync_Verify_NeverCalled(Guid userId)
+        public async Task GetByUserIdAsync_Should_VerifyNeverCalled_When_UserIdHasDifferentValue(Guid userId)
         {
             await MockRepository.Object.GetByUserIdAsync(userId);
             MockRepository.Verify(r => r.GetByUserIdAsync(Guid.NewGuid()), Times.Never);
@@ -139,7 +139,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [InlineAutoData]
-        public async Task GetByUserIdAsync_Verify_CalledOnce(Guid userId)
+        public async Task GetByUserIdAsync_Should_VerifyCalledOnce_When_UserIdHasSameValue(Guid userId)
         {
             await MockRepository.Object.GetByUserIdAsync(userId);
             MockRepository.Verify(r => r.GetByUserIdAsync(userId), Times.Once);
@@ -147,14 +147,14 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(RoleData.RoleWithValidLength), MemberType = typeof(RoleData))]
-        public async Task InsertAsync_ValidData_Should_Succeed(Role role)
+        public async Task InsertAsync_Should_Succeed_When_RoleIsValid(Role role)
         {
             await Db.InsertAsync(role);
         }
 
         [Theory]
         [MemberData(nameof(RoleData.RoleWithMissingRequiredFields), MemberType = typeof(RoleData))]
-        public async Task InsertAsync_MissingRequiredFields_Should_Throw_SqlException(Role role, string expectedMessage)
+        public async Task InsertAsync_Should_ThrowSqlException_When_RequiredFieldsAreMissing(Role role, string expectedMessage)
         {
             Func<Task> func = async () => await Db.InsertAsync(role);
             (await func.Should().ThrowAsync<SqlException>()).WithMessage(expectedMessage);
@@ -162,7 +162,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(RoleData.RoleWithExceededLength), MemberType = typeof(RoleData))]
-        public async Task InsertAsync_ExceedLength_Should_Throw_SqlException(Role role, string expectedMessage)
+        public async Task InsertAsync_Should_ThrowSqlException_When_LengthIsExceeded(Role role, string expectedMessage)
         {
             Func<Task> func = async () => await Db.InsertAsync(role);
             (await func.Should().ThrowAsync<SqlException>()).And.Message.Should().StartWith(expectedMessage);

@@ -21,7 +21,7 @@ namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests
         }
 
         [Fact]
-        public void InitDbSession_OpenConnection_Should_Return_Valid_Session()
+        public void InitDbSession_Should_ReturnValidSession_When_ConnectionStringIsValid()
         {
             string connectionString = _configuration.GetConnectionString(DbConstants.SocialEventManagerTest);
             DbSession session = new(connectionString);
@@ -34,7 +34,7 @@ namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests
         }
 
         [Fact]
-        public void InitDbSession_OpenConnection_Should_Throw_ArgumentException()
+        public void InitDbSession_Should_ThrowArgumentException_When_ConnectionStringIsInvalid()
         {
             string connectionString = RandomGeneratorHelpers.GenerateRandomValue();
             Action action = () => new DbSession(connectionString);
@@ -42,7 +42,7 @@ namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests
         }
 
         [Fact]
-        public void InitDbSession_OpenTransaction_Should_Return_Transaction()
+        public void InitDbSession_Should_ReturnTransaction_When_TransactionHasBegun()
         {
             string connectionString = _configuration.GetConnectionString(DbConstants.SocialEventManagerTest);
             DbSession session = new(connectionString);
@@ -52,7 +52,7 @@ namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests
         }
 
         [Fact]
-        public void InitDbSession_DisposeTransaction_Should_Return_Null_Connection()
+        public void InitDbSession_Should_ReturnNullConnection_When_ConnectionIsDisposed()
         {
             string connectionString = _configuration.GetConnectionString(DbConstants.SocialEventManagerTest);
             DbSession session = new(connectionString);
