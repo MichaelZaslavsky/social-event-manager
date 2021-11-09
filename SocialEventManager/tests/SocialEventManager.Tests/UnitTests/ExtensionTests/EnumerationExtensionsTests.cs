@@ -16,7 +16,7 @@ namespace SocialEventManager.Tests.UnitTests.ExtensionTests
         [InlineData(RoleType.Admin, "Admin")]
         [InlineData(RoleType.User, "User")]
         [InlineData((RoleType)(-1), "-1")]
-        public void GetDescription_Should_Return_Description(Enum value, string expectedDescription)
+        public void GetDescription_Should_ReturnDescription_When_EnumHasDescriptionAttribute(Enum value, string expectedDescription)
         {
             string actualResult = value.GetDescription();
             actualResult.Should().Be(expectedDescription);

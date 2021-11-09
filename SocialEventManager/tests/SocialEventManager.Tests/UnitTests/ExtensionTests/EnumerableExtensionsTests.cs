@@ -17,7 +17,7 @@ namespace SocialEventManager.Tests.UnitTests.ExtensionTests
     {
         [Theory]
         [MemberData(nameof(EnumerableData.EmptyData), MemberType = typeof(EnumerableData))]
-        public void IsEmpty_Should_Return_Expected_Result(IEnumerable<int> enumerable, bool expectedResult)
+        public void IsEmpty_Should_ReturnExpectedResult(IEnumerable<int> enumerable, bool expectedResult)
         {
             bool actualResult = enumerable.IsEmpty();
             actualResult.Should().Be(expectedResult);
@@ -25,7 +25,7 @@ namespace SocialEventManager.Tests.UnitTests.ExtensionTests
 
         [Theory]
         [InlineData(null)]
-        public void IsEmpty_Should_Return_ArgumentNullException<T>(IEnumerable<T> enumerable)
+        public void IsEmpty_Should_ReturnArgumentNullException_When_ValueIsNull<T>(IEnumerable<T> enumerable)
         {
             Action action = () => enumerable.IsEmpty();
             action.Should().Throw<ArgumentNullException>().WithMessage(ExceptionConstants.ValueCannotBeNull("source"));
@@ -33,7 +33,7 @@ namespace SocialEventManager.Tests.UnitTests.ExtensionTests
 
         [Theory]
         [MemberData(nameof(EnumerableData.NullOrEmptyData), MemberType = typeof(EnumerableData))]
-        public void IsNullOrEmpty_Should_Return_Expected_Result(IEnumerable<int> enumerable, bool expectedResult)
+        public void IsNullOrEmpty_Should_ReturnExpectedResult(IEnumerable<int> enumerable, bool expectedResult)
         {
             bool actualResult = enumerable.IsNullOrEmpty();
             actualResult.Should().Be(expectedResult);
@@ -41,7 +41,7 @@ namespace SocialEventManager.Tests.UnitTests.ExtensionTests
 
         [Theory]
         [MemberData(nameof(EnumerableData.NotNullAndAnyData), MemberType = typeof(EnumerableData))]
-        public void IsNotNullAndAny_Should_Return_Expected_Result(IEnumerable<int> enumerable, bool expectedResult)
+        public void IsNotNullAndAny_Should_ReturnExpectedResult(IEnumerable<int> enumerable, bool expectedResult)
         {
             bool actualResult = enumerable.IsNotNullAndAny();
             actualResult.Should().Be(expectedResult);
@@ -49,7 +49,7 @@ namespace SocialEventManager.Tests.UnitTests.ExtensionTests
 
         [Theory]
         [MemberData(nameof(EnumerableData.UpdateInForEachData), MemberType = typeof(EnumerableData))]
-        public void ForEach_Should_Update_All_Values(IEnumerable<Role> roles, string roleName)
+        public void ForEach_Should_UpdateAllValues_When_RoleNameIsUpdated(IEnumerable<Role> roles, string roleName)
         {
             foreach (Role actualRole in roles.ForEach(r => r.Name = roleName))
             {

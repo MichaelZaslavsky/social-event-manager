@@ -31,7 +31,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(UserClaimData.ValidUserClaim), MemberType = typeof(UserClaimData))]
-        public async Task GetUserClaims_Should_Return_UserClaims(UserClaim userClaim)
+        public async Task GetUserClaims_Should_ReturnUserClaims_When_FilteringByExistingTypeAndValue(UserClaim userClaim)
         {
             userClaim.Id = await CreateUserClaimAndRelatedData(userClaim);
 
@@ -41,7 +41,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(UserClaimData.UserClaimsWithSameUser), MemberType = typeof(UserClaimData))]
-        public async Task GetUserClaims_Multiple_Should_Return_UserClaimPerUser(IEnumerable<UserClaim> userClaims)
+        public async Task GetUserClaims_Should_ReturnUserClaimPerUser_When_FilteringByExistingTypeAndValue(IEnumerable<UserClaim> userClaims)
         {
             await Db.InsertAsync(AccountData.GetMockAccount(userClaims.First().UserId));
             await Db.InsertAsync(userClaims);
@@ -55,7 +55,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(UserClaimData.UserClaimsWithSameType), MemberType = typeof(UserClaimData))]
-        public async Task GetUserClaims_Multiple_Should_Return_UserClaimPerType(IEnumerable<UserClaim> userClaims)
+        public async Task GetUserClaims_Should_ReturnUserClaimPerType_When_FilteringByExistingTypeAndValue(IEnumerable<UserClaim> userClaims)
         {
             foreach (UserClaim userClaim in userClaims)
             {
@@ -74,7 +74,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
         [Theory]
         [MemberData(nameof(UserClaimData.UserClaimsWithSameTypeAndValue), MemberType = typeof(UserClaimData))]
 
-        public async Task GetUserClaims_Multiple_Should_Return_UserClaims(IEnumerable<UserClaim> userClaims)
+        public async Task GetUserClaims_Should_ReturnUserClaims_When_FilteringByExistingTypeAndValueOfTheFirstUser(IEnumerable<UserClaim> userClaims)
         {
             foreach (UserClaim userClaim in userClaims)
             {
@@ -91,7 +91,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [InlineAutoData]
-        public async Task GetUserClaims_Should_Return_Empty_UserClaims(string type, string value)
+        public async Task GetUserClaims_Should_ReturnEmptyUserClaims_When_FilteringByNonExistingValueOrType(string type, string value)
         {
             IEnumerable<UserClaim> actualUserClaims = await Repository.GetUserClaims(type, value);
             actualUserClaims.Should().BeEmpty();
@@ -99,7 +99,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [InlineAutoData]
-        public async Task GetUserClaims_Verify_NeverCalled(string type, string value)
+        public async Task GetUserClaims_Should_VerifyNeverCalled_When_TypeHasDifferentValue(string type, string value)
         {
             await MockRepository.Object.GetUserClaims(type, value);
             MockRepository.Verify(r => r.GetUserClaims(null, value), Times.Never);
@@ -107,7 +107,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [InlineAutoData]
-        public async Task GetUserClaims_Verify_CalledOnce(string type, string value)
+        public async Task GetUserClaims_Should_VerifyCalledOnce_When_TypeAndValueValuesAreRepetead(string type, string value)
         {
             await MockRepository.Object.GetUserClaims(type, value);
             MockRepository.Verify(r => r.GetUserClaims(type, value), Times.Once);
@@ -115,7 +115,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(UserClaimData.ValidUserClaim), MemberType = typeof(UserClaimData))]
-        public async Task DeleteUserClaim_Should_Return_True(UserClaim userClaim)
+        public async Task DeleteUserClaims_Should_ReturnTrue_When_UserClaimExists(UserClaim userClaim)
         {
             userClaim.Id = await CreateUserClaimAndRelatedData(userClaim);
 
@@ -128,7 +128,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(UserClaimData.UserClaimsWithSameUser), MemberType = typeof(UserClaimData))]
-        public async Task DeleteUserClaims_Should_Return_True(IEnumerable<UserClaim> userClaims)
+        public async Task DeleteUserClaims_Should_ReturnTrue_When_UserClaimsExist(IEnumerable<UserClaim> userClaims)
         {
             await Db.InsertAsync(AccountData.GetMockAccount(userClaims.First().UserId));
             await Db.InsertAsync(userClaims);
@@ -142,7 +142,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [InlineAutoData]
-        public async Task DeleteUserClaims_Should_Return_False(IEnumerable<UserClaim> userClaims)
+        public async Task DeleteUserClaims_Should_ReturnFalse_When_UserClaimsNotExists(IEnumerable<UserClaim> userClaims)
         {
             bool isDeleted = await Repository.DeleteUserClaims(userClaims);
             isDeleted.Should().BeFalse();
@@ -150,7 +150,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [InlineAutoData]
-        public async Task DeleteUserClaims_Verify_NeverCalled(IEnumerable<UserClaim> userClaims)
+        public async Task DeleteUserClaims_Should_VerifyNeverCalled_When_UserClaimsHaveDifferentValue(IEnumerable<UserClaim> userClaims)
         {
             await MockRepository.Object.DeleteUserClaims(userClaims);
             MockRepository.Verify(r => r.DeleteUserClaims(null), Times.Never);
@@ -158,7 +158,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [InlineAutoData]
-        public async Task DeleteUserClaims_Verify_CalledOnce(IEnumerable<UserClaim> userClaims)
+        public async Task DeleteUserClaims_Should_VerifyCalledOnce_When_UserClaimsHaveSameValue(IEnumerable<UserClaim> userClaims)
         {
             await MockRepository.Object.DeleteUserClaims(userClaims);
             MockRepository.Verify(r => r.DeleteUserClaims(userClaims), Times.Once);
@@ -166,7 +166,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(UserClaimData.ValidUserClaim), MemberType = typeof(UserClaimData))]
-        public async Task DeleteAsync_Should_Return_True(UserClaim userClaim)
+        public async Task DeleteAsync_Should_ReturnTrue_When_UserClaimExists(UserClaim userClaim)
         {
             await Db.InsertAsync(AccountData.GetMockAccount(userClaim.UserId));
             int userClaimId = await Db.InsertAsync(userClaim);
@@ -180,7 +180,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(UserClaimData.UserClaimsWithSameUserAndType), MemberType = typeof(UserClaimData))]
-        public async Task InsertDuplicateUserAndTypeClaims_Should_Throw_SqlException(IEnumerable<UserClaim> userClaims)
+        public async Task InsertAsync_Should_ThrowSqlException_When_UserTypeAndClaimsAreDuplicated(IEnumerable<UserClaim> userClaims)
         {
             UserClaim firstUserClaim = userClaims.First();
             await Db.InsertAsync(AccountData.GetMockAccount(firstUserClaim.UserId));
@@ -195,7 +195,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(UserClaimData.ValidUserClaim), MemberType = typeof(UserClaimData))]
-        public async Task InsertAsync_NonExistingUserId_Should_Throw_SqlException(UserClaim userClaim)
+        public async Task InsertAsync_Should_ThrowSqlException_When_UserIdNotExists(UserClaim userClaim)
         {
             string foriegnKeyName = $"FK_{AliasConstants.UserClaims}_{AliasConstants.Accounts}_{nameof(UserClaim.UserId)}";
             string expectedMessage = ExceptionConstants.ForeignKeyConstraintConflict(foriegnKeyName, TableNameConstants.Accounts, nameof(UserClaim.UserId));
@@ -206,7 +206,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(UserClaimData.ValidUserClaim), MemberType = typeof(UserClaimData))]
-        public async Task DeleteUser_Should_Delete_Related_UserClaim(UserClaim userClaim)
+        public async Task DeleteUser_Should_DeleteRelatedUserClaim_When_UserHasARelatedUserClaim(UserClaim userClaim)
         {
             Account account = AccountData.GetMockAccount(userClaim.UserId);
 
@@ -221,7 +221,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(UserClaimData.UserClaimWithValidLength), MemberType = typeof(UserClaimData))]
-        public async Task InsertAsync_ValidData_Should_Succeed(UserClaim userClaim)
+        public async Task InsertAsync_Should_Succeed_When_UserClaimIsValid(UserClaim userClaim)
         {
             await Db.InsertAsync(AccountData.GetMockAccount(userClaim.UserId));
             await Db.InsertAsync(userClaim);
@@ -229,7 +229,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(UserClaimData.UserClaimWithMissingRequiredFields), MemberType = typeof(UserClaimData))]
-        public async Task InsertAsync_MissingRequiredFields_Should_Throw_SqlException(UserClaim userClaim, string expectedMessage)
+        public async Task InsertAsync_Should_ThrowSqlException_When_RequiredFieldsAreMissing(UserClaim userClaim, string expectedMessage)
         {
             await Db.InsertAsync(AccountData.GetMockAccount(userClaim.UserId));
 
@@ -239,7 +239,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests
 
         [Theory]
         [MemberData(nameof(UserClaimData.UserClaimWithExceededLength), MemberType = typeof(UserClaimData))]
-        public async Task InsertAsync_ExceedLength_Should_Throw_SqlException(UserClaim userClaim, string expectedMessage)
+        public async Task InsertAsync_Should_ThrowSqlException_When_LengthIsExceeded(UserClaim userClaim, string expectedMessage)
         {
             await Db.InsertAsync(AccountData.GetMockAccount(userClaim.UserId));
 

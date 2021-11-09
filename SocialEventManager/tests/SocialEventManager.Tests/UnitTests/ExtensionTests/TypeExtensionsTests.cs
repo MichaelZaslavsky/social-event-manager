@@ -12,7 +12,7 @@ namespace SocialEventManager.Tests.UnitTests.ExtensionTests
     public class TypeExtensionsTests
     {
         [Fact]
-        public void GetNonPublicStaticMethod_Should_Return_Method()
+        public void GetNonPublicStaticMethod_Should_ReturnMethod_When_MethodNameExists()
         {
             const string methodName = "GetTableName";
             MethodInfo getTableNameMethod = typeof(SqlMapperExtensions).GetNonPublicStaticMethod(methodName);
@@ -21,7 +21,7 @@ namespace SocialEventManager.Tests.UnitTests.ExtensionTests
         }
 
         [Fact]
-        public void GetNonPublicStaticMethod_Should_Return_ArgumentOutOfRangeException()
+        public void GetNonPublicStaticMethod_Should_ReturnArgumentOutOfRangeException_When_MethodNameDoesNotExist()
         {
             string methodName = RandomGeneratorHelpers.GenerateRandomValue();
             Type type = typeof(SqlMapperExtensions);

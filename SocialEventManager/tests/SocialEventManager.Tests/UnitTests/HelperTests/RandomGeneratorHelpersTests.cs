@@ -13,7 +13,7 @@ namespace SocialEventManager.Tests.UnitTests.HelperTests
     {
         [Theory]
         [InlineAutoData]
-        public void GenerateRandomValue_Should_Return_Value_Of_Requested_Length(int length)
+        public void GenerateRandomValue_Should_ReturnValueOfRequestedLength_When_LengthIsPositive(int length)
         {
             string value = RandomGeneratorHelpers.GenerateRandomValue(length);
             value.Length.Should().Be(length);

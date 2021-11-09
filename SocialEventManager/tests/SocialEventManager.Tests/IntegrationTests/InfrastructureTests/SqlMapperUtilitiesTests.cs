@@ -11,7 +11,7 @@ namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests
     public class SqlMapperUtilitiesTests
     {
         [Fact]
-        public void GetTableName_Should_Return_TableName()
+        public void GetTableName_Should_ReturnTableName_When_ClassHasTableAttribute()
         {
             string tableName = SqlMapperUtilities.GetTableName<Role>();
             tableName.Should().Be(TableNameConstants.Roles);
@@ -22,7 +22,7 @@ namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests
         [InlineData(typeof(Role), TableNameConstants.Roles)]
         [InlineData(typeof(UserRole), TableNameConstants.UserRoles)]
         [InlineData(typeof(UserClaim), TableNameConstants.UserClaims)]
-        public void GetTableName_ByType_Should_Return_TableName(Type type, string expectedTableName)
+        public void GetTableName_Should_ReturnTableName_When_TypeHasTableAttribute(Type type, string expectedTableName)
         {
             string actualTableName = SqlMapperUtilities.GetTableName(type);
             actualTableName.Should().Be(expectedTableName);
@@ -30,7 +30,7 @@ namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests
 
         [Theory]
         [InlineData(typeof(ClaimBase))]
-        public void GetTableName_ByTableNameMapper_Should_Return_TableName(Type type)
+        public void GetTableName_Should_ReturnTableName_When_TypeIsDefinedInTableNameMapper(Type type)
         {
             SqlMapperExtensions.TableNameMapper = (type) => type.Name;
 

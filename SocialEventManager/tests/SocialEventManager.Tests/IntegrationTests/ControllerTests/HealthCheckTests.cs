@@ -21,7 +21,7 @@ namespace SocialEventManager.Tests.IntegrationTests.ControllerTests
         [Theory]
         [InlineData(ApiPathConstants.HealthReady)]
         [InlineData(ApiPathConstants.HealthLive)]
-        public async Task HealthCheck_Should_Return_Ok_Status_Code(string requestUri)
+        public async Task HealthCheck_Should_ReturnOkStatusCode_When_ApplicationIsHealthy(string requestUri)
         {
             HttpResponseMessage response = await Client.GetAsync(requestUri);
             response.Should().NotBeNull();

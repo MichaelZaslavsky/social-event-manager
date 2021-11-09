@@ -32,7 +32,7 @@ namespace SocialEventManager.Tests.IntegrationTests.ControllerTests
 
         [Theory]
         [InlineAutoData]
-        public async Task CreateRole_Should_Return_Ok(ApplicationRole applicationRole)
+        public async Task CreateRole_Should_ReturnOk_When_RoleIsValid(ApplicationRole applicationRole)
         {
             applicationRole.Id = Guid.NewGuid().ToString();
 
@@ -42,7 +42,7 @@ namespace SocialEventManager.Tests.IntegrationTests.ControllerTests
 
         [Theory]
         [InlineAutoData]
-        public async Task CreateRole_DuplicateRoleName_Should_Return_BadRequest(ApplicationRole applicationRole)
+        public async Task CreateRole_Should_ReturnBadRequest_When_RoleNameIsDuplicated(ApplicationRole applicationRole)
         {
             HttpClient client = Factory.WithWebHostBuilder(builder =>
                 builder.ConfigureTestServices(services => services.AddTransient<IRolesRepository, InvalidRolesStub>()))
@@ -55,7 +55,7 @@ namespace SocialEventManager.Tests.IntegrationTests.ControllerTests
 
         [Theory]
         [MemberData(nameof(ApplicationRoleData.InvalidApplicationRole), MemberType = typeof(ApplicationRoleData))]
-        public async Task CreateRole_InvalidData_Should_Return_BadRequest(ApplicationRole applicationRole, string expectedResult)
+        public async Task CreateRole_Should_ReturnBadRequest_When_DataIsInvalid(ApplicationRole applicationRole, string expectedResult)
         {
             (HttpStatusCode statusCode, string message) = await Client.CreateAsyncWithError(ApiPathConstants.Roles, applicationRole);
             statusCode.Should().Be(HttpStatusCode.BadRequest);

@@ -18,7 +18,7 @@ namespace SocialEventManager.Tests.UnitTests.AttributeTests
         [InlineData(new[] { 1 }, true)]
         [InlineData(0, false)]
         [MemberData(nameof(GuidData.NotDefaultGuidData), MemberType = typeof(GuidData))]
-        public void IsValid_Should_Return_Expected_Result(object value, bool expectedResult)
+        public void IsValid_Should_ReturnExpectedResult(object value, bool expectedResult)
         {
             NotDefaultAttribute notDefaultAttribute = new();
             bool actualResult = notDefaultAttribute.IsValid(value);
