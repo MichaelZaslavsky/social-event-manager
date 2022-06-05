@@ -1,5 +1,3 @@
-using System;
-
 namespace SocialEventManager.BLL.Models.Users
 {
     public record UserRoleDto : UserRoleBase

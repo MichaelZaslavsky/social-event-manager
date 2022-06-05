@@ -1,5 +1,3 @@
-using System;
-
 namespace SocialEventManager.Tests.IntegrationTests.Infrastructure
 {
     public class TestBase : IDisposable

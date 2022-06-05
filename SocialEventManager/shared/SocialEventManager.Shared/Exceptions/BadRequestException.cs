@@ -1,5 +1,3 @@
-using System;
-
 namespace SocialEventManager.Shared.Exceptions
 {
     public class BadRequestException : ApplicationException

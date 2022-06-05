@@ -1,4 +1,3 @@
-using System;
 using System.Net;
 using FluentAssertions;
 using SocialEventManager.Shared.Constants;

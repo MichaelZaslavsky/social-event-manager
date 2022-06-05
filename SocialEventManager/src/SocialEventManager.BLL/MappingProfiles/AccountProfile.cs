@@ -1,4 +1,3 @@
-using System;
 using AutoMapper;
 using SocialEventManager.BLL.Models.Accounts;
 using SocialEventManager.BLL.Models.Identity;

@@ -1,6 +1,4 @@
 using Hangfire;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using SocialEventManager.Shared.Constants;
 
 namespace SocialEventManager.API.DependencyInjection

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using SocialEventManager.DAL.Entities;
 using SocialEventManager.Shared.Helpers;

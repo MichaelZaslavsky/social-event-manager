@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace SocialEventManager.Infrastructure.Loggers
 {
     public interface IScopeInformation

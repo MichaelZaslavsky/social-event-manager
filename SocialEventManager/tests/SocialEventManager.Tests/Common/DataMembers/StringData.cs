@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Helpers;
 

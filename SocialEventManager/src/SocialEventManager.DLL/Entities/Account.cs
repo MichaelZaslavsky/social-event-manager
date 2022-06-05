@@ -1,4 +1,3 @@
-using System;
 using ServiceStack.DataAnnotations;
 using SocialEventManager.Shared.Constants;
 

@@ -1,6 +1,4 @@
-using System;
 using System.Data.SqlClient;
-using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Serilog;
 using Serilog.Events;

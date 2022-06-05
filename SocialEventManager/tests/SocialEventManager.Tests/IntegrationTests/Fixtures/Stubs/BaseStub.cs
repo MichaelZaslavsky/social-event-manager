@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using SocialEventManager.DAL.Infrastructure;
 
 namespace SocialEventManager.Tests.IntegrationTests.Fixtures.Stubs

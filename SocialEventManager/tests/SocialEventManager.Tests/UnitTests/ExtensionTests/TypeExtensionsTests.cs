@@ -1,4 +1,3 @@
-using System;
 using System.Reflection;
 using Dapper.Contrib.Extensions;
 using FluentAssertions;
