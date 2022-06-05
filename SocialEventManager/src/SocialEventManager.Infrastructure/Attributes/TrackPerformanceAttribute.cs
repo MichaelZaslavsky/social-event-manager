@@ -25,7 +25,7 @@ public class TrackPerformanceAttribute : ActionFilterAttribute
     {
         _timer.Stop();
 
-        if (context.Exception == null)
+        if (context.Exception is null)
         {
             _logger.LogRoutePerformance(context.HttpContext.Request.Path, context.HttpContext.Request.Method, _timer.ElapsedMilliseconds);
         }

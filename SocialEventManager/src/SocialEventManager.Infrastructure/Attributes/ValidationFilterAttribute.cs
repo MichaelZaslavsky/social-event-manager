@@ -8,7 +8,7 @@ public class ValidationFilterAttribute : IAsyncActionFilter
 {
     public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {
-        if (context.ActionArguments == null)
+        if (context.ActionArguments is null)
         {
             context.Result = new BadRequestObjectResult(ValidationConstants.ObjectIsNull);
             return;

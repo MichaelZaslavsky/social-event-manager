@@ -9,11 +9,11 @@ public static class EnumerationExtensions
     {
         MemberInfo enumMember = value.GetType().GetMember(value.ToString()).FirstOrDefault();
 
-        DescriptionAttribute descriptionAttribute = enumMember == null
+        DescriptionAttribute descriptionAttribute = enumMember is null
             ? default
             : enumMember.GetCustomAttribute(typeof(DescriptionAttribute)) as DescriptionAttribute;
 
-        return descriptionAttribute == null
+        return descriptionAttribute is null
             ? value.ToString()
             : descriptionAttribute.Description;
     }

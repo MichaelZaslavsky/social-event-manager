@@ -11,7 +11,7 @@ public static class SqlMapperUtilities
 
     public static string GetTableName(Type type)
     {
-        if (SqlMapperExtensions.TableNameMapper != null)
+        if (SqlMapperExtensions.TableNameMapper is not null)
         {
             return SqlMapperExtensions.TableNameMapper(type);
         }
