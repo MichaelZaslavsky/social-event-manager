@@ -249,7 +249,9 @@ Backup*/
 UpgradeLog*.XML
 UpgradeLog*.htm
 ServiceFabricBackup/
+.gitignore.bak
 *.rptproj.bak
+*.yml.bak
 
 # SQL Server files
 *.mdf
@@ -351,3 +353,4 @@ MigrationBackup/
 
 # Secret files
 .env/
+
