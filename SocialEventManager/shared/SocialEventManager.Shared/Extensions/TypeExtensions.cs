@@ -9,7 +9,7 @@ public static class TypeExtensions
     {
         MethodInfo methodInfo = type.GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Static);
 
-        if (methodInfo == null)
+        if (methodInfo is null)
         {
             throw new ArgumentOutOfRangeException(methodName, ExceptionConstants.MethodIsNotFound(methodName, nameof(type)));
         }

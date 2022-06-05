@@ -31,7 +31,7 @@ public static class SwaggerServiceCollectionExtensions
                 ApiVersionModel actionApiVersionModel = apiDescription.ActionDescriptor.GetApiVersionModel(
                     ApiVersionMapping.Explicit | ApiVersionMapping.Implicit);
 
-                return actionApiVersionModel == null || (actionApiVersionModel.DeclaredApiVersions.Count > 0
+                return actionApiVersionModel is null || (actionApiVersionModel.DeclaredApiVersions.Count > 0
                     ? actionApiVersionModel.DeclaredApiVersions.Any(version => $"{ApiConstants.SocialEventManagerApi}v{version}" == documentName)
                     : actionApiVersionModel.ImplementedApiVersions.Any(version => $"{ApiConstants.SocialEventManagerApi}v{version}" == documentName));
             });

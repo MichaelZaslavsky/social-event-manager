@@ -8,7 +8,7 @@ public static class ExceptionExtensions
 {
     public static (HttpStatusCode httpStatusCode, string title) ToHttpStatusCodeAndTitle(this Exception ex)
     {
-        if (ex == null)
+        if (ex is null)
         {
             return (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError);
         }
@@ -24,7 +24,7 @@ public static class ExceptionExtensions
 
     public static bool IsCritical(this Exception ex)
     {
-        if (ex == null)
+        if (ex is null)
         {
             return false;
         }

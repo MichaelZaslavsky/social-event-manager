@@ -10,7 +10,7 @@ public static class MessageHelpers
 {
     public static string BuildRequestMessage(HttpRequest request)
     {
-        if (request == null)
+        if (request is null)
         {
             return null;
         }
@@ -49,7 +49,7 @@ public static class MessageHelpers
 
     public static string BuildResponseMessage(ApiError error)
     {
-        if (error == null)
+        if (error is null)
         {
             return null;
         }

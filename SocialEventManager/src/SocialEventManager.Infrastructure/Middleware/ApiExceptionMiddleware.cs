@@ -61,7 +61,7 @@ public class ApiExceptionMiddleware
 
     private string GetInnermostExceptionMessage(Exception ex)
     {
-        return ex.InnerException == null
+        return ex.InnerException is null
             ? ex.Message
             : GetInnermostExceptionMessage(ex.InnerException);
     }

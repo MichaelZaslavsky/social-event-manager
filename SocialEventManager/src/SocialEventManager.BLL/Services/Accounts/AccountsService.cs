@@ -98,7 +98,7 @@ public class AccountsService : ServiceBase<IAccountsRepository, Account>, IAccou
     {
         AccountDto account = await GetAccount(userId);
 
-        if (account == null)
+        if (account is null)
         {
             throw new NotFoundException($"The user '{userId}' {ValidationConstants.WasNotFound}");
         }
