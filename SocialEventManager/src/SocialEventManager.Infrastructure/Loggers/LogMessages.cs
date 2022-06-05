@@ -15,6 +15,6 @@ public static class LogMessages
     public static void LogRoutePerformance(this ILogger logger, string pageName, string method,
         long elapsedMilliseconds)
     {
-        _routePerformance(logger, pageName, method, elapsedMilliseconds, null);
+        _routePerformance(logger, pageName, method, elapsedMilliseconds, null!);
     }
 }

@@ -25,5 +25,5 @@ public sealed class UserRolesData
         }
     }
 
-    public List<UserRole> UserRoles { get; set; }
+    public List<UserRole> UserRoles { get; set; } = new List<UserRole>();
 }

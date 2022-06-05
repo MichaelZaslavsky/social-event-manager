@@ -1,4 +1,5 @@
 using System.Data;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace SocialEventManager.Shared.Extensions;
@@ -8,10 +9,10 @@ public static class EnumerableExtensions
     public static bool IsEmpty<T>(this IEnumerable<T> enumerable) =>
         !enumerable.Any();
 
-    public static bool IsNullOrEmpty<T>(this IEnumerable<T> enumerable) =>
+    public static bool IsNullOrEmpty<T>([NotNullWhen(false)] this IEnumerable<T>? enumerable) =>
         enumerable?.Any() != true;
 
-    public static bool IsNotNullAndAny<T>(this IEnumerable<T> enumerable) =>
+    public static bool IsNotNullAndAny<T>([NotNullWhen(true)] this IEnumerable<T>? enumerable) =>
         enumerable?.Any() == true;
 
     public static DataTable ToDataTable<T>(this IEnumerable<T> enumerable)
@@ -27,7 +28,13 @@ public static class EnumerableExtensions
 
         foreach (T item in enumerable)
         {
-            object[] values = properties.Select(p => p.GetValue(item)).ToArray();
+            object?[]? values = properties.Select(p => p.GetValue(item))?.ToArray();
+
+            if (values is null)
+            {
+                continue;
+            }
+
             dataTable.Rows.Add(values);
         }
 

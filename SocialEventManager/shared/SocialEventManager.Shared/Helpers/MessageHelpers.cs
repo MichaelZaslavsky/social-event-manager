@@ -8,7 +8,7 @@ namespace SocialEventManager.Shared.Helpers;
 
 public static class MessageHelpers
 {
-    public static string BuildRequestMessage(HttpRequest request)
+    public static string? BuildRequestMessage(HttpRequest request)
     {
         if (request is null)
         {
@@ -47,7 +47,7 @@ public static class MessageHelpers
         return builder.ToString();
     }
 
-    public static string BuildResponseMessage(ApiError error)
+    public static string? BuildResponseMessage(ApiError error)
     {
         if (error is null)
         {

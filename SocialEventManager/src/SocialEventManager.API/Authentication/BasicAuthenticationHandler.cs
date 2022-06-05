@@ -32,9 +32,11 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
 
         try
         {
-            LoginModel login = GetLoginCredentials();
+            LoginModel? login = GetLoginCredentials();
 
-            if (login.UserName == _authenticationConfig.Value.UserName && login.Password == _authenticationConfig.Value.Password)
+            if (login is not null
+                && login.UserName == _authenticationConfig.Value.UserName
+                && login.Password == _authenticationConfig.Value.Password)
             {
                 Claim[] claims = new[]
                 {
@@ -56,9 +58,14 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
         }
     }
 
-    private LoginModel GetLoginCredentials()
+    private LoginModel? GetLoginCredentials()
     {
         AuthenticationHeaderValue authenticationHeader = AuthenticationHeaderValue.Parse(Request.Headers[AuthConstants.Authorization]);
+
+        if (authenticationHeader.Parameter is null)
+        {
+            return null;
+        }
 
         byte[] credentialBytes = Convert.FromBase64String(authenticationHeader.Parameter);
         string[] credentials = Encoding.UTF8.GetString(credentialBytes).Split(':');

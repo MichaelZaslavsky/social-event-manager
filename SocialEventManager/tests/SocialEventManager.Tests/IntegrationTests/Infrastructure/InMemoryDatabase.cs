@@ -88,8 +88,13 @@ public class InMemoryDatabase : IInMemoryDatabase
 
     #region Private Methods
 
-    private async Task CreateRelevantTablesIfNotExistAsync(Type type)
+    private async Task CreateRelevantTablesIfNotExistAsync(Type? type)
     {
+        if (type is null)
+        {
+            return;
+        }
+
         IEnumerable<PropertyInfo> properties = type.GetProperties().Where(prop => Attribute.IsDefined(prop, typeof(ForeignKeyAttribute)));
 
         if (properties.IsEmpty())
@@ -100,7 +105,7 @@ public class InMemoryDatabase : IInMemoryDatabase
 
         foreach (PropertyInfo property in properties)
         {
-            Type foreignKeyType = property.GetCustomAttribute<ForeignKeyAttribute>().Type;
+            Type? foreignKeyType = property.GetCustomAttribute<ForeignKeyAttribute>()?.Type;
             await CreateRelevantTablesIfNotExistAsync(foreignKeyType);
         }
 

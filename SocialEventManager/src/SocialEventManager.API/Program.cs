@@ -13,7 +13,8 @@ public static class Program
 
     static Program()
     {
-        EnvironmentName = Environment.GetEnvironmentVariable(ApiConstants.AspNetCoreEnvironment);
+        EnvironmentName = Environment.GetEnvironmentVariable(ApiConstants.AspNetCoreEnvironment)!;
+        ArgumentNullException.ThrowIfNull(EnvironmentName);
 
         Configuration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())

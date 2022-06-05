@@ -6,8 +6,8 @@ namespace SocialEventManager.Shared.Extensions;
 
 public static class HttpClientExtensions
 {
-    public static async Task<T> GetAndDeserializeAsync<T>(this HttpClient client, string requestUri) =>
-        await client.GetFromJsonAsync<T>(requestUri);
+    public static async Task<T?> GetAndDeserializeAsync<T>(this HttpClient client, string requestUri) =>
+        await client.GetFromJsonAsync<T?>(requestUri);
 
     public static async Task CreateAsync<T>(this HttpClient client, string requestUri, T obj)
     {

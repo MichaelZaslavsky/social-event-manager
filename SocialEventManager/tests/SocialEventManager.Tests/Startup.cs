@@ -14,7 +14,7 @@ namespace SocialEventManager.Tests;
 
 public class Startup
 {
-    public IConfiguration Configuration { get; set; }
+    public IConfiguration Configuration { get; set; } = null!;
 
     public void ConfigureServices(IServiceCollection services)
     {

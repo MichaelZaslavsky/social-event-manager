@@ -15,23 +15,23 @@ public abstract record AccountBase
     [Required]
     [MinLength(LengthConstants.Length2)]
     [MaxLength(LengthConstants.Length255)]
-    public string UserName { get; init; }
+    public string? UserName { get; init; }
 
     [MinLength(LengthConstants.Length2)]
     [MaxLength(LengthConstants.LengthMax)]
-    public string PasswordHash { get; init; }
+    public string PasswordHash { get; init; } = null!;
 
     [Required]
     [MinLength(LengthConstants.Length2)]
     [MaxLength(LengthConstants.Length255)]
-    public string Email { get; init; }
+    public string? Email { get; init; }
 
     [Required]
     public bool EmailConfirmed { get; init; }
 
     [MinLength(LengthConstants.Length2)]
     [MaxLength(LengthConstants.LengthMax)]
-    public string PhoneNumber { get; init; }
+    public string? PhoneNumber { get; init; }
 
     [Required]
     public bool PhoneNumberConfirmed { get; init; }
@@ -47,22 +47,22 @@ public abstract record AccountBase
     [Required]
     [MinLength(LengthConstants.Length2)]
     [MaxLength(LengthConstants.Length255)]
-    public string NormalizedEmail { get; init; }
+    public string NormalizedEmail { get; init; } = null!;
 
     [Required]
     [MinLength(LengthConstants.Length2)]
     [MaxLength(LengthConstants.Length255)]
-    public string NormalizedUserName { get; init; }
+    public string NormalizedUserName { get; init; } = null!;
 
     [Required]
     [MinLength(LengthConstants.Length2)]
     [MaxLength(LengthConstants.Length255)]
-    public string ConcurrencyStamp { get; init; }
+    public string ConcurrencyStamp { get; init; } = null!;
 
     [Required]
     [MinLength(LengthConstants.Length2)]
     [MaxLength(LengthConstants.LengthMax)]
-    public string SecurityStamp { get; init; }
+    public string SecurityStamp { get; init; } = null!;
 
     [Required]
     public bool TwoFactorEnabled { get; init; }

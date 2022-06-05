@@ -12,11 +12,11 @@ public static class SqlConnectionExtensions
         return await cmd.ExecuteNonQueryAsync();
     }
 
-    public static async Task<T> ExecuteScalarAsync<T>(this SqlConnection connection, string command)
+    public static async Task<T?> ExecuteScalarAsync<T>(this SqlConnection connection, string command)
     {
         using SqlCommand cmd = connection.CreateCommand();
         cmd.CommandText = command;
 
-        return (T)await cmd.ExecuteScalarAsync();
+        return (T?)await cmd.ExecuteScalarAsync();
     }
 }

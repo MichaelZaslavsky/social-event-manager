@@ -1,11 +1,13 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace SocialEventManager.Shared.Extensions;
 
 public static class StringExtensions
 {
-    public static bool IsNullOrEmpty(this string value) =>
+    public static bool IsNullOrEmpty([NotNullWhen(false)] this string? value) =>
         string.IsNullOrEmpty(value);
 
-    public static bool IsNullOrWhiteSpace(this string value) =>
+    public static bool IsNullOrWhiteSpace([NotNullWhen(false)] this string? value) =>
         string.IsNullOrWhiteSpace(value);
 
     public static string TakeAfterFirst(this string source, string fromStart, StringComparison comparisonType = StringComparison.Ordinal)

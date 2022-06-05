@@ -56,8 +56,12 @@ public class AccountsController : ControllerBase
 
         if (!result.Succeeded)
         {
-            string errorMessage = result.Errors.ToErrorMessage();
-            Log.Information(errorMessage);
+            string? errorMessage = result.Errors.ToErrorMessage();
+
+            if (errorMessage is not null)
+            {
+                Log.Information(errorMessage);
+            }
 
             return BadRequest(errorMessage);
         }

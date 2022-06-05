@@ -28,5 +28,5 @@ public class ValidationException : ApplicationException
     {
     }
 
-    public IList<string> ValdationErrors { get; set; }
+    public IList<string> ValdationErrors { get; set; } = new List<string>();
 }
