@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using SocialEventManager.DAL.Entities;
 using SocialEventManager.Shared.Helpers;
 

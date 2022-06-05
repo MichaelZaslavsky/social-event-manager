@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
-using Microsoft.Extensions.DependencyInjection;
 using SocialEventManager.Shared.Constants;
 
 namespace SocialEventManager.API.DependencyInjection

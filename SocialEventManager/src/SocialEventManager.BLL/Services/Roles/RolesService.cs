@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using AutoMapper;
 using SocialEventManager.BLL.Models.Roles;
 using SocialEventManager.BLL.Services.Infrastructure;

@@ -1,5 +1,3 @@
-﻿using System;
-
 namespace SocialEventManager.Shared.Extensions
 {
     public static class StringExtensions
@@ -81,7 +79,7 @@ namespace SocialEventManager.Shared.Extensions
                 return string.Empty;
             }
 
-            return source.Substring(0, endIndex);
+            return source[..endIndex];
         }
 
         #endregion Private Methods

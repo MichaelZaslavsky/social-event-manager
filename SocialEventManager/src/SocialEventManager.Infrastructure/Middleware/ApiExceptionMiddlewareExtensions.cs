@@ -1,4 +1,3 @@
-using System;
 using Microsoft.AspNetCore.Builder;
 
 namespace SocialEventManager.Infrastructure.Middleware

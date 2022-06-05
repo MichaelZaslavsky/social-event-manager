@@ -1,5 +1,3 @@
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using SocialEventManager.DAL.Infrastructure;
 using SocialEventManager.Shared.Constants;
 

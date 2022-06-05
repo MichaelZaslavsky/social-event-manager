@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace SocialEventManager.Tests.Common.DataMembers
 {
     public static class GuidData

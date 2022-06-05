@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using SocialEventManager.DAL.Entities;
 using SocialEventManager.DAL.Infrastructure;
 

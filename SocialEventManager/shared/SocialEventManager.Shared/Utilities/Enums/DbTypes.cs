@@ -1,5 +1,3 @@
-using System;
-
 namespace SocialEventManager.DAL.Utilities.Enums
 {
     [Flags]

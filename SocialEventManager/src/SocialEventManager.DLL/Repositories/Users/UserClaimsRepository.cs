@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Dapper;
 using Newtonsoft.Json;
 using SocialEventManager.DAL.Entities;

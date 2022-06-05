@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Builder;
-
 namespace SocialEventManager.API.Configurations
 {
     public static class SecurityPolicyConfigurations

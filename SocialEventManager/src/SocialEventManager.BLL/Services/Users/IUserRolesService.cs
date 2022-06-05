@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using SocialEventManager.BLL.Models.Users;
 
 namespace SocialEventManager.BLL.Services.Users

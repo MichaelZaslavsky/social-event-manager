@@ -1,19 +1,11 @@
-using System;
-using System.Linq;
 using AspNetCoreRateLimit;
 using Hangfire;
 using Hangfire.Dashboard;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using SocialEventManager.API.Authentication;
 using SocialEventManager.API.Configurations;
 using SocialEventManager.API.DependencyInjection;
@@ -97,7 +89,7 @@ namespace SocialEventManager.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-           }
+            }
             else
             {
                 app.UseHsts();

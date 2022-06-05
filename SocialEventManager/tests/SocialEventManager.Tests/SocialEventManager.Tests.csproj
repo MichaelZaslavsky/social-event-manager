@@ -1,52 +1,53 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <IsPackable>false</IsPackable>
-    <CodeAnalysisRuleSet>..\..\items\Analyzers.ruleset</CodeAnalysisRuleSet>
-    <UserSecretsId>80a155b1-fb7a-44de-8788-4f5759c60ff6</UserSecretsId>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<IsPackable>false</IsPackable>
+		<CodeAnalysisRuleSet>..\..\items\Analyzers.ruleset</CodeAnalysisRuleSet>
+		<UserSecretsId>80a155b1-fb7a-44de-8788-4f5759c60ff6</UserSecretsId>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="AutoFixture.Xunit2" Version="4.17.0" />
-    <PackageReference Include="DeepCloner" Version="0.10.3" />
-    <PackageReference Include="DeepEqual" Version="2.0.0" />
-    <PackageReference Include="FluentAssertions" Version="6.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="5.0.11" />
-    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.3">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
-    <PackageReference Include="Moq" Version="4.16.1" />
-    <PackageReference Include="SecurityCodeScan.VS2019" Version="5.2.1">
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="ServiceStack.OrmLite" Version="5.12.0" />
-    <PackageReference Include="ServiceStack.OrmLite.SqlServer" Version="5.12.0" />
-    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="xunit" Version="2.4.1" />
-    <PackageReference Include="xunit.categories" Version="2.0.5" />
-    <PackageReference Include="Xunit.DependencyInjection" Version="8.1.0" />
-    <PackageReference Include="Xunit.DependencyInjection.Logging" Version="8.0.0" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="coverlet.collector" Version="3.1.0">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="AutoFixture.Xunit2" Version="4.17.0" />
+		<PackageReference Include="DeepCloner" Version="0.10.3" />
+		<PackageReference Include="DeepEqual" Version="2.0.0" />
+		<PackageReference Include="FluentAssertions" Version="6.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="5.0.11" />
+		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.3">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+		<PackageReference Include="Moq" Version="4.16.1" />
+		<PackageReference Include="SecurityCodeScan.VS2019" Version="5.2.1">
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="ServiceStack.OrmLite" Version="5.12.0" />
+		<PackageReference Include="ServiceStack.OrmLite.SqlServer" Version="5.12.0" />
+		<PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="xunit" Version="2.4.1" />
+		<PackageReference Include="xunit.categories" Version="2.0.5" />
+		<PackageReference Include="Xunit.DependencyInjection" Version="8.1.0" />
+		<PackageReference Include="Xunit.DependencyInjection.Logging" Version="8.0.0" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="coverlet.collector" Version="3.1.0">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\SocialEventManager.API\SocialEventManager.API.csproj" />
-    <ProjectReference Include="..\..\src\SocialEventManager.BLL\SocialEventManager.BLL.csproj" />
-    <ProjectReference Include="..\..\src\SocialEventManager.DLL\SocialEventManager.DAL.csproj" />
-  </ItemGroup>
-  
+	<ItemGroup>
+		<ProjectReference Include="..\..\src\SocialEventManager.API\SocialEventManager.API.csproj" />
+		<ProjectReference Include="..\..\src\SocialEventManager.BLL\SocialEventManager.BLL.csproj" />
+		<ProjectReference Include="..\..\src\SocialEventManager.DLL\SocialEventManager.DAL.csproj" />
+	</ItemGroup>
+
 </Project>

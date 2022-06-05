@@ -1,8 +1,5 @@
-using System;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
 using SocialEventManager.BLL.Models.Identity;
 using SocialEventManager.BLL.Services.Identity;
 

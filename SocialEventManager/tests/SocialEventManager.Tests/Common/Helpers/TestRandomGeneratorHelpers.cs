@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using SocialEventManager.Shared.Helpers;
 
 namespace SocialEventManager.Tests.Common.Helpers

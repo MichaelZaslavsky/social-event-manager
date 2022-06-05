@@ -1,5 +1,3 @@
-using System;
-
 namespace SocialEventManager.DAL.Infrastructure
 {
     public interface IUnitOfWork : IDisposable

@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using SocialEventManager.BLL.Models.Accounts;
 using SocialEventManager.BLL.Models.Users;

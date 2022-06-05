@@ -1,6 +1,4 @@
-using System;
 using System.Net;
-using System.Threading;
 using SocialEventManager.Shared.Common.Constants;
 using SocialEventManager.Shared.Exceptions;
 

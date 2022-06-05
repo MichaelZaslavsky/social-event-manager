@@ -1,4 +1,3 @@
-using System;
 using SocialEventManager.DAL.Utilities.Enums;
 
 namespace SocialEventManager.Shared.Utilities.Attributes

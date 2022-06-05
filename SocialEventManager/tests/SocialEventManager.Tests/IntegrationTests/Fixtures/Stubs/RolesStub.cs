@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using SocialEventManager.DAL.Entities;
 using SocialEventManager.DAL.Repositories.Roles;
 using SocialEventManager.Tests.IntegrationTests.Data;
