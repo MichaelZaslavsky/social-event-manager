@@ -4,185 +4,184 @@ using SocialEventManager.Shared.Common.Constants;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Helpers;
 
-namespace SocialEventManager.Tests.Common.DataMembers
+namespace SocialEventManager.Tests.Common.DataMembers;
+
+public static class UserClaimData
 {
-    public static class UserClaimData
+    private const string TableName = TableNameConstants.UserClaims;
+
+    private static readonly string Length256;
+
+    static UserClaimData()
     {
-        private const string TableName = TableNameConstants.UserClaims;
+        Length256 = DataConstants.Length256;
+    }
 
-        private static readonly string Length256;
-
-        static UserClaimData()
+    public static IEnumerable<object[]> ValidUserClaim
+    {
+        get
         {
-            Length256 = DataConstants.Length256;
+            yield return new object[] { GetMockUserClaim(userId: Guid.NewGuid()) };
         }
+    }
 
-        public static IEnumerable<object[]> ValidUserClaim
+    public static IEnumerable<object[]> UserClaimsWithSameUser
+    {
+        get
         {
-            get
-            {
-                yield return new object[] { GetMockUserClaim(userId: Guid.NewGuid()) };
-            }
+            yield return new object[] { GetMockUserClaims(sameUserId: true) };
         }
+    }
 
-        public static IEnumerable<object[]> UserClaimsWithSameUser
+    public static IEnumerable<object[]> UserClaimsWithSameType
+    {
+        get
         {
-            get
-            {
-                yield return new object[] { GetMockUserClaims(sameUserId: true) };
-            }
+            yield return new object[] { GetMockUserClaims(sameType: true, sameValue: true) };
         }
+    }
 
-        public static IEnumerable<object[]> UserClaimsWithSameType
+    public static IEnumerable<object[]> UserClaimsWithSameTypeAndValue
+    {
+        get
         {
-            get
-            {
-                yield return new object[] { GetMockUserClaims(sameType: true, sameValue: true) };
-            }
+            yield return new object[] { GetMockUserClaims(sameType: true, sameValue: true) };
         }
+    }
 
-        public static IEnumerable<object[]> UserClaimsWithSameTypeAndValue
+    public static IEnumerable<object[]> UserClaimsWithSameUserAndType
+    {
+        get
         {
-            get
-            {
-                yield return new object[] { GetMockUserClaims(sameType: true, sameValue: true) };
-            }
+            yield return new object[] { GetMockUserClaims(sameUserId: true, sameType: true) };
         }
+    }
 
-        public static IEnumerable<object[]> UserClaimsWithSameUserAndType
+    public static IEnumerable<object[]> UserClaimWithValidLength
+    {
+        get
         {
-            get
+            yield return new object[]
             {
-                yield return new object[] { GetMockUserClaims(sameUserId: true, sameType: true) };
-            }
-        }
-
-        public static IEnumerable<object[]> UserClaimWithValidLength
-        {
-            get
-            {
-                yield return new object[]
-                {
                     GetMockUserClaim(typeLength: LengthConstants.Length255),
-                };
-                yield return new object[]
-                {
-                    GetMockUserClaim(valueLength: LengthConstants.LengthMax),
-                };
-            }
-        }
-
-        public static IEnumerable<object[]> UserClaimWithMissingRequiredFields
-        {
-            get
+            };
+            yield return new object[]
             {
-                yield return new object[]
-                {
+                    GetMockUserClaim(valueLength: LengthConstants.LengthMax),
+            };
+        }
+    }
+
+    public static IEnumerable<object[]> UserClaimWithMissingRequiredFields
+    {
+        get
+        {
+            yield return new object[]
+            {
                     GetMockUserClaim(nullifyType: true),
                     ExceptionConstants.CannotInsertTheValueNull(nameof(UserClaim.Type), TableName),
-                };
-                yield return new object[]
-                {
+            };
+            yield return new object[]
+            {
                     GetMockUserClaim(nullifyValue: true),
                     ExceptionConstants.CannotInsertTheValueNull(nameof(UserClaim.Value), TableName),
-                };
-            }
+            };
         }
+    }
 
-        public static IEnumerable<object[]> UserClaimWithExceededLength
+    public static IEnumerable<object[]> UserClaimWithExceededLength
+    {
+        get
         {
-            get
+            yield return new object[]
             {
-                yield return new object[]
-                {
                     GetMockUserClaim(type: Length256),
                     ExceptionConstants.ExceedMaximumAllowedLength,
-                };
-            }
+            };
         }
+    }
 
-        public static IEnumerable<object[]> UserClaimsWithDifferentIds
+    public static IEnumerable<object[]> UserClaimsWithDifferentIds
+    {
+        get
         {
-            get
+            yield return new object[]
             {
-                yield return new object[]
-                {
                     GetMockUserClaim(Guid.Empty, value: DataConstants.RandomText, id: 1),
                     GetMockUserClaim(Guid.Empty, value: DataConstants.RandomText, id: 2),
-                };
-            }
-        }
-
-        public static IEnumerable<object[]> UserClaimsWithOneNull
-        {
-            get
-            {
-                yield return new object[]
-                {
-                    GetMockUserClaim(userId: Guid.NewGuid()),
-                    null,
-                };
-                yield return new object[]
-                {
-                    null,
-                    GetMockUserClaim(userId: Guid.NewGuid()),
-                };
-            }
-        }
-
-        #region Private Methods
-
-        private static UserClaim GetMockUserClaim(Guid? userId = null, string type = ClaimTypes.Name, string value = null, int id = 1)
-        {
-            return new UserClaim
-            {
-                Id = id,
-                UserId = userId ?? Guid.NewGuid(),
-                Type = type,
-                Value = value ?? RandomGeneratorHelpers.GenerateRandomValue(),
             };
         }
-
-        private static IEnumerable<UserClaim> GetMockUserClaims(bool sameUserId = false, bool sameType = false, bool sameValue = false, int itemsCount = 2)
-        {
-            Guid userId = sameUserId ? Guid.NewGuid() : Guid.Empty;
-            string type = sameType ? ClaimTypes.Name : null;
-            string value = sameValue ? RandomGeneratorHelpers.GenerateRandomValue() : null;
-
-            var userClaims = new UserClaim[itemsCount];
-
-            for (int i = 0; i < itemsCount; i++)
-            {
-                userClaims[i] = new UserClaim
-                {
-                    Id = i + 1,
-                    UserId = sameUserId ? userId : Guid.NewGuid(),
-                    Type = sameType ? type : RandomGeneratorHelpers.GenerateRandomValue(),
-                    Value = sameValue ? value : RandomGeneratorHelpers.GenerateRandomValue(),
-                };
-            }
-
-            return userClaims;
-        }
-
-        private static UserClaim GetMockUserClaim(bool nullifyType = false, bool nullifyValue = false) =>
-            new()
-            {
-                Id = RandomGeneratorHelpers.NextInt32(),
-                UserId = Guid.NewGuid(),
-                Type = nullifyType ? null : ClaimTypes.Name,
-                Value = nullifyValue ? null : RandomGeneratorHelpers.GenerateRandomValue(),
-            };
-
-        private static UserClaim GetMockUserClaim(int typeLength = LengthConstants.Length255, int valueLength = LengthConstants.Length255) =>
-            new()
-            {
-                Id = RandomGeneratorHelpers.NextInt32(),
-                UserId = Guid.NewGuid(),
-                Type = RandomGeneratorHelpers.GenerateRandomValue(typeLength),
-                Value = RandomGeneratorHelpers.GenerateRandomValue(valueLength),
-            };
-
-        #endregion Private Methods
     }
+
+    public static IEnumerable<object[]> UserClaimsWithOneNull
+    {
+        get
+        {
+            yield return new object[]
+            {
+                    GetMockUserClaim(userId: Guid.NewGuid()),
+                    null,
+            };
+            yield return new object[]
+            {
+                    null,
+                    GetMockUserClaim(userId: Guid.NewGuid()),
+            };
+        }
+    }
+
+    #region Private Methods
+
+    private static UserClaim GetMockUserClaim(Guid? userId = null, string type = ClaimTypes.Name, string value = null, int id = 1)
+    {
+        return new UserClaim
+        {
+            Id = id,
+            UserId = userId ?? Guid.NewGuid(),
+            Type = type,
+            Value = value ?? RandomGeneratorHelpers.GenerateRandomValue(),
+        };
+    }
+
+    private static IEnumerable<UserClaim> GetMockUserClaims(bool sameUserId = false, bool sameType = false, bool sameValue = false, int itemsCount = 2)
+    {
+        Guid userId = sameUserId ? Guid.NewGuid() : Guid.Empty;
+        string type = sameType ? ClaimTypes.Name : null;
+        string value = sameValue ? RandomGeneratorHelpers.GenerateRandomValue() : null;
+
+        var userClaims = new UserClaim[itemsCount];
+
+        for (int i = 0; i < itemsCount; i++)
+        {
+            userClaims[i] = new UserClaim
+            {
+                Id = i + 1,
+                UserId = sameUserId ? userId : Guid.NewGuid(),
+                Type = sameType ? type : RandomGeneratorHelpers.GenerateRandomValue(),
+                Value = sameValue ? value : RandomGeneratorHelpers.GenerateRandomValue(),
+            };
+        }
+
+        return userClaims;
+    }
+
+    private static UserClaim GetMockUserClaim(bool nullifyType = false, bool nullifyValue = false) =>
+        new()
+        {
+            Id = RandomGeneratorHelpers.NextInt32(),
+            UserId = Guid.NewGuid(),
+            Type = nullifyType ? null : ClaimTypes.Name,
+            Value = nullifyValue ? null : RandomGeneratorHelpers.GenerateRandomValue(),
+        };
+
+    private static UserClaim GetMockUserClaim(int typeLength = LengthConstants.Length255, int valueLength = LengthConstants.Length255) =>
+        new()
+        {
+            Id = RandomGeneratorHelpers.NextInt32(),
+            UserId = Guid.NewGuid(),
+            Type = RandomGeneratorHelpers.GenerateRandomValue(typeLength),
+            Value = RandomGeneratorHelpers.GenerateRandomValue(valueLength),
+        };
+
+    #endregion Private Methods
 }

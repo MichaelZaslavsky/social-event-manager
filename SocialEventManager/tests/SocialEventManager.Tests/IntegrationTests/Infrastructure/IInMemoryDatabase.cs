@@ -1,31 +1,30 @@
 using System.Data;
 
-namespace SocialEventManager.Tests.IntegrationTests.Infrastructure
+namespace SocialEventManager.Tests.IntegrationTests.Infrastructure;
+
+public interface IInMemoryDatabase
 {
-    public interface IInMemoryDatabase
-    {
-        public Task<IDbConnection> OpenConnectionAsync();
+    public Task<IDbConnection> OpenConnectionAsync();
 
-        public IDbTransaction OpenTransaction();
+    public IDbTransaction OpenTransaction();
 
-        Task<int> InsertAsync<T>(T item);
+    Task<int> InsertAsync<T>(T item);
 
-        Task InsertAsync<T>(IEnumerable<T> items);
+    Task InsertAsync<T>(IEnumerable<T> items);
 
-        Task DeleteAsync<T>(T item);
+    Task DeleteAsync<T>(T item);
 
-        Task<IEnumerable<T>> SelectAsync<T>();
+    Task<IEnumerable<T>> SelectAsync<T>();
 
-        Task<IEnumerable<T>> WhereAsync<T>(string columnName, object value);
+    Task<IEnumerable<T>> WhereAsync<T>(string columnName, object value);
 
-        Task<T> SingleWhereAsync<T>(string columnName, object value);
+    Task<T> SingleWhereAsync<T>(string columnName, object value);
 
-        Task CreateTableIfNotExistsAsync<T>();
+    Task CreateTableIfNotExistsAsync<T>();
 
-        Task CreateTableIfNotExistsAsync(Type type);
+    Task CreateTableIfNotExistsAsync(Type type);
 
-        Task CreateRelevantTablesIfNotExistAsync<T>();
+    Task CreateRelevantTablesIfNotExistAsync<T>();
 
-        Task CleanupAsync();
-    }
+    Task CleanupAsync();
 }

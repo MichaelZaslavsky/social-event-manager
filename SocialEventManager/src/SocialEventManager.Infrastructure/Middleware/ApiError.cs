@@ -1,13 +1,12 @@
-namespace SocialEventManager.Infrastructure.Middleware
+namespace SocialEventManager.Infrastructure.Middleware;
+
+public class ApiError
 {
-    public class ApiError
-    {
-        public string Id { get; set; }
+    public string Id { get; set; }
 
-        public short Status { get; set; }
+    public short Status { get; set; }
 
-        public string Title { get; set; }
+    public string Title { get; set; }
 
-        public ApiErrorData Data { get; set; }
-    }
+    public ApiErrorData Data { get; set; }
 }

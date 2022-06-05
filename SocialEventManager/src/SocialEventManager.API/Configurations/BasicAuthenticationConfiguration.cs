@@ -1,9 +1,8 @@
-namespace SocialEventManager.API.Configurations
-{
-    public class BasicAuthenticationConfiguration
-    {
-        public string UserName { get; init; }
+namespace SocialEventManager.API.Configurations;
 
-        public string Password { get; init; }
-    }
+public class BasicAuthenticationConfiguration
+{
+    public string UserName { get; init; }
+
+    public string Password { get; init; }
 }

@@ -3,68 +3,67 @@ using Dapper.Contrib.Extensions;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Utilities.Attributes;
 
-namespace SocialEventManager.BLL.Models.Accounts
+namespace SocialEventManager.BLL.Models.Accounts;
+
+public abstract record AccountBase
 {
-    public abstract record AccountBase
-    {
-        [Required]
-        [NotDefault]
-        [ExplicitKey]
-        public Guid UserId { get; init; }
+    [Required]
+    [NotDefault]
+    [ExplicitKey]
+    public Guid UserId { get; init; }
 
-        [Required]
-        [MinLength(LengthConstants.Length2)]
-        [MaxLength(LengthConstants.Length255)]
-        public string UserName { get; init; }
+    [Required]
+    [MinLength(LengthConstants.Length2)]
+    [MaxLength(LengthConstants.Length255)]
+    public string UserName { get; init; }
 
-        [MinLength(LengthConstants.Length2)]
-        [MaxLength(LengthConstants.LengthMax)]
-        public string PasswordHash { get; init; }
+    [MinLength(LengthConstants.Length2)]
+    [MaxLength(LengthConstants.LengthMax)]
+    public string PasswordHash { get; init; }
 
-        [Required]
-        [MinLength(LengthConstants.Length2)]
-        [MaxLength(LengthConstants.Length255)]
-        public string Email { get; init; }
+    [Required]
+    [MinLength(LengthConstants.Length2)]
+    [MaxLength(LengthConstants.Length255)]
+    public string Email { get; init; }
 
-        [Required]
-        public bool EmailConfirmed { get; init; }
+    [Required]
+    public bool EmailConfirmed { get; init; }
 
-        [MinLength(LengthConstants.Length2)]
-        [MaxLength(LengthConstants.LengthMax)]
-        public string PhoneNumber { get; init; }
+    [MinLength(LengthConstants.Length2)]
+    [MaxLength(LengthConstants.LengthMax)]
+    public string PhoneNumber { get; init; }
 
-        [Required]
-        public bool PhoneNumberConfirmed { get; init; }
+    [Required]
+    public bool PhoneNumberConfirmed { get; init; }
 
-        public DateTime? LockoutEnd { get; init; }
+    public DateTime? LockoutEnd { get; init; }
 
-        [Required]
-        public bool LockoutEnabled { get; init; }
+    [Required]
+    public bool LockoutEnabled { get; init; }
 
-        [Required]
-        public int AccessFailedCount { get; init; }
+    [Required]
+    public int AccessFailedCount { get; init; }
 
-        [Required]
-        [MinLength(LengthConstants.Length2)]
-        [MaxLength(LengthConstants.Length255)]
-        public string NormalizedEmail { get; init; }
+    [Required]
+    [MinLength(LengthConstants.Length2)]
+    [MaxLength(LengthConstants.Length255)]
+    public string NormalizedEmail { get; init; }
 
-        [Required]
-        [MinLength(LengthConstants.Length2)]
-        [MaxLength(LengthConstants.Length255)]
-        public string NormalizedUserName { get; init; }
+    [Required]
+    [MinLength(LengthConstants.Length2)]
+    [MaxLength(LengthConstants.Length255)]
+    public string NormalizedUserName { get; init; }
 
-        [Required]
-        [MinLength(LengthConstants.Length2)]
-        [MaxLength(LengthConstants.Length255)]
-        public string ConcurrencyStamp { get; init; }
+    [Required]
+    [MinLength(LengthConstants.Length2)]
+    [MaxLength(LengthConstants.Length255)]
+    public string ConcurrencyStamp { get; init; }
 
-        [Required]
-        [MinLength(LengthConstants.Length2)]
-        [MaxLength(LengthConstants.LengthMax)]
-        public string SecurityStamp { get; init; }
+    [Required]
+    [MinLength(LengthConstants.Length2)]
+    [MaxLength(LengthConstants.LengthMax)]
+    public string SecurityStamp { get; init; }
 
-        [Required]
-        public bool TwoFactorEnabled { get; init; }
-    }
+    [Required]
+    public bool TwoFactorEnabled { get; init; }
 }

@@ -2,16 +2,16 @@ using SocialEventManager.BLL.Models.Identity;
 using SocialEventManager.Shared.Common.Constants;
 using SocialEventManager.Shared.Helpers;
 
-namespace SocialEventManager.Tests.Common.DataMembers
+namespace SocialEventManager.Tests.Common.DataMembers;
+
+public static class ApplicationRoleData
 {
-    public static class ApplicationRoleData
+    public static IEnumerable<object[]> InvalidApplicationRole
     {
-        public static IEnumerable<object[]> InvalidApplicationRole
+        get
         {
-            get
+            yield return new object[]
             {
-                yield return new object[]
-                {
                     new ApplicationRole
                     {
                         Id = Guid.NewGuid().ToString(),
@@ -20,8 +20,7 @@ namespace SocialEventManager.Tests.Common.DataMembers
                         ConcurrencyStamp = RandomGeneratorHelpers.GenerateRandomValue(),
                     },
                     ExceptionConstants.RoleNameIsInvalid,
-                };
-            }
+            };
         }
     }
 }

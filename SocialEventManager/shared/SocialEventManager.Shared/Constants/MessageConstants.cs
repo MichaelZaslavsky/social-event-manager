@@ -1,7 +1,6 @@
-namespace SocialEventManager.Shared.Constants
+namespace SocialEventManager.Shared.Constants;
+
+public static class MessageConstants
 {
-    public static class MessageConstants
-    {
-        public const string InternalServerError = "Internal Server Error. Please try again later.";
-    }
+    public const string InternalServerError = "Internal Server Error. Please try again later.";
 }

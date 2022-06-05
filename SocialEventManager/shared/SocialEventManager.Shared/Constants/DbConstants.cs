@@ -1,9 +1,8 @@
-namespace SocialEventManager.Shared.Constants
+namespace SocialEventManager.Shared.Constants;
+
+public static class DbConstants
 {
-    public static class DbConstants
-    {
-        public const string SocialEventManager = "SocialEventManager";
-        public const string SocialEventManagerHangfire = "SocialEventManagerHangfire";
-        public const string SocialEventManagerTest = "SocialEventManagerTest";
-    }
+    public const string SocialEventManager = "SocialEventManager";
+    public const string SocialEventManagerHangfire = "SocialEventManagerHangfire";
+    public const string SocialEventManagerTest = "SocialEventManagerTest";
 }

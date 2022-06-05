@@ -1,8 +1,7 @@
-namespace SocialEventManager.DAL.Utilities.Enums
+namespace SocialEventManager.DAL.Utilities.Enums;
+
+[Flags]
+public enum DbTypes
 {
-    [Flags]
-    public enum DbTypes
-    {
-        SocialEventManager = 0,
-    }
+    SocialEventManager = 0,
 }

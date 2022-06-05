@@ -4,24 +4,23 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using SocialEventManager.Tests.Common.DependencyInjection;
 
-namespace SocialEventManager.Tests.IntegrationTests.Fixtures
+namespace SocialEventManager.Tests.IntegrationTests.Fixtures;
+
+public class ApiWebApplicationFactory : WebApplicationFactory<API.Startup>
 {
-    public class ApiWebApplicationFactory : WebApplicationFactory<API.Startup>
+    public IConfiguration Configuration { get; private set; }
+
+    protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        public IConfiguration Configuration { get; private set; }
-
-        protected override void ConfigureWebHost(IWebHostBuilder builder)
+        builder.ConfigureAppConfiguration(config =>
         {
-            builder.ConfigureAppConfiguration(config =>
-            {
-                Configuration = new ConfigurationBuilder()
-                    .AddEnvironmentVariables()
-                    .Build();
+            Configuration = new ConfigurationBuilder()
+                .AddEnvironmentVariables()
+                .Build();
 
-                config.AddConfiguration(Configuration);
-            });
+            config.AddConfiguration(Configuration);
+        });
 
-            builder.ConfigureTestServices(services => services.RegisterRepositories());
-        }
+        builder.ConfigureTestServices(services => services.RegisterRepositories());
     }
 }

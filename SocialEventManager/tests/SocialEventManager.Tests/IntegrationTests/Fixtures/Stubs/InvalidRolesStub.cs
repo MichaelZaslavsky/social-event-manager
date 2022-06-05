@@ -2,15 +2,14 @@ using SocialEventManager.DAL.Entities;
 using SocialEventManager.DAL.Repositories.Roles;
 using SocialEventManager.Tests.IntegrationTests.Data;
 
-namespace SocialEventManager.Tests.IntegrationTests.Fixtures.Stubs
+namespace SocialEventManager.Tests.IntegrationTests.Fixtures.Stubs;
+
+public class InvalidRolesStub : BaseStub<Role>, IRolesRepository
 {
-    public class InvalidRolesStub : BaseStub<Role>, IRolesRepository
-    {
-        public Task<IEnumerable<Role>> GetByUserIdAsync(Guid userId) => Task.FromResult<IEnumerable<Role>>(null);
+    public Task<IEnumerable<Role>> GetByUserIdAsync(Guid userId) => Task.FromResult<IEnumerable<Role>>(null);
 
-        public Task<Guid> InsertRole(Role role) => Task.FromResult<Guid>(default);
+    public Task<Guid> InsertRole(Role role) => Task.FromResult<Guid>(default);
 
-        public new Task<Role> GetSingleOrDefaultAsync<TFilter>(TFilter filterValue, string columnName) =>
-            Task.FromResult(RolesData.Instance.Roles[0]);
-    }
+    public new Task<Role> GetSingleOrDefaultAsync<TFilter>(TFilter filterValue, string columnName) =>
+        Task.FromResult(RolesData.Instance.Roles[0]);
 }

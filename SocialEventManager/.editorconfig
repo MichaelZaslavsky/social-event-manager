@@ -212,6 +212,7 @@ charset = utf-8
 trim_trailing_whitespace = true
 guidelines = 170
 guidelines_style = 5px solid 40ff0000
+csharp_style_namespace_declarations=file_scoped:silent
 
 [*.tt]
 insert_final_newline = false

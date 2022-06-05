@@ -1,4 +1,3 @@
-namespace SocialEventManager.BLL.Models.Accounts
-{
-    public record AccountDto : AccountBase;
-}
+namespace SocialEventManager.BLL.Models.Accounts;
+
+public record AccountDto : AccountBase;
