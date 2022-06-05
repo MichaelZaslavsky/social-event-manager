@@ -1,58 +1,43 @@
 using SocialEventManager.DAL.Entities;
 using SocialEventManager.DAL.Enums;
 using SocialEventManager.Shared.Extensions;
+using Xunit;
 
 namespace SocialEventManager.Tests.Common.DataMembers;
 
 public static class UserRoleData
 {
-    public static IEnumerable<object[]> UserRole
-    {
-        get
-        {
-            yield return new object[] { GetMockUserRole() };
-        }
-    }
+    public static TheoryData<UserRole> UserRole =>
+        new() { GetMockUserRole() };
 
-    public static IEnumerable<object[]> UserRoleRelatedData
-    {
-        get
-        {
-            yield return new object[] { AccountData.GetMockAccount(), RoleData.GetMockRole() };
-        }
-    }
+    public static TheoryData<Account, Role> UserRoleRelatedData =>
+        new() { { AccountData.GetMockAccount(), RoleData.GetMockRole() } };
 
-    public static IEnumerable<object[]> UserRoleRelatedDataWithMultipleRoles
-    {
-        get
+    public static TheoryData<Account, List<Role>> UserRoleRelatedDataWithMultipleRoles =>
+        new()
         {
-            yield return new object[]
             {
+                AccountData.GetMockAccount(),
+                new()
+                {
+                    RoleData.GetMockRole(RoleType.User.GetDescription()),
+                    RoleData.GetMockRole(RoleType.Admin.GetDescription()),
+                }
+            },
+        };
+
+    public static TheoryData<List<Account>, Role> UserRoleRelatedDataWithMultipleAccounts =>
+        new()
+        {
+            {
+                new()
+                {
                     AccountData.GetMockAccount(),
-                    new List<Role>
-                    {
-                        RoleData.GetMockRole(RoleType.User.GetDescription()),
-                        RoleData.GetMockRole(RoleType.Admin.GetDescription()),
-                    },
-            };
-        }
-    }
-
-    public static IEnumerable<object[]> UserRoleRelatedDataWithMultipleAccounts
-    {
-        get
-        {
-            yield return new object[]
-            {
-                    new List<Account>
-                    {
-                        AccountData.GetMockAccount(),
-                        AccountData.GetMockAccount(),
-                    },
-                    RoleData.GetMockRole(),
-            };
-        }
-    }
+                    AccountData.GetMockAccount(),
+                },
+                RoleData.GetMockRole()
+            },
+        };
 
     public static UserRole GetMockUserRole(Guid? roleId = null, Guid? userId = null)
     {

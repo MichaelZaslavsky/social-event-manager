@@ -1,98 +1,78 @@
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Helpers;
+using Xunit;
 
 namespace SocialEventManager.Tests.DataMembers.Common;
 
 public static class StringData
 {
-    public static IEnumerable<object[]> NullOrEmptyData
-    {
-        get
+    public static TheoryData<string?, bool> NullOrEmptyData =>
+        new()
         {
-            yield return new object[] { null!, true };
-            yield return new object[] { string.Empty, true };
-            yield return new object[] { RandomGeneratorHelpers.GenerateRandomValue(), false };
-        }
-    }
+            { null, true },
+            { string.Empty, true },
+            { RandomGeneratorHelpers.GenerateRandomValue(), false },
+        };
 
-    public static IEnumerable<object[]> NullOrWhiteSpaceData
-    {
-        get
+    public static TheoryData<string?> NullOrWhiteSpaceData =>
+        new()
         {
-            yield return new object[] { null! };
-            yield return new object[] { string.Empty };
-            yield return new object[] { " " };
-        }
-    }
+            { null },
+            { string.Empty },
+            { " " },
+        };
 
-    public static IEnumerable<object[]> WhiteSpaceData
-    {
-        get
-        {
-            yield return new object[] { " ", true };
-        }
-    }
+    public static TheoryData<string, bool> WhiteSpaceData =>
+        new() { { " ", true } };
 
-    public static IEnumerable<object[]> TakeAfterData
-    {
-        get
+    public static TheoryData<string, string?, StringComparison, string> TakeAfterData =>
+        new()
         {
-            yield return new object[] { DataConstants.RandomText, "Random ", StringComparison.Ordinal, "Text" };
-            yield return new object[] { DataConstants.RandomText, "random ", StringComparison.Ordinal, DataConstants.RandomText };
-            yield return new object[] { DataConstants.RandomText, "random ", StringComparison.OrdinalIgnoreCase, "Text" };
-            yield return new object[] { DataConstants.RandomText, "Random", StringComparison.Ordinal, " Text" };
-            yield return new object[] { DataConstants.RandomText, "Random Text", StringComparison.Ordinal, string.Empty };
-            yield return new object[] { DataConstants.RandomText, null!, StringComparison.Ordinal, DataConstants.RandomText };
-            yield return new object[] { DataConstants.RandomText, string.Empty, StringComparison.Ordinal, DataConstants.RandomText };
-            yield return new object[] { DataConstants.RandomText, RandomGeneratorHelpers.GenerateRandomValue(), StringComparison.Ordinal, DataConstants.RandomText };
-        }
-    }
+            { DataConstants.RandomText, "Random ", StringComparison.Ordinal, "Text" },
+            { DataConstants.RandomText, "random ", StringComparison.Ordinal, DataConstants.RandomText },
+            { DataConstants.RandomText, "random ", StringComparison.OrdinalIgnoreCase, "Text" },
+            { DataConstants.RandomText, "Random", StringComparison.Ordinal, " Text" },
+            { DataConstants.RandomText, "Random Text", StringComparison.Ordinal, string.Empty },
+            { DataConstants.RandomText, null, StringComparison.Ordinal, DataConstants.RandomText },
+            { DataConstants.RandomText, string.Empty, StringComparison.Ordinal, DataConstants.RandomText },
+            { DataConstants.RandomText, RandomGeneratorHelpers.GenerateRandomValue(), StringComparison.Ordinal, DataConstants.RandomText },
+        };
 
-    public static IEnumerable<object[]> TakeAfterFirstData
-    {
-        get
+    public static TheoryData<string, string, StringComparison, string> TakeAfterFirstData =>
+        new()
         {
-            yield return new object[] { $"{DataConstants.RandomText} {DataConstants.RandomText}", "Random", StringComparison.Ordinal, $" Text {DataConstants.RandomText}" };
-        }
-    }
+            { $"{DataConstants.RandomText} {DataConstants.RandomText}", "Random", StringComparison.Ordinal, $" Text {DataConstants.RandomText}" },
+        };
 
-    public static IEnumerable<object[]> TakeAfterLastData
-    {
-        get
+    public static TheoryData<string, string, StringComparison, string> TakeAfterLastData =>
+        new()
         {
-            yield return new object[] { $"{DataConstants.RandomText} {DataConstants.RandomText}", "Random", StringComparison.Ordinal, " Text" };
-        }
-    }
+            { $"{DataConstants.RandomText} {DataConstants.RandomText}", "Random", StringComparison.Ordinal, " Text" },
+        };
 
-    public static IEnumerable<object[]> TakeUntilData
-    {
-        get
+    public static TheoryData<string, string?, StringComparison, string> TakeUntilData =>
+        new()
         {
-            yield return new object[] { DataConstants.RandomText, " Text", StringComparison.Ordinal, "Random" };
-            yield return new object[] { DataConstants.RandomText, " ", StringComparison.Ordinal, "Random" };
-            yield return new object[] { DataConstants.RandomText, "Text", StringComparison.Ordinal, "Random " };
-            yield return new object[] { DataConstants.RandomText, "text", StringComparison.Ordinal, DataConstants.RandomText };
-            yield return new object[] { DataConstants.RandomText, "text", StringComparison.OrdinalIgnoreCase, "Random " };
-            yield return new object[] { DataConstants.RandomText, "Random Text", StringComparison.Ordinal, string.Empty };
-            yield return new object[] { DataConstants.RandomText, null!, StringComparison.Ordinal, DataConstants.RandomText };
-            yield return new object[] { DataConstants.RandomText, string.Empty, StringComparison.Ordinal, DataConstants.RandomText };
-            yield return new object[] { DataConstants.RandomText, RandomGeneratorHelpers.GenerateRandomValue(), StringComparison.Ordinal, DataConstants.RandomText };
-        }
-    }
+            { DataConstants.RandomText, " Text", StringComparison.Ordinal, "Random" },
+            { DataConstants.RandomText, " ", StringComparison.Ordinal, "Random" },
+            { DataConstants.RandomText, "Text", StringComparison.Ordinal, "Random " },
+            { DataConstants.RandomText, "text", StringComparison.Ordinal, DataConstants.RandomText },
+            { DataConstants.RandomText, "text", StringComparison.OrdinalIgnoreCase, "Random " },
+            { DataConstants.RandomText, "Random Text", StringComparison.Ordinal, string.Empty },
+            { DataConstants.RandomText, null, StringComparison.Ordinal, DataConstants.RandomText },
+            { DataConstants.RandomText, string.Empty, StringComparison.Ordinal, DataConstants.RandomText },
+            { DataConstants.RandomText, RandomGeneratorHelpers.GenerateRandomValue(), StringComparison.Ordinal, DataConstants.RandomText },
+        };
 
-    public static IEnumerable<object[]> TakeUntilFirstData
-    {
-        get
+    public static TheoryData<string, string, StringComparison, string> TakeUntilFirstData =>
+        new()
         {
-            yield return new object[] { $"{DataConstants.RandomText} {DataConstants.RandomText}", "Text", StringComparison.Ordinal, "Random " };
-        }
-    }
+            { $"{DataConstants.RandomText} {DataConstants.RandomText}", "Text", StringComparison.Ordinal, "Random " },
+        };
 
-    public static IEnumerable<object[]> TakeUntilLastData
-    {
-        get
+    public static TheoryData<string, string, StringComparison, string> TakeUntilLastData =>
+        new()
         {
-            yield return new object[] { $"{DataConstants.RandomText} {DataConstants.RandomText}", "Text", StringComparison.Ordinal, "Random Text Random " };
-        }
-    }
+            { $"{DataConstants.RandomText} {DataConstants.RandomText}", "Text", StringComparison.Ordinal, "Random Text Random " },
+        };
 }

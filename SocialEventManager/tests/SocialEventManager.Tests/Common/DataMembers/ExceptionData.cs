@@ -1,41 +1,38 @@
 using System.Net;
 using SocialEventManager.Shared.Common.Constants;
 using SocialEventManager.Shared.Exceptions;
+using Xunit;
 
 namespace SocialEventManager.Tests.Common.DataMembers;
 
 public static class ExceptionData
 {
-    public static IEnumerable<object[]> ExceptionDataForHttpStatusAndTitle
-    {
-        get
+    public static TheoryData<Exception?, (HttpStatusCode, string)> ExceptionDataForHttpStatusAndTitle =>
+        new()
         {
-            yield return new object[] { new NotFoundException(), (HttpStatusCode.NotFound, ExceptionConstants.NotFound) };
-            yield return new object[] { new BadRequestException(), (HttpStatusCode.BadRequest, ExceptionConstants.BadRequest) };
-            yield return new object[] { new ValidationException(), (HttpStatusCode.UnprocessableEntity, ExceptionConstants.UnprocessableEntity) };
-            yield return new object[] { null!, (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError) };
-            yield return new object[] { new NullReferenceException(), (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError) };
-            yield return new object[] { new ArgumentNullException(), (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError) };
-            yield return new object[] { new ArgumentException(), (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError) };
-            yield return new object[] { new Exception(), (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError) };
-        }
-    }
+            { new NotFoundException(), (HttpStatusCode.NotFound, ExceptionConstants.NotFound) },
+            { new BadRequestException(), (HttpStatusCode.BadRequest, ExceptionConstants.BadRequest) },
+            { new ValidationException(), (HttpStatusCode.UnprocessableEntity, ExceptionConstants.UnprocessableEntity) },
+            { null, (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError) },
+            { new NullReferenceException(), (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError) },
+            { new ArgumentNullException(), (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError) },
+            { new ArgumentException(), (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError) },
+            { new Exception(), (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError) },
+        };
 
-    public static IEnumerable<object[]> CriticalExceptionsData
-    {
-        get
+    public static TheoryData<Exception?, bool> CriticalExceptionsData =>
+        new()
         {
-            yield return new object[] { new OutOfMemoryException(), true };
-            yield return new object[] { new AppDomainUnloadedException(), true };
-            yield return new object[] { new BadImageFormatException(), true };
-            yield return new object[] { new CannotUnloadAppDomainException(), true };
-            yield return new object[] { new InvalidProgramException(), true };
-            yield return new object[] { new Exception(ExceptionConstants.CannotOpenDatabase), true };
-            yield return new object[] { new Exception(ExceptionConstants.ANetworkRelated), true };
-            yield return new object[] { null!, false };
-            yield return new object[] { new NullReferenceException(), false };
-            yield return new object[] { new ArgumentNullException(), false };
-            yield return new object[] { new ArgumentException(), false };
-        }
-    }
+            { new OutOfMemoryException(), true },
+            { new AppDomainUnloadedException(), true },
+            { new BadImageFormatException(), true },
+            { new CannotUnloadAppDomainException(), true },
+            { new InvalidProgramException(), true },
+            { new Exception(ExceptionConstants.CannotOpenDatabase), true },
+            { new Exception(ExceptionConstants.ANetworkRelated), true },
+            { null, false },
+            { new NullReferenceException(), false },
+            { new ArgumentNullException(), false },
+            { new ArgumentException(), false },
+        };
 }
