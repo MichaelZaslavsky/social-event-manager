@@ -21,13 +21,13 @@ public class RolesStub : BaseStub<Role>, IRolesRepository
         return Task.FromResult(RolesData.Instance.Roles.Where(r => userRoles.All(ur => ur == r.Id)));
     }
 
-    public new Task<Role> GetSingleOrDefaultAsync<TFilter>(TFilter filterValue, string columnName)
+    public new Task<Role?> GetSingleOrDefaultAsync<TFilter>(TFilter filterValue, string columnName)
     {
-        Role role = columnName switch
+        Role? role = columnName switch
         {
-            nameof(Role.Id) => RolesData.Instance.Roles.SingleOrDefault(r => r.Id == (Guid)(object)filterValue),
-            nameof(Role.Name) => RolesData.Instance.Roles.SingleOrDefault(r => r.Name == (string)(object)filterValue),
-            nameof(Role.NormalizedName) => RolesData.Instance.Roles.SingleOrDefault(r => r.NormalizedName == (string)(object)filterValue),
+            nameof(Role.Id) => RolesData.Instance.Roles.SingleOrDefault(r => r.Id == (Guid)(object)filterValue!),
+            nameof(Role.Name) => RolesData.Instance.Roles.SingleOrDefault(r => r.Name == (string)(object)filterValue!),
+            nameof(Role.NormalizedName) => RolesData.Instance.Roles.SingleOrDefault(r => r.NormalizedName == (string)(object)filterValue!),
             _ => null,
         };
 

@@ -10,10 +10,10 @@ public abstract record UserClaimBase
     [Required]
     [MinLength(LengthConstants.Length2)]
     [MaxLength(LengthConstants.Length255)]
-    public string Type { get; init; }
+    public string Type { get; init; } = null!;
 
     [Required]
     [MinLength(LengthConstants.Length2)]
     [MaxLength(LengthConstants.LengthMax)]
-    public string Value { get; init; }
+    public string Value { get; init; } = null!;
 }

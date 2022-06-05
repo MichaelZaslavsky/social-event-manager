@@ -53,7 +53,7 @@ public class UserClaimsService : ServiceBase<IUserClaimsRepository, UserClaim>, 
     public async Task<bool> ReplaceUserClaim(UserClaimBase currentUserClaim, UserClaimForUpdateDto newUserClaimForUpdate)
     {
         UnitOfWork.BeginTransaction();
-        UserClaim userClaim = (await Repository.GetAsync(newUserClaimForUpdate.UserId, nameof(UserClaim.UserId)))
+        UserClaim? userClaim = (await Repository.GetAsync(newUserClaimForUpdate.UserId, nameof(UserClaim.UserId)))
             .SingleOrDefault(uc => uc.Type == currentUserClaim.Type && uc.Value == currentUserClaim.Value);
 
         if (userClaim is null)

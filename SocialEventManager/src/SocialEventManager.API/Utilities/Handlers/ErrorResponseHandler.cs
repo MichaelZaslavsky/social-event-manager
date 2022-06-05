@@ -31,8 +31,8 @@ public static class ErrorResponseHandler
             _ => new ApiErrorData(name)
         };
 
-        string requestMessage = MessageHelpers.BuildRequestMessage(context.Request).Replace(Environment.NewLine, string.Empty);
-        string responseMessage = MessageHelpers.BuildResponseMessage(error).Replace(Environment.NewLine, string.Empty);
+        string? requestMessage = MessageHelpers.BuildRequestMessage(context.Request)?.Replace(Environment.NewLine, string.Empty);
+        string? responseMessage = MessageHelpers.BuildResponseMessage(error)?.Replace(Environment.NewLine, string.Empty);
 
         Log.Logger.Information(responseMessage + Environment.NewLine + Environment.NewLine + requestMessage);
     }

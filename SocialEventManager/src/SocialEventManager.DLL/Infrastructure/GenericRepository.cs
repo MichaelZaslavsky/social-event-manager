@@ -61,7 +61,7 @@ public abstract class GenericRepository<TEntity> : IGenericRepository<TEntity>
         return await _session.Connection.QueryAsync<TEntity>(query, new DynamicParameters(new { filterValues }), _session.Transaction);
     }
 
-    public async Task<TEntity> GetSingleOrDefaultAsync<TFilter>(TFilter filterValue, string columnName)
+    public async Task<TEntity?> GetSingleOrDefaultAsync<TFilter>(TFilter filterValue, string columnName)
     {
         string tableName = SqlMapperUtilities.GetTableName<TEntity>();
 

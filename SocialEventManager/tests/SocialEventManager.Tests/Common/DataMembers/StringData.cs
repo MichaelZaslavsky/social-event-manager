@@ -9,7 +9,7 @@ public static class StringData
     {
         get
         {
-            yield return new object[] { null, true };
+            yield return new object[] { null!, true };
             yield return new object[] { string.Empty, true };
             yield return new object[] { RandomGeneratorHelpers.GenerateRandomValue(), false };
         }
@@ -42,7 +42,7 @@ public static class StringData
             yield return new object[] { DataConstants.RandomText, "random ", StringComparison.OrdinalIgnoreCase, "Text" };
             yield return new object[] { DataConstants.RandomText, "Random", StringComparison.Ordinal, " Text" };
             yield return new object[] { DataConstants.RandomText, "Random Text", StringComparison.Ordinal, string.Empty };
-            yield return new object[] { DataConstants.RandomText, null, StringComparison.Ordinal, DataConstants.RandomText };
+            yield return new object[] { DataConstants.RandomText, null!, StringComparison.Ordinal, DataConstants.RandomText };
             yield return new object[] { DataConstants.RandomText, string.Empty, StringComparison.Ordinal, DataConstants.RandomText };
             yield return new object[] { DataConstants.RandomText, RandomGeneratorHelpers.GenerateRandomValue(), StringComparison.Ordinal, DataConstants.RandomText };
         }
@@ -74,7 +74,7 @@ public static class StringData
             yield return new object[] { DataConstants.RandomText, "text", StringComparison.Ordinal, DataConstants.RandomText };
             yield return new object[] { DataConstants.RandomText, "text", StringComparison.OrdinalIgnoreCase, "Random " };
             yield return new object[] { DataConstants.RandomText, "Random Text", StringComparison.Ordinal, string.Empty };
-            yield return new object[] { DataConstants.RandomText, null, StringComparison.Ordinal, DataConstants.RandomText };
+            yield return new object[] { DataConstants.RandomText, null!, StringComparison.Ordinal, DataConstants.RandomText };
             yield return new object[] { DataConstants.RandomText, string.Empty, StringComparison.Ordinal, DataConstants.RandomText };
             yield return new object[] { DataConstants.RandomText, RandomGeneratorHelpers.GenerateRandomValue(), StringComparison.Ordinal, DataConstants.RandomText };
         }

@@ -8,7 +8,7 @@ namespace SocialEventManager.Infrastructure.Filters;
 public class TrackActionPerformanceFilter : IActionFilter
 {
     private readonly ILogger<TrackActionPerformanceFilter> _logger;
-    private Stopwatch _timer;
+    private Stopwatch _timer = default!;
 
     public TrackActionPerformanceFilter(ILogger<TrackActionPerformanceFilter> logger)
     {

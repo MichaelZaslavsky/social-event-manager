@@ -21,9 +21,9 @@ public static class RepositoryRegistrationCollectionExtensions
 
         foreach (Type repository in repositories)
         {
-            string name = repository.FullName.TakeAfterFirst(GlobalConstants.InterfacePrefix).TakeUntilLast(GlobalConstants.Repository);
+            string? name = repository.FullName?.TakeAfterFirst(GlobalConstants.InterfacePrefix).TakeUntilLast(GlobalConstants.Repository);
 
-            if (stubsPerTypeName.ContainsKey(name))
+            if (name is not null && stubsPerTypeName.ContainsKey(name))
             {
                 services.AddTransient(repository, stubsPerTypeName[name]);
             }

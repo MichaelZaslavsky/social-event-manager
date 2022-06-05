@@ -31,19 +31,19 @@ public class AccountsService : ServiceBase<IAccountsRepository, Account>, IAccou
 
     public async Task<AccountDto> GetAccount(Guid userId)
     {
-        Account account = await Repository.GetSingleOrDefaultAsync(userId, nameof(Account.UserId));
+        Account? account = await Repository.GetSingleOrDefaultAsync(userId, nameof(Account.UserId));
         return Mapper.Map<AccountDto>(account);
     }
 
     public async Task<AccountDto> GetAccountByUserName(string userName)
     {
-        Account account = await Repository.GetSingleOrDefaultAsync(userName, nameof(Account.UserName));
+        Account? account = await Repository.GetSingleOrDefaultAsync(userName, nameof(Account.UserName));
         return Mapper.Map<AccountDto>(account);
     }
 
     public async Task<AccountDto> GetAccountByEmail(string email)
     {
-        Account account = await Repository.GetSingleOrDefaultAsync(email, nameof(Account.Email));
+        Account? account = await Repository.GetSingleOrDefaultAsync(email, nameof(Account.Email));
         return Mapper.Map<AccountDto>(account);
     }
 

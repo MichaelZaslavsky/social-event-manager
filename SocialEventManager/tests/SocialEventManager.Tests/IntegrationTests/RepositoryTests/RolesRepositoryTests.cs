@@ -41,7 +41,7 @@ public class RolesRepositoryTests : RepositoryTestBase<IRolesRepository, Role>
     public async Task InsertRole_Should_VerifyNeverCalled_When_RoleHasDifferentValue(Role role)
     {
         await MockRepository.Object.InsertRole(role);
-        MockRepository.Verify(r => r.InsertRole(null), Times.Never);
+        MockRepository.Verify(r => r.InsertRole(null!), Times.Never);
     }
 
     [Theory]

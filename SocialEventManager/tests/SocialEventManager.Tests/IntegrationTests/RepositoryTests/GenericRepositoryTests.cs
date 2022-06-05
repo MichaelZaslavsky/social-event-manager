@@ -167,7 +167,7 @@ public class GenericRepositoryTests : RepositoryTestBase<IRolesRepository, Role>
     public async Task UpdateAsync_Should_VerifyNeverCalled_When_RoleHasDifferentValue(Role role)
     {
         await MockRepository.Object.UpdateAsync(role);
-        MockRepository.Verify(r => r.UpdateAsync(null), Times.Never);
+        MockRepository.Verify(r => r.UpdateAsync(null!), Times.Never);
     }
 
     [Theory]
@@ -204,7 +204,7 @@ public class GenericRepositoryTests : RepositoryTestBase<IRolesRepository, Role>
     public async Task DeleteAsync_Should_VerifyNeverCalled_When_RoleHasDifferentValue(Role role)
     {
         await MockRepository.Object.DeleteAsync(role);
-        MockRepository.Verify(r => r.DeleteAsync(null), Times.Never);
+        MockRepository.Verify(r => r.DeleteAsync(null!), Times.Never);
     }
 
     [Theory]
@@ -218,7 +218,7 @@ public class GenericRepositoryTests : RepositoryTestBase<IRolesRepository, Role>
     [Fact]
     public void InitializeConstructor_Should_ThrowSqlException_When_DbSessionIsNull()
     {
-        Action action = () => new RolesRepository(null);
+        Action action = () => new RolesRepository(null!);
         action.Should().Throw<ArgumentNullException>().WithMessage(ExceptionConstants.ValueCannotBeNull("session"));
     }
 }

@@ -22,20 +22,20 @@ public class Account
 
     [Required]
     [StringLength(LengthConstants.Length255)]
-    public string UserName { get; set; }
+    public string UserName { get; set; } = null!;
 
     [StringLength(StringLengthAttribute.MaxText)]
-    public string PasswordHash { get; set; }
+    public string PasswordHash { get; set; } = null!;
 
     [Required]
     [StringLength(LengthConstants.Length255)]
-    public string Email { get; set; }
+    public string Email { get; set; } = null!;
 
     [Required]
     public bool EmailConfirmed { get; set; }
 
     [StringLength(StringLengthAttribute.MaxText)]
-    public string PhoneNumber { get; set; }
+    public string? PhoneNumber { get; set; }
 
     [Required]
     public bool PhoneNumberConfirmed { get; set; }
@@ -50,19 +50,19 @@ public class Account
 
     [Required]
     [StringLength(LengthConstants.Length255)]
-    public string NormalizedEmail { get; set; }
+    public string NormalizedEmail { get; set; } = null!;
 
     [Required]
     [StringLength(LengthConstants.Length255)]
-    public string NormalizedUserName { get; set; }
+    public string NormalizedUserName { get; set; } = null!;
 
     [Required]
     [StringLength(LengthConstants.Length255)]
-    public string ConcurrencyStamp { get; set; }
+    public string ConcurrencyStamp { get; set; } = null!;
 
     [Required]
     [StringLength(StringLengthAttribute.MaxText)]
-    public string SecurityStamp { get; set; }
+    public string SecurityStamp { get; set; } = null!;
 
     [Required]
     public bool TwoFactorEnabled { get; set; }

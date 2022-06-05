@@ -6,7 +6,7 @@ namespace SocialEventManager.Shared.Extensions;
 
 public static class IdentityErrorExtensions
 {
-    public static string ToErrorMessage(this IEnumerable<IdentityError> errors)
+    public static string? ToErrorMessage(this IEnumerable<IdentityError> errors)
     {
         if (errors.IsNullOrEmpty())
         {

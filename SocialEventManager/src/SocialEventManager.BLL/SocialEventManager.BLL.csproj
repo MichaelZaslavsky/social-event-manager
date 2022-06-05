@@ -4,6 +4,7 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<CodeAnalysisRuleSet>..\..\items\Analyzers.ruleset</CodeAnalysisRuleSet>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -16,13 +16,13 @@ public class Role
 
     [Required]
     [StringLength(LengthConstants.Length255)]
-    public string ConcurrencyStamp { get; set; }
+    public string ConcurrencyStamp { get; set; } = null!;
 
     [Required]
     [StringLength(LengthConstants.Length255)]
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
     [Required]
     [StringLength(LengthConstants.Length255)]
-    public string NormalizedName { get; set; }
+    public string NormalizedName { get; set; } = null!;
 }

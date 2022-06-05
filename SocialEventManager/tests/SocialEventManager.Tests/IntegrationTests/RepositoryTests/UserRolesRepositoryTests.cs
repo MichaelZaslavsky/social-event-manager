@@ -119,7 +119,7 @@ public class UserRolesRepositoryTests : RepositoryTestBase<IUserRolesRepository,
     public async Task GetUserRoles_Should_VerifyNeverCalled_When_RoleNameHasDifferentValue(string roleName)
     {
         await MockRepository.Object.GetUserRoles(roleName);
-        MockRepository.Verify(r => r.GetUserRoles(null), Times.Never);
+        MockRepository.Verify(r => r.GetUserRoles(null!), Times.Never);
     }
 
     [Theory]
@@ -196,7 +196,7 @@ public class UserRolesRepositoryTests : RepositoryTestBase<IUserRolesRepository,
     public async Task DeleteUserRole_Should_VerifyNeverCalled_When_RoleNameHasDifferentValue(Guid userId, string roleName)
     {
         await MockRepository.Object.DeleteUserRole(userId, roleName);
-        MockRepository.Verify(r => r.DeleteUserRole(userId, null), Times.Never);
+        MockRepository.Verify(r => r.DeleteUserRole(userId, null!), Times.Never);
     }
 
     [Theory]
@@ -250,7 +250,7 @@ public class UserRolesRepositoryTests : RepositoryTestBase<IUserRolesRepository,
     public async Task IsInRole_Should_VerifyNeverCalled_When_RoleNameHasDifferentValue(Guid userId, string roleName)
     {
         await MockRepository.Object.IsInRole(userId, roleName);
-        MockRepository.Verify(r => r.IsInRole(userId, null), Times.Never);
+        MockRepository.Verify(r => r.IsInRole(userId, null!), Times.Never);
     }
 
     [Theory]
