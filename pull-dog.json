@@ -1,0 +1,5 @@
+{
+    "dockerComposeYmlFilePaths": [
+        "SocialEventManager/docker-compose.yml"
+    ]
+}
