@@ -9,6 +9,7 @@ using SocialEventManager.BLL.Services.Users;
 using SocialEventManager.DAL.Infrastructure;
 using SocialEventManager.Shared.Constants.Validations;
 using SocialEventManager.Shared.Extensions;
+using SocialEventManager.Shared.Helpers;
 
 namespace SocialEventManager.BLL.Services.Identity;
 
@@ -243,11 +244,7 @@ public class CustomUsersStore :
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
-
-        if (roleName.IsNullOrWhiteSpace())
-        {
-            throw new ArgumentNullException(nameof(roleName));
-        }
+        ArgumentExceptionHelpers.ThrowIfNullOrWhiteSpace(roleName, nameof(roleName));
 
         UserRoleForCreationDto userRoleForCreation = new(user.Id, roleName);
 
@@ -275,11 +272,7 @@ public class CustomUsersStore :
     public async Task<IList<ApplicationUser>> GetUsersInRoleAsync(string roleName, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (roleName.IsNullOrWhiteSpace())
-        {
-            throw new ArgumentNullException(nameof(roleName));
-        }
+        ArgumentExceptionHelpers.ThrowIfNullOrWhiteSpace(roleName, nameof(roleName));
 
         IEnumerable<AccountDto> accounts = await _accountsService.GetAccounts(roleName);
         return _mapper.Map<IList<ApplicationUser>>(accounts);
@@ -289,11 +282,7 @@ public class CustomUsersStore :
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
-
-        if (roleName.IsNullOrWhiteSpace())
-        {
-            throw new ArgumentNullException(nameof(roleName));
-        }
+        ArgumentExceptionHelpers.ThrowIfNullOrWhiteSpace(roleName, nameof(roleName));
 
         UserRoleBase userRoleBase = new(user.Id, roleName);
 
@@ -308,11 +297,7 @@ public class CustomUsersStore :
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
-
-        if (roleName.IsNullOrWhiteSpace())
-        {
-            throw new ArgumentNullException(nameof(roleName));
-        }
+        ArgumentExceptionHelpers.ThrowIfNullOrWhiteSpace(roleName, nameof(roleName));
 
         UserRoleDto userRole = new(user.Id, roleName);
         return await _userRolesService.IsInRole(userRole);
@@ -361,8 +346,7 @@ public class CustomUsersStore :
     public async Task AddClaimsAsync(ApplicationUser user, IEnumerable<Claim> claims, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
-        ArgumentNullException.ThrowIfNull(user);
-        ArgumentNullException.ThrowIfNull(claims);
+        ArgumentNullExceptionHelpers.ThrowIfNull((user, nameof(user)), (claims, nameof(claims)));
 
         if (claims.IsEmpty())
         {
@@ -393,9 +377,7 @@ public class CustomUsersStore :
     public async Task ReplaceClaimAsync(ApplicationUser user, Claim claim, Claim newClaim, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
-        ArgumentNullException.ThrowIfNull(user);
-        ArgumentNullException.ThrowIfNull(claim);
-        ArgumentNullException.ThrowIfNull(newClaim);
+        ArgumentNullExceptionHelpers.ThrowIfNull((user, nameof(user)), (claim, nameof(claim)), (newClaim, nameof(newClaim)));
 
         if (!Guid.TryParse(user.Id, out Guid userId))
         {
@@ -413,8 +395,7 @@ public class CustomUsersStore :
     public async Task RemoveClaimsAsync(ApplicationUser user, IEnumerable<Claim> claims, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
-        ArgumentNullException.ThrowIfNull(user);
-        ArgumentNullException.ThrowIfNull(claims);
+        ArgumentNullExceptionHelpers.ThrowIfNull((user, nameof(user)), (claims, nameof(claims)));
 
         if (claims.IsEmpty())
         {

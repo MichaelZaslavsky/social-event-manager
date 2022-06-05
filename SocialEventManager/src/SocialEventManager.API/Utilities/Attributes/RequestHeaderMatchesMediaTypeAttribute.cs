@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc.ActionConstraints;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
+using SocialEventManager.Shared.Helpers;
 
 namespace SocialEventManager.API.Utilities.Attributes;
 
@@ -12,8 +13,9 @@ public class RequestHeaderMatchesMediaTypeAttribute : Attribute, IActionConstrai
 
     public RequestHeaderMatchesMediaTypeAttribute(string requestHeaderToMatch, string mediaType, params string[] otherMediaTypes)
     {
-        _requestHeaderToMatch = requestHeaderToMatch ?? throw new ArgumentNullException(nameof(requestHeaderToMatch));
-        ArgumentNullException.ThrowIfNull(mediaType);
+        ArgumentNullExceptionHelpers.ThrowIfNull((requestHeaderToMatch, nameof(requestHeaderToMatch)), (mediaType, nameof(mediaType)));
+
+        _requestHeaderToMatch = requestHeaderToMatch;
 
         // Check if the inputted media types are valid media types and add them to the _mediaTypes collection.
         if (MediaTypeHeaderValue.TryParse(mediaType, out MediaTypeHeaderValue parsedMediaType))

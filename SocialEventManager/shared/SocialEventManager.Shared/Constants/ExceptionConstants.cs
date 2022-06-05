@@ -24,6 +24,8 @@ public static class ExceptionConstants
     public const string InvalidConnectionString = "Format of the initialization string does not conform to specification starting at index 0.";
     public const string RoleNameIsInvalid = "\"Role name '' is invalid.(InvalidRoleName)\"";
     public const string ExceedMaximumAllowedLength = "String or binary data would be truncated";
+    public const string ValueCannotBeNullOrEmpty = "Value cannot be null or empty.";
+    public const string ValueCannotBeNullOrWhiteSpace = "Value cannot be null or whitespace.";
 
     public static string InvalidObjectName(string objectName) => $"Invalid object name '{objectName}'.";
 

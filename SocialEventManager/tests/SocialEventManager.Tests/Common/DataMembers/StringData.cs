@@ -15,6 +15,16 @@ public static class StringData
         }
     }
 
+    public static IEnumerable<object[]> NullOrWhiteSpaceData
+    {
+        get
+        {
+            yield return new object[] { null! };
+            yield return new object[] { string.Empty };
+            yield return new object[] { " " };
+        }
+    }
+
     public static IEnumerable<object[]> WhiteSpaceData
     {
         get
