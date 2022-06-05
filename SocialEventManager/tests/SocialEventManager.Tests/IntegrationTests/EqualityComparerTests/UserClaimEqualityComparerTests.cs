@@ -38,7 +38,7 @@ public class UserClaimEqualityComparerTests
     [Theory]
     [InlineAutoData]
     [MemberData(nameof(UserClaimData.UserClaimsWithOneNull), MemberType = typeof(UserClaimData))]
-    public void CompareUserClaims_Should_ReturnFalse_When_OneOfTheUserClaimsIsNull(UserClaim userClaim, UserClaim otherUserClaim)
+    public void CompareUserClaims_Should_ReturnFalse_When_OneOfTheUserClaimsIsNull(UserClaim? userClaim, UserClaim? otherUserClaim)
     {
         UserClaimEqualityComparer comparer = new();
         bool isEqual = comparer.Equals(userClaim, otherUserClaim);

@@ -4,58 +4,49 @@ using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Tests.Common.DataMembers;
 using SocialEventManager.Tests.Common.Helpers;
+using Xunit;
 
 namespace SocialEventManager.Tests.DataMembers.Common;
 
 public static class EnumerableData
 {
-    public static IEnumerable<object[]> EmptyData
-    {
-        get
+    public static TheoryData<IEnumerable<int>, bool> EmptyData =>
+        new()
         {
-            yield return new object[] { Enumerable.Empty<int>(), true };
-            yield return new object[] { TestRandomGeneratorHelpers.NextInt32s(), false };
-        }
-    }
+            { Enumerable.Empty<int>(), true },
+            { TestRandomGeneratorHelpers.NextInt32s(), false },
+        };
 
-    public static IEnumerable<object[]> NullOrEmptyData
-    {
-        get
+    public static TheoryData<IEnumerable<int>?, bool> NullOrEmptyData =>
+        new()
         {
-            yield return new object[] { null!, true };
-            yield return new object[] { Enumerable.Empty<int>(), true };
-            yield return new object[] { TestRandomGeneratorHelpers.NextInt32s(), false };
-        }
-    }
+            { null, true },
+            { Enumerable.Empty<int>(), true },
+            { TestRandomGeneratorHelpers.NextInt32s(), false },
+        };
 
-    public static IEnumerable<object[]> NotNullAndAnyData
-    {
-        get
+    public static TheoryData<IEnumerable<int>?, bool> NotNullAndAnyData =>
+        new()
         {
-            yield return new object[] { TestRandomGeneratorHelpers.NextInt32s(), true };
-            yield return new object[] { Enumerable.Empty<int>(), false };
-            yield return new object[] { null!, false };
-        }
-    }
+            { TestRandomGeneratorHelpers.NextInt32s(), true },
+            { Enumerable.Empty<int>(), false },
+            { null, false },
+        };
 
-    public static IEnumerable<object[]> UpdateInForEachData
-    {
-        get
+    public static TheoryData<List<Role>, string> UpdateInForEachData =>
+        new()
         {
-            yield return new object[]
             {
-                    new List<Role>
-                    {
-                        RoleData.GetMockRole(RoleType.User.GetDescription()),
-                        RoleData.GetMockRole(RoleType.Admin.GetDescription()),
-                    },
-                    DataConstants.LoremIpsum,
-            };
-            yield return new object[]
+                new()
+                {
+                    RoleData.GetMockRole(RoleType.User.GetDescription()),
+                    RoleData.GetMockRole(RoleType.Admin.GetDescription()),
+                },
+                DataConstants.LoremIpsum
+            },
             {
-                    new List<Role>(),
-                    DataConstants.LoremIpsum,
-            };
-        }
-    }
+                new(),
+                DataConstants.LoremIpsum
+            },
+        };
 }

@@ -10,7 +10,7 @@ public static class StringExtensions
     public static bool IsNullOrWhiteSpace([NotNullWhen(false)] this string? value) =>
         string.IsNullOrWhiteSpace(value);
 
-    public static string TakeAfterFirst(this string source, string fromStart, StringComparison comparisonType = StringComparison.Ordinal)
+    public static string TakeAfterFirst(this string source, string? fromStart, StringComparison comparisonType = StringComparison.Ordinal)
     {
         if (fromStart.IsNullOrEmpty())
         {
@@ -21,7 +21,7 @@ public static class StringExtensions
         return GetSubstringForStartIndex(source, firstIndex, fromStart.Length);
     }
 
-    public static string TakeAfterLast(this string source, string fromStart, StringComparison comparisonType = StringComparison.Ordinal)
+    public static string TakeAfterLast(this string source, string? fromStart, StringComparison comparisonType = StringComparison.Ordinal)
     {
         if (fromStart.IsNullOrEmpty())
         {
@@ -32,7 +32,7 @@ public static class StringExtensions
         return GetSubstringForStartIndex(source, lastIndex, fromStart.Length);
     }
 
-    public static string TakeUntilFirst(this string source, string fromEnd, StringComparison comparisonType = StringComparison.Ordinal)
+    public static string TakeUntilFirst(this string source, string? fromEnd, StringComparison comparisonType = StringComparison.Ordinal)
     {
         if (fromEnd.IsNullOrEmpty())
         {
@@ -43,7 +43,7 @@ public static class StringExtensions
         return GetSubStringForEndIndex(source, endIndex);
     }
 
-    public static string TakeUntilLast(this string source, string fromEnd, StringComparison comparisonType = StringComparison.Ordinal)
+    public static string TakeUntilLast(this string source, string? fromEnd, StringComparison comparisonType = StringComparison.Ordinal)
     {
         if (fromEnd.IsNullOrEmpty())
         {

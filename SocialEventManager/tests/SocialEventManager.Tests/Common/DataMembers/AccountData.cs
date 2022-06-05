@@ -3,6 +3,7 @@ using SocialEventManager.DAL.Entities;
 using SocialEventManager.Shared.Common.Constants;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Helpers;
+using Xunit;
 
 namespace SocialEventManager.Tests.Common.DataMembers;
 
@@ -17,140 +18,81 @@ public static class AccountData
         Length256 = DataConstants.Length256;
     }
 
-    public static IEnumerable<object[]> AccountWithSameUserId
-    {
-        get
-        {
-            yield return new object[] { GetMockAccount(sameUserId: true) };
-        }
-    }
+    public static TheoryData<IEnumerable<Account>> AccountWithSameUserId =>
+        new() { GetMockAccount(sameUserId: true) };
 
-    public static IEnumerable<object[]> AccountWithSameEmail
-    {
-        get
-        {
-            yield return new object[] { GetMockAccount(sameEmail: true) };
-        }
-    }
+    public static TheoryData<IEnumerable<Account>> AccountWithSameEmail =>
+        new() { GetMockAccount(sameEmail: true) };
 
-    public static IEnumerable<object[]> AccountWithValidLength
-    {
-        get
+    public static TheoryData<Account> AccountWithValidLength =>
+        new()
         {
-            yield return new object[]
-            {
-                    GetMockAccount(emailLength: LengthConstants.Length255),
-            };
-            yield return new object[]
-            {
-                    GetMockAccount(normalizedEmailLength: LengthConstants.Length255),
-            };
-            yield return new object[]
-            {
-                    GetMockAccount(userNameLength: LengthConstants.Length255),
-            };
-            yield return new object[]
-            {
-                    GetMockAccount(normalizedUserNameLength: LengthConstants.Length255),
-            };
-            yield return new object[]
-            {
-                    GetMockAccount(concurrencyStampLength: LengthConstants.Length255),
-            };
-            yield return new object[]
-            {
-                    GetMockAccount(passwordHashLength: LengthConstants.LengthMax),
-            };
-            yield return new object[]
-            {
-                    GetMockAccount(phoneNumberLength: LengthConstants.LengthMax),
-            };
-            yield return new object[]
-            {
-                    GetMockAccount(securityStampLength: LengthConstants.LengthMax),
-            };
-        }
-    }
+            { GetMockAccount(emailLength: LengthConstants.Length255) },
+            { GetMockAccount(normalizedEmailLength: LengthConstants.Length255) },
+            { GetMockAccount(userNameLength: LengthConstants.Length255) },
+            { GetMockAccount(normalizedUserNameLength: LengthConstants.Length255) },
+            { GetMockAccount(concurrencyStampLength: LengthConstants.Length255) },
+            { GetMockAccount(passwordHashLength: LengthConstants.LengthMax) },
+            { GetMockAccount(phoneNumberLength: LengthConstants.LengthMax) },
+            { GetMockAccount(securityStampLength: LengthConstants.LengthMax) },
+        };
 
-    public static IEnumerable<object[]> AccountWithNonRequiredNullField
-    {
-        get
-        {
-            yield return new object[]
-            {
-                    GetMockAccount(nullifyPasswordHash: true),
-            };
-        }
-    }
+    public static TheoryData<Account> AccountWithNonRequiredNullField =>
+        new() { GetMockAccount(nullifyPasswordHash: true) };
 
-    public static IEnumerable<object[]> AccountWithMissingRequiredFields
-    {
-        get
+    public static TheoryData<Account, string> AccountWithMissingRequiredFields =>
+        new()
         {
-            yield return new object[]
             {
-                    GetMockAccount(nullifyEmail: true),
-                    ExceptionConstants.CannotInsertTheValueNull(nameof(Account.Email), TableName),
-            };
-            yield return new object[]
+                GetMockAccount(nullifyEmail: true),
+                ExceptionConstants.CannotInsertTheValueNull(nameof(Account.Email), TableName)
+            },
             {
-                    GetMockAccount(nullifyNormalizedEmail: true),
-                    ExceptionConstants.CannotInsertTheValueNull(nameof(Account.NormalizedEmail), TableName),
-            };
-            yield return new object[]
+                GetMockAccount(nullifyNormalizedEmail: true),
+                ExceptionConstants.CannotInsertTheValueNull(nameof(Account.NormalizedEmail), TableName)
+            },
             {
-                    GetMockAccount(nullifyUserName: true),
-                    ExceptionConstants.CannotInsertTheValueNull(nameof(Account.UserName), TableName),
-            };
-            yield return new object[]
+                GetMockAccount(nullifyUserName: true),
+                ExceptionConstants.CannotInsertTheValueNull(nameof(Account.UserName), TableName)
+            },
             {
-                    GetMockAccount(nullifyNormalizedUserName: true),
-                    ExceptionConstants.CannotInsertTheValueNull(nameof(Account.NormalizedUserName), TableName),
-            };
-            yield return new object[]
+                GetMockAccount(nullifyNormalizedUserName: true),
+                ExceptionConstants.CannotInsertTheValueNull(nameof(Account.NormalizedUserName), TableName)
+            },
             {
-                    GetMockAccount(nullifyConcurrencyStamp: true),
-                    ExceptionConstants.CannotInsertTheValueNull(nameof(Account.ConcurrencyStamp), TableName),
-            };
-            yield return new object[]
+                GetMockAccount(nullifyConcurrencyStamp: true),
+                ExceptionConstants.CannotInsertTheValueNull(nameof(Account.ConcurrencyStamp), TableName)
+            },
             {
-                    GetMockAccount(nullifySecurityStamp: true),
-                    ExceptionConstants.CannotInsertTheValueNull(nameof(Account.SecurityStamp), TableName),
-            };
-        }
-    }
+                GetMockAccount(nullifySecurityStamp: true),
+                ExceptionConstants.CannotInsertTheValueNull(nameof(Account.SecurityStamp), TableName)
+            },
+        };
 
-    public static IEnumerable<object[]> AccountWithExceededLength
-    {
-        get
+    public static TheoryData<Account, string> AccountWithExceededLength =>
+        new()
         {
-            yield return new object[]
             {
-                    GetMockAccount(email: Length256),
-                    ExceptionConstants.ExceedMaximumAllowedLength,
-            };
-            yield return new object[]
+                GetMockAccount(email: Length256),
+                ExceptionConstants.ExceedMaximumAllowedLength
+            },
             {
-                    GetMockAccount(normalizedEmail: Length256),
-                    ExceptionConstants.ExceedMaximumAllowedLength,
-            };
-            yield return new object[]
+                GetMockAccount(normalizedEmail: Length256),
+                ExceptionConstants.ExceedMaximumAllowedLength
+            },
             {
-                    GetMockAccount(userName: Length256),
-                    ExceptionConstants.ExceedMaximumAllowedLength,
-            };
-            yield return new object[]
+                GetMockAccount(userName: Length256),
+                ExceptionConstants.ExceedMaximumAllowedLength
+            },
             {
-                    GetMockAccount(normalizedUserName: Length256),
-                    ExceptionConstants.ExceedMaximumAllowedLength,
-            };
-            yield return new object[]
+                GetMockAccount(normalizedUserName: Length256),
+                ExceptionConstants.ExceedMaximumAllowedLength
+            },
             {
-                    GetMockAccount(concurrencyStamp: Length256),
-                    ExceptionConstants.ExceedMaximumAllowedLength,
-            };
-        }
-    }
+                GetMockAccount(concurrencyStamp: Length256),
+                ExceptionConstants.ExceedMaximumAllowedLength
+            },
+        };
 
     public static Account GetMockAccount(Guid? userId = null, int id = 1, string? userName = null, string? passwordHash = null, string? email = null,
         bool emailConfirmed = false, string? phoneNumber = null, bool phoneNumberConfirmed = false, DateTime? lockoutEnd = null, bool lockoutEnabled = false,
