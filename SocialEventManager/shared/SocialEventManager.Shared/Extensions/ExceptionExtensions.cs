@@ -40,6 +40,7 @@ public static class ExceptionExtensions
             case { } when ex.Message.StartsWith(ExceptionConstants.CannotOpenDatabase, StringComparison.InvariantCultureIgnoreCase):
             case { } when ex.Message.StartsWith(ExceptionConstants.ANetworkRelated, StringComparison.InvariantCultureIgnoreCase):
                 return true;
+
             default:
                 return false;
         }

@@ -84,5 +84,5 @@ public static class StringExtensions
         return source[..endIndex];
     }
 
-    #endregion Private Methods
+    #endregion Private methods
 }

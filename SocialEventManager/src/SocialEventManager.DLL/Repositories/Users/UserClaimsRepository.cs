@@ -36,7 +36,7 @@ public class UserClaimsRepository : GenericRepository<UserClaim>, IUserClaimsRep
 	            FROM    {TableNameConstants.UserClaims} UC
                         INNER JOIN OPENJSON(@UserClaimsJson)
 	                    WITH
-                        (   
+                        (
                             UserId	UNIQUEIDENTIFIER    N'$.UserId',
                             [Type]  NVARCHAR(255)       N'$.Type',
                             [Value] NVARCHAR(255)       N'$.Value'

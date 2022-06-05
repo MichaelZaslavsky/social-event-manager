@@ -31,7 +31,7 @@ public class UserClaimEqualityComparerTests
     public void CompareUserClaims_Should_ReturnTrue_When_UserClaimsAreNulls()
     {
         UserClaimEqualityComparer comparer = new();
-        bool isEqual = comparer.Equals(null!, null!);
+        bool isEqual = comparer.Equals(null, null);
         isEqual.Should().BeTrue();
     }
 
