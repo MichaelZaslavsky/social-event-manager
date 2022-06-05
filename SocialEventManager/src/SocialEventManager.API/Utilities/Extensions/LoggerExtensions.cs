@@ -30,7 +30,7 @@ public static class LoggerExtensions
     {
         HttpContext context = accessor.HttpContext;
 
-        return context == null
+        return context is null
             ? null
             : new ContextInformation
             {

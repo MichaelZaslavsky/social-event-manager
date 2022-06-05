@@ -8,12 +8,12 @@ public class UserClaimEqualityComparer : IEqualityComparer<UserClaim>
 {
     public bool Equals(UserClaim userClaim, UserClaim otherUserClaim)
     {
-        if (userClaim == null && otherUserClaim == null)
+        if (userClaim is null && otherUserClaim is null)
         {
             return true;
         }
 
-        if (userClaim == null || otherUserClaim == null)
+        if (userClaim is null || otherUserClaim is null)
         {
             return false;
         }

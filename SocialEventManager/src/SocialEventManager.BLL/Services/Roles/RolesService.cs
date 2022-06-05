@@ -67,7 +67,7 @@ public class RolesService : ServiceBase<IRolesRepository, Role>, IRolesService
     {
         Role role = await Repository.GetAsync(roleId);
 
-        if (role == null)
+        if (role is null)
         {
             throw new NotFoundException($"The role '{roleId}' {ValidationConstants.WasNotFound}");
         }

@@ -56,7 +56,7 @@ public class UserClaimsService : ServiceBase<IUserClaimsRepository, UserClaim>, 
         UserClaim userClaim = (await Repository.GetAsync(newUserClaimForUpdate.UserId, nameof(UserClaim.UserId)))
             .SingleOrDefault(uc => uc.Type == currentUserClaim.Type && uc.Value == currentUserClaim.Value);
 
-        if (userClaim == null)
+        if (userClaim is null)
         {
             throw new NotFoundException(
                 $"The user claims of type '{currentUserClaim.Type}' and value '{currentUserClaim.Value}' {ValidationConstants.WasNotFound}");

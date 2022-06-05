@@ -20,7 +20,7 @@ public static class HashingHelpers
         {
             for (int i = 0; i < input.Length; i++)
             {
-                if (input[i] != null)
+                if (input[i] is not null)
                 {
                     hash = (hash * a) + input[i].GetHashCode();
                     a *= b;
