@@ -26,7 +26,7 @@ public static class SecurityPolicyConfigurations
             .AddContentSecurityPolicy(builder =>
             {
                 builder.AddDefaultSrc().Self(); // Only allow loading resources from this app by default
-                    builder.AddStyleSrc().Self().WithNonce();
+                builder.AddStyleSrc().Self().WithNonce();
                 builder.AddScriptSrc().Self().WithNonce();
             });
     }
