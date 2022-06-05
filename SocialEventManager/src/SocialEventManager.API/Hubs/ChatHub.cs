@@ -1,5 +1,3 @@
-using System;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 using Serilog;
 using SocialEventManager.Shared.Constants;

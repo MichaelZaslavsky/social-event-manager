@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoFixture.Xunit2;
 using DeepEqual.Syntax;
 using FluentAssertions;

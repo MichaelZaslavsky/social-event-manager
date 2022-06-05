@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using FluentValidation.Results;
 
 namespace SocialEventManager.Shared.Exceptions

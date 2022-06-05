@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
 using System.Security.Principal;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
 using Serilog;
 using Serilog.Enrichers.AspnetcoreHttpcontext;
 using SocialEventManager.API.Utilities.Logging;

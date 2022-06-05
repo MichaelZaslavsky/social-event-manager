@@ -1,4 +1,3 @@
-using System;
 using FluentAssertions;
 using SocialEventManager.DAL.Enums;
 using SocialEventManager.Shared.Constants;

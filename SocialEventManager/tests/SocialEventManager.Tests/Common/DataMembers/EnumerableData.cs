@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using SocialEventManager.DAL.Entities;
 using SocialEventManager.DAL.Enums;
 using SocialEventManager.Shared.Constants;

@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using NetCore.AutoRegisterDi;

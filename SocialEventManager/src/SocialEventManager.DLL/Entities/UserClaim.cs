@@ -1,4 +1,3 @@
-using System;
 using Dapper.Contrib.Extensions;
 using ServiceStack.DataAnnotations;
 using SocialEventManager.Shared.Constants;

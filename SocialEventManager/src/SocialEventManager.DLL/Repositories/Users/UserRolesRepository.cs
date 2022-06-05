@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Dapper;
 using SocialEventManager.DAL.Constants;
 using SocialEventManager.DAL.Entities;

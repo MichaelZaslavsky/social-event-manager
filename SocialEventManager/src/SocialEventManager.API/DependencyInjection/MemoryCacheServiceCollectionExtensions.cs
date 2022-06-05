@@ -1,5 +1,3 @@
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using ServiceStack;
 using ServiceStack.Redis;
 using SocialEventManager.Shared.Constants;

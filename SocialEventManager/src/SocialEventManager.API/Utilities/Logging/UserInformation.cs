@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace SocialEventManager.API.Utilities.Logging
 {
     public record UserInformation

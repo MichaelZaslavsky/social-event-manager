@@ -1,4 +1,3 @@
-using System;
 using System.Reflection;
 using SocialEventManager.Shared.Common.Constants;
 

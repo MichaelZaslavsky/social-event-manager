@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using SocialEventManager.BLL.Models.Accounts;
 
 namespace SocialEventManager.BLL.Services.Accounts
