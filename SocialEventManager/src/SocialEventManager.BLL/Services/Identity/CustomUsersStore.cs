@@ -45,11 +45,7 @@ public class CustomUsersStore :
     public Task<string> GetUserIdAsync(ApplicationUser user, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (user == null)
-        {
-            throw new ArgumentNullException(nameof(user));
-        }
+        ArgumentNullException.ThrowIfNull(user);
 
         return Task.FromResult(user.Id);
     }
@@ -57,11 +53,7 @@ public class CustomUsersStore :
     public Task<string> GetUserNameAsync(ApplicationUser user, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (user == null)
-        {
-            throw new ArgumentNullException(nameof(user));
-        }
+        ArgumentNullException.ThrowIfNull(user);
 
         return Task.FromResult(user.UserName);
     }
@@ -69,11 +61,7 @@ public class CustomUsersStore :
     public Task SetUserNameAsync(ApplicationUser user, string userName, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (user == null)
-        {
-            throw new ArgumentNullException(nameof(user));
-        }
+        ArgumentNullException.ThrowIfNull(user);
 
         user.UserName = userName;
         return Task.CompletedTask;
@@ -82,11 +70,7 @@ public class CustomUsersStore :
     public Task<string> GetNormalizedUserNameAsync(ApplicationUser user, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (user == null)
-        {
-            throw new ArgumentNullException(nameof(user));
-        }
+        ArgumentNullException.ThrowIfNull(user);
 
         return Task.FromResult(user.UserName);
     }
@@ -94,11 +78,7 @@ public class CustomUsersStore :
     public Task SetNormalizedUserNameAsync(ApplicationUser user, string normalizedName, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (user == null)
-        {
-            throw new ArgumentNullException(nameof(user));
-        }
+        ArgumentNullException.ThrowIfNull(user);
 
         user.NormalizedUserName = normalizedName ?? throw new ArgumentNullException(nameof(normalizedName));
         return Task.CompletedTask;
@@ -107,11 +87,7 @@ public class CustomUsersStore :
     public async Task<IdentityResult> CreateAsync(ApplicationUser user, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (user == null)
-        {
-            throw new ArgumentNullException(nameof(user));
-        }
+        ArgumentNullException.ThrowIfNull(user);
 
         AccountForCreationDto accountForCreation = _mapper.Map<AccountForCreationDto>(user);
         int id = await _accountsService.CreateAccount(accountForCreation);
@@ -124,11 +100,7 @@ public class CustomUsersStore :
     public async Task<IdentityResult> UpdateAsync(ApplicationUser user, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (user == null)
-        {
-            throw new ArgumentNullException(nameof(user));
-        }
+        ArgumentNullException.ThrowIfNull(user);
 
         AccountForUpdateDto accountForUpdate = _mapper.Map<AccountForUpdateDto>(user);
         bool isUpdated = await _accountsService.UpdateAccount(accountForUpdate);
@@ -141,11 +113,7 @@ public class CustomUsersStore :
     public async Task<IdentityResult> DeleteAsync(ApplicationUser user, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (user == null)
-        {
-            throw new ArgumentNullException(nameof(user));
-        }
+        ArgumentNullException.ThrowIfNull(user);
 
         if (!Guid.TryParse(user.Id, out Guid userId))
         {
@@ -162,11 +130,7 @@ public class CustomUsersStore :
     public async Task<ApplicationUser> FindByIdAsync(string userId, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (userId == null)
-        {
-            throw new ArgumentNullException(nameof(userId));
-        }
+        ArgumentNullException.ThrowIfNull(userId);
 
         if (!Guid.TryParse(userId, out Guid id))
         {
@@ -180,11 +144,7 @@ public class CustomUsersStore :
     public async Task<ApplicationUser> FindByNameAsync(string userName, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (userName == null)
-        {
-            throw new ArgumentNullException(nameof(userName));
-        }
+        ArgumentNullException.ThrowIfNull(userName);
 
         AccountDto account = await _accountsService.GetAccountByUserName(userName);
         return _mapper.Map<ApplicationUser>(account);
@@ -197,11 +157,7 @@ public class CustomUsersStore :
     public Task SetEmailAsync(ApplicationUser user, string email, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (user == null)
-        {
-            throw new ArgumentNullException(nameof(user));
-        }
+        ArgumentNullException.ThrowIfNull(user);
 
         user.UserName = email;
         return Task.CompletedTask;
@@ -210,11 +166,7 @@ public class CustomUsersStore :
     public Task<string> GetEmailAsync(ApplicationUser user, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (user == null)
-        {
-            throw new ArgumentNullException(nameof(user));
-        }
+        ArgumentNullException.ThrowIfNull(user);
 
         return Task.FromResult(user.Email);
     }
@@ -240,11 +192,7 @@ public class CustomUsersStore :
     public Task<string> GetNormalizedEmailAsync(ApplicationUser user, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (user == null)
-        {
-            throw new ArgumentNullException(nameof(user));
-        }
+        ArgumentNullException.ThrowIfNull(user);
 
         return Task.FromResult(user.Email);
     }
@@ -252,11 +200,7 @@ public class CustomUsersStore :
     public Task SetNormalizedEmailAsync(ApplicationUser user, string normalizedEmail, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (user == null)
-        {
-            throw new ArgumentNullException(nameof(user));
-        }
+        ArgumentNullException.ThrowIfNull(user);
 
         user.NormalizedEmail = normalizedEmail ?? throw new ArgumentNullException(nameof(normalizedEmail));
         return Task.CompletedTask;
@@ -269,11 +213,7 @@ public class CustomUsersStore :
     public Task SetPasswordHashAsync(ApplicationUser user, string passwordHash, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (user == null)
-        {
-            throw new ArgumentNullException(nameof(user));
-        }
+        ArgumentNullException.ThrowIfNull(user);
 
         user.PasswordHash = passwordHash ?? throw new ArgumentNullException(nameof(passwordHash));
         return Task.CompletedTask;
@@ -282,11 +222,7 @@ public class CustomUsersStore :
     public Task<string> GetPasswordHashAsync(ApplicationUser user, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (user == null)
-        {
-            throw new ArgumentNullException(nameof(user));
-        }
+        ArgumentNullException.ThrowIfNull(user);
 
         return Task.FromResult(user.PasswordHash);
     }
@@ -294,11 +230,7 @@ public class CustomUsersStore :
     public Task<bool> HasPasswordAsync(ApplicationUser user, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (user == null)
-        {
-            throw new ArgumentNullException(nameof(user));
-        }
+        ArgumentNullException.ThrowIfNull(user);
 
         return Task.FromResult(!user.PasswordHash.IsNullOrWhiteSpace());
     }
@@ -310,11 +242,7 @@ public class CustomUsersStore :
     public async Task AddToRoleAsync(ApplicationUser user, string roleName, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (user == null)
-        {
-            throw new ArgumentNullException(nameof(user));
-        }
+        ArgumentNullException.ThrowIfNull(user);
 
         if (roleName.IsNullOrWhiteSpace())
         {
@@ -333,11 +261,7 @@ public class CustomUsersStore :
     public async Task<IList<string>> GetRolesAsync(ApplicationUser user, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (user == null)
-        {
-            throw new ArgumentNullException(nameof(user));
-        }
+        ArgumentNullException.ThrowIfNull(user);
 
         if (!Guid.TryParse(user.Id, out Guid userId))
         {
@@ -364,11 +288,7 @@ public class CustomUsersStore :
     public async Task RemoveFromRoleAsync(ApplicationUser user, string roleName, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (user == null)
-        {
-            throw new ArgumentNullException(nameof(user));
-        }
+        ArgumentNullException.ThrowIfNull(user);
 
         if (roleName.IsNullOrWhiteSpace())
         {
@@ -387,11 +307,7 @@ public class CustomUsersStore :
     public async Task<bool> IsInRoleAsync(ApplicationUser user, string roleName, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (user == null)
-        {
-            throw new ArgumentNullException(nameof(user));
-        }
+        ArgumentNullException.ThrowIfNull(user);
 
         if (roleName.IsNullOrWhiteSpace())
         {
@@ -409,11 +325,7 @@ public class CustomUsersStore :
     public Task SetSecurityStampAsync(ApplicationUser user, string stamp, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (user == null)
-        {
-            throw new ArgumentNullException(nameof(user));
-        }
+        ArgumentNullException.ThrowIfNull(user);
 
         user.SecurityStamp = stamp;
 
@@ -423,11 +335,7 @@ public class CustomUsersStore :
     public Task<string> GetSecurityStampAsync(ApplicationUser user, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (user == null)
-        {
-            throw new ArgumentNullException(nameof(user));
-        }
+        ArgumentNullException.ThrowIfNull(user);
 
         return Task.FromResult(user.SecurityStamp);
     }
@@ -439,11 +347,7 @@ public class CustomUsersStore :
     public async Task<IList<Claim>> GetClaimsAsync(ApplicationUser user, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (user == null)
-        {
-            throw new ArgumentNullException(nameof(user));
-        }
+        ArgumentNullException.ThrowIfNull(user);
 
         if (!Guid.TryParse(user.Id, out Guid userId))
         {
@@ -457,16 +361,8 @@ public class CustomUsersStore :
     public async Task AddClaimsAsync(ApplicationUser user, IEnumerable<Claim> claims, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (user == null)
-        {
-            throw new ArgumentNullException(nameof(user));
-        }
-
-        if (claims == null)
-        {
-            throw new ArgumentNullException(nameof(claims));
-        }
+        ArgumentNullException.ThrowIfNull(user);
+        ArgumentNullException.ThrowIfNull(claims);
 
         if (claims.IsEmpty())
         {
@@ -497,21 +393,9 @@ public class CustomUsersStore :
     public async Task ReplaceClaimAsync(ApplicationUser user, Claim claim, Claim newClaim, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (user == null)
-        {
-            throw new ArgumentNullException(nameof(user));
-        }
-
-        if (claim == null)
-        {
-            throw new ArgumentNullException(nameof(claim));
-        }
-
-        if (newClaim == null)
-        {
-            throw new ArgumentNullException(nameof(newClaim));
-        }
+        ArgumentNullException.ThrowIfNull(user);
+        ArgumentNullException.ThrowIfNull(claim);
+        ArgumentNullException.ThrowIfNull(newClaim);
 
         if (!Guid.TryParse(user.Id, out Guid userId))
         {
@@ -529,16 +413,8 @@ public class CustomUsersStore :
     public async Task RemoveClaimsAsync(ApplicationUser user, IEnumerable<Claim> claims, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (user == null)
-        {
-            throw new ArgumentNullException(nameof(user));
-        }
-
-        if (claims == null)
-        {
-            throw new ArgumentNullException(nameof(claims));
-        }
+        ArgumentNullException.ThrowIfNull(user);
+        ArgumentNullException.ThrowIfNull(claims);
 
         if (claims.IsEmpty())
         {
@@ -558,10 +434,7 @@ public class CustomUsersStore :
 
     public async Task<IList<ApplicationUser>> GetUsersForClaimAsync(Claim claim, CancellationToken cancellationToken)
     {
-        if (claim == null)
-        {
-            throw new ArgumentNullException(nameof(claim));
-        }
+        ArgumentNullException.ThrowIfNull(claim);
 
         IEnumerable<AccountDto> accounts = await _accountsService.GetAccounts(claim.Value, claim.Value);
         return _mapper.Map<IList<ApplicationUser>>(accounts);

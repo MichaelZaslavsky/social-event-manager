@@ -13,11 +13,7 @@ public class RequestHeaderMatchesMediaTypeAttribute : Attribute, IActionConstrai
     public RequestHeaderMatchesMediaTypeAttribute(string requestHeaderToMatch, string mediaType, params string[] otherMediaTypes)
     {
         _requestHeaderToMatch = requestHeaderToMatch ?? throw new ArgumentNullException(nameof(requestHeaderToMatch));
-
-        if (mediaType == null)
-        {
-            throw new ArgumentNullException(nameof(mediaType));
-        }
+        ArgumentNullException.ThrowIfNull(mediaType);
 
         // Check if the inputted media types are valid media types and add them to the _mediaTypes collection.
         if (MediaTypeHeaderValue.TryParse(mediaType, out MediaTypeHeaderValue parsedMediaType))
