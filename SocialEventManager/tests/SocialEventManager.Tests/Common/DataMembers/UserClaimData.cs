@@ -3,6 +3,7 @@ using SocialEventManager.DAL.Entities;
 using SocialEventManager.Shared.Common.Constants;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Helpers;
+using Xunit;
 
 namespace SocialEventManager.Tests.Common.DataMembers;
 
@@ -17,118 +18,71 @@ public static class UserClaimData
         Length256 = DataConstants.Length256;
     }
 
-    public static IEnumerable<object[]> ValidUserClaim
-    {
-        get
-        {
-            yield return new object[] { GetMockUserClaim(userId: Guid.NewGuid()) };
-        }
-    }
+    public static TheoryData<UserClaim> ValidUserClaim =>
+        new() { GetMockUserClaim(userId: Guid.NewGuid()) };
 
-    public static IEnumerable<object[]> UserClaimsWithSameUser
-    {
-        get
-        {
-            yield return new object[] { GetMockUserClaims(sameUserId: true) };
-        }
-    }
+    public static TheoryData<IEnumerable<UserClaim>> UserClaimsWithSameUser =>
+        new() { GetMockUserClaims(sameUserId: true) };
 
-    public static IEnumerable<object[]> UserClaimsWithSameType
-    {
-        get
-        {
-            yield return new object[] { GetMockUserClaims(sameType: true, sameValue: true) };
-        }
-    }
+    public static TheoryData<IEnumerable<UserClaim>> UserClaimsWithSameType =>
+        new() { GetMockUserClaims(sameType: true, sameValue: true) };
 
-    public static IEnumerable<object[]> UserClaimsWithSameTypeAndValue
-    {
-        get
-        {
-            yield return new object[] { GetMockUserClaims(sameType: true, sameValue: true) };
-        }
-    }
+    public static TheoryData<IEnumerable<UserClaim>> UserClaimsWithSameTypeAndValue =>
+        new() { GetMockUserClaims(sameType: true, sameValue: true) };
 
-    public static IEnumerable<object[]> UserClaimsWithSameUserAndType
-    {
-        get
-        {
-            yield return new object[] { GetMockUserClaims(sameUserId: true, sameType: true) };
-        }
-    }
+    public static TheoryData<IEnumerable<UserClaim>> UserClaimsWithSameUserAndType =>
+        new() { GetMockUserClaims(sameUserId: true, sameType: true) };
 
-    public static IEnumerable<object[]> UserClaimWithValidLength
-    {
-        get
+    public static TheoryData<UserClaim> UserClaimWithValidLength =>
+        new()
         {
-            yield return new object[]
+            { GetMockUserClaim(typeLength: LengthConstants.Length255) },
+            { GetMockUserClaim(valueLength: LengthConstants.LengthMax) },
+        };
+
+    public static TheoryData<UserClaim, string> UserClaimWithMissingRequiredFields =>
+        new()
+        {
             {
-                    GetMockUserClaim(typeLength: LengthConstants.Length255),
-            };
-            yield return new object[]
+                GetMockUserClaim(nullifyType: true),
+                ExceptionConstants.CannotInsertTheValueNull(nameof(UserClaim.Type), TableName)
+            },
             {
-                    GetMockUserClaim(valueLength: LengthConstants.LengthMax),
-            };
-        }
-    }
+                GetMockUserClaim(nullifyValue: true),
+                ExceptionConstants.CannotInsertTheValueNull(nameof(UserClaim.Value), TableName)
+            },
+        };
 
-    public static IEnumerable<object[]> UserClaimWithMissingRequiredFields
-    {
-        get
+    public static TheoryData<UserClaim, string> UserClaimWithExceededLength =>
+        new()
         {
-            yield return new object[]
             {
-                    GetMockUserClaim(nullifyType: true),
-                    ExceptionConstants.CannotInsertTheValueNull(nameof(UserClaim.Type), TableName),
-            };
-            yield return new object[]
-            {
-                    GetMockUserClaim(nullifyValue: true),
-                    ExceptionConstants.CannotInsertTheValueNull(nameof(UserClaim.Value), TableName),
-            };
-        }
-    }
+                GetMockUserClaim(type: Length256),
+                ExceptionConstants.ExceedMaximumAllowedLength
+            },
+        };
 
-    public static IEnumerable<object[]> UserClaimWithExceededLength
-    {
-        get
+    public static TheoryData<UserClaim, UserClaim> UserClaimsWithDifferentIds =>
+        new()
         {
-            yield return new object[]
             {
-                    GetMockUserClaim(type: Length256),
-                    ExceptionConstants.ExceedMaximumAllowedLength,
-            };
-        }
-    }
+                GetMockUserClaim(Guid.Empty, value: DataConstants.RandomText, id: 1),
+                GetMockUserClaim(Guid.Empty, value: DataConstants.RandomText, id: 2)
+            },
+        };
 
-    public static IEnumerable<object[]> UserClaimsWithDifferentIds
-    {
-        get
+    public static TheoryData<UserClaim?, UserClaim?> UserClaimsWithOneNull =>
+        new()
         {
-            yield return new object[]
             {
-                    GetMockUserClaim(Guid.Empty, value: DataConstants.RandomText, id: 1),
-                    GetMockUserClaim(Guid.Empty, value: DataConstants.RandomText, id: 2),
-            };
-        }
-    }
-
-    public static IEnumerable<object[]> UserClaimsWithOneNull
-    {
-        get
-        {
-            yield return new object[]
+                GetMockUserClaim(userId: Guid.NewGuid()),
+                null
+            },
             {
-                    GetMockUserClaim(userId: Guid.NewGuid()),
-                    null!,
-            };
-            yield return new object[]
-            {
-                    null!,
-                    GetMockUserClaim(userId: Guid.NewGuid()),
-            };
-        }
-    }
+                null,
+                GetMockUserClaim(userId: Guid.NewGuid())
+            },
+        };
 
     #region Private Methods
 

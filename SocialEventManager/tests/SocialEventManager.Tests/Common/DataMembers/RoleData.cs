@@ -5,6 +5,7 @@ using SocialEventManager.Shared.Common.Constants;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Shared.Helpers;
+using Xunit;
 
 namespace SocialEventManager.Tests.Common.DataMembers;
 
@@ -19,107 +20,74 @@ public static class RoleData
         Length256 = DataConstants.Length256;
     }
 
-    public static IEnumerable<object[]> ValidRole
-    {
-        get
+    public static TheoryData<Role> ValidRole =>
+        new()
         {
-            yield return new object[] { GetMockRole(RoleType.User.GetDescription()) };
-            yield return new object[] { GetMockRole(RoleType.Admin.GetDescription()) };
-        }
-    }
+            { GetMockRole(RoleType.User.GetDescription()) },
+            { GetMockRole(RoleType.Admin.GetDescription()) },
+        };
 
-    public static IEnumerable<object[]> ValidRoles
-    {
-        get
+    public static TheoryData<List<Role>> ValidRoles =>
+        new()
         {
-            yield return new object[]
+            new()
             {
-                    new List<Role>
-                    {
-                        GetMockRole(RoleType.User.GetDescription()),
-                        GetMockRole(RoleType.Admin.GetDescription()),
-                    },
-            };
-        }
-    }
+                GetMockRole(RoleType.User.GetDescription()),
+                GetMockRole(RoleType.Admin.GetDescription()),
+            },
+        };
 
-    public static IEnumerable<object[]> RolesWithSameName
-    {
-        get
+    public static TheoryData<List<Role>> RolesWithSameName =>
+        new()
         {
-            yield return new object[]
+            new()
             {
-                    new List<Role>
-                    {
-                        GetMockRole(RoleType.User.GetDescription()),
-                        GetMockRole(RoleType.User.GetDescription()),
-                    },
-            };
-        }
-    }
+                GetMockRole(RoleType.User.GetDescription()),
+                GetMockRole(RoleType.User.GetDescription()),
+            },
+        };
 
-    public static IEnumerable<object[]> RoleWithValidLength
-    {
-        get
+    public static TheoryData<Role> RoleWithValidLength =>
+        new()
         {
-            yield return new object[]
-            {
-                    GetMockRole(concurrencyStampLength: LengthConstants.Length255),
-            };
-            yield return new object[]
-            {
-                    GetMockRole(nameLength: LengthConstants.Length255),
-            };
-            yield return new object[]
-            {
-                    GetMockRole(normalizedNameLength: LengthConstants.Length255),
-            };
-        }
-    }
+            { GetMockRole(concurrencyStampLength: LengthConstants.Length255) },
+            { GetMockRole(nameLength: LengthConstants.Length255) },
+            { GetMockRole(normalizedNameLength: LengthConstants.Length255) },
+        };
 
-    public static IEnumerable<object[]> RoleWithMissingRequiredFields
-    {
-        get
+    public static TheoryData<Role, string> RoleWithMissingRequiredFields =>
+        new()
         {
-            yield return new object[]
             {
-                    GetMockRole(nullifyConcurrencyStamp: true),
-                    ExceptionConstants.CannotInsertTheValueNull(nameof(Role.ConcurrencyStamp), TableName),
-            };
-            yield return new object[]
+                GetMockRole(nullifyConcurrencyStamp: true),
+                ExceptionConstants.CannotInsertTheValueNull(nameof(Role.ConcurrencyStamp), TableName)
+            },
             {
-                    GetMockRole(nullifyName: true),
-                    ExceptionConstants.CannotInsertTheValueNull(nameof(Role.Name), TableName),
-            };
-            yield return new object[]
+                GetMockRole(nullifyName: true),
+                ExceptionConstants.CannotInsertTheValueNull(nameof(Role.Name), TableName)
+            },
             {
-                    GetMockRole(nullifyNormalizedName: true),
-                    ExceptionConstants.CannotInsertTheValueNull(nameof(Role.NormalizedName), TableName),
-            };
-        }
-    }
+                GetMockRole(nullifyNormalizedName: true),
+                ExceptionConstants.CannotInsertTheValueNull(nameof(Role.NormalizedName), TableName)
+            },
+        };
 
-    public static IEnumerable<object[]> RoleWithExceededLength
-    {
-        get
+    public static TheoryData<Role, string> RoleWithExceededLength =>
+        new()
         {
-            yield return new object[]
             {
-                    GetMockRole(concurrencyStamp: Length256),
-                    ExceptionConstants.ExceedMaximumAllowedLength,
-            };
-            yield return new object[]
+                GetMockRole(concurrencyStamp: Length256),
+                ExceptionConstants.ExceedMaximumAllowedLength
+            },
             {
-                    GetMockRole(name: Length256),
-                    ExceptionConstants.ExceedMaximumAllowedLength,
-            };
-            yield return new object[]
+                GetMockRole(name: Length256),
+                ExceptionConstants.ExceedMaximumAllowedLength
+            },
             {
-                    GetMockRole(normalizedName: Length256),
-                    ExceptionConstants.ExceedMaximumAllowedLength,
-            };
-        }
-    }
+                GetMockRole(normalizedName: Length256),
+                ExceptionConstants.ExceedMaximumAllowedLength
+            },
+        };
 
     public static Role GetMockRole(string name = "User", Guid? id = null, string? concurrencyStamp = null, string? normalizedName = null) =>
         new()

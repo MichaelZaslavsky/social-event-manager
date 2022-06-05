@@ -6,7 +6,7 @@ namespace SocialEventManager.Shared.Extensions;
 
 public static class ExceptionExtensions
 {
-    public static (HttpStatusCode httpStatusCode, string title) ToHttpStatusCodeAndTitle(this Exception ex)
+    public static (HttpStatusCode httpStatusCode, string title) ToHttpStatusCodeAndTitle(this Exception? ex)
     {
         if (ex is null)
         {
@@ -22,7 +22,7 @@ public static class ExceptionExtensions
         };
     }
 
-    public static bool IsCritical(this Exception ex)
+    public static bool IsCritical(this Exception? ex)
     {
         if (ex is null)
         {

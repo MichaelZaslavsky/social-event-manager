@@ -1,24 +1,13 @@
+using Xunit;
+
 namespace SocialEventManager.Tests.Common.DataMembers;
 
 public static class GuidData
 {
-    public static IEnumerable<object[]> NotDefaultGuidData
-    {
-        get
+    public static TheoryData<Guid, bool> NotDefaultGuidData =>
+        new()
         {
-            return new List<object[]>
-                {
-                    new object[]
-                    {
-                        Guid.Empty,
-                        false,
-                    },
-                    new object[]
-                    {
-                        Guid.NewGuid(),
-                        true,
-                    },
-                };
-        }
-    }
+            { Guid.Empty, false },
+            { Guid.NewGuid(), true },
+        };
 }

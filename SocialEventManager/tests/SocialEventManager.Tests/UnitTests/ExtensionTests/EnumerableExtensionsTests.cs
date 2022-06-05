@@ -31,7 +31,7 @@ public class EnumerableExtensionsTests
 
     [Theory]
     [MemberData(nameof(EnumerableData.NullOrEmptyData), MemberType = typeof(EnumerableData))]
-    public void IsNullOrEmpty_Should_ReturnCorrectResult_WhenCalled(IEnumerable<int> enumerable, bool expectedResult)
+    public void IsNullOrEmpty_Should_ReturnCorrectResult_WhenCalled(IEnumerable<int>? enumerable, bool expectedResult)
     {
         bool actualResult = enumerable.IsNullOrEmpty();
         actualResult.Should().Be(expectedResult);
@@ -39,7 +39,7 @@ public class EnumerableExtensionsTests
 
     [Theory]
     [MemberData(nameof(EnumerableData.NotNullAndAnyData), MemberType = typeof(EnumerableData))]
-    public void IsNotNullAndAny_Should_ReturnCorrectResult_WhenCalled(IEnumerable<int> enumerable, bool expectedResult)
+    public void IsNotNullAndAny_Should_ReturnCorrectResult_WhenCalled(IEnumerable<int>? enumerable, bool expectedResult)
     {
         bool actualResult = enumerable.IsNotNullAndAny();
         actualResult.Should().Be(expectedResult);

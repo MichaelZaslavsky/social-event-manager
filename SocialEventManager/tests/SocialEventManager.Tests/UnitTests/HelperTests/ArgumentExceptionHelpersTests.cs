@@ -22,7 +22,7 @@ public class ArgumentExceptionHelpersTests
 
     [Theory]
     [MemberData(nameof(EnumerableData.NullOrEmptyData), MemberType = typeof(EnumerableData))]
-    public void ThrowIfNullOrEmpty_Should_ThrowArgumentException_When_ArgumentIsNullOrEmpty(IEnumerable<object> argument)
+    public void ThrowIfNullOrEmpty_Should_ThrowArgumentException_When_ArgumentIsNullOrEmpty(IEnumerable<object>? argument)
     {
         Action action = () => ArgumentExceptionHelpers.ThrowIfNullOrEmpty(argument, nameof(argument));
 
@@ -40,7 +40,7 @@ public class ArgumentExceptionHelpersTests
 
     [Theory]
     [MemberData(nameof(StringData.NullOrWhiteSpaceData), MemberType = typeof(StringData))]
-    public void ThrowIfNullOrWhiteSpace_Should_ThrowArgumentException_When_ArgumentIsNullOrEmpty(string argument)
+    public void ThrowIfNullOrWhiteSpace_Should_ThrowArgumentException_When_ArgumentIsNullOrEmpty(string? argument)
     {
         Action action = () => ArgumentExceptionHelpers.ThrowIfNullOrWhiteSpace(argument, nameof(argument));
 
