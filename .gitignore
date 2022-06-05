@@ -252,6 +252,7 @@ ServiceFabricBackup/
 .gitignore.bak
 *.rptproj.bak
 *.yml.bak
+README.md.bak
 
 # SQL Server files
 *.mdf

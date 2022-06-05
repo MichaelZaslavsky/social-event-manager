@@ -82,7 +82,8 @@ My Events:
     ```
 2.  Open folder `%APPDATA%/Microsoft/UserSecrets`
 
-    - Create a folder called `80a155b1-fb7a-44de-8788-4f5759c60ff6`
+    - Create "UserSecrets" folder if not exists
+    - Enter "UserSecrets" folder
     - Go into the created folder and create a file `secrets.json`
     - Edit the created file. You need to add `Kestrel:Certificates` key \
       For example:
