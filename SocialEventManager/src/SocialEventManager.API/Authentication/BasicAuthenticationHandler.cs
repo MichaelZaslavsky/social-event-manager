@@ -38,8 +38,8 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
             {
                 Claim[] claims = new[]
                 {
-                        new Claim(ClaimTypes.NameIdentifier, login.UserName),
-                    };
+                    new Claim(ClaimTypes.NameIdentifier, login.UserName),
+                };
 
                 ClaimsIdentity identity = new(claims, Scheme.Name);
                 ClaimsPrincipal principal = new(identity);

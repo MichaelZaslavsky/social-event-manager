@@ -40,5 +40,5 @@ public class Startup
     }
 
     public void Configure(ILoggerFactory loggerFactory, ITestOutputHelperAccessor accessor) =>
-        loggerFactory.AddProvider(new XunitTestOutputLoggerProvider(accessor, delegate { return true; }));
+        loggerFactory.AddProvider(new XunitTestOutputLoggerProvider(accessor, (_, __) => true));
 }

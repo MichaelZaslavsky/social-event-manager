@@ -11,10 +11,10 @@ public static class ServicesRegistrationCollectionExtensions
     {
         Assembly[] assembliesToScan = new[]
         {
-                Assembly.GetExecutingAssembly(),
-                Assembly.Load($"{nameof(SocialEventManager)}.{nameof(BLL)}"),
-                Assembly.Load($"{nameof(SocialEventManager)}.{nameof(DAL)}"),
-            };
+            Assembly.GetExecutingAssembly(),
+            Assembly.Load($"{nameof(SocialEventManager)}.{nameof(BLL)}"),
+            Assembly.Load($"{nameof(SocialEventManager)}.{nameof(DAL)}"),
+        };
 
         services.RegisterAssemblyPublicNonGenericClasses(assembliesToScan)
             .Where(c => c.Name.EndsWith(GlobalConstants.Service) || c.Name.EndsWith(GlobalConstants.Repository))
