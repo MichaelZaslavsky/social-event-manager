@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <CodeAnalysisRuleSet>..\..\items\Analyzers.ruleset</CodeAnalysisRuleSet>
     <UserSecretsId>80a155b1-fb7a-44de-8788-4f5759c60ff6</UserSecretsId>
