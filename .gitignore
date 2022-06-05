@@ -253,6 +253,7 @@ ServiceFabricBackup/
 *.rptproj.bak
 *.yml.bak
 README.md.bak
+pull-dog.json.bak
 
 # SQL Server files
 *.mdf
