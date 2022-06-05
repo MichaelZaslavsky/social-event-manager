@@ -1,12 +1,12 @@
 using SocialEventManager.Shared.Constants;
 
-namespace SocialEventManager.Shared.Helpers.Queries
+namespace SocialEventManager.Shared.Helpers.Queries;
+
+public static class RoleQueryHelpers
 {
-    public static class RoleQueryHelpers
+    public static string ExistsByRoleName(string userRolesAlias = "UR")
     {
-        public static string ExistsByRoleName(string userRolesAlias = "UR")
-        {
-            return $@"
+        return $@"
                 EXISTS
                 (
                     SELECT  TOP 1 1
@@ -14,6 +14,5 @@ namespace SocialEventManager.Shared.Helpers.Queries
                     WHERE   {userRolesAlias}.RoleId = R.Id
                             AND R.NormalizedName = @RoleName
                 )";
-        }
     }
 }

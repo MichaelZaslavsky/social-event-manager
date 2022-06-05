@@ -1,4 +1,3 @@
-namespace SocialEventManager.BLL.Models.Users
-{
-    public record UserClaimForCreationDto : UserClaimDto;
-}
+namespace SocialEventManager.BLL.Models.Users;
+
+public record UserClaimForCreationDto : UserClaimDto;

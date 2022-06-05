@@ -1,7 +1,6 @@
-namespace SocialEventManager.Infrastructure.Loggers
+namespace SocialEventManager.Infrastructure.Loggers;
+
+public interface IScopeInformation
 {
-    public interface IScopeInformation
-    {
-        IDictionary<string, string> HostScopeInfo { get; }
-    }
+    IDictionary<string, string> HostScopeInfo { get; }
 }

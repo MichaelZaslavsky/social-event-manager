@@ -1,11 +1,10 @@
-namespace SocialEventManager.API.Utilities.Logging
+namespace SocialEventManager.API.Utilities.Logging;
+
+public record UserInformation
 {
-    public record UserInformation
-    {
-        public string UserId { get; init; }
+    public string UserId { get; init; }
 
-        public string UserName { get; init; }
+    public string UserName { get; init; }
 
-        public IDictionary<string, IList<string>> UserClaims { get; init; }
-    }
+    public IDictionary<string, IList<string>> UserClaims { get; init; }
 }

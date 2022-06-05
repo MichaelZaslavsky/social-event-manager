@@ -1,13 +1,12 @@
 using SocialEventManager.DAL.Entities;
 using SocialEventManager.DAL.Infrastructure;
 
-namespace SocialEventManager.DAL.Repositories.Accounts
+namespace SocialEventManager.DAL.Repositories.Accounts;
+
+public class AccountsRepository : GenericRepository<Account>, IAccountsRepository
 {
-    public class AccountsRepository : GenericRepository<Account>, IAccountsRepository
+    public AccountsRepository(IDbSession session)
+        : base(session)
     {
-        public AccountsRepository(IDbSession session)
-            : base(session)
-        {
-        }
     }
 }

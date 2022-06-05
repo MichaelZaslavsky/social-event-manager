@@ -3,21 +3,20 @@ using System.Text;
 using SocialEventManager.Shared.Constants;
 using Xunit;
 
-namespace SocialEventManager.Tests.IntegrationTests.Fixtures
+namespace SocialEventManager.Tests.IntegrationTests.Fixtures;
+
+public class IntegrationTest : IClassFixture<ApiWebApplicationFactory>
 {
-    public class IntegrationTest : IClassFixture<ApiWebApplicationFactory>
+    public IntegrationTest(ApiWebApplicationFactory fixture)
     {
-        public IntegrationTest(ApiWebApplicationFactory fixture)
-        {
-            Factory = fixture;
-            Client = Factory.CreateClient();
+        Factory = fixture;
+        Client = Factory.CreateClient();
 
-            byte[] byteArray = Encoding.ASCII.GetBytes("TempUser:TempPassword");
-            Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(AuthConstants.Scheme, Convert.ToBase64String(byteArray));
-        }
-
-        protected ApiWebApplicationFactory Factory { get; }
-
-        protected HttpClient Client { get; }
+        byte[] byteArray = Encoding.ASCII.GetBytes("TempUser:TempPassword");
+        Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(AuthConstants.Scheme, Convert.ToBase64String(byteArray));
     }
+
+    protected ApiWebApplicationFactory Factory { get; }
+
+    protected HttpClient Client { get; }
 }

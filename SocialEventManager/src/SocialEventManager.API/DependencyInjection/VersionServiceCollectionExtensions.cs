@@ -2,24 +2,23 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using SocialEventManager.Shared.Constants;
 
-namespace SocialEventManager.API.DependencyInjection
-{
-    public static class VersionServiceCollectionExtensions
-    {
-        public static IServiceCollection AddSupportedApiVersioning(this IServiceCollection services)
-        {
-            services.AddApiVersioning(options =>
-            {
-                options.AssumeDefaultVersionWhenUnspecified = true;
-                options.DefaultApiVersion = ApiVersion.Default;
-                options.ReportApiVersions = true;
-                options.ApiVersionReader = ApiVersionReader.Combine(
-                    new HeaderApiVersionReader(ApiConstants.ApiVersion),
-                    new MediaTypeApiVersionReader(ApiConstants.ApiVersion),
-                    new QueryStringApiVersionReader(ApiConstants.Ver, ApiConstants.Version));
-            });
+namespace SocialEventManager.API.DependencyInjection;
 
-            return services;
-        }
+public static class VersionServiceCollectionExtensions
+{
+    public static IServiceCollection AddSupportedApiVersioning(this IServiceCollection services)
+    {
+        services.AddApiVersioning(options =>
+        {
+            options.AssumeDefaultVersionWhenUnspecified = true;
+            options.DefaultApiVersion = ApiVersion.Default;
+            options.ReportApiVersions = true;
+            options.ApiVersionReader = ApiVersionReader.Combine(
+                new HeaderApiVersionReader(ApiConstants.ApiVersion),
+                new MediaTypeApiVersionReader(ApiConstants.ApiVersion),
+                new QueryStringApiVersionReader(ApiConstants.Ver, ApiConstants.Version));
+        });
+
+        return services;
     }
 }

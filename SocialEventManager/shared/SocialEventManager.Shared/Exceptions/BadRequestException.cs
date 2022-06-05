@@ -1,19 +1,18 @@
-namespace SocialEventManager.Shared.Exceptions
+namespace SocialEventManager.Shared.Exceptions;
+
+public class BadRequestException : ApplicationException
 {
-    public class BadRequestException : ApplicationException
+    public BadRequestException()
     {
-        public BadRequestException()
-        {
-        }
+    }
 
-        public BadRequestException(string message)
-            : base(message)
-        {
-        }
+    public BadRequestException(string message)
+        : base(message)
+    {
+    }
 
-        public BadRequestException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+    public BadRequestException(string message, Exception innerException)
+        : base(message, innerException)
+    {
     }
 }

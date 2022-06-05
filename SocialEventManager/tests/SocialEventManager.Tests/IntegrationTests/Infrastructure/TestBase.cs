@@ -1,18 +1,17 @@
-namespace SocialEventManager.Tests.IntegrationTests.Infrastructure
+namespace SocialEventManager.Tests.IntegrationTests.Infrastructure;
+
+public class TestBase : IDisposable
 {
-    public class TestBase : IDisposable
+    protected TestBase(IInMemoryDatabase db)
     {
-        protected TestBase(IInMemoryDatabase db)
-        {
-            Db = db;
-        }
+        Db = db;
+    }
 
-        protected IInMemoryDatabase Db { get; }
+    protected IInMemoryDatabase Db { get; }
 
-        public void Dispose()
-        {
-            Db.CleanupAsync().GetAwaiter().GetResult();
-            GC.SuppressFinalize(this);
-        }
+    public void Dispose()
+    {
+        Db.CleanupAsync().GetAwaiter().GetResult();
+        GC.SuppressFinalize(this);
     }
 }

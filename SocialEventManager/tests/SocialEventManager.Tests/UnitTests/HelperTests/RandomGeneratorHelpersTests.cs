@@ -5,22 +5,21 @@ using SocialEventManager.Shared.Helpers;
 using Xunit;
 using Xunit.Categories;
 
-namespace SocialEventManager.Tests.UnitTests.HelperTests
-{
-    [UnitTest]
-    [Category(CategoryConstants.Helpers)]
-    public class RandomGeneratorHelpersTests
-    {
-        [Theory]
-        [InlineAutoData]
-        public void GenerateRandomValue_Should_ReturnValueOfRequestedLength_When_LengthIsPositive(int length)
-        {
-            string value = RandomGeneratorHelpers.GenerateRandomValue(length);
-            value.Length.Should().Be(length);
-        }
+namespace SocialEventManager.Tests.UnitTests.HelperTests;
 
-        [Fact]
-        public void NextInt32_Should_Succeed() =>
-            RandomGeneratorHelpers.NextInt32();
+[UnitTest]
+[Category(CategoryConstants.Helpers)]
+public class RandomGeneratorHelpersTests
+{
+    [Theory]
+    [InlineAutoData]
+    public void GenerateRandomValue_Should_ReturnValueOfRequestedLength_When_LengthIsPositive(int length)
+    {
+        string value = RandomGeneratorHelpers.GenerateRandomValue(length);
+        value.Length.Should().Be(length);
     }
+
+    [Fact]
+    public void NextInt32_Should_Succeed() =>
+        RandomGeneratorHelpers.NextInt32();
 }

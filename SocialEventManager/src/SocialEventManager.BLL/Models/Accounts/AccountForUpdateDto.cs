@@ -1,6 +1,5 @@
-namespace SocialEventManager.BLL.Models.Accounts
+namespace SocialEventManager.BLL.Models.Accounts;
+
+public record AccountForUpdateDto : AccountBase
 {
-    public record AccountForUpdateDto : AccountBase
-    {
-    }
 }

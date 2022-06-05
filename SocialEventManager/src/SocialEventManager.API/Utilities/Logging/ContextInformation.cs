@@ -1,15 +1,14 @@
-namespace SocialEventManager.API.Utilities.Logging
+namespace SocialEventManager.API.Utilities.Logging;
+
+public record ContextInformation
 {
-    public record ContextInformation
-    {
-        public string Host { get; init; }
+    public string Host { get; init; }
 
-        public string Method { get; init; }
+    public string Method { get; init; }
 
-        public string RemoteIpAddress { get; init; }
+    public string RemoteIpAddress { get; init; }
 
-        public string Protocol { get; init; }
+    public string Protocol { get; init; }
 
-        public UserInformation UserInfo { get; init; }
-    }
+    public UserInformation UserInfo { get; init; }
 }
