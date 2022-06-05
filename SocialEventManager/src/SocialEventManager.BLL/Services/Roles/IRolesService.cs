@@ -1,19 +1,18 @@
 using SocialEventManager.BLL.Models.Roles;
 
-namespace SocialEventManager.BLL.Services.Roles
+namespace SocialEventManager.BLL.Services.Roles;
+
+public interface IRolesService
 {
-    public interface IRolesService
-    {
-        Task<Guid> CreateRole(RoleForCreationDto roleForCreation);
+    Task<Guid> CreateRole(RoleForCreationDto roleForCreation);
 
-        Task<RoleDto> GetRole(Guid roleId);
+    Task<RoleDto> GetRole(Guid roleId);
 
-        Task<RoleDto> GetRole(string normalizedRoleName);
+    Task<RoleDto> GetRole(string normalizedRoleName);
 
-        Task<IEnumerable<RoleDto>> GetRoles(Guid userId);
+    Task<IEnumerable<RoleDto>> GetRoles(Guid userId);
 
-        Task<bool> UpdateRole(RoleForUpdateDto roleForUpdate);
+    Task<bool> UpdateRole(RoleForUpdateDto roleForUpdate);
 
-        Task<bool> DeleteRole(Guid roleId);
-    }
+    Task<bool> DeleteRole(Guid roleId);
 }

@@ -1,4 +1,3 @@
-namespace SocialEventManager.BLL.Models.Roles
-{
-    public record RoleForCreationDto : RoleBase;
-}
+namespace SocialEventManager.BLL.Models.Roles;
+
+public record RoleForCreationDto : RoleBase;

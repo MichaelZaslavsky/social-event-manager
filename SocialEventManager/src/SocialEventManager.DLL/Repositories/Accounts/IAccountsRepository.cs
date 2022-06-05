@@ -1,9 +1,8 @@
 using SocialEventManager.DAL.Entities;
 using SocialEventManager.DAL.Infrastructure;
 
-namespace SocialEventManager.DAL.Repositories.Accounts
+namespace SocialEventManager.DAL.Repositories.Accounts;
+
+public interface IAccountsRepository : IGenericRepository<Account>
 {
-    public interface IAccountsRepository : IGenericRepository<Account>
-    {
-    }
 }

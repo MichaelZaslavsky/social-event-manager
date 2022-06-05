@@ -1,10 +1,10 @@
-namespace SocialEventManager.Shared.Helpers.Queries
+namespace SocialEventManager.Shared.Helpers.Queries;
+
+public static class SchemaQueryHelpers
 {
-    public static class SchemaQueryHelpers
+    public static string CreateSchemaIfNotExists(string schemaName)
     {
-        public static string CreateSchemaIfNotExists(string schemaName)
-        {
-            return $@"
+        return $@"
                 IF NOT EXISTS
                 (
                     SELECT  TOP 1 1
@@ -19,6 +19,5 @@ namespace SocialEventManager.Shared.Helpers.Queries
                 BEGIN
                     SELECT 0;
                 END";
-        }
     }
 }

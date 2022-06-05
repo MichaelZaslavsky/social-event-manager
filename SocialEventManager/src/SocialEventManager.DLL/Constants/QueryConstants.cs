@@ -1,7 +1,6 @@
-namespace SocialEventManager.DAL.Constants
+namespace SocialEventManager.DAL.Constants;
+
+public static class QueryConstants
 {
-    public static class QueryConstants
-    {
-        public const string SelectScopeIdentity = "SELECT SCOPE_IDENTITY();";
-    }
+    public const string SelectScopeIdentity = "SELECT SCOPE_IDENTITY();";
 }

@@ -1,23 +1,22 @@
 using SocialEventManager.BLL.Models.Accounts;
 
-namespace SocialEventManager.BLL.Services.Accounts
+namespace SocialEventManager.BLL.Services.Accounts;
+
+public interface IAccountsService
 {
-    public interface IAccountsService
-    {
-        Task<int> CreateAccount(AccountForCreationDto accountForCreation);
+    Task<int> CreateAccount(AccountForCreationDto accountForCreation);
 
-        Task<AccountDto> GetAccount(Guid userId);
+    Task<AccountDto> GetAccount(Guid userId);
 
-        Task<AccountDto> GetAccountByUserName(string userName);
+    Task<AccountDto> GetAccountByUserName(string userName);
 
-        Task<AccountDto> GetAccountByEmail(string email);
+    Task<AccountDto> GetAccountByEmail(string email);
 
-        Task<IEnumerable<AccountDto>> GetAccounts(string roleName);
+    Task<IEnumerable<AccountDto>> GetAccounts(string roleName);
 
-        Task<IEnumerable<AccountDto>> GetAccounts(string claimType, string claimValue);
+    Task<IEnumerable<AccountDto>> GetAccounts(string claimType, string claimValue);
 
-        Task<bool> UpdateAccount(AccountForUpdateDto accountForUpdate);
+    Task<bool> UpdateAccount(AccountForUpdateDto accountForUpdate);
 
-        Task<bool> DeleteAccount(Guid userId);
-    }
+    Task<bool> DeleteAccount(Guid userId);
 }

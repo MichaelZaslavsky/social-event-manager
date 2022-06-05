@@ -1,11 +1,10 @@
-namespace SocialEventManager.DAL.Infrastructure
+namespace SocialEventManager.DAL.Infrastructure;
+
+public interface IUnitOfWork : IDisposable
 {
-    public interface IUnitOfWork : IDisposable
-    {
-        void BeginTransaction();
+    void BeginTransaction();
 
-        void Commit();
+    void Commit();
 
-        void Rollback();
-    }
+    void Rollback();
 }

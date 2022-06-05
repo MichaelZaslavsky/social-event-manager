@@ -5,58 +5,57 @@ using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Tests.Common.DataMembers;
 using SocialEventManager.Tests.Common.Helpers;
 
-namespace SocialEventManager.Tests.DataMembers.Common
+namespace SocialEventManager.Tests.DataMembers.Common;
+
+public static class EnumerableData
 {
-    public static class EnumerableData
+    public static IEnumerable<object[]> EmptyData
     {
-        public static IEnumerable<object[]> EmptyData
+        get
         {
-            get
-            {
-                yield return new object[] { Enumerable.Empty<int>(), true };
-                yield return new object[] { TestRandomGeneratorHelpers.NextInt32s(), false };
-            }
+            yield return new object[] { Enumerable.Empty<int>(), true };
+            yield return new object[] { TestRandomGeneratorHelpers.NextInt32s(), false };
         }
+    }
 
-        public static IEnumerable<object[]> NullOrEmptyData
+    public static IEnumerable<object[]> NullOrEmptyData
+    {
+        get
         {
-            get
-            {
-                yield return new object[] { null, true };
-                yield return new object[] { Enumerable.Empty<int>(), true };
-                yield return new object[] { TestRandomGeneratorHelpers.NextInt32s(), false };
-            }
+            yield return new object[] { null, true };
+            yield return new object[] { Enumerable.Empty<int>(), true };
+            yield return new object[] { TestRandomGeneratorHelpers.NextInt32s(), false };
         }
+    }
 
-        public static IEnumerable<object[]> NotNullAndAnyData
+    public static IEnumerable<object[]> NotNullAndAnyData
+    {
+        get
         {
-            get
-            {
-                yield return new object[] { TestRandomGeneratorHelpers.NextInt32s(), true };
-                yield return new object[] { Enumerable.Empty<int>(), false };
-                yield return new object[] { null, false };
-            }
+            yield return new object[] { TestRandomGeneratorHelpers.NextInt32s(), true };
+            yield return new object[] { Enumerable.Empty<int>(), false };
+            yield return new object[] { null, false };
         }
+    }
 
-        public static IEnumerable<object[]> UpdateInForEachData
+    public static IEnumerable<object[]> UpdateInForEachData
+    {
+        get
         {
-            get
+            yield return new object[]
             {
-                yield return new object[]
-                {
                     new List<Role>
                     {
                         RoleData.GetMockRole(RoleType.User.GetDescription()),
                         RoleData.GetMockRole(RoleType.Admin.GetDescription()),
                     },
                     DataConstants.LoremIpsum,
-                };
-                yield return new object[]
-                {
+            };
+            yield return new object[]
+            {
                     new List<Role>(),
                     DataConstants.LoremIpsum,
-                };
-            }
+            };
         }
     }
 }

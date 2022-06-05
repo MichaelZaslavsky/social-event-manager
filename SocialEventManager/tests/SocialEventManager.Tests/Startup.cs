@@ -10,36 +10,35 @@ using SocialEventManager.Tests.IntegrationTests.Infrastructure;
 using Xunit.DependencyInjection;
 using Xunit.DependencyInjection.Logging;
 
-namespace SocialEventManager.Tests
+namespace SocialEventManager.Tests;
+
+public class Startup
 {
-    public class Startup
+    public IConfiguration Configuration { get; set; }
+
+    public void ConfigureServices(IServiceCollection services)
     {
-        public IConfiguration Configuration { get; set; }
+        Configuration = new ConfigurationBuilder()
+            .AddEnvironmentVariables()
+            .AddUserSecrets<Startup>()
+            .Build();
 
-        public void ConfigureServices(IServiceCollection services)
+        services.AddLogging(builder => builder.SetMinimumLevel(LogLevel.Debug))
+            .AddSingleton<IInMemoryDatabase, InMemoryDatabase>(_ =>
+                new InMemoryDatabase(Configuration.GetConnectionString(DbConstants.SocialEventManagerTest)))
+            .AddSingleton(Configuration)
+            .RegisterServices()
+            .AddRedisClients(Configuration);
+
+        services.AddScoped(sp =>
         {
-            Configuration = new ConfigurationBuilder()
-                .AddEnvironmentVariables()
-                .AddUserSecrets<Startup>()
-                .Build();
+            IInMemoryDatabase provider = sp.GetRequiredService<IInMemoryDatabase>();
+            Mock<IDbSession> mock = provider.GetMockDbSession();
 
-            services.AddLogging(builder => builder.SetMinimumLevel(LogLevel.Debug))
-                .AddSingleton<IInMemoryDatabase, InMemoryDatabase>(_ =>
-                    new InMemoryDatabase(Configuration.GetConnectionString(DbConstants.SocialEventManagerTest)))
-                .AddSingleton(Configuration)
-                .RegisterServices()
-                .AddRedisClients(Configuration);
-
-            services.AddScoped(sp =>
-            {
-                IInMemoryDatabase provider = sp.GetRequiredService<IInMemoryDatabase>();
-                Mock<IDbSession> mock = provider.GetMockDbSession();
-
-                return mock.Object;
-            });
-        }
-
-        public void Configure(ILoggerFactory loggerFactory, ITestOutputHelperAccessor accessor) =>
-            loggerFactory.AddProvider(new XunitTestOutputLoggerProvider(accessor, delegate { return true; }));
+            return mock.Object;
+        });
     }
+
+    public void Configure(ILoggerFactory loggerFactory, ITestOutputHelperAccessor accessor) =>
+        loggerFactory.AddProvider(new XunitTestOutputLoggerProvider(accessor, delegate { return true; }));
 }

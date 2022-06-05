@@ -4,18 +4,17 @@ using SocialEventManager.BLL.Models.Identity;
 using SocialEventManager.BLL.Models.Users;
 using SocialEventManager.DAL.Entities;
 
-namespace SocialEventManager.BLL.MappingProfiles
+namespace SocialEventManager.BLL.MappingProfiles;
+
+public class UserProfile : Profile
 {
-    public class UserProfile : Profile
+    public UserProfile()
     {
-        public UserProfile()
-        {
-            CreateMap<RegisterUserDto, ApplicationUser>();
-            CreateMap<UserClaim, UserClaimDto>();
-            CreateMap<Claim, UserClaimDto>();
-            CreateMap<Claim, UserClaimForCreationDto>();
-            CreateMap<UserClaimForCreationDto, UserClaim>();
-            CreateMap<UserClaimForUpdateDto, UserClaim>();
-        }
+        CreateMap<RegisterUserDto, ApplicationUser>();
+        CreateMap<UserClaim, UserClaimDto>();
+        CreateMap<Claim, UserClaimDto>();
+        CreateMap<Claim, UserClaimForCreationDto>();
+        CreateMap<UserClaimForCreationDto, UserClaim>();
+        CreateMap<UserClaimForUpdateDto, UserClaim>();
     }
 }

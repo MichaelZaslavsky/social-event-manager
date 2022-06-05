@@ -1,17 +1,16 @@
 using SocialEventManager.BLL.Models.Users;
 
-namespace SocialEventManager.BLL.Services.Users
+namespace SocialEventManager.BLL.Services.Users;
+
+public interface IUserClaimsService
 {
-    public interface IUserClaimsService
-    {
-        Task CreateUserClaims(IEnumerable<UserClaimForCreationDto> userClaimsForCreation);
+    Task CreateUserClaims(IEnumerable<UserClaimForCreationDto> userClaimsForCreation);
 
-        Task<IEnumerable<UserClaimDto>> GetUserClaims(Guid userId);
+    Task<IEnumerable<UserClaimDto>> GetUserClaims(Guid userId);
 
-        Task<IEnumerable<UserClaimDto>> GetUserClaims(string type, string value);
+    Task<IEnumerable<UserClaimDto>> GetUserClaims(string type, string value);
 
-        Task<bool> ReplaceUserClaim(UserClaimBase currentUserClaim, UserClaimForUpdateDto newUserClaimForUpdate);
+    Task<bool> ReplaceUserClaim(UserClaimBase currentUserClaim, UserClaimForUpdateDto newUserClaimForUpdate);
 
-        Task<bool> DeleteUserClaims(IEnumerable<UserClaimBase> userClaimsBase, Guid userId);
-    }
+    Task<bool> DeleteUserClaims(IEnumerable<UserClaimBase> userClaimsBase, Guid userId);
 }

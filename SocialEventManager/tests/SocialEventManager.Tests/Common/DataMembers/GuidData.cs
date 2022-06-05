@@ -1,12 +1,12 @@
-namespace SocialEventManager.Tests.Common.DataMembers
+namespace SocialEventManager.Tests.Common.DataMembers;
+
+public static class GuidData
 {
-    public static class GuidData
+    public static IEnumerable<object[]> NotDefaultGuidData
     {
-        public static IEnumerable<object[]> NotDefaultGuidData
+        get
         {
-            get
-            {
-                return new List<object[]>
+            return new List<object[]>
                 {
                     new object[]
                     {
@@ -19,7 +19,6 @@ namespace SocialEventManager.Tests.Common.DataMembers
                         true,
                     },
                 };
-            }
         }
     }
 }

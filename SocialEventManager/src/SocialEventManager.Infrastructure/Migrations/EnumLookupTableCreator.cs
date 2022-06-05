@@ -9,126 +9,126 @@ using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Shared.Helpers.Queries;
 using SocialEventManager.Shared.Utilities.Attributes;
 
-namespace SocialEventManager.Infrastructure.Migrations
+namespace SocialEventManager.Infrastructure.Migrations;
+
+public class EnumLookupTableCreator
 {
-    public class EnumLookupTableCreator
+    private const string TypeName = "LoadedValues";
+    private readonly SqlConnection _connection;
+
+    public EnumLookupTableCreator(SqlConnection connection)
     {
-        private const string TypeName = "LoadedValues";
-        private readonly SqlConnection _connection;
+        _connection = connection;
+    }
 
-        public EnumLookupTableCreator(SqlConnection connection)
+    public async Task Run()
+    {
+        Log.Debug($"[{_connection.Database}]: Checking for {SchemaConstants.Enum}...");
+
+        await EnsureSchemaExists();
+        HashSet<string> enumTableNames = await GetEnumTableNames();
+
+        IEnumerable<Type> types = GetEnumTypes(DbTypes.SocialEventManager);
+        IEnumerable<Task> upsertLookupTasks = types.Select(type => MergeLookup(type, enumTableNames));
+
+        await Task.WhenAll(upsertLookupTasks);
+
+        Log.Debug($"[{_connection.Database}]: Synced all platform enum tables.");
+    }
+
+    #region Private Methods
+
+    private async Task EnsureSchemaExists()
+    {
+        await CreateSchemaIfNotExists();
+        await RecreateType();
+    }
+
+    private async Task CreateSchemaIfNotExists()
+    {
+        Log.Debug($"[{_connection.Database}]: Checking for {SchemaConstants.Enum}...");
+
+        int rowCount = await _connection.ExecuteScalarAsync<int>(SchemaQueryHelpers.CreateSchemaIfNotExists(SchemaConstants.Enum));
+
+        if (rowCount == 1)
         {
-            _connection = connection;
+            Log.Debug($"[{_connection.Database}]: Created schema {SchemaConstants.Enum}.");
         }
+    }
 
-        public async Task Run()
+    private async Task RecreateType()
+    {
+        Log.Debug($"[{_connection.Database}]: Recreating {SchemaConstants.Enum}.{TypeName}...");
+        await _connection.ExecuteNonQueryAsync(TableQueryHelpers.RecreateType(SchemaConstants.Enum, TypeName));
+    }
+
+    private async Task<HashSet<string>> GetEnumTableNames()
+    {
+        string query = TableQueryHelpers.GetTableNames(SchemaConstants.Enum);
+
+        using SqlCommand cmd = new(query, _connection);
+        using SqlDataReader reader = await cmd.ExecuteReaderAsync();
+
+        return reader.Cast<IDataRecord>().Select(r => (string)r[0]).ToHashSet();
+    }
+
+    private static IEnumerable<Type> GetEnumTypes(DbTypes dbTypes)
+    {
+        Assembly assembly = Assembly.Load($"{nameof(SocialEventManager)}.{nameof(DAL)}");
+        return GetEnumTypes(dbTypes, assembly);
+    }
+
+    private static IEnumerable<Type> GetEnumTypes(DbTypes dbTypes, Assembly assembly)
+    {
+        foreach (Type type in assembly.GetTypes().Where(t => t.IsEnum))
         {
-            Log.Debug($"[{_connection.Database}]: Checking for {SchemaConstants.Enum}...");
+            object[] attributes = type.GetCustomAttributes(typeof(DbEntityAttribute), inherit: true);
 
-            await EnsureSchemaExists();
-            HashSet<string> enumTableNames = await GetEnumTableNames();
-
-            IEnumerable<Type> types = GetEnumTypes(DbTypes.SocialEventManager);
-            IEnumerable<Task> upsertLookupTasks = types.Select(type => MergeLookup(type, enumTableNames));
-
-            await Task.WhenAll(upsertLookupTasks);
-
-            Log.Debug($"[{_connection.Database}]: Synced all platform enum tables.");
-        }
-
-        #region Private Methods
-
-        private async Task EnsureSchemaExists()
-        {
-            await CreateSchemaIfNotExists();
-            await RecreateType();
-        }
-
-        private async Task CreateSchemaIfNotExists()
-        {
-            Log.Debug($"[{_connection.Database}]: Checking for {SchemaConstants.Enum}...");
-
-            int rowCount = await _connection.ExecuteScalarAsync<int>(SchemaQueryHelpers.CreateSchemaIfNotExists(SchemaConstants.Enum));
-
-            if (rowCount == 1)
+            if (attributes.Length == 0)
             {
-                Log.Debug($"[{_connection.Database}]: Created schema {SchemaConstants.Enum}.");
+                continue;
             }
-        }
 
-        private async Task RecreateType()
-        {
-            Log.Debug($"[{_connection.Database}]: Recreating {SchemaConstants.Enum}.{TypeName}...");
-            await _connection.ExecuteNonQueryAsync(TableQueryHelpers.RecreateType(SchemaConstants.Enum, TypeName));
-        }
-
-        private async Task<HashSet<string>> GetEnumTableNames()
-        {
-            string query = TableQueryHelpers.GetTableNames(SchemaConstants.Enum);
-
-            using SqlCommand cmd = new(query, _connection);
-            using SqlDataReader reader = await cmd.ExecuteReaderAsync();
-
-            return reader.Cast<IDataRecord>().Select(r => (string)r[0]).ToHashSet();
-        }
-
-        private static IEnumerable<Type> GetEnumTypes(DbTypes dbTypes)
-        {
-            Assembly assembly = Assembly.Load($"{nameof(SocialEventManager)}.{nameof(DAL)}");
-            return GetEnumTypes(dbTypes, assembly);
-        }
-
-        private static IEnumerable<Type> GetEnumTypes(DbTypes dbTypes, Assembly assembly)
-        {
-            foreach (Type type in assembly.GetTypes().Where(t => t.IsEnum))
+            foreach (object attribute in attributes)
             {
-                object[] attributes = type.GetCustomAttributes(typeof(DbEntityAttribute), inherit: true);
+                DbEntityAttribute dbEntity = attribute as DbEntityAttribute;
 
-                if (attributes.Length == 0)
+                if (dbTypes != dbEntity.DbTypes)
                 {
                     continue;
                 }
 
-                foreach (object attribute in attributes)
-                {
-                    DbEntityAttribute dbEntity = attribute as DbEntityAttribute;
-
-                    if (dbTypes != dbEntity.DbTypes)
-                    {
-                        continue;
-                    }
-
-                    yield return type;
-                }
+                yield return type;
             }
         }
+    }
 
-        private async Task MergeLookup(Type type, HashSet<string> tableNames)
+    private async Task MergeLookup(Type type, HashSet<string> tableNames)
+    {
+        string tableName = type.Name;
+
+        if (!tableNames.Contains(tableName))
         {
-            string tableName = type.Name;
-
-            if (!tableNames.Contains(tableName))
-            {
-                await CreateTable(tableName);
-            }
-
-            MergeValues(type, tableName);
+            await CreateTable(tableName);
         }
 
-        private async Task CreateTable(string tableName)
-        {
-            Log.Debug($"[{_connection.Database}]: Creating table {SchemaConstants.Enum}.{tableName}...");
+        MergeValues(type, tableName);
+    }
 
-            string command = TableQueryHelpers.CreateBasicTable(SchemaConstants.Enum, tableName);
-            await _connection.ExecuteNonQueryAsync(command);
+    private async Task CreateTable(string tableName)
+    {
+        Log.Debug($"[{_connection.Database}]: Creating table {SchemaConstants.Enum}.{tableName}...");
 
-            Log.Debug($"[{_connection.Database}]: Created table {SchemaConstants.Enum}.{tableName}.");
-        }
+        string command = TableQueryHelpers.CreateBasicTable(SchemaConstants.Enum, tableName);
+        await _connection.ExecuteNonQueryAsync(command);
 
-        private void MergeValues(Type type, string tableName)
-        {
-            using SqlCommand cmd = _connection.CreateCommand();
-            cmd.CommandText = $@"
+        Log.Debug($"[{_connection.Database}]: Created table {SchemaConstants.Enum}.{tableName}.");
+    }
+
+    private void MergeValues(Type type, string tableName)
+    {
+        using SqlCommand cmd = _connection.CreateCommand();
+        cmd.CommandText = $@"
                     MERGE   {SchemaConstants.Enum}.{tableName} dst
                     USING   @src as src ON dst.Id = Src.Id
                     WHEN MATCHED THEN
@@ -139,27 +139,26 @@ namespace SocialEventManager.Infrastructure.Migrations
                     WHEN NOT MATCHED BY SOURCE THEN
                         DELETE;";
 
-            DataTable values = type.GetFields()
-                .Where(f =>
-                    f.DeclaringType == type // Don't get stuff inherited from Enum base class/type.
-                    && (f.Attributes & FieldAttributes.Literal) != 0) // Get constants, ignore compiler-generated stuff.
-                .Select(f => new
-                {
-                    Id = (int)f.GetRawConstantValue(),
-                    f.Name,
-                    f.GetCustomAttribute<DescriptionAttribute>()?.Description,
-                })
-                .ToDataTable();
+        DataTable values = type.GetFields()
+            .Where(f =>
+                f.DeclaringType == type // Don't get stuff inherited from Enum base class/type.
+                && (f.Attributes & FieldAttributes.Literal) != 0) // Get constants, ignore compiler-generated stuff.
+            .Select(f => new
+            {
+                Id = (int)f.GetRawConstantValue(),
+                f.Name,
+                f.GetCustomAttribute<DescriptionAttribute>()?.Description,
+            })
+            .ToDataTable();
 
-            SqlParameter param = cmd.Parameters.AddWithValue("@src", values);
-            param.SqlDbType = SqlDbType.Structured;
-            param.TypeName = $"{SchemaConstants.Enum}.{TypeName}";
+        SqlParameter param = cmd.Parameters.AddWithValue("@src", values);
+        param.SqlDbType = SqlDbType.Structured;
+        param.TypeName = $"{SchemaConstants.Enum}.{TypeName}";
 
-            cmd.ExecuteNonQuery();
+        cmd.ExecuteNonQuery();
 
-            Log.Debug($"Synced enums values for {tableName}.");
-        }
-
-        #endregion Private Methods
+        Log.Debug($"Synced enums values for {tableName}.");
     }
+
+    #endregion Private Methods
 }

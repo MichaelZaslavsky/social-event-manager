@@ -4,34 +4,34 @@ using SocialEventManager.DAL.Entities;
 using SocialEventManager.DAL.Infrastructure;
 using SocialEventManager.Shared.Constants;
 
-namespace SocialEventManager.DAL.Repositories.Users
+namespace SocialEventManager.DAL.Repositories.Users;
+
+public class UserClaimsRepository : GenericRepository<UserClaim>, IUserClaimsRepository
 {
-    public class UserClaimsRepository : GenericRepository<UserClaim>, IUserClaimsRepository
+    private readonly IDbSession _session;
+
+    public UserClaimsRepository(IDbSession session)
+        : base(session)
     {
-        private readonly IDbSession _session;
+        _session = session;
+    }
 
-        public UserClaimsRepository(IDbSession session)
-            : base(session)
-        {
-            _session = session;
-        }
-
-        public async Task<IEnumerable<UserClaim>> GetUserClaims(string type, string value)
-        {
-            string sql = $@"
+    public async Task<IEnumerable<UserClaim>> GetUserClaims(string type, string value)
+    {
+        string sql = $@"
                 SELECT  UC.*
                 FROM    {TableNameConstants.UserClaims} UC
                 WHERE   UC.[Type] = @Type
                         AND UC.[Value] = @Value;";
 
-            return await _session.Connection.QueryAsync<UserClaim>(sql, new DynamicParameters(new { type, value }), _session.Transaction);
-        }
+        return await _session.Connection.QueryAsync<UserClaim>(sql, new DynamicParameters(new { type, value }), _session.Transaction);
+    }
 
-        public async Task<bool> DeleteUserClaims(IEnumerable<UserClaim> userClaims)
-        {
-            string userClaimsJson = JsonConvert.SerializeObject(userClaims);
+    public async Task<bool> DeleteUserClaims(IEnumerable<UserClaim> userClaims)
+    {
+        string userClaimsJson = JsonConvert.SerializeObject(userClaims);
 
-            string sql = $@"
+        string sql = $@"
                 DELETE  UC
 	            FROM    {TableNameConstants.UserClaims} UC
                         INNER JOIN OPENJSON(@UserClaimsJson)
@@ -44,7 +44,6 @@ namespace SocialEventManager.DAL.Repositories.Users
                             AND UC.[Type] = UCJ.[Type]
                             AND UC.[Value] = UCJ.[Value];";
 
-            return await _session.Connection.ExecuteAsync(sql, new DynamicParameters(new { userClaimsJson }), _session.Transaction) > 0;
-        }
+        return await _session.Connection.ExecuteAsync(sql, new DynamicParameters(new { userClaimsJson }), _session.Transaction) > 0;
     }
 }
