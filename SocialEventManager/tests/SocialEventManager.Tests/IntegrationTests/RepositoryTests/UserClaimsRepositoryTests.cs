@@ -69,7 +69,6 @@ public class UserClaimsRepositoryTests : RepositoryTestBase<IUserClaimsRepositor
 
     [Theory]
     [MemberData(nameof(UserClaimData.UserClaimsWithSameTypeAndValue), MemberType = typeof(UserClaimData))]
-
     public async Task GetUserClaims_Should_ReturnUserClaims_When_FilteringByExistingTypeAndValueOfTheFirstUser(IEnumerable<UserClaim> userClaims)
     {
         foreach (UserClaim userClaim in userClaims)
