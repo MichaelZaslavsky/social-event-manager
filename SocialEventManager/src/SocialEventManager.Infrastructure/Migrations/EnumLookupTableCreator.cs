@@ -91,7 +91,7 @@ public class EnumLookupTableCreator
 
             foreach (object attribute in attributes)
             {
-                DbEntityAttribute dbEntity = attribute as DbEntityAttribute;
+                DbEntityAttribute dbEntity = (attribute as DbEntityAttribute)!;
 
                 if (dbTypes != dbEntity.DbTypes)
                 {
@@ -145,7 +145,7 @@ public class EnumLookupTableCreator
                 && (f.Attributes & FieldAttributes.Literal) != 0) // Get constants, ignore compiler-generated stuff.
             .Select(f => new
             {
-                Id = (int)f.GetRawConstantValue(),
+                Id = (int?)f.GetRawConstantValue(),
                 f.Name,
                 f.GetCustomAttribute<DescriptionAttribute>()?.Description,
             })

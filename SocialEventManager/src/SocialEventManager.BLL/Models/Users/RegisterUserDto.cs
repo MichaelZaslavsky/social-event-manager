@@ -14,14 +14,14 @@ public record RegisterUserDto
     [Required]
     [MinLength(LengthConstants.Length2)]
     [MaxLength(LengthConstants.Length255)]
-    public string UserName { get; init; }
+    public string UserName { get; init; } = null!;
 
     /// <summary>
     /// Gets the password of the registered user.
     /// </summary>
     [Required]
     [DataType(DataType.Password)]
-    public string Password { get; init; }
+    public string Password { get; init; } = null!;
 
     /// <summary>
     /// Gets the confirmation password of the registered user.
@@ -30,12 +30,12 @@ public record RegisterUserDto
     [Required]
     [DataType(DataType.Password)]
     [Compare(nameof(Password))]
-    public string ConfirmPassword { get; init; }
+    public string ConfirmPassword { get; init; } = null!;
 
     /// <summary>
     /// Gets the email of the registered user.
     /// </summary>
     [Required]
     [EmailAddress]
-    public string Email { get; init; }
+    public string Email { get; init; } = null!;
 }

@@ -22,7 +22,7 @@ public static class EnumerableData
     {
         get
         {
-            yield return new object[] { null, true };
+            yield return new object[] { null!, true };
             yield return new object[] { Enumerable.Empty<int>(), true };
             yield return new object[] { TestRandomGeneratorHelpers.NextInt32s(), false };
         }
@@ -34,7 +34,7 @@ public static class EnumerableData
         {
             yield return new object[] { TestRandomGeneratorHelpers.NextInt32s(), true };
             yield return new object[] { Enumerable.Empty<int>(), false };
-            yield return new object[] { null, false };
+            yield return new object[] { null!, false };
         }
     }
 

@@ -18,7 +18,7 @@ public class RequestHeaderMatchesMediaTypeAttribute : Attribute, IActionConstrai
         _requestHeaderToMatch = requestHeaderToMatch;
 
         // Check if the inputted media types are valid media types and add them to the _mediaTypes collection.
-        if (MediaTypeHeaderValue.TryParse(mediaType, out MediaTypeHeaderValue parsedMediaType))
+        if (MediaTypeHeaderValue.TryParse(mediaType, out MediaTypeHeaderValue? parsedMediaType))
         {
             _mediaTypes.Add(parsedMediaType);
         }
@@ -29,7 +29,7 @@ public class RequestHeaderMatchesMediaTypeAttribute : Attribute, IActionConstrai
 
         foreach (string otherMediaType in otherMediaTypes)
         {
-            if (MediaTypeHeaderValue.TryParse(otherMediaType, out MediaTypeHeaderValue parsedOtherMediaType))
+            if (MediaTypeHeaderValue.TryParse(otherMediaType, out MediaTypeHeaderValue? parsedOtherMediaType))
             {
                 _mediaTypes.Add(parsedOtherMediaType);
             }

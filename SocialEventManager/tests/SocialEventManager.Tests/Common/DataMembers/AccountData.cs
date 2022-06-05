@@ -152,10 +152,10 @@ public static class AccountData
         }
     }
 
-    public static Account GetMockAccount(Guid? userId = null, int id = 1, string userName = null, string passwordHash = null, string email = null,
-        bool emailConfirmed = false, string phoneNumber = null, bool phoneNumberConfirmed = false, DateTime? lockoutEnd = null, bool lockoutEnabled = false,
-        int accessFailedCount = 0, string concurrencyStamp = null, string securityStamp = null, bool twoFactorEnabled = false,
-        string normalizedEmail = null, string normalizedUserName = null)
+    public static Account GetMockAccount(Guid? userId = null, int id = 1, string? userName = null, string? passwordHash = null, string? email = null,
+        bool emailConfirmed = false, string? phoneNumber = null, bool phoneNumberConfirmed = false, DateTime? lockoutEnd = null, bool lockoutEnabled = false,
+        int accessFailedCount = 0, string? concurrencyStamp = null, string? securityStamp = null, bool twoFactorEnabled = false,
+        string? normalizedEmail = null, string? normalizedUserName = null)
     {
         email ??= $"{RandomGeneratorHelpers.GenerateRandomValue()}@gmail.com";
         userName ??= RandomGeneratorHelpers.GenerateRandomValue();
@@ -174,7 +174,7 @@ public static class AccountData
             LockoutEnabled = lockoutEnabled,
             AccessFailedCount = accessFailedCount,
             NormalizedEmail = normalizedEmail ?? email.ToUpper(CultureInfo.InvariantCulture),
-            NormalizedUserName = normalizedUserName ?? userName.ToUpper(CultureInfo.InvariantCulture),
+            NormalizedUserName = normalizedUserName ?? userName!.ToUpper(CultureInfo.InvariantCulture),
             ConcurrencyStamp = concurrencyStamp ?? Guid.NewGuid().ToString(),
             SecurityStamp = securityStamp ?? Guid.NewGuid().ToString(),
             TwoFactorEnabled = twoFactorEnabled,
@@ -186,7 +186,7 @@ public static class AccountData
     private static IEnumerable<Account> GetMockAccount(bool sameUserId = false, bool sameEmail = false, int itemsCount = 2)
     {
         Guid? userId = sameUserId ? Guid.NewGuid() : null;
-        string email = sameEmail ? $"{RandomGeneratorHelpers.GenerateRandomValue()}@gmail.com" : null;
+        string? email = sameEmail ? $"{RandomGeneratorHelpers.GenerateRandomValue()}@gmail.com" : null;
 
         var accounts = new Account[itemsCount];
 
@@ -201,31 +201,31 @@ public static class AccountData
     private static Account GetMockAccount(bool nullifyEmail = false, bool nullifyNormalizedEmail = false, bool nullifyUserName = false,
         bool nullifyNormalizedUserName = false, bool nullifyConcurrencyStamp = false, bool nullifySecurityStamp = false, bool nullifyPasswordHash = false)
     {
-        string email = nullifyEmail ? null : $"{RandomGeneratorHelpers.GenerateRandomValue()}@gmail.com";
-        string normalizedEmail = nullifyNormalizedEmail ? null : $"{RandomGeneratorHelpers.GenerateRandomValue()}@gmail.com".ToUpper(CultureInfo.InvariantCulture);
-        string userName = nullifyUserName ? null : RandomGeneratorHelpers.GenerateRandomValue();
-        string normalizedUserName = nullifyNormalizedUserName ? null : RandomGeneratorHelpers.GenerateRandomValue();
-        string concurrencyStamp = nullifyConcurrencyStamp ? null : Guid.NewGuid().ToString();
-        string securityStamp = nullifySecurityStamp ? null : Guid.NewGuid().ToString();
-        string passwordHash = nullifyPasswordHash ? null : Guid.NewGuid().ToString();
+        string? email = nullifyEmail ? null : $"{RandomGeneratorHelpers.GenerateRandomValue()}@gmail.com";
+        string? normalizedEmail = nullifyNormalizedEmail ? null : $"{RandomGeneratorHelpers.GenerateRandomValue()}@gmail.com".ToUpper(CultureInfo.InvariantCulture);
+        string? userName = nullifyUserName ? null : RandomGeneratorHelpers.GenerateRandomValue();
+        string? normalizedUserName = nullifyNormalizedUserName ? null : RandomGeneratorHelpers.GenerateRandomValue();
+        string? concurrencyStamp = nullifyConcurrencyStamp ? null : Guid.NewGuid().ToString();
+        string? securityStamp = nullifySecurityStamp ? null : Guid.NewGuid().ToString();
+        string? passwordHash = nullifyPasswordHash ? null : Guid.NewGuid().ToString();
 
         return new Account
         {
             Id = 1,
             UserId = Guid.NewGuid(),
-            UserName = userName,
-            PasswordHash = passwordHash,
-            Email = email,
+            UserName = userName!,
+            PasswordHash = passwordHash!,
+            Email = email!,
             EmailConfirmed = false,
             PhoneNumber = DataConstants.PhoneNumber,
             PhoneNumberConfirmed = false,
             LockoutEnd = null,
             LockoutEnabled = false,
             AccessFailedCount = 0,
-            NormalizedEmail = normalizedEmail,
-            NormalizedUserName = normalizedUserName,
-            ConcurrencyStamp = concurrencyStamp,
-            SecurityStamp = securityStamp,
+            NormalizedEmail = normalizedEmail!,
+            NormalizedUserName = normalizedUserName!,
+            ConcurrencyStamp = concurrencyStamp!,
+            SecurityStamp = securityStamp!,
             TwoFactorEnabled = false,
         };
     }

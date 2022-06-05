@@ -118,7 +118,7 @@ public class ExtendedRepositoryTests : RepositoryTestBase<IRolesRepository, Role
     {
         await Db.InsertAsync(role);
 
-        Role actualRole = await Repository.GetSingleOrDefaultAsync(role.Name, nameof(Role.Name));
+        Role? actualRole = await Repository.GetSingleOrDefaultAsync(role.Name, nameof(Role.Name));
         actualRole.Should().BeEquivalentTo(role);
     }
 
@@ -126,7 +126,7 @@ public class ExtendedRepositoryTests : RepositoryTestBase<IRolesRepository, Role
     [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
     public async Task GetSingleOrDefaultAsync_Should_ReturnNull_When_FilteringByNonExistingRoleName(Role role)
     {
-        Role actualRole = await Repository.GetSingleOrDefaultAsync(role.Name, nameof(Role.Name));
+        Role? actualRole = await Repository.GetSingleOrDefaultAsync(role.Name, nameof(Role.Name));
         actualRole.Should().BeNull();
     }
 

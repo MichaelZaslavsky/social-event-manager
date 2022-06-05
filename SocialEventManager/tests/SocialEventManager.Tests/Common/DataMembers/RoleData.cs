@@ -121,7 +121,7 @@ public static class RoleData
         }
     }
 
-    public static Role GetMockRole(string name = "User", Guid? id = null, string concurrencyStamp = null, string normalizedName = null) =>
+    public static Role GetMockRole(string name = "User", Guid? id = null, string? concurrencyStamp = null, string? normalizedName = null) =>
         new()
         {
             Id = id ?? Guid.NewGuid(),
@@ -136,9 +136,9 @@ public static class RoleData
         new()
         {
             Id = Guid.NewGuid(),
-            ConcurrencyStamp = nullifyConcurrencyStamp ? null : Guid.NewGuid().ToString().ToLower(CultureInfo.InvariantCulture),
-            Name = nullifyName ? null : RoleType.User.GetDescription(),
-            NormalizedName = nullifyNormalizedName ? null : RoleType.User.GetDescription().ToUpper(CultureInfo.InvariantCulture),
+            ConcurrencyStamp = nullifyConcurrencyStamp ? null! : Guid.NewGuid().ToString().ToLower(CultureInfo.InvariantCulture),
+            Name = nullifyName ? null! : RoleType.User.GetDescription(),
+            NormalizedName = nullifyNormalizedName ? null! : RoleType.User.GetDescription().ToUpper(CultureInfo.InvariantCulture),
         };
 
     private static Role GetMockRole(

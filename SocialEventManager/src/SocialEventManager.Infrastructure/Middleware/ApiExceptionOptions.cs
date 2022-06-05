@@ -5,7 +5,7 @@ namespace SocialEventManager.Infrastructure.Middleware;
 
 public class ApiExceptionOptions
 {
-    public Action<HttpContext, Exception, ApiError> AddResponseDetails { get; set; }
+    public Action<HttpContext, Exception, ApiError> AddResponseDetails { get; set; } = null!;
 
-    public Func<Exception, LogEventLevel> DetermineLogLevel { get; set; }
+    public Func<Exception, LogEventLevel> DetermineLogLevel { get; set; } = null!;
 }

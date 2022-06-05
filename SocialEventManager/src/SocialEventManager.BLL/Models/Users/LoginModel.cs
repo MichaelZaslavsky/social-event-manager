@@ -11,12 +11,12 @@ public record LoginModel
     /// Gets the name of the user.
     /// </summary>
     [Required]
-    public string UserName { get; init; }
+    public string UserName { get; init; } = null!;
 
     /// <summary>
     /// Gets the password of the user.
     /// </summary>
     [Required]
     [DataType(DataType.Password)]
-    public string Password { get; init; }
+    public string Password { get; init; } = null!;
 }

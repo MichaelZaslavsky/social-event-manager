@@ -24,13 +24,13 @@ public class RolesService : ServiceBase<IRolesRepository, Role>, IRolesService
 
     public async Task<RoleDto> GetRole(Guid roleId)
     {
-        Role role = await Repository.GetSingleOrDefaultAsync(roleId, nameof(Role.Id));
+        Role? role = await Repository.GetSingleOrDefaultAsync(roleId, nameof(Role.Id));
         return Mapper.Map<RoleDto>(role);
     }
 
     public async Task<RoleDto> GetRole(string normalizedRoleName)
     {
-        Role role = await Repository.GetSingleOrDefaultAsync(normalizedRoleName, nameof(Role.NormalizedName));
+        Role? role = await Repository.GetSingleOrDefaultAsync(normalizedRoleName, nameof(Role.NormalizedName));
         return Mapper.Map<RoleDto>(role);
     }
 

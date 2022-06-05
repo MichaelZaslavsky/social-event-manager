@@ -19,6 +19,9 @@ public static class SqlMapperUtilities
         const string methodName = "GetTableName";
         MethodInfo getTableNameMethod = typeof(SqlMapperExtensions).GetNonPublicStaticMethod(methodName);
 
-        return getTableNameMethod.Invoke(null, new object[] { type }) as string;
+        string? tableName = getTableNameMethod.Invoke(null, new object[] { type }) as string;
+        ArgumentNullException.ThrowIfNull(tableName);
+
+        return tableName;
     }
 }

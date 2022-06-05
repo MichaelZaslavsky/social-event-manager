@@ -13,7 +13,7 @@ public static class ExceptionData
             yield return new object[] { new NotFoundException(), (HttpStatusCode.NotFound, ExceptionConstants.NotFound) };
             yield return new object[] { new BadRequestException(), (HttpStatusCode.BadRequest, ExceptionConstants.BadRequest) };
             yield return new object[] { new ValidationException(), (HttpStatusCode.UnprocessableEntity, ExceptionConstants.UnprocessableEntity) };
-            yield return new object[] { null, (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError) };
+            yield return new object[] { null!, (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError) };
             yield return new object[] { new NullReferenceException(), (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError) };
             yield return new object[] { new ArgumentNullException(), (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError) };
             yield return new object[] { new ArgumentException(), (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError) };
@@ -32,7 +32,7 @@ public static class ExceptionData
             yield return new object[] { new InvalidProgramException(), true };
             yield return new object[] { new Exception(ExceptionConstants.CannotOpenDatabase), true };
             yield return new object[] { new Exception(ExceptionConstants.ANetworkRelated), true };
-            yield return new object[] { null, false };
+            yield return new object[] { null!, false };
             yield return new object[] { new NullReferenceException(), false };
             yield return new object[] { new ArgumentNullException(), false };
             yield return new object[] { new ArgumentException(), false };

@@ -120,11 +120,11 @@ public static class UserClaimData
             yield return new object[]
             {
                     GetMockUserClaim(userId: Guid.NewGuid()),
-                    null,
+                    null!,
             };
             yield return new object[]
             {
-                    null,
+                    null!,
                     GetMockUserClaim(userId: Guid.NewGuid()),
             };
         }
@@ -132,9 +132,9 @@ public static class UserClaimData
 
     #region Private Methods
 
-    private static UserClaim GetMockUserClaim(Guid? userId = null, string type = ClaimTypes.Name, string value = null, int id = 1)
+    private static UserClaim GetMockUserClaim(Guid? userId = null, string type = ClaimTypes.Name, string? value = null, int id = 1)
     {
-        return new UserClaim
+        return new()
         {
             Id = id,
             UserId = userId ?? Guid.NewGuid(),
@@ -146,19 +146,19 @@ public static class UserClaimData
     private static IEnumerable<UserClaim> GetMockUserClaims(bool sameUserId = false, bool sameType = false, bool sameValue = false, int itemsCount = 2)
     {
         Guid userId = sameUserId ? Guid.NewGuid() : Guid.Empty;
-        string type = sameType ? ClaimTypes.Name : null;
-        string value = sameValue ? RandomGeneratorHelpers.GenerateRandomValue() : null;
+        string? type = sameType ? ClaimTypes.Name : null;
+        string? value = sameValue ? RandomGeneratorHelpers.GenerateRandomValue() : null;
 
         var userClaims = new UserClaim[itemsCount];
 
         for (int i = 0; i < itemsCount; i++)
         {
-            userClaims[i] = new UserClaim
+            userClaims[i] = new()
             {
                 Id = i + 1,
                 UserId = sameUserId ? userId : Guid.NewGuid(),
-                Type = sameType ? type : RandomGeneratorHelpers.GenerateRandomValue(),
-                Value = sameValue ? value : RandomGeneratorHelpers.GenerateRandomValue(),
+                Type = sameType ? type! : RandomGeneratorHelpers.GenerateRandomValue(),
+                Value = sameValue ? value! : RandomGeneratorHelpers.GenerateRandomValue(),
             };
         }
 
@@ -170,8 +170,8 @@ public static class UserClaimData
         {
             Id = RandomGeneratorHelpers.NextInt32(),
             UserId = Guid.NewGuid(),
-            Type = nullifyType ? null : ClaimTypes.Name,
-            Value = nullifyValue ? null : RandomGeneratorHelpers.GenerateRandomValue(),
+            Type = nullifyType ? null! : ClaimTypes.Name,
+            Value = nullifyValue ? null! : RandomGeneratorHelpers.GenerateRandomValue(),
         };
 
     private static UserClaim GetMockUserClaim(int typeLength = LengthConstants.Length255, int valueLength = LengthConstants.Length255) =>

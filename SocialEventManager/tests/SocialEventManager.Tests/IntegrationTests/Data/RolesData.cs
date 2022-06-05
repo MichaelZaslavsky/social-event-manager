@@ -11,15 +11,15 @@ public sealed class RolesData
         string name = RandomGeneratorHelpers.GenerateRandomValue();
 
         Roles = new List<Role>
+        {
+            new()
             {
-                new Role
-                {
-                    Id = Guid.NewGuid(),
-                    ConcurrencyStamp = RandomGeneratorHelpers.GenerateRandomValue(),
-                    Name = RandomGeneratorHelpers.GenerateRandomValue(),
-                    NormalizedName = name.ToUpper(CultureInfo.InvariantCulture),
-                },
-            };
+                Id = Guid.NewGuid(),
+                ConcurrencyStamp = RandomGeneratorHelpers.GenerateRandomValue(),
+                Name = RandomGeneratorHelpers.GenerateRandomValue(),
+                NormalizedName = name.ToUpper(CultureInfo.InvariantCulture),
+            },
+        };
     }
 
     private static readonly Lazy<RolesData> Lazy = new(() => new RolesData());

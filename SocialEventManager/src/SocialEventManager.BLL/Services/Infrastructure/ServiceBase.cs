@@ -55,11 +55,11 @@ public class ServiceBase<TIRepository, TEntity>
         Logger = logger;
     }
 
-    protected TIRepository Repository { get; }
+    protected TIRepository Repository { get; } = null!;
 
-    protected IUnitOfWork UnitOfWork { get; }
+    protected IUnitOfWork UnitOfWork { get; } = null!;
 
-    protected IMapper Mapper { get; }
+    protected IMapper Mapper { get; } = null!;
 
-    protected ILogger Logger { get; }
+    protected ILogger Logger { get; } = null!;
 }

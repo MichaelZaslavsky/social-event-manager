@@ -13,26 +13,26 @@ public static class LoggerExtensions
     public static void WithSerilogLogger(this LoggerConfiguration loggerConfig, IServiceProvider provider, IConfiguration config)
     {
         string seqServerUrl = config[ApiConstants.SeqServerUrlSettingPath];
-        string assemblyName = Assembly.GetEntryAssembly()?.GetName().Name;
+        string? assemblyName = Assembly.GetEntryAssembly()?.GetName().Name;
 
         loggerConfig.ReadFrom.Configuration(config)
             .MinimumLevel.Verbose()
             .Enrich.FromLogContext()
             .Enrich.WithMachineName()
-            .Enrich.WithProperty(ApiConstants.Assembly, assemblyName)
+            .Enrich.WithProperty(ApiConstants.Assembly, assemblyName ?? string.Empty)
             .Enrich.WithAspnetcoreHttpcontext(provider, GetContextInfo)
             .WriteTo.Seq(seqServerUrl);
     }
 
     #region Private Methods
 
-    private static ContextInformation GetContextInfo(IHttpContextAccessor accessor)
+    private static ContextInformation? GetContextInfo(IHttpContextAccessor accessor)
     {
-        HttpContext context = accessor.HttpContext;
+        HttpContext? context = accessor?.HttpContext;
 
         return context is null
             ? null
-            : new ContextInformation
+            : new()
             {
                 RemoteIpAddress = context.Connection.RemoteIpAddress?.ToString(),
                 Host = context.Request.Host.ToString(),
@@ -42,9 +42,9 @@ public static class LoggerExtensions
             };
     }
 
-    private static UserInformation GetUserInfo(ClaimsPrincipal principal)
+    private static UserInformation? GetUserInfo(ClaimsPrincipal principal)
     {
-        IIdentity user = principal.Identity;
+        IIdentity? user = principal.Identity;
 
         if (user?.IsAuthenticated != true)
         {

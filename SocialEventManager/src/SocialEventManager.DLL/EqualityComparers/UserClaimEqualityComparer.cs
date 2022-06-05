@@ -6,7 +6,7 @@ namespace SocialEventManager.DAL.EqualityComparers;
 
 public class UserClaimEqualityComparer : IEqualityComparer<UserClaim>
 {
-    public bool Equals(UserClaim userClaim, UserClaim otherUserClaim)
+    public bool Equals(UserClaim? userClaim, UserClaim? otherUserClaim)
     {
         if (userClaim is null && otherUserClaim is null)
         {

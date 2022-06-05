@@ -7,7 +7,7 @@ public static class TypeExtensions
 {
     public static MethodInfo GetNonPublicStaticMethod(this Type type, string methodName)
     {
-        MethodInfo methodInfo = type.GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Static);
+        MethodInfo? methodInfo = type.GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Static);
 
         if (methodInfo is null)
         {

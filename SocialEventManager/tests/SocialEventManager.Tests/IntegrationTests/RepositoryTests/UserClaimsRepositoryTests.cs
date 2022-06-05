@@ -98,7 +98,7 @@ public class UserClaimsRepositoryTests : RepositoryTestBase<IUserClaimsRepositor
     public async Task GetUserClaims_Should_VerifyNeverCalled_When_TypeHasDifferentValue(string type, string value)
     {
         await MockRepository.Object.GetUserClaims(type, value);
-        MockRepository.Verify(r => r.GetUserClaims(null, value), Times.Never);
+        MockRepository.Verify(r => r.GetUserClaims(null!, value), Times.Never);
     }
 
     [Theory]
@@ -149,7 +149,7 @@ public class UserClaimsRepositoryTests : RepositoryTestBase<IUserClaimsRepositor
     public async Task DeleteUserClaims_Should_VerifyNeverCalled_When_UserClaimsHaveDifferentValue(IEnumerable<UserClaim> userClaims)
     {
         await MockRepository.Object.DeleteUserClaims(userClaims);
-        MockRepository.Verify(r => r.DeleteUserClaims(null), Times.Never);
+        MockRepository.Verify(r => r.DeleteUserClaims(null!), Times.Never);
     }
 
     [Theory]

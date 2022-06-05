@@ -13,15 +13,15 @@ public abstract record RoleBase
     [Required]
     [MinLength(LengthConstants.Length2)]
     [MaxLength(LengthConstants.Length255)]
-    public string ConcurrencyStamp { get; init; }
+    public string ConcurrencyStamp { get; init; } = null!;
 
     [Required]
     [MinLength(LengthConstants.Length2)]
     [MaxLength(LengthConstants.Length255)]
-    public string Name { get; init; }
+    public string Name { get; init; } = null!;
 
     [Required]
     [MinLength(LengthConstants.Length2)]
     [MaxLength(LengthConstants.Length255)]
-    public string NormalizedName { get; init; }
+    public string NormalizedName { get; init; } = null!;
 }
