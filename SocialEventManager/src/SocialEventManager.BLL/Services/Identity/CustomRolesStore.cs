@@ -31,11 +31,7 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
     public async Task<IdentityResult> CreateAsync(ApplicationRole role, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (role == null)
-        {
-            throw new ArgumentNullException(nameof(role));
-        }
+        ArgumentNullException.ThrowIfNull(role);
 
         RoleForCreationDto roleForCreation = _mapper.Map<RoleForCreationDto>(role);
 
@@ -51,11 +47,7 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
     public async Task<IdentityResult> UpdateAsync(ApplicationRole role, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (role == null)
-        {
-            throw new ArgumentNullException(nameof(role));
-        }
+        ArgumentNullException.ThrowIfNull(role);
 
         RoleForUpdateDto roleForUpdate = _mapper.Map<RoleForUpdateDto>(role);
         bool isUpdated = await _rolesService.UpdateRole(roleForUpdate);
@@ -68,11 +60,7 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
     public async Task<IdentityResult> DeleteAsync(ApplicationRole role, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (role == null)
-        {
-            throw new ArgumentNullException(nameof(role));
-        }
+        ArgumentNullException.ThrowIfNull(role);
 
         if (!Guid.TryParse(role.Id, out Guid roleId))
         {
@@ -89,11 +77,7 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
     public Task<string> GetRoleIdAsync(ApplicationRole role, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (role == null)
-        {
-            throw new ArgumentNullException(nameof(role));
-        }
+        ArgumentNullException.ThrowIfNull(role);
 
         return Task.FromResult(role.Id);
     }
@@ -101,11 +85,7 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
     public Task<string> GetRoleNameAsync(ApplicationRole role, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (role == null)
-        {
-            throw new ArgumentNullException(nameof(role));
-        }
+        ArgumentNullException.ThrowIfNull(role);
 
         return Task.FromResult(role.Name);
     }
@@ -113,11 +93,7 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
     public Task SetRoleNameAsync(ApplicationRole role, string roleName, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (role == null)
-        {
-            throw new ArgumentNullException(nameof(role));
-        }
+        ArgumentNullException.ThrowIfNull(role);
 
         role.Name = roleName ?? throw new ArgumentNullException(nameof(roleName));
         return Task.CompletedTask;
@@ -126,11 +102,7 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
     public Task<string> GetNormalizedRoleNameAsync(ApplicationRole role, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (role == null)
-        {
-            throw new ArgumentNullException(nameof(role));
-        }
+        ArgumentNullException.ThrowIfNull(role);
 
         return Task.FromResult(role.NormalizedName);
     }
@@ -138,11 +110,7 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
     public Task SetNormalizedRoleNameAsync(ApplicationRole role, string normalizedName, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (role == null)
-        {
-            throw new ArgumentNullException(nameof(role));
-        }
+        ArgumentNullException.ThrowIfNull(role);
 
         role.NormalizedName = normalizedName ?? throw new ArgumentNullException(nameof(normalizedName));
         return Task.CompletedTask;
@@ -151,11 +119,7 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
     public async Task<ApplicationRole> FindByIdAsync(string roleId, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (roleId == null)
-        {
-            throw new ArgumentNullException(nameof(roleId));
-        }
+        ArgumentNullException.ThrowIfNull(roleId);
 
         if (!Guid.TryParse(roleId, out Guid id))
         {
@@ -169,11 +133,7 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
     public async Task<ApplicationRole> FindByNameAsync(string normalizedRoleName, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        if (normalizedRoleName == null)
-        {
-            throw new ArgumentNullException(nameof(normalizedRoleName));
-        }
+        ArgumentNullException.ThrowIfNull(normalizedRoleName);
 
         RoleDto role = await _rolesService.GetRole(normalizedRoleName);
         return _mapper.Map<ApplicationRole>(role);
