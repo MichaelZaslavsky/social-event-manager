@@ -1,3 +1,5 @@
+[![.NET package](https://github.com/MichaelZaslavsky/social-event-manager/actions/workflows/dotnet-build-and-test.yml/badge.svg)](https://github.com/MichaelZaslavsky/social-event-manager/actions/workflows/dotnet-build-and-test.yml)
+
 # Social Event Manager
 
 A project for learning purposes built by Michael Zaslavsky.
