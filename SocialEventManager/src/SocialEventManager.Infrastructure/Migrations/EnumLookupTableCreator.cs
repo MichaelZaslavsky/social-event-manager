@@ -128,16 +128,18 @@ public class EnumLookupTableCreator
     private void MergeValues(Type type, string tableName)
     {
         using SqlCommand cmd = _connection.CreateCommand();
+        cmd.Parameters.AddWithValue("@tableName", tableName);
+
         cmd.CommandText = $@"
-                    MERGE   {SchemaConstants.Enum}.{tableName} dst
-                    USING   @src as src ON dst.Id = Src.Id
-                    WHEN MATCHED THEN
-                        UPDATE SET dst.[Name] = src.[Name], dst.[Description] = src.[Description]
-                    WHEN NOT MATCHED BY TARGET THEN
-                        INSERT (Id, [Name], [Description])
-                        VALUES (src.Id, src.[Name], src.[Description])
-                    WHEN NOT MATCHED BY SOURCE THEN
-                        DELETE;";
+            MERGE   {SchemaConstants.Enum}.@tableName dst
+            USING   @src as src ON dst.Id = Src.Id
+            WHEN MATCHED THEN
+                UPDATE SET dst.[Name] = src.[Name], dst.[Description] = src.[Description]
+            WHEN NOT MATCHED BY TARGET THEN
+                INSERT (Id, [Name], [Description])
+                VALUES (src.Id, src.[Name], src.[Description])
+            WHEN NOT MATCHED BY SOURCE THEN
+                DELETE;";
 
         DataTable values = type.GetFields()
             .Where(f =>
