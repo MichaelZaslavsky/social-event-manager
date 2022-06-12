@@ -1,4 +1,5 @@
 [![.NET package](https://github.com/MichaelZaslavsky/social-event-manager/actions/workflows/dotnet-build-and-test.yml/badge.svg)](https://github.com/MichaelZaslavsky/social-event-manager/actions/workflows/dotnet-build-and-test.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=MichaelZaslavsky_social-event-manager&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=MichaelZaslavsky_social-event-manager)
 
 # Social Event Manager
 
