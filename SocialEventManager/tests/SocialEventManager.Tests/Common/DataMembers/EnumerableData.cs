@@ -17,6 +17,13 @@ public static class EnumerableData
             { TestRandomGeneratorHelpers.NextInt32s(), false },
         };
 
+    public static TheoryData<IEnumerable<object>?> NullOrEmpty =>
+        new()
+        {
+            { null },
+            { Enumerable.Empty<object>() },
+        };
+
     public static TheoryData<IEnumerable<int>?, bool> NullOrEmptyData =>
         new()
         {

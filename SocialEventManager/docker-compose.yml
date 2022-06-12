@@ -85,7 +85,7 @@ services:
 
   socialeventmanager.tests:
     container_name: socialeventmanager.tests
-    image: mcr.microsoft.com/dotnet/sdk:5.0
+    image: mcr.microsoft.com/dotnet/sdk:6.0
     networks:
       - aspnet
     env_file:

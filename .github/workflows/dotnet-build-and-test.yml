@@ -13,13 +13,11 @@ jobs:
 
     steps:
     
-    - uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '2.2.106'
     - uses: actions/checkout@v2
     - name: Setup .NET
+      uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '6.0.100-preview.4.21255.9'
+        dotnet-version: '6.0.x'
         include-prerelease: true
     - name: Restore dependencies
       working-directory: ./SocialEventManager/src/SocialEventManager.API
