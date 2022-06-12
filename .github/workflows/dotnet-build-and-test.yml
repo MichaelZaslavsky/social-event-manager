@@ -1,4 +1,4 @@
-name: .NET package
+name: Continuous Integration and Deployment
 
 on:
   push:
@@ -6,26 +6,32 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  DOTNET_VERSION: '6.0.x'
+
 jobs:
   build-and-test:
 
     runs-on: ubuntu-latest
 
     steps:
-    
-    - uses: actions/checkout@v2
-    - name: Setup .NET
+    - name: Check out code 🛎
+      uses: actions/checkout@v2
+      
+    - name: Setup .NET 🔧
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '6.0.x'
-        include-prerelease: true
-    - name: Restore dependencies
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+        
+    - name: Restore dependencies 🛠
       working-directory: ./SocialEventManager/src/SocialEventManager.API
       run: dotnet restore
-    - name: Build
+      
+    - name: Build app 🚀
       working-directory: ./SocialEventManager/src/SocialEventManager.API
       run: dotnet build --configuration Release --no-restore
-    - name: Run Tests
+      
+    - name: Run Tests 🧪
       working-directory: ./SocialEventManager
       run: docker-compose up --exit-code-from socialeventmanager.tests socialeventmanager.tests
       env:
