@@ -6,7 +6,7 @@ public static class ApiConstants
     public const string SocialEventManagerApi = "SocialEventManagerAPI";
     public const string SocialEventManagerApiTitle = "Social Event Manager API";
     public const string SocialEventManagerApiDescription = "Access to REST APIs";
-    public const string AllowAll = "AllowAll";
+    public const string AllowOrigin = "AllowOrigin";
     public const string AspNetCoreEnvironment = "ASPNETCORE_ENVIRONMENT";
     public const string AppSettings = "appsettings";
     public const string AppSettingsJson = "appsettings.json";
