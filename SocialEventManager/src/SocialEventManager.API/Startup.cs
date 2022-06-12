@@ -107,11 +107,11 @@ public class Startup
             .UseSwagger()
             .UseSwaggerUI(options =>
             {
-                foreach (ApiVersionDescription description in apiVersionDescriptionProvider.ApiVersionDescriptions)
+                foreach (string groupName in apiVersionDescriptionProvider.ApiVersionDescriptions.Select(description => description.GroupName))
                 {
                     options.SwaggerEndpoint(
-                        $"/{ApiConstants.Swagger}/{ApiConstants.SocialEventManagerApi}{description.GroupName}/{ApiConstants.Swagger}.json",
-                        description.GroupName.ToUpperInvariant());
+                        $"/{ApiConstants.Swagger}/{ApiConstants.SocialEventManagerApi}{groupName}/{ApiConstants.Swagger}.json",
+                        groupName.ToUpperInvariant());
                 }
             })
             .UseRouting()
