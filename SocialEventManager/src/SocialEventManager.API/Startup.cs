@@ -43,7 +43,14 @@ public class Startup
                 options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
             });
 
-        services.AddCors(options => options.AddPolicy(ApiConstants.AllowAll, builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()))
+        services.AddCors(options => options.AddPolicy(
+            name: ApiConstants.AllowOrigin,
+            builder =>
+            {
+                builder.WithOrigins("https://localhost:44351", "http://localhost:4200")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+            }))
             .AddVersionedApiExplorer(options => options.GroupNameFormat = "'v'VV")
             .AddAuthentication(AuthConstants.AuthenticationScheme)
             .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>(AuthConstants.AuthenticationScheme, null);
@@ -108,7 +115,7 @@ public class Startup
                 }
             })
             .UseRouting()
-            .UseCors(ApiConstants.AllowAll)
+            .UseCors(ApiConstants.AllowOrigin)
             .UseIpRateLimiting()
             .UseAuthentication()
             .UseAuthorization()
