@@ -21,7 +21,7 @@ public class ArgumentExceptionHelpersTests
     }
 
     [Theory]
-    [MemberData(nameof(EnumerableData.NullOrEmptyData), MemberType = typeof(EnumerableData))]
+    [MemberData(nameof(EnumerableData.NullOrEmpty), MemberType = typeof(EnumerableData))]
     public void ThrowIfNullOrEmpty_Should_ThrowArgumentException_When_ArgumentIsNullOrEmpty(IEnumerable<object>? argument)
     {
         Action action = () => ArgumentExceptionHelpers.ThrowIfNullOrEmpty(argument, nameof(argument));
