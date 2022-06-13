@@ -60,8 +60,6 @@ public class UserRolesService : ServiceBase<IUserRolesRepository, UserRole>, IUs
         {
             throw new NotFoundException($"User '{userId}' role '{roleName}' {ValidationConstants.WasNotFound}");
         }
-
-        return;
     }
 
     #endregion Private Methods

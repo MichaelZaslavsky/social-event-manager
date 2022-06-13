@@ -12,6 +12,12 @@ public class TestBase : IDisposable
     public void Dispose()
     {
         Db.CleanupAsync().GetAwaiter().GetResult();
+
+        Dispose(true);
         GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
     }
 }

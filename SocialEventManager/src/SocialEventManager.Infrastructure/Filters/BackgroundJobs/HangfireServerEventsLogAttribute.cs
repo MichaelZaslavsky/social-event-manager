@@ -8,13 +8,13 @@ public class HangfireServerEventsLogAttribute : JobFilterAttribute, IServerFilte
 {
     private static readonly ILog Logger = LogProvider.GetCurrentClassLogger();
 
-    public void OnPerforming(PerformingContext context)
+    public void OnPerforming(PerformingContext filterContext)
     {
-        Logger.InfoFormat("IServerFilter: Starting to perform job `{0}`", context.BackgroundJob.Id);
+        Logger.InfoFormat("IServerFilter: Starting to perform job `{0}`", filterContext.BackgroundJob.Id);
     }
 
-    public void OnPerformed(PerformedContext context)
+    public void OnPerformed(PerformedContext filterContext)
     {
-        Logger.InfoFormat("IServerFilter: Job `{0}` has been performed", context.BackgroundJob.Id);
+        Logger.InfoFormat("IServerFilter: Job `{0}` has been performed", filterContext.BackgroundJob.Id);
     }
 }

@@ -55,7 +55,7 @@ public class ServiceBase<TIRepository, TEntity>
         Logger = logger;
     }
 
-    protected TIRepository Repository { get; } = null!;
+    protected TIRepository Repository { get; }
 
     protected IUnitOfWork UnitOfWork { get; } = null!;
 

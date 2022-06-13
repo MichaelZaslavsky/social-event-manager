@@ -17,7 +17,8 @@ public class ArgumentExceptionHelpersTests
     [InlineAutoData]
     public void ThrowIfNullOrEmpty_Should_NotThrowArgumentException_When_ArgumentHasValue(IEnumerable<object> argument)
     {
-        ArgumentExceptionHelpers.ThrowIfNullOrEmpty(argument, nameof(argument));
+        Exception? exception = Record.Exception(() => ArgumentExceptionHelpers.ThrowIfNullOrEmpty(argument, nameof(argument)));
+        Assert.Null(exception);
     }
 
     [Theory]

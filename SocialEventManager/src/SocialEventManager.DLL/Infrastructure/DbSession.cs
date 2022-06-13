@@ -11,7 +11,7 @@ public sealed class DbSession : IDbSession, IDisposable
         Connection.Open();
     }
 
-    public IDbConnection Connection { get; } = null!;
+    public IDbConnection Connection { get; }
 
     public IDbTransaction Transaction { get; set; } = null!;
 
