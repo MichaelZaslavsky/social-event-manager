@@ -20,6 +20,9 @@ public class RandomGeneratorHelpersTests
     }
 
     [Fact]
-    public void NextInt32_Should_Succeed() =>
-        RandomGeneratorHelpers.NextInt32();
+    public void NextInt32_Should_Succeed()
+    {
+        Exception? exception = Record.Exception(() => RandomGeneratorHelpers.NextInt32());
+        Assert.Null(exception);
+    }
 }

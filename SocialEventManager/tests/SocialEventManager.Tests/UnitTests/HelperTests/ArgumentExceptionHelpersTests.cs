@@ -36,7 +36,8 @@ public class ArgumentExceptionHelpersTests
     [InlineAutoData]
     public void ThrowIfNullOrWhiteSpace_Should_NotThrowArgumentException_When_ArgumentHasValue(string argument)
     {
-        ArgumentExceptionHelpers.ThrowIfNullOrWhiteSpace(argument, nameof(argument));
+        Exception? exception = Record.Exception(() => ArgumentExceptionHelpers.ThrowIfNullOrWhiteSpace(argument, nameof(argument)));
+        Assert.Null(exception);
     }
 
     [Theory]
