@@ -13,7 +13,10 @@ public class ArgumentNullExceptionHelpersTests
     [InlineAutoData]
     public void ThrowIfNull_Should_ReturnOk_When_AllParametersAreNotNull(string argument1, int argument2, bool argument3)
     {
-        ArgumentNullExceptionHelpers.ThrowIfNull((argument1, nameof(argument1)), (argument2, nameof(argument2)), (argument3, nameof(argument3)));
+        Exception? exception = Record.Exception(() =>
+            ArgumentNullExceptionHelpers.ThrowIfNull((argument1, nameof(argument1)), (argument2, nameof(argument2)), (argument3, nameof(argument3))));
+
+        Assert.Null(exception);
     }
 
     [Theory]
