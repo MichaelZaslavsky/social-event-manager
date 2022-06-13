@@ -13,7 +13,7 @@ public class ApiErrorData
         Links = links;
     }
 
-    public string Detail { get; set; } = null!;
+    public string Detail { get; set; }
 
     public string Links { get; set; } = null!;
 }

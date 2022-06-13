@@ -102,8 +102,6 @@ public class AccountsService : ServiceBase<IAccountsRepository, Account>, IAccou
         {
             throw new NotFoundException($"The user '{userId}' {ValidationConstants.WasNotFound}");
         }
-
-        return;
     }
 
     #endregion Private Methods

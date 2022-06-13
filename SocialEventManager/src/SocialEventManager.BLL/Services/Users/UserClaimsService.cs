@@ -22,8 +22,6 @@ public class UserClaimsService : ServiceBase<IUserClaimsRepository, UserClaim>, 
     {
         IEnumerable<UserClaim> userClaims = Mapper.Map<IEnumerable<UserClaim>>(userClaimsForCreation);
         await Repository.InsertAsync(userClaims);
-
-        return;
     }
 
     public async Task<IEnumerable<UserClaimDto>> GetUserClaims(Guid userId)

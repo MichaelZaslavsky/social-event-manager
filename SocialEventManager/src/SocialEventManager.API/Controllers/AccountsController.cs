@@ -95,11 +95,14 @@ public class AccountsController : ControllerBase
     {
         SignInResult result = await _signInManager.PasswordSignInAsync(loginModel.UserName, loginModel.Password, isPersistent: true, lockoutOnFailure: false);
 
-        return result.IsLockedOut
-            ? Unauthorized()
-            : result.Succeeded
-                ? Ok()
-                : BadRequest();
+        if (result.IsLockedOut)
+        {
+            return Unauthorized();
+        }
+
+        return result.Succeeded
+            ? Ok()
+            : BadRequest();
     }
 
     /// <summary>

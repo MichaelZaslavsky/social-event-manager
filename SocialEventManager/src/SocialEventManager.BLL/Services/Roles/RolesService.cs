@@ -71,8 +71,6 @@ public class RolesService : ServiceBase<IRolesRepository, Role>, IRolesService
         {
             throw new NotFoundException($"The role '{roleId}' {ValidationConstants.WasNotFound}");
         }
-
-        return;
     }
 
     #endregion Private Methods

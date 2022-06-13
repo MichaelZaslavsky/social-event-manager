@@ -8,16 +8,16 @@ public class HangfireClientEventsLogAttribute : JobFilterAttribute, IClientFilte
 {
     private static readonly ILog Logger = LogProvider.GetCurrentClassLogger();
 
-    public void OnCreating(CreatingContext context)
+    public void OnCreating(CreatingContext filterContext)
     {
-        Logger.InfoFormat("IClientFilter: Creating a job based on method `{0}`...", context.Job.Method.Name);
+        Logger.InfoFormat("IClientFilter: Creating a job based on method `{0}`...", filterContext.Job.Method.Name);
     }
 
-    public void OnCreated(CreatedContext context)
+    public void OnCreated(CreatedContext filterContext)
     {
         Logger.InfoFormat(
             "IClientFilter: Job that is based on method `{0}` has been created with id `{1}`",
-            context.Job.Method.Name,
-            context.BackgroundJob?.Id);
+            filterContext.Job.Method.Name,
+            filterContext.BackgroundJob?.Id);
     }
 }

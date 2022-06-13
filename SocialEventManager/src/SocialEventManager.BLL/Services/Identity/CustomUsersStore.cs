@@ -38,12 +38,13 @@ public class CustomUsersStore :
 
     public void Dispose()
     {
+        Dispose(true);
         GC.SuppressFinalize(this);
     }
 
     #region Implement IUserStore
 
-    public Task<string> GetUserIdAsync(ApplicationUser user, CancellationToken cancellationToken = default)
+    public Task<string> GetUserIdAsync(ApplicationUser user, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
@@ -51,7 +52,7 @@ public class CustomUsersStore :
         return Task.FromResult(user.Id);
     }
 
-    public Task<string> GetUserNameAsync(ApplicationUser user, CancellationToken cancellationToken = default)
+    public Task<string> GetUserNameAsync(ApplicationUser user, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
@@ -59,7 +60,7 @@ public class CustomUsersStore :
         return Task.FromResult(user.UserName);
     }
 
-    public Task SetUserNameAsync(ApplicationUser user, string userName, CancellationToken cancellationToken = default)
+    public Task SetUserNameAsync(ApplicationUser user, string userName, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
@@ -68,15 +69,15 @@ public class CustomUsersStore :
         return Task.CompletedTask;
     }
 
-    public Task<string> GetNormalizedUserNameAsync(ApplicationUser user, CancellationToken cancellationToken = default)
+    public Task<string> GetNormalizedUserNameAsync(ApplicationUser user, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
 
-        return Task.FromResult(user.UserName);
+        return Task.FromResult(user.NormalizedUserName);
     }
 
-    public Task SetNormalizedUserNameAsync(ApplicationUser user, string normalizedName, CancellationToken cancellationToken = default)
+    public Task SetNormalizedUserNameAsync(ApplicationUser user, string normalizedName, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
@@ -85,7 +86,7 @@ public class CustomUsersStore :
         return Task.CompletedTask;
     }
 
-    public async Task<IdentityResult> CreateAsync(ApplicationUser user, CancellationToken cancellationToken = default)
+    public async Task<IdentityResult> CreateAsync(ApplicationUser user, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
@@ -98,7 +99,7 @@ public class CustomUsersStore :
             : IdentityResult.Failed(new IdentityError { Description = UserValidationConstants.CouldNotInsertUser(user.Email) });
     }
 
-    public async Task<IdentityResult> UpdateAsync(ApplicationUser user, CancellationToken cancellationToken = default)
+    public async Task<IdentityResult> UpdateAsync(ApplicationUser user, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
@@ -111,43 +112,38 @@ public class CustomUsersStore :
             : IdentityResult.Failed(new IdentityError { Description = UserValidationConstants.CouldNotUpdateUser(user.Email) });
     }
 
-    public async Task<IdentityResult> DeleteAsync(ApplicationUser user, CancellationToken cancellationToken = default)
+    public Task<IdentityResult> DeleteAsync(ApplicationUser user, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
 
         if (!Guid.TryParse(user.Id, out Guid userId))
         {
-            throw new ArgumentException(ValidationConstants.NotAValidIdentifier, nameof(user.Id));
+            throw new FormatException(ValidationConstants.NotAValidIdentifier);
         }
 
-        bool isDeleted = await _accountsService.DeleteAccount(userId);
-
-        return isDeleted
-            ? IdentityResult.Success
-            : IdentityResult.Failed(new IdentityError { Description = UserValidationConstants.CouldNotDeleteUser(user.Email) });
+        return DeleteAccountAsync(user, userId);
     }
 
-    public async Task<ApplicationUser> FindByIdAsync(string userId, CancellationToken cancellationToken = default)
+    public Task<ApplicationUser> FindByIdAsync(string userId, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(userId);
 
         if (!Guid.TryParse(userId, out Guid id))
         {
-            throw new ArgumentException(ValidationConstants.NotAValidIdentifier, nameof(userId));
+            throw new FormatException(ValidationConstants.NotAValidIdentifier);
         }
 
-        AccountDto account = await _accountsService.GetAccount(id);
-        return _mapper.Map<ApplicationUser>(account);
+        return GetAccountAsync(id);
     }
 
-    public async Task<ApplicationUser> FindByNameAsync(string userName, CancellationToken cancellationToken = default)
+    public async Task<ApplicationUser> FindByNameAsync(string normalizedUserName, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
-        ArgumentNullException.ThrowIfNull(userName);
+        ArgumentNullException.ThrowIfNull(normalizedUserName);
 
-        AccountDto account = await _accountsService.GetAccountByUserName(userName);
+        AccountDto account = await _accountsService.GetAccountByUserName(normalizedUserName);
         return _mapper.Map<ApplicationUser>(account);
     }
 
@@ -155,7 +151,7 @@ public class CustomUsersStore :
 
     #region Implement IUserEmailStore
 
-    public Task SetEmailAsync(ApplicationUser user, string email, CancellationToken cancellationToken = default)
+    public Task SetEmailAsync(ApplicationUser user, string email, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
@@ -164,7 +160,7 @@ public class CustomUsersStore :
         return Task.CompletedTask;
     }
 
-    public Task<string> GetEmailAsync(ApplicationUser user, CancellationToken cancellationToken = default)
+    public Task<string> GetEmailAsync(ApplicationUser user, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
@@ -172,17 +168,17 @@ public class CustomUsersStore :
         return Task.FromResult(user.Email);
     }
 
-    public Task<bool> GetEmailConfirmedAsync(ApplicationUser user, CancellationToken cancellationToken = default)
+    public Task<bool> GetEmailConfirmedAsync(ApplicationUser user, CancellationToken cancellationToken)
     {
         return Task.FromResult(true);
     }
 
-    public Task SetEmailConfirmedAsync(ApplicationUser user, bool confirmed, CancellationToken cancellationToken = default)
+    public Task SetEmailConfirmedAsync(ApplicationUser user, bool confirmed, CancellationToken cancellationToken)
     {
         return Task.CompletedTask;
     }
 
-    public async Task<ApplicationUser> FindByEmailAsync(string normalizedEmail, CancellationToken cancellationToken = default)
+    public async Task<ApplicationUser> FindByEmailAsync(string normalizedEmail, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
 
@@ -190,15 +186,15 @@ public class CustomUsersStore :
         return _mapper.Map<ApplicationUser>(account);
     }
 
-    public Task<string> GetNormalizedEmailAsync(ApplicationUser user, CancellationToken cancellationToken = default)
+    public Task<string> GetNormalizedEmailAsync(ApplicationUser user, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
 
-        return Task.FromResult(user.Email);
+        return Task.FromResult(user.NormalizedEmail);
     }
 
-    public Task SetNormalizedEmailAsync(ApplicationUser user, string normalizedEmail, CancellationToken cancellationToken = default)
+    public Task SetNormalizedEmailAsync(ApplicationUser user, string normalizedEmail, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
@@ -211,7 +207,7 @@ public class CustomUsersStore :
 
     #region Implement IUserPasswordStore
 
-    public Task SetPasswordHashAsync(ApplicationUser user, string passwordHash, CancellationToken cancellationToken = default)
+    public Task SetPasswordHashAsync(ApplicationUser user, string passwordHash, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
@@ -220,7 +216,7 @@ public class CustomUsersStore :
         return Task.CompletedTask;
     }
 
-    public Task<string> GetPasswordHashAsync(ApplicationUser user, CancellationToken cancellationToken = default)
+    public Task<string> GetPasswordHashAsync(ApplicationUser user, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
@@ -228,7 +224,7 @@ public class CustomUsersStore :
         return Task.FromResult(user.PasswordHash);
     }
 
-    public Task<bool> HasPasswordAsync(ApplicationUser user, CancellationToken cancellationToken = default)
+    public Task<bool> HasPasswordAsync(ApplicationUser user, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
@@ -255,18 +251,17 @@ public class CustomUsersStore :
         return;
     }
 
-    public async Task<IList<string>> GetRolesAsync(ApplicationUser user, CancellationToken cancellationToken)
+    public Task<IList<string>> GetRolesAsync(ApplicationUser user, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
 
         if (!Guid.TryParse(user.Id, out Guid userId))
         {
-            throw new ArgumentException(ValidationConstants.NotAValidIdentifier, nameof(user.Id));
+            throw new FormatException(ValidationConstants.NotAValidIdentifier);
         }
 
-        IEnumerable<UserRoleDto> userRoles = await _userRolesService.GetUserRoles(userId);
-        return userRoles.Select(ur => ur.RoleName).ToList();
+        return GetUserRoleAsync(userId);
     }
 
     public async Task<IList<ApplicationUser>> GetUsersInRoleAsync(string roleName, CancellationToken cancellationToken)
@@ -329,18 +324,17 @@ public class CustomUsersStore :
 
     #region Implement IUserClaimStore
 
-    public async Task<IList<Claim>> GetClaimsAsync(ApplicationUser user, CancellationToken cancellationToken)
+    public Task<IList<Claim>> GetClaimsAsync(ApplicationUser user, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
 
         if (!Guid.TryParse(user.Id, out Guid userId))
         {
-            throw new ArgumentException(ValidationConstants.NotAValidIdentifier, nameof(user.Id));
+            throw new FormatException(ValidationConstants.NotAValidIdentifier);
         }
 
-        IEnumerable<UserClaimDto> userClaims = await _userClaimsService.GetUserClaims(userId);
-        return userClaims.Select(uc => new Claim(uc.Type, uc.Value)).ToList();
+        return GetUserClaimsAsync(userId);
     }
 
     public async Task AddClaimsAsync(ApplicationUser user, IEnumerable<Claim> claims, CancellationToken cancellationToken)
@@ -355,23 +349,10 @@ public class CustomUsersStore :
 
         if (!Guid.TryParse(user.Id, out Guid userId))
         {
-            throw new ArgumentException(ValidationConstants.NotAValidIdentifier, nameof(user.Id));
+            throw new FormatException(ValidationConstants.NotAValidIdentifier);
         }
 
-        IEnumerable<UserClaimForCreationDto> userClaimsForCreation =
-            _mapper.Map<IEnumerable<UserClaimForCreationDto>>(claims, opt => opt.AfterMap((_, dest) =>
-            {
-                foreach (UserClaimForCreationDto item in dest)
-                {
-                    item.UserId = userId;
-                }
-            }));
-
-        _unitOfWork.BeginTransaction();
-        await _userClaimsService.CreateUserClaims(userClaimsForCreation);
-        _unitOfWork.Commit();
-
-        return;
+        await CreateUserClaimsAsync(claims, userId);
     }
 
     public async Task ReplaceClaimAsync(ApplicationUser user, Claim claim, Claim newClaim, CancellationToken cancellationToken)
@@ -381,15 +362,10 @@ public class CustomUsersStore :
 
         if (!Guid.TryParse(user.Id, out Guid userId))
         {
-            throw new ArgumentException(ValidationConstants.NotAValidIdentifier, nameof(user.Id));
+            throw new FormatException(ValidationConstants.NotAValidIdentifier);
         }
 
-        UserClaimDto currentUserClaim = _mapper.Map<UserClaimDto>(claim, opt => opt.AfterMap((_, dest) => dest.UserId = userId));
-        UserClaimForUpdateDto newUserClaimForUpdate = _mapper.Map<UserClaimForUpdateDto>(newClaim, opt => opt.AfterMap((_, dest) => dest.UserId = userId));
-
-        await _userClaimsService.ReplaceUserClaim(currentUserClaim, newUserClaimForUpdate);
-
-        return;
+        await ReplaceUserClaimAsync(claim, newClaim, userId);
     }
 
     public async Task RemoveClaimsAsync(ApplicationUser user, IEnumerable<Claim> claims, CancellationToken cancellationToken)
@@ -404,13 +380,10 @@ public class CustomUsersStore :
 
         if (!Guid.TryParse(user.Id, out Guid userId))
         {
-            throw new ArgumentException(ValidationConstants.NotAValidIdentifier, nameof(user.Id));
+            throw new FormatException(ValidationConstants.NotAValidIdentifier);
         }
 
-        IEnumerable<UserClaimBase> userClaims = _mapper.Map<IEnumerable<UserClaimBase>>(claims);
-        await _userClaimsService.DeleteUserClaims(userClaims, userId);
-
-        return;
+        await DeleteUserClaimsAsync(claims, userId);
     }
 
     public async Task<IList<ApplicationUser>> GetUsersForClaimAsync(Claim claim, CancellationToken cancellationToken)
@@ -422,4 +395,65 @@ public class CustomUsersStore :
     }
 
     #endregion Implement IUserClaimStore
+
+    protected virtual void Dispose(bool disposing)
+    {
+    }
+
+    private async Task<IdentityResult> DeleteAccountAsync(ApplicationUser user, Guid userId)
+    {
+        bool isDeleted = await _accountsService.DeleteAccount(userId);
+
+        return isDeleted
+            ? IdentityResult.Success
+            : IdentityResult.Failed(new IdentityError { Description = UserValidationConstants.CouldNotDeleteUser(user.Email) });
+    }
+
+    private async Task<ApplicationUser> GetAccountAsync(Guid id)
+    {
+        AccountDto account = await _accountsService.GetAccount(id);
+        return _mapper.Map<ApplicationUser>(account);
+    }
+
+    private async Task<IList<string>> GetUserRoleAsync(Guid userId)
+    {
+        IEnumerable<UserRoleDto> userRoles = await _userRolesService.GetUserRoles(userId);
+        return userRoles.Select(ur => ur.RoleName).ToList();
+    }
+
+    private async Task<IList<Claim>> GetUserClaimsAsync(Guid userId)
+    {
+        IEnumerable<UserClaimDto> userClaims = await _userClaimsService.GetUserClaims(userId);
+        return userClaims.Select(uc => new Claim(uc.Type, uc.Value)).ToList();
+    }
+
+    private async Task CreateUserClaimsAsync(IEnumerable<Claim> claims, Guid userId)
+    {
+        IEnumerable<UserClaimForCreationDto> userClaimsForCreation =
+            _mapper.Map<IEnumerable<UserClaimForCreationDto>>(claims, opt => opt.AfterMap((_, dest) =>
+            {
+                foreach (UserClaimForCreationDto item in dest)
+                {
+                    item.UserId = userId;
+                }
+            }));
+
+        _unitOfWork.BeginTransaction();
+        await _userClaimsService.CreateUserClaims(userClaimsForCreation);
+        _unitOfWork.Commit();
+    }
+
+    private async Task ReplaceUserClaimAsync(Claim claim, Claim newClaim, Guid userId)
+    {
+        UserClaimDto currentUserClaim = _mapper.Map<UserClaimDto>(claim, opt => opt.AfterMap((_, dest) => dest.UserId = userId));
+        UserClaimForUpdateDto newUserClaimForUpdate = _mapper.Map<UserClaimForUpdateDto>(newClaim, opt => opt.AfterMap((_, dest) => dest.UserId = userId));
+
+        await _userClaimsService.ReplaceUserClaim(currentUserClaim, newUserClaimForUpdate);
+    }
+
+    private async Task DeleteUserClaimsAsync(IEnumerable<Claim> claims, Guid userId)
+    {
+        IEnumerable<UserClaimBase> userClaims = _mapper.Map<IEnumerable<UserClaimBase>>(claims);
+        await _userClaimsService.DeleteUserClaims(userClaims, userId);
+    }
 }

@@ -23,12 +23,13 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
 
     public void Dispose()
     {
+        Dispose(true);
         GC.SuppressFinalize(this);
     }
 
     #region Implement IRoleStore
 
-    public async Task<IdentityResult> CreateAsync(ApplicationRole role, CancellationToken cancellationToken = default)
+    public async Task<IdentityResult> CreateAsync(ApplicationRole role, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(role);
@@ -44,7 +45,7 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
             : IdentityResult.Success;
     }
 
-    public async Task<IdentityResult> UpdateAsync(ApplicationRole role, CancellationToken cancellationToken = default)
+    public async Task<IdentityResult> UpdateAsync(ApplicationRole role, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(role);
@@ -57,24 +58,20 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
             : IdentityResult.Failed(new IdentityError { Description = RoleValidationConstants.CouldNotUpdateRole(role.Name) });
     }
 
-    public async Task<IdentityResult> DeleteAsync(ApplicationRole role, CancellationToken cancellationToken = default)
+    public Task<IdentityResult> DeleteAsync(ApplicationRole role, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(role);
 
         if (!Guid.TryParse(role.Id, out Guid roleId))
         {
-            throw new ArgumentException(ValidationConstants.NotAValidIdentifier, nameof(role.Id));
+            throw new FormatException(ValidationConstants.NotAValidIdentifier);
         }
 
-        bool isDeleted = await _rolesService.DeleteRole(roleId);
-
-        return isDeleted
-            ? IdentityResult.Success
-            : IdentityResult.Failed(new IdentityError { Description = RoleValidationConstants.CouldNotDeleteRole(role.Name) });
+        return DeleteRoleAsync(role, roleId);
     }
 
-    public Task<string> GetRoleIdAsync(ApplicationRole role, CancellationToken cancellationToken = default)
+    public Task<string> GetRoleIdAsync(ApplicationRole role, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(role);
@@ -82,7 +79,7 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
         return Task.FromResult(role.Id);
     }
 
-    public Task<string> GetRoleNameAsync(ApplicationRole role, CancellationToken cancellationToken = default)
+    public Task<string> GetRoleNameAsync(ApplicationRole role, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(role);
@@ -90,7 +87,7 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
         return Task.FromResult(role.Name);
     }
 
-    public Task SetRoleNameAsync(ApplicationRole role, string roleName, CancellationToken cancellationToken = default)
+    public Task SetRoleNameAsync(ApplicationRole role, string roleName, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(role);
@@ -99,7 +96,7 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
         return Task.CompletedTask;
     }
 
-    public Task<string> GetNormalizedRoleNameAsync(ApplicationRole role, CancellationToken cancellationToken = default)
+    public Task<string> GetNormalizedRoleNameAsync(ApplicationRole role, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(role);
@@ -107,7 +104,7 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
         return Task.FromResult(role.NormalizedName);
     }
 
-    public Task SetNormalizedRoleNameAsync(ApplicationRole role, string normalizedName, CancellationToken cancellationToken = default)
+    public Task SetNormalizedRoleNameAsync(ApplicationRole role, string normalizedName, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(role);
@@ -116,21 +113,20 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
         return Task.CompletedTask;
     }
 
-    public async Task<ApplicationRole> FindByIdAsync(string roleId, CancellationToken cancellationToken = default)
+    public Task<ApplicationRole> FindByIdAsync(string roleId, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(roleId);
 
         if (!Guid.TryParse(roleId, out Guid id))
         {
-            throw new ArgumentException(ValidationConstants.NotAValidIdentifier, nameof(roleId));
+            throw new FormatException(ValidationConstants.NotAValidIdentifier);
         }
 
-        RoleDto role = await _rolesService.GetRole(id);
-        return _mapper.Map<ApplicationRole>(role);
+        return GetRoleAsync(id);
     }
 
-    public async Task<ApplicationRole> FindByNameAsync(string normalizedRoleName, CancellationToken cancellationToken = default)
+    public async Task<ApplicationRole> FindByNameAsync(string normalizedRoleName, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(normalizedRoleName);
@@ -140,4 +136,23 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
     }
 
     #endregion Implement IRoleStore
+
+    protected virtual void Dispose(bool disposing)
+    {
+    }
+
+    private async Task<IdentityResult> DeleteRoleAsync(ApplicationRole role, Guid roleId)
+    {
+        bool isDeleted = await _rolesService.DeleteRole(roleId);
+
+        return isDeleted
+            ? IdentityResult.Success
+            : IdentityResult.Failed(new IdentityError { Description = RoleValidationConstants.CouldNotDeleteRole(role.Name) });
+    }
+
+    private async Task<ApplicationRole> GetRoleAsync(Guid id)
+    {
+        RoleDto role = await _rolesService.GetRole(id);
+        return _mapper.Map<ApplicationRole>(role);
+    }
 }

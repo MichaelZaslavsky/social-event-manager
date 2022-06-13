@@ -218,8 +218,11 @@ public class UserClaimsRepositoryTests : RepositoryTestBase<IUserClaimsRepositor
     [MemberData(nameof(UserClaimData.UserClaimWithValidLength), MemberType = typeof(UserClaimData))]
     public async Task InsertAsync_Should_Succeed_When_UserClaimIsValid(UserClaim userClaim)
     {
-        await Db.InsertAsync(AccountData.GetMockAccount(userClaim.UserId));
-        await Db.InsertAsync(userClaim);
+        int accountId = await Db.InsertAsync(AccountData.GetMockAccount(userClaim.UserId));
+        int userClaimId = await Db.InsertAsync(userClaim);
+
+        Assert.True(accountId > 0);
+        Assert.True(userClaimId > 0);
     }
 
     [Theory]

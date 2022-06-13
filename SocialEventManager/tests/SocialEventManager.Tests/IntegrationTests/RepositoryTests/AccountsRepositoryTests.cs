@@ -35,7 +35,8 @@ public class AccountsRepositoryTests : RepositoryTestBase<IAccountsRepository, A
     [MemberData(nameof(AccountData.AccountWithNonRequiredNullField), MemberType = typeof(AccountData))]
     public async Task InsertAsync_Should_Succeed_When_AccountIsValid(Account account)
     {
-        await Db.InsertAsync(account);
+        int id = await Db.InsertAsync(account);
+        Assert.True(id > 0);
     }
 
     [Theory]

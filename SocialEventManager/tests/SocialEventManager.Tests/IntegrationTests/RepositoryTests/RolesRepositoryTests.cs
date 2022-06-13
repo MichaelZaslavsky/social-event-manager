@@ -145,7 +145,8 @@ public class RolesRepositoryTests : RepositoryTestBase<IRolesRepository, Role>
     [MemberData(nameof(RoleData.RoleWithValidLength), MemberType = typeof(RoleData))]
     public async Task InsertAsync_Should_Succeed_When_RoleIsValid(Role role)
     {
-        await Db.InsertAsync(role);
+        int id = await Db.InsertAsync(role);
+        Assert.True(id > 0);
     }
 
     [Theory]
