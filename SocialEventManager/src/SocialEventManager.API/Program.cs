@@ -8,22 +8,14 @@ namespace SocialEventManager.API;
 
 public static class Program
 {
-    private static readonly string EnvironmentName;
-    private static readonly IConfiguration Configuration;
-
-    static Program()
-    {
-        EnvironmentName = Environment.GetEnvironmentVariable(ApiConstants.AspNetCoreEnvironment)!;
-        ArgumentNullException.ThrowIfNull(EnvironmentName);
-
-        Configuration = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile(ApiConstants.AppSettingsJson, optional: false, reloadOnChange: true)
-            .AddJsonFile($"{ApiConstants.AppSettings}.{EnvironmentName}.json", optional: true)
-            .AddEnvironmentVariables()
-            .AddUserSecrets<Startup>()
-            .Build();
-    }
+    private static readonly string EnvironmentName = Environment.GetEnvironmentVariable(ApiConstants.AspNetCoreEnvironment)!;
+    private static readonly IConfiguration Configuration = new ConfigurationBuilder()
+        .SetBasePath(Directory.GetCurrentDirectory())
+        .AddJsonFile(ApiConstants.AppSettingsJson, optional: false, reloadOnChange: true)
+        .AddJsonFile($"{ApiConstants.AppSettings}.{EnvironmentName}.json", optional: true)
+        .AddEnvironmentVariables()
+        .AddUserSecrets<Startup>()
+        .Build();
 
     public static void Main(string[] args)
     {
