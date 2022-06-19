@@ -43,6 +43,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Constants\Validations\ValidationConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Queries\TableQueryHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Attributes\DbEntityAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\Attributes\EnumTableAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Attributes\NotDefaultAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Enums\DbTypes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions\BadRequestException.cs" />
