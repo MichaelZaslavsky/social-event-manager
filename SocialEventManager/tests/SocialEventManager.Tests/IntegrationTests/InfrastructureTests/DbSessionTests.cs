@@ -7,9 +7,12 @@ using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Shared.Helpers;
 using Xunit;
+using Xunit.Categories;
 
 namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests;
 
+[IntegrationTest]
+[Category(CategoryConstants.Infrastructure)]
 public class DbSessionTests
 {
     private readonly IConfiguration _configuration;
