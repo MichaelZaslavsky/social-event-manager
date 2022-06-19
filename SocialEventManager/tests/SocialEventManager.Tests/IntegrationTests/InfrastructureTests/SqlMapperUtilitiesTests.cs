@@ -4,9 +4,12 @@ using SocialEventManager.DAL.Entities;
 using SocialEventManager.DAL.Infrastructure;
 using SocialEventManager.Shared.Constants;
 using Xunit;
+using Xunit.Categories;
 
 namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests;
 
+[IntegrationTest]
+[Category(CategoryConstants.Infrastructure)]
 public class SqlMapperUtilitiesTests
 {
     [Fact]

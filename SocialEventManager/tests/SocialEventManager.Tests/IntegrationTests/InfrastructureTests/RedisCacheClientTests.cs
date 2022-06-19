@@ -1,10 +1,14 @@
 using AutoFixture.Xunit2;
 using FluentAssertions;
 using ServiceStack.Redis;
+using SocialEventManager.Shared.Constants;
 using Xunit;
+using Xunit.Categories;
 
 namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests;
 
+[IntegrationTest]
+[Category(CategoryConstants.Infrastructure)]
 public class RedisCacheClientTests
 {
     private readonly IRedisClientsManagerAsync _manager;
