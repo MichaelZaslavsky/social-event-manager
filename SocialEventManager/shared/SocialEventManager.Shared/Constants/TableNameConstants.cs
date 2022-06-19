@@ -2,9 +2,9 @@ namespace SocialEventManager.Shared.Constants;
 
 public static class TableNameConstants
 {
-    public const string Changelog = "Changelog";
-    public const string Accounts = "dbo.Accounts";
-    public const string Roles = "dbo.Roles";
-    public const string UserRoles = "dbo.UserRoles";
-    public const string UserClaims = "dbo.UserClaims";
+    public const string Accounts = $"{SchemaConstants.Default}.{nameof(Accounts)}";
+    public const string Changelog = nameof(Changelog);
+    public const string Roles = $"{SchemaConstants.Default}.{nameof(Roles)}";
+    public const string UserClaims = $"{SchemaConstants.Default}.{nameof(UserClaims)}";
+    public const string UserRoles = $"{SchemaConstants.Default}.{nameof(UserRoles)}";
 }
