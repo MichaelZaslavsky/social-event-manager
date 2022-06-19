@@ -42,9 +42,9 @@ public abstract class GenericRepository<TEntity> : IGenericRepository<TEntity>
         string tableName = SqlMapperUtilities.GetTableName<TEntity>();
 
         string query = $@"
-                SELECT  *
-                FROM    {tableName}
-                WHERE   {columnName} = @FilterValue;";
+            SELECT  *
+            FROM    {tableName}
+            WHERE   {columnName} = @FilterValue;";
 
         return await _session.Connection.QueryAsync<TEntity>(query, new DynamicParameters(new { filterValue }), _session.Transaction);
     }
@@ -54,9 +54,9 @@ public abstract class GenericRepository<TEntity> : IGenericRepository<TEntity>
         string tableName = SqlMapperUtilities.GetTableName<TEntity>();
 
         string query = $@"
-                SELECT  *
-                FROM    {tableName}
-                WHERE   {columnName} IN @FilterValues;";
+            SELECT  *
+            FROM    {tableName}
+            WHERE   {columnName} IN @FilterValues;";
 
         return await _session.Connection.QueryAsync<TEntity>(query, new DynamicParameters(new { filterValues }), _session.Transaction);
     }
@@ -66,9 +66,9 @@ public abstract class GenericRepository<TEntity> : IGenericRepository<TEntity>
         string tableName = SqlMapperUtilities.GetTableName<TEntity>();
 
         string query = $@"
-                SELECT  *
-                FROM    {tableName}
-                WHERE   {columnName} = @FilterValue;";
+            SELECT  *
+            FROM    {tableName}
+            WHERE   {columnName} = @FilterValue;";
 
         return await _session.Connection.QuerySingleOrDefaultAsync<TEntity>(query, new DynamicParameters(new { filterValue }), _session.Transaction);
     }
@@ -78,8 +78,8 @@ public abstract class GenericRepository<TEntity> : IGenericRepository<TEntity>
         string tableName = SqlMapperUtilities.GetTableName<TEntity>();
 
         string query = $@"
-                DELETE FROM {tableName}
-                WHERE {columnName} = @Id;";
+            DELETE FROM {tableName}
+            WHERE {columnName} = @Id;";
 
         return await _session.Connection.ExecuteAsync(query, new DynamicParameters(new { Id = id }), _session.Transaction) > 0;
     }
@@ -89,8 +89,8 @@ public abstract class GenericRepository<TEntity> : IGenericRepository<TEntity>
         string tableName = SqlMapperUtilities.GetTableName<TEntity>();
 
         string query = $@"
-                DELETE FROM {tableName}
-                WHERE {columnName} = @Id;";
+            DELETE FROM {tableName}
+            WHERE {columnName} = @Id;";
 
         return await _session.Connection.ExecuteAsync(query, new DynamicParameters(new { Id = id }), _session.Transaction) > 0;
     }
