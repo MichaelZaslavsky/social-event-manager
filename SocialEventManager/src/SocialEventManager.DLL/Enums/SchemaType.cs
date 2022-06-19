@@ -6,6 +6,7 @@ using SocialEventManager.Shared.Utilities.Attributes;
 namespace SocialEventManager.DAL.Enums;
 
 [DbEntity(DbTypes.SocialEventManager)]
+[EnumTable(TableNameConstants.SchemaTypes)]
 public enum SchemaType
 {
     [Description(SchemaConstants.Default)]
