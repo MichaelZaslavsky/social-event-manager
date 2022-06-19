@@ -105,7 +105,7 @@ public class EnumLookupTableCreator
 
     private async Task MergeLookup(Type type, HashSet<string> tableNames)
     {
-        string tableName = type.Name;
+        string tableName = GetTableName(type);
 
         if (!tableNames.Contains(tableName))
         {
@@ -113,6 +113,15 @@ public class EnumLookupTableCreator
         }
 
         MergeValues(type, tableName);
+    }
+
+    private static string GetTableName(Type type)
+    {
+        object? attribute = type.GetCustomAttributes(typeof(EnumTableAttribute), inherit: true).FirstOrDefault();
+
+        return attribute is null
+            ? type.Name
+            : (attribute as EnumTableAttribute)!.TableName;
     }
 
     private async Task CreateTable(string tableName)
