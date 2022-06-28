@@ -1,6 +1,7 @@
 [![.NET package](https://github.com/MichaelZaslavsky/social-event-manager/actions/workflows/dotnet-build-and-test.yml/badge.svg)](https://github.com/MichaelZaslavsky/social-event-manager/actions/workflows/dotnet-build-and-test.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=MichaelZaslavsky_social-event-manager&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=MichaelZaslavsky_social-event-manager)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/10e406198cbb439989fc58af01f95263)](https://www.codacy.com/gh/MichaelZaslavsky/social-event-manager/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=MichaelZaslavsky/social-event-manager&amp;utm_campaign=Badge_Grade)
+[![CodeQL](https://github.com/MichaelZaslavsky/social-event-manager/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/MichaelZaslavsky/social-event-manager/actions/workflows/codeql-analysis.yml)
 [![Dependabot auto-merge](https://github.com/MichaelZaslavsky/social-event-manager/actions/workflows/auto-merge-dependabot.yml/badge.svg)](https://github.com/MichaelZaslavsky/social-event-manager/actions/workflows/auto-merge-dependabot.yml)
 
 # Social Event Manager
