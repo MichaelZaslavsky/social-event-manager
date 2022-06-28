@@ -3,6 +3,7 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/10e406198cbb439989fc58af01f95263)](https://www.codacy.com/gh/MichaelZaslavsky/social-event-manager/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=MichaelZaslavsky/social-event-manager&amp;utm_campaign=Badge_Grade)
 [![CodeQL](https://github.com/MichaelZaslavsky/social-event-manager/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/MichaelZaslavsky/social-event-manager/actions/workflows/codeql-analysis.yml)
 [![Dependabot auto-merge](https://github.com/MichaelZaslavsky/social-event-manager/actions/workflows/auto-merge-dependabot.yml/badge.svg)](https://github.com/MichaelZaslavsky/social-event-manager/actions/workflows/auto-merge-dependabot.yml)
+![GitHub last commit](https://img.shields.io/github/last-commit/MichaelZaslavsky/social-event-manager)
 
 # Social Event Manager
 
