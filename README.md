@@ -4,6 +4,7 @@
 [![CodeQL](https://github.com/MichaelZaslavsky/social-event-manager/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/MichaelZaslavsky/social-event-manager/actions/workflows/codeql-analysis.yml)
 [![Dependabot auto-merge](https://github.com/MichaelZaslavsky/social-event-manager/actions/workflows/auto-merge-dependabot.yml/badge.svg)](https://github.com/MichaelZaslavsky/social-event-manager/actions/workflows/auto-merge-dependabot.yml)
 ![GitHub last commit](https://img.shields.io/github/last-commit/MichaelZaslavsky/social-event-manager)
+![GitHub repo size](https://img.shields.io/github/repo-size/MichaelZaslavsky/social-event-manager)
 
 # Social Event Manager
 
