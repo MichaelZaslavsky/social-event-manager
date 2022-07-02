@@ -26,7 +26,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\SocialEventManager.DLL\SocialEventManager.DAL.csproj" />
+		<ProjectReference Include="..\SocialEventManager.DAL\SocialEventManager.DAL.csproj" />
 	</ItemGroup>
 
 </Project>

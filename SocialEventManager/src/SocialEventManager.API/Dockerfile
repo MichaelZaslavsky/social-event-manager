@@ -10,7 +10,7 @@ WORKDIR /src
 COPY ["src/SocialEventManager.API/SocialEventManager.API.csproj", "src/SocialEventManager.API/"]
 COPY ["src/SocialEventManager.Infrastructure/SocialEventManager.Infrastructure.csproj", "src/SocialEventManager.Infrastructure/"]
 COPY ["src/SocialEventManager.BLL/SocialEventManager.BLL.csproj", "src/SocialEventManager.BLL/"]
-COPY ["src/SocialEventManager.DLL/SocialEventManager.DAL.csproj", "src/SocialEventManager.DLL/"]
+COPY ["src/SocialEventManager.DAL/SocialEventManager.DAL.csproj", "src/SocialEventManager.DAL/"]
 RUN dotnet restore "src/SocialEventManager.API/SocialEventManager.API.csproj"
 COPY . .
 WORKDIR "/src/src/SocialEventManager.API"
