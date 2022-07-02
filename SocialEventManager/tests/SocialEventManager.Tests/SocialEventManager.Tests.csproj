@@ -48,7 +48,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\SocialEventManager.API\SocialEventManager.API.csproj" />
 		<ProjectReference Include="..\..\src\SocialEventManager.BLL\SocialEventManager.BLL.csproj" />
-		<ProjectReference Include="..\..\src\SocialEventManager.DLL\SocialEventManager.DAL.csproj" />
+		<ProjectReference Include="..\..\src\SocialEventManager.DAL\SocialEventManager.DAL.csproj" />
 	</ItemGroup>
 
 </Project>
