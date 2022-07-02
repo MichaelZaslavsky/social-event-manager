@@ -60,7 +60,7 @@ public class RolesRepositoryTests : RepositoryTestBase<IRolesRepository, Role>
 
         Func<Task> func = async () => await Db.InsertAsync(role);
         string message = (await func.Should().ThrowAsync<SqlException>()).Subject.First().Message;
-        message.Should().StartWith(ExceptionConstants.ViolationOfPrimaryKeyConstraint($"PK__{AliasConstants.Roles}__"));
+        message.Should().StartWith(ExceptionConstants.ViolationOfPrimaryKeyConstraint($"PK__{nameof(TableNameConstants.Roles)}__"));
     }
 
     [Theory]
@@ -73,14 +73,14 @@ public class RolesRepositoryTests : RepositoryTestBase<IRolesRepository, Role>
 
         Func<Task> func = async () => await Db.InsertAsync(duplicatedIdRole);
         string message = (await func.Should().ThrowAsync<SqlException>()).Subject.First().Message;
-        message.Should().StartWith(ExceptionConstants.ViolationOfPrimaryKeyConstraint($"PK__{AliasConstants.Roles}__"));
+        message.Should().StartWith(ExceptionConstants.ViolationOfPrimaryKeyConstraint($"PK__{nameof(TableNameConstants.Roles)}__"));
     }
 
     [Theory]
     [MemberData(nameof(RoleData.RolesWithSameName), MemberType = typeof(RoleData))]
     public async Task InsertAsync_Should_ThrowSqlException_When_RoleNameIsDuplicated(IEnumerable<Role> roles)
     {
-        string uniqueConstraintName = $"UC_{AliasConstants.Roles}_{nameof(Role.Name)}";
+        string uniqueConstraintName = $"UC_{nameof(TableNameConstants.Roles)}_{nameof(Role.Name)}";
         string duplicateKeyValue = roles.First().Name;
 
         Func<Task> func = async () => await Db.InsertAsync(roles);

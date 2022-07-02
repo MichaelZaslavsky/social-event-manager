@@ -5,7 +5,7 @@ using SocialEventManager.Shared.Constants;
 namespace SocialEventManager.DAL.Entities;
 
 [Table(TableNameConstants.UserClaims)]
-[Alias(AliasConstants.UserClaims)]
+[Alias(nameof(TableNameConstants.UserClaims))]
 [UniqueConstraint(nameof(UserId), nameof(Type))]
 public class UserClaim : ClaimBase
 {

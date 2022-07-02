@@ -5,7 +5,7 @@ using SocialEventManager.Shared.Constants;
 namespace SocialEventManager.DAL.Entities;
 
 [Table(TableNameConstants.Roles)]
-[Alias(AliasConstants.Roles)]
+[Alias(nameof(TableNameConstants.Roles))]
 [UniqueConstraint(nameof(Name))]
 public class Role
 {

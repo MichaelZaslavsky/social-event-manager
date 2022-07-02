@@ -6,7 +6,7 @@ namespace SocialEventManager.DAL.Entities;
 using Dapper.Contrib.Extensions;
 
 [Table(TableNameConstants.UserRoles)]
-[Alias(AliasConstants.UserRoles)]
+[Alias(nameof(TableNameConstants.UserRoles))]
 [UniqueConstraint(nameof(UserId), nameof(RoleId))]
 public class UserRole
 {
