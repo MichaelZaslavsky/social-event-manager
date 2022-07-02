@@ -46,7 +46,7 @@ public class UserRolesRepositoryTests : RepositoryTestBase<IUserRolesRepository,
     {
         await Db.InsertAsync(RoleData.GetMockRole(id: userRole.RoleId));
 
-        string foriegnKeyName = $"FK_{AliasConstants.UserRoles}_{AliasConstants.Accounts}_{nameof(UserRole.UserId)}";
+        string foriegnKeyName = $"FK_{nameof(TableNameConstants.UserRoles)}_{nameof(TableNameConstants.Accounts)}_{nameof(UserRole.UserId)}";
         string expectedMessage = ExceptionConstants.ForeignKeyConstraintConflict(foriegnKeyName, TableNameConstants.Accounts, nameof(UserRole.UserId));
 
         Func<Task> func = async () => await Db.InsertAsync(userRole);
@@ -59,7 +59,7 @@ public class UserRolesRepositoryTests : RepositoryTestBase<IUserRolesRepository,
     {
         await Db.InsertAsync(AccountData.GetMockAccount(userRole.UserId));
 
-        string foriegnKeyName = $"FK_{AliasConstants.UserRoles}_{AliasConstants.Roles}_{nameof(UserRole.RoleId)}";
+        string foriegnKeyName = $"FK_{nameof(TableNameConstants.UserRoles)}_{nameof(TableNameConstants.Roles)}_{nameof(UserRole.RoleId)}";
         string expectedMessage = ExceptionConstants.ForeignKeyConstraintConflict(foriegnKeyName, TableNameConstants.Roles, nameof(Role.Id));
 
         Func<Task> func = async () => await Db.InsertAsync(userRole);
@@ -88,7 +88,7 @@ public class UserRolesRepositoryTests : RepositoryTestBase<IUserRolesRepository,
     {
         userRole.Id = await CreateUserRoleAndRelatedData(userRole);
 
-        string uniqueConstraintName = $"UC_{AliasConstants.UserRoles}_{nameof(UserRole.UserId)}_{nameof(UserRole.RoleId)}";
+        string uniqueConstraintName = $"UC_{nameof(TableNameConstants.UserRoles)}_{nameof(UserRole.UserId)}_{nameof(UserRole.RoleId)}";
         string duplicateKeyValue = $"{userRole.UserId}, {userRole.RoleId}";
         string expectedMessage = ExceptionConstants.ViolationOfUniqueKeyConstraint(uniqueConstraintName, TableNameConstants.UserRoles, duplicateKeyValue);
 

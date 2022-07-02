@@ -43,7 +43,7 @@ public class AccountsRepositoryTests : RepositoryTestBase<IAccountsRepository, A
     [MemberData(nameof(AccountData.AccountWithSameEmail), MemberType = typeof(AccountData))]
     public async Task InsertAsync_Should_ThrowSqlException_When_AccountEmailIsDuplicated(IEnumerable<Account> accounts)
     {
-        string uniqueConstraintName = $"UC_{AliasConstants.Accounts}_{nameof(Account.Email)}";
+        string uniqueConstraintName = $"UC_{nameof(TableNameConstants.Accounts)}_{nameof(Account.Email)}";
         string duplicateKeyValue = $"{accounts.First().Email}";
         string expectedMessage = ExceptionConstants.ViolationOfUniqueKeyConstraint(uniqueConstraintName, TableNameConstants.Accounts, duplicateKeyValue);
 

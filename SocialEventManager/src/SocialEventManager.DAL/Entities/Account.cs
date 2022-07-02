@@ -6,7 +6,7 @@ namespace SocialEventManager.DAL.Entities;
 using Dapper.Contrib.Extensions;
 
 [Table(TableNameConstants.Accounts)]
-[Alias(AliasConstants.Accounts)]
+[Alias(nameof(TableNameConstants.Accounts))]
 [UniqueConstraint(nameof(Email))]
 [UniqueConstraint(nameof(UserId))]
 public class Account

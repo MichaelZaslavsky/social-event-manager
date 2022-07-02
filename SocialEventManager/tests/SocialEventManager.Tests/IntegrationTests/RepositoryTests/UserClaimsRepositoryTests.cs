@@ -180,7 +180,7 @@ public class UserClaimsRepositoryTests : RepositoryTestBase<IUserClaimsRepositor
         UserClaim firstUserClaim = userClaims.First();
         await Db.InsertAsync(AccountData.GetMockAccount(firstUserClaim.UserId));
 
-        string uniqueConstraintName = $"UC_{AliasConstants.UserClaims}_{nameof(UserClaim.UserId)}_{nameof(UserClaim.Type)}";
+        string uniqueConstraintName = $"UC_{nameof(TableNameConstants.UserClaims)}_{nameof(UserClaim.UserId)}_{nameof(UserClaim.Type)}";
         string duplicateKeyValue = $"{firstUserClaim.UserId}, {firstUserClaim.Type}";
         string expectedMessage = ExceptionConstants.ViolationOfUniqueKeyConstraint(uniqueConstraintName, TableNameConstants.UserClaims, duplicateKeyValue);
 
@@ -192,7 +192,7 @@ public class UserClaimsRepositoryTests : RepositoryTestBase<IUserClaimsRepositor
     [MemberData(nameof(UserClaimData.ValidUserClaim), MemberType = typeof(UserClaimData))]
     public async Task InsertAsync_Should_ThrowSqlException_When_UserIdNotExists(UserClaim userClaim)
     {
-        string foriegnKeyName = $"FK_{AliasConstants.UserClaims}_{AliasConstants.Accounts}_{nameof(UserClaim.UserId)}";
+        string foriegnKeyName = $"FK_{nameof(TableNameConstants.UserClaims)}_{nameof(TableNameConstants.Accounts)}_{nameof(UserClaim.UserId)}";
         string expectedMessage = ExceptionConstants.ForeignKeyConstraintConflict(foriegnKeyName, TableNameConstants.Accounts, nameof(UserClaim.UserId));
 
         Func<Task> func = async () => await Db.InsertAsync(userClaim);
