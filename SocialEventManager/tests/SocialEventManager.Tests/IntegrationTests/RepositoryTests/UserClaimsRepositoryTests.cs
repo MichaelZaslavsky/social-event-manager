@@ -221,8 +221,8 @@ public class UserClaimsRepositoryTests : RepositoryTestBase<IUserClaimsRepositor
         int accountId = await Db.InsertAsync(AccountData.GetMockAccount(userClaim.UserId));
         int userClaimId = await Db.InsertAsync(userClaim);
 
-        Assert.True(accountId > 0);
-        Assert.True(userClaimId > 0);
+        accountId.Should().BeGreaterThan(0);
+        userClaimId.Should().BeGreaterThan(0);
     }
 
     [Theory]

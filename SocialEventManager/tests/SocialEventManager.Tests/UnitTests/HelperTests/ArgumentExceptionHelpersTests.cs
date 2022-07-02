@@ -18,7 +18,7 @@ public class ArgumentExceptionHelpersTests
     public void ThrowIfNullOrEmpty_Should_NotThrowArgumentException_When_ArgumentHasValue(IEnumerable<object> argument)
     {
         Exception? exception = Record.Exception(() => ArgumentExceptionHelpers.ThrowIfNullOrEmpty(argument, nameof(argument)));
-        Assert.Null(exception);
+        exception.Should().BeNull();
     }
 
     [Theory]
@@ -37,7 +37,7 @@ public class ArgumentExceptionHelpersTests
     public void ThrowIfNullOrWhiteSpace_Should_NotThrowArgumentException_When_ArgumentHasValue(string argument)
     {
         Exception? exception = Record.Exception(() => ArgumentExceptionHelpers.ThrowIfNullOrWhiteSpace(argument, nameof(argument)));
-        Assert.Null(exception);
+        exception.Should().BeNull();
     }
 
     [Theory]
