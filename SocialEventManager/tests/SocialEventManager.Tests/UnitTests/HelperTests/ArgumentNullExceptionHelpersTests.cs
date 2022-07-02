@@ -16,7 +16,7 @@ public class ArgumentNullExceptionHelpersTests
         Exception? exception = Record.Exception(() =>
             ArgumentNullExceptionHelpers.ThrowIfNull((argument1, nameof(argument1)), (argument2, nameof(argument2)), (argument3, nameof(argument3))));
 
-        Assert.Null(exception);
+        exception.Should().BeNull();
     }
 
     [Theory]

@@ -36,7 +36,7 @@ public class AccountsRepositoryTests : RepositoryTestBase<IAccountsRepository, A
     public async Task InsertAsync_Should_Succeed_When_AccountIsValid(Account account)
     {
         int id = await Db.InsertAsync(account);
-        Assert.True(id > 0);
+        id.Should().BeGreaterThan(0);
     }
 
     [Theory]
