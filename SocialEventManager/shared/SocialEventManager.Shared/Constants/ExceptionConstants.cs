@@ -51,6 +51,8 @@ public static class ExceptionConstants
 
     public static string DuplicateRoleName(string roleName) => $"\"Role name '{roleName}' {IsAlreadyTaken}(DuplicateRoleName)\"";
 
+    public static string UnexpectedException(Exception ex) => $"Unexpected exception, {ex}";
+
     #region Private Fields
 
     private const string TheStatementHasBeenTerminatedWithSpace = "\r\nThe statement has been terminated.";
