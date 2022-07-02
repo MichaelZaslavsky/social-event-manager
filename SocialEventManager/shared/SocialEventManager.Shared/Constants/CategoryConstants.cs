@@ -8,4 +8,5 @@ public static class CategoryConstants
     public const string Identity = nameof(Identity);
     public const string Infrastructure = nameof(Infrastructure);
     public const string HealthChecks = nameof(HealthChecks);
+    public const string Utilities = nameof(Utilities);
 }
