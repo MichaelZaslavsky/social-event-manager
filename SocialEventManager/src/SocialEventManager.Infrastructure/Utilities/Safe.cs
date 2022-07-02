@@ -104,19 +104,9 @@ public static class Safe
         }
         catch (Exception ex)
         {
-            string errorDetails = ex switch
-            {
-                _ when ex is ArgumentNullException
-                    or ArgumentException
-                    or NullReferenceException
-                    or IndexOutOfRangeException
-                    or InvalidOperationException
-                    or OutOfMemoryException
-                    or FormatException => ex.ToString(),
-                _ => ExceptionConstants.UnexpectedException(ex),
-            };
-
+            string errorDetails = GetErrorDetails(ex);
             Log.Error(errorDetails);
+
             return result;
         }
     }
@@ -158,21 +148,24 @@ public static class Safe
         }
         catch (Exception ex)
         {
-            string errorDetails = ex switch
-            {
-                _ when ex is ArgumentNullException
-                    or ArgumentException
-                    or NullReferenceException
-                    or IndexOutOfRangeException
-                    or InvalidOperationException
-                    or OutOfMemoryException
-                    or FormatException => ex.ToString(),
-                _ => ExceptionConstants.UnexpectedException(ex),
-            };
-
+            string errorDetails = GetErrorDetails(ex);
             Log.Error(errorDetails);
+
             return result;
         }
+    }
+
+    private static string GetErrorDetails(Exception ex)
+    {
+        return ex is ArgumentNullException
+            or ArgumentException
+            or NullReferenceException
+            or IndexOutOfRangeException
+            or InvalidOperationException
+            or OutOfMemoryException
+            or FormatException
+            ? ex.ToString()
+            : ExceptionConstants.UnexpectedException(ex);
     }
 
     // A record that is used as a generic placeholder and doesn't have a real usage.
