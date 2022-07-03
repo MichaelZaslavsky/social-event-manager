@@ -322,7 +322,12 @@ public class SafeTests
             throw new ArgumentNullException(nameof(argument3));
         }
 
-        throw new ArgumentNullException(nameof(argument4));
+        if (argument4 is null)
+        {
+            throw new ArgumentNullException(nameof(argument4));
+        }
+
+        throw new ArgumentNullException(nameof(argument1));
     }
 
     private static async Task<string> FuncAsync(string argument1) =>
@@ -363,6 +368,11 @@ public class SafeTests
             return await Task.FromException<string>(new ArgumentNullException(nameof(argument3)));
         }
 
-        return await Task.FromException<string>(new ArgumentNullException(nameof(argument4)));
+        if (argument4 is null)
+        {
+            return await Task.FromException<string>(new ArgumentNullException(nameof(argument4)));
+        }
+
+        return await Task.FromException<string>(new ArgumentNullException(nameof(argument1)));
     }
 }
