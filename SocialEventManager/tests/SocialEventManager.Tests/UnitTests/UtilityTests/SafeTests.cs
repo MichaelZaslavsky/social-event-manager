@@ -305,8 +305,25 @@ public class SafeTests
     private static string FuncThrowsArgumentNullException(string argument1, string argument2, string argument3) =>
         FuncThrowsArgumentNullException(argument1, argument2, argument3, null!);
 
-    private static string FuncThrowsArgumentNullException(string argument1, string argument2, string argument3, string argument4) =>
-        throw new ArgumentNullException(nameof(argument1));
+    private static string FuncThrowsArgumentNullException(string argument1, string argument2, string argument3, string argument4)
+    {
+        if (argument1 is null)
+        {
+            throw new ArgumentNullException(nameof(argument1));
+        }
+
+        if (argument2 is null)
+        {
+            throw new ArgumentNullException(nameof(argument2));
+        }
+
+        if (argument3 is null)
+        {
+            throw new ArgumentNullException(nameof(argument3));
+        }
+
+        throw new ArgumentNullException(nameof(argument4));
+    }
 
     private static async Task<string> FuncAsync(string argument1) =>
         await FuncAsync(argument1, null!);
@@ -346,11 +363,6 @@ public class SafeTests
             return await Task.FromException<string>(new ArgumentNullException(nameof(argument3)));
         }
 
-        if (argument4 is null)
-        {
-            return await Task.FromException<string>(new ArgumentNullException(nameof(argument4)));
-        }
-
-        return await Task.FromException<string>(new ArgumentNullException(nameof(argument1)));
+        return await Task.FromException<string>(new ArgumentNullException(nameof(argument4)));
     }
 }
