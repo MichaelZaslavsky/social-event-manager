@@ -169,5 +169,5 @@ public static class Safe
     }
 
     // A record that is used as a generic placeholder and doesn't have a real usage.
-    private record EmptyT();
+    private sealed record EmptyT();
 }
