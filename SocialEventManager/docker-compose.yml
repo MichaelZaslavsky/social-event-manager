@@ -108,7 +108,10 @@ services:
         '--',
         'dotnet',
         'test',
-        'tests/SocialEventManager.Tests/SocialEventManager.Tests.csproj'
+        'tests/SocialEventManager.Tests/SocialEventManager.Tests.csproj',
+        '/p:CollectCoverage=true',
+        '/p:CoverletOutput=TestResults',
+        '/p:CoverletOutputFormat=lcov'
       ]
     depends_on:
       - sql-server-database
