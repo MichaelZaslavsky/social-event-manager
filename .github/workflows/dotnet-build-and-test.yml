@@ -43,3 +43,9 @@ jobs:
         ConnectionStrings__SocialEventManagerTest: ${{ secrets.ConnectionStrings__SocialEventManagerTest }}
         REDIS_MASTER_PASSWORD: ${{ secrets.REDIS_MASTER_PASSWORD }}
         REDIS_REPLICA_PASSWORD: ${{ secrets.REDIS_REPLICA_PASSWORD }}
+        
+    - name: Publish coverage report to coveralls.io
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: ./SocialEventManager/tests/SocialEventManager.Tests/TestResults.info
