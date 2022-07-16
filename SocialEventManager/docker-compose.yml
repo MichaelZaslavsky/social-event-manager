@@ -97,9 +97,9 @@ services:
       - Redis__2=redis-replica:6379?password=${REDIS_REPLICA_PASSWORD}
       - Redis__3=redis-replica:6379?password=${REDIS_REPLICA_PASSWORD}
     volumes:
-      - .:/src
+      - .:/home/runner/work/social-event-manager/social-event-manager/SocialEventManager
       - .:/tests
-    working_dir: /src
+    working_dir: /home/runner/work/social-event-manager/social-event-manager/SocialEventManager
     command:
       [
         '/bin/bash',
@@ -110,7 +110,6 @@ services:
         'test',
         'tests/SocialEventManager.Tests/SocialEventManager.Tests.csproj',
         '/p:CollectCoverage=true',
-        '/p:CoverletOutput=TestResults',
         '/p:CoverletOutputFormat=lcov'
       ]
     depends_on:
