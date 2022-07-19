@@ -9,7 +9,7 @@
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=MichaelZaslavsky_social-event-manager&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=MichaelZaslavsky_social-event-manager)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=MichaelZaslavsky_social-event-manager&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=MichaelZaslavsky_social-event-manager)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=MichaelZaslavsky_social-event-manager&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=MichaelZaslavsky_social-event-manager)
-[![Coverage Status](https://coveralls.io/repos/github/MichaelZaslavsky/social-event-manager/badge.svg?branch=master)](https://coveralls.io/github/MichaelZaslavsky/social-event-manager?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/MichaelZaslavsky/social-event-manager/badge.svg)](https://coveralls.io/github/MichaelZaslavsky/social-event-manager)
 ![GitHub last commit](https://img.shields.io/github/last-commit/MichaelZaslavsky/social-event-manager)
 ![GitHub repo size](https://img.shields.io/github/repo-size/MichaelZaslavsky/social-event-manager)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/MichaelZaslavsky/social-event-manager)
