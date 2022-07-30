@@ -6,6 +6,7 @@ public static class GlobalConstants
     public const string EntryPoint = nameof(EntryPoint);
     public const string Service = nameof(Service);
     public const string Repository = nameof(Repository);
+    public const string Fake = nameof(Fake);
     public const string Stub = nameof(Stub);
     public const string InterfacePrefix = "I";
     public const string Cascade = "CASCADE";

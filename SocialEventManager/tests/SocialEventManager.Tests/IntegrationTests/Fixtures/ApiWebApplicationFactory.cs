@@ -21,6 +21,6 @@ public class ApiWebApplicationFactory : WebApplicationFactory<API.Startup>
             config.AddConfiguration(Configuration);
         });
 
-        builder.ConfigureTestServices(services => services.RegisterRepositories());
+        builder.ConfigureTestServices(services => services.RegisterFakes());
     }
 }
