@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 using Serilog;
 using Serilog.Events;
 using SocialEventManager.Infrastructure.Middleware;
-using SocialEventManager.Shared.Common.Constants;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Exceptions;
 using SocialEventManager.Shared.Extensions;

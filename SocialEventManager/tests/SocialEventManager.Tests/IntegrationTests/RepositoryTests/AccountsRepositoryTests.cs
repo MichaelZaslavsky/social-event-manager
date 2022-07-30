@@ -2,7 +2,6 @@ using System.Data.SqlClient;
 using FluentAssertions;
 using SocialEventManager.DAL.Entities;
 using SocialEventManager.DAL.Repositories.Accounts;
-using SocialEventManager.Shared.Common.Constants;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Tests.Common.Constants;
 using SocialEventManager.Tests.Common.DataMembers;

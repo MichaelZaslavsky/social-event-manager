@@ -1,6 +1,4 @@
-using SocialEventManager.Shared.Constants;
-
-namespace SocialEventManager.Shared.Common.Constants;
+namespace SocialEventManager.Shared.Constants;
 
 public static class ExceptionConstants
 {
@@ -26,6 +24,9 @@ public static class ExceptionConstants
     public const string ExceedMaximumAllowedLength = "String or binary data would be truncated";
     public const string ValueCannotBeNullOrEmpty = "Value cannot be null or empty.";
     public const string ValueCannotBeNullOrWhiteSpace = "Value cannot be null or whitespace.";
+    public const string NoRecipientsHaveBeenSpecified = "No recipients have been specified.";
+    public const string NoConnectionCouldBeMade = "No connection could be made because the target machine actively refused it.";
+    public const string ConnectionRefused = "Connection refused";
 
     public static string InvalidObjectName(string objectName) => $"Invalid object name '{objectName}'.";
 

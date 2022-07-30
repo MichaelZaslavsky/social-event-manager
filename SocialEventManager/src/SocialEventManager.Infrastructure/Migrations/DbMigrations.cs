@@ -2,7 +2,6 @@ using System.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
-using SocialEventManager.Shared.Common.Constants;
 using SocialEventManager.Shared.Constants;
 
 namespace SocialEventManager.Infrastructure.Migrations;

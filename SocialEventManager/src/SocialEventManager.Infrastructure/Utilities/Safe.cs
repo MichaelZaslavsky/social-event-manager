@@ -1,5 +1,5 @@
 using Serilog;
-using SocialEventManager.Shared.Common.Constants;
+using SocialEventManager.Shared.Constants;
 
 namespace SocialEventManager.Infrastructure.Utilities;
 

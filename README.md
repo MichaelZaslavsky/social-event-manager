@@ -114,6 +114,9 @@ My Events:
 3.  Create `.env` file in the same folder where `docker-compose.yml` file is and add the following keys:
 
     ```yml
+	EmailConfiguration__Host=smtp.gmail.com,
+	EmailConfiguration__UserName=<SomeEmail>,
+	EmailConfiguration__Password=<AppPassword>,
     SA_PASSWORD=<SomePassword1>
     DB_USER=<SomeDBUser>
     DB_PASSWORD=<SomePassord2>

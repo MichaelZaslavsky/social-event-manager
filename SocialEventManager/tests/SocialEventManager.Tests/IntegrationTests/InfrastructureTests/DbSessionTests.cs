@@ -2,7 +2,6 @@ using System.Data;
 using FluentAssertions;
 using Microsoft.Extensions.Configuration;
 using SocialEventManager.DAL.Infrastructure;
-using SocialEventManager.Shared.Common.Constants;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Shared.Helpers;

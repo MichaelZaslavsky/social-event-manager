@@ -1,7 +1,7 @@
 using System.Reflection;
 using Dapper.Contrib.Extensions;
 using FluentAssertions;
-using SocialEventManager.Shared.Common.Constants;
+using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Shared.Helpers;
 using Xunit;

@@ -7,5 +7,4 @@ public static class AuthConstants
     public const string BasicAuth = "basicAuth";
     public const string Scheme = "basic";
     public const string SwaggerAuthenticationDescription = "Input your username and password to access this API";
-    public const string BasicAuthentication = nameof(BasicAuthentication);
 }

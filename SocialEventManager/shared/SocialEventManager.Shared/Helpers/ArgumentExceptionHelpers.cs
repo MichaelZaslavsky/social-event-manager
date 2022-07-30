@@ -1,5 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
-using SocialEventManager.Shared.Common.Constants;
+using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
 
 namespace SocialEventManager.Shared.Helpers;

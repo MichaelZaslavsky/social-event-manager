@@ -1,6 +1,5 @@
 using System.Globalization;
 using SocialEventManager.DAL.Entities;
-using SocialEventManager.Shared.Common.Constants;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Helpers;
 using Xunit;

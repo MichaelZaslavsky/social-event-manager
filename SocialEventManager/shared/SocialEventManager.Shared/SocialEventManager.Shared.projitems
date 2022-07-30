@@ -9,10 +9,12 @@
     <Import_RootNamespace>SocialEventManager.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Configurations\EmailConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\ApiConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\ApiPathConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\AuthConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\CategoryConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants\ConfigurationConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\ContactConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\DataConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\DbConstants.cs" />
@@ -41,6 +43,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Constants\TableNameConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\Validations\ValidationConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Queries\TableQueryHelpers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\EmailDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Attributes\DbEntityAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Attributes\EnumTableAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Attributes\NotDefaultAttribute.cs" />

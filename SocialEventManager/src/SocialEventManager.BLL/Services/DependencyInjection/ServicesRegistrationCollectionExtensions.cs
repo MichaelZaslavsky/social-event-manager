@@ -14,6 +14,7 @@ public static class ServicesRegistrationCollectionExtensions
             Assembly.GetExecutingAssembly(),
             Assembly.Load($"{nameof(SocialEventManager)}.{nameof(BLL)}"),
             Assembly.Load($"{nameof(SocialEventManager)}.{nameof(DAL)}"),
+            Assembly.Load($"{nameof(SocialEventManager)}.{nameof(Infrastructure)}"),
         };
 
         services.RegisterAssemblyPublicNonGenericClasses(assembliesToScan)

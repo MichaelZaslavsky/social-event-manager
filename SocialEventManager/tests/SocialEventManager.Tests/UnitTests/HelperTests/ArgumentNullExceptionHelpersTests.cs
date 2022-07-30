@@ -1,6 +1,5 @@
 using AutoFixture.Xunit2;
 using FluentAssertions;
-using SocialEventManager.Shared.Common.Constants;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Helpers;
 using Xunit;

@@ -5,7 +5,6 @@ using FluentAssertions;
 using Moq;
 using SocialEventManager.DAL.Entities;
 using SocialEventManager.DAL.Repositories.Roles;
-using SocialEventManager.Shared.Common.Constants;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Helpers;
 using SocialEventManager.Tests.Common.Constants;
