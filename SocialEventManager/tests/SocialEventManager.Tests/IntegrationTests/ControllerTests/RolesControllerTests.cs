@@ -9,8 +9,9 @@ using SocialEventManager.DAL.Repositories.Roles;
 using SocialEventManager.Shared.Common.Constants;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
+using SocialEventManager.Tests.Common.Constants;
 using SocialEventManager.Tests.Common.DataMembers;
-using SocialEventManager.Tests.IntegrationTests.Data;
+using SocialEventManager.Tests.Common.DataMembers.Storages;
 using SocialEventManager.Tests.IntegrationTests.Fixtures;
 using SocialEventManager.Tests.IntegrationTests.Fixtures.Stubs;
 using Xunit;
@@ -18,6 +19,7 @@ using Xunit.Categories;
 
 namespace SocialEventManager.Tests.IntegrationTests.ControllerTests;
 
+[Collection(TestConstants.StorageDependent)]
 [IntegrationTest]
 [Category(CategoryConstants.Identity)]
 public class RolesControllerTests : IntegrationTest
@@ -34,7 +36,7 @@ public class RolesControllerTests : IntegrationTest
         applicationRole.Id = Guid.NewGuid().ToString();
 
         await Client.CreateAsync(ApiPathConstants.Roles, applicationRole);
-        RolesData.Instance.Roles.Should().ContainSingle(r => r.Name == applicationRole.Name);
+        RolesStorage.Instance.Data.Should().ContainSingle(r => r.Name == applicationRole.Name);
     }
 
     [Theory]

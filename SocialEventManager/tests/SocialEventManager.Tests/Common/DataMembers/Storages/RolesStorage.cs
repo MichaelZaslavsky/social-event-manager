@@ -2,15 +2,15 @@ using System.Globalization;
 using SocialEventManager.DAL.Entities;
 using SocialEventManager.Shared.Helpers;
 
-namespace SocialEventManager.Tests.IntegrationTests.Data;
+namespace SocialEventManager.Tests.Common.DataMembers.Storages;
 
-public sealed class RolesData
+internal sealed class RolesStorage : StorageBase<RolesStorage, Role>
 {
-    private RolesData()
+    public override void Init()
     {
         string name = RandomGeneratorHelpers.GenerateRandomValue();
 
-        Roles = new List<Role>
+        Data = new List<Role>
         {
             new()
             {
@@ -21,16 +21,4 @@ public sealed class RolesData
             },
         };
     }
-
-    private static readonly Lazy<RolesData> Lazy = new(() => new RolesData());
-
-    public static RolesData Instance
-    {
-        get
-        {
-            return Lazy.Value;
-        }
-    }
-
-    public IList<Role> Roles { get; set; }
 }

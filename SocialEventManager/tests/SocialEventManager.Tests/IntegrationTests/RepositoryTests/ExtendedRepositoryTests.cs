@@ -8,6 +8,7 @@ using SocialEventManager.DAL.Repositories.Roles;
 using SocialEventManager.Shared.Common.Constants;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Helpers;
+using SocialEventManager.Tests.Common.Constants;
 using SocialEventManager.Tests.Common.DataMembers;
 using SocialEventManager.Tests.IntegrationTests.Infrastructure;
 using Xunit;
@@ -16,7 +17,7 @@ using Xunit.Categories;
 namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests;
 
 // Test GenericRepository through RolesRepository
-[Collection(DataConstants.RepositoryTests)]
+[Collection(TestConstants.DatabaseDependent)]
 [IntegrationTest]
 [Category(CategoryConstants.Infrastructure)]
 public class ExtendedRepositoryTests : RepositoryTestBase<IRolesRepository, Role>
