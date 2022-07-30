@@ -8,6 +8,7 @@ using SocialEventManager.DAL.Repositories.Users;
 using SocialEventManager.Shared.Common.Constants;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
+using SocialEventManager.Tests.Common.Constants;
 using SocialEventManager.Tests.Common.DataMembers;
 using SocialEventManager.Tests.IntegrationTests.Infrastructure;
 using Xunit;
@@ -15,7 +16,7 @@ using Xunit.Categories;
 
 namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests;
 
-[Collection(DataConstants.RepositoryTests)]
+[Collection(TestConstants.DatabaseDependent)]
 [IntegrationTest]
 [Category(CategoryConstants.Identity)]
 public class UserClaimsRepositoryTests : RepositoryTestBase<IUserClaimsRepository, UserClaim>
