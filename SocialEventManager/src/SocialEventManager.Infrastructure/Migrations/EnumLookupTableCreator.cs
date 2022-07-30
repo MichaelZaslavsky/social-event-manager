@@ -139,8 +139,11 @@ public class EnumLookupTableCreator
         using SqlCommand cmd = _connection.CreateCommand();
         cmd.Parameters.AddWithValue("@tableName", tableName);
 
+        SqlCommandBuilder builder = new();
+        string escapedTableName = builder.QuoteIdentifier(tableName);
+
         cmd.CommandText = $@"
-            MERGE   {SchemaConstants.Enum}.@tableName dst
+            MERGE   {SchemaConstants.Enum}.{escapedTableName} dst
             USING   @src as src ON dst.Id = Src.Id
             WHEN MATCHED THEN
                 UPDATE SET dst.[Name] = src.[Name], dst.[Description] = src.[Description]
@@ -156,7 +159,7 @@ public class EnumLookupTableCreator
                 && (f.Attributes & FieldAttributes.Literal) != 0) // Get constants, ignore compiler-generated stuff.
             .Select(f => new
             {
-                Id = (int?)f.GetRawConstantValue(),
+                Id = (int)f.GetRawConstantValue()!,
                 f.Name,
                 f.GetCustomAttribute<DescriptionAttribute>()?.Description,
             })
