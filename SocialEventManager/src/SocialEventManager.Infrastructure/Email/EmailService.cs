@@ -2,7 +2,6 @@ using Microsoft.Extensions.Options;
 using MimeKit;
 using MimeKit.Text;
 using SocialEventManager.Shared.Configurations;
-using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Shared.Models;
 
 namespace SocialEventManager.Infrastructure.Email;
@@ -33,9 +32,21 @@ public class EmailService : IEmailService
         };
 
         email.From.Add(MailboxAddress.Parse(_emailConfiguration.Value.UserName));
-        request.To.ForEach(to => email.To.Add(MailboxAddress.Parse(to)));
-        request.Cc.ForEach(cc => email.Cc.Add(MailboxAddress.Parse(cc)));
-        request.Bcc.ForEach(bcc => email.Bcc.Add(MailboxAddress.Parse(bcc)));
+
+        foreach (string to in request.To)
+        {
+            email.To.Add(MailboxAddress.Parse(to));
+        }
+
+        foreach (string cc in request.Cc)
+        {
+            email.Cc.Add(MailboxAddress.Parse(cc));
+        }
+
+        foreach (string bcc in request.Bcc)
+        {
+            email.To.Add(MailboxAddress.Parse(bcc));
+        }
 
         return email;
     }

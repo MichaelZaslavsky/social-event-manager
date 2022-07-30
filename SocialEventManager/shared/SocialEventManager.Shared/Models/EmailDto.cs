@@ -6,6 +6,10 @@ namespace SocialEventManager.Shared.Models;
 
 public record EmailDto
 {
+    public EmailDto()
+    {
+    }
+
     public EmailDto(string subject, string? body, IEnumerable<string> to)
         : this(subject, body, to, Enumerable.Empty<string>(), Enumerable.Empty<string>())
     {
@@ -31,13 +35,13 @@ public record EmailDto
     }
 
     [Required]
-    public string Subject { get; init; }
+    public string Subject { get; init; } = null!;
 
     public string? Body { get; init; }
 
-    public IEnumerable<string> To { get; init; }
+    public IEnumerable<string> To { get; init; } = Enumerable.Empty<string>();
 
-    public IEnumerable<string> Cc { get; init; }
+    public IEnumerable<string> Cc { get; init; } = Enumerable.Empty<string>();
 
-    public IEnumerable<string> Bcc { get; init; }
+    public IEnumerable<string> Bcc { get; init; } = Enumerable.Empty<string>();
 }
