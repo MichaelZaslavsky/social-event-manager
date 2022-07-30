@@ -102,10 +102,6 @@ services:
     working_dir: /home/runner/work/social-event-manager/social-event-manager/SocialEventManager
     command:
       [
-        '/bin/bash',
-        'items/sql/wait-for-it.sh',
-        'sql-server-database:1433',
-        '--',
         'dotnet',
         'test',
         'tests/SocialEventManager.Tests/SocialEventManager.Tests.csproj',
