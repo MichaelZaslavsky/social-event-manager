@@ -25,9 +25,9 @@ public record EmailDto
 
         Subject = subject;
         Body = body;
-        To = to ?? Enumerable.Empty<string>();
-        Cc = cc ?? Enumerable.Empty<string>();
-        Bcc = bcc ?? Enumerable.Empty<string>();
+        To = to;
+        Cc = cc;
+        Bcc = bcc;
     }
 
     [Required]

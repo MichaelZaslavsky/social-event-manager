@@ -27,6 +27,7 @@ public static class ExceptionConstants
     public const string NoRecipientsHaveBeenSpecified = "No recipients have been specified.";
     public const string NoConnectionCouldBeMade = "No connection could be made because the target machine actively refused it.";
     public const string ConnectionRefused = "Connection refused";
+    public const string CannotAssignRequestedAddress = "Cannot assign requested address";
 
     public static string InvalidObjectName(string objectName) => $"Invalid object name '{objectName}'.";
 
