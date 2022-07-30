@@ -3,6 +3,7 @@ using Hangfire;
 using Hangfire.Dashboard;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.SignalR;
@@ -41,6 +42,7 @@ public class Startup
                 options.ReturnHttpNotAcceptable = true;
                 options.OutputFormatters.RemoveType<StringOutputFormatter>();
                 options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
+                options.Conventions.Add(new RouteTokenTransformerConvention(new SlugifyParameterTransformer()));
             });
 
         services.AddCors(options => options.AddPolicy(
