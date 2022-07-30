@@ -1,5 +1,5 @@
 using System.Net;
-using SocialEventManager.Shared.Common.Constants;
+using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Exceptions;
 using Xunit;
 

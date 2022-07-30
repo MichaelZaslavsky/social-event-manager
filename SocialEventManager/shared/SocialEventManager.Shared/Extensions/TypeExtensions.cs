@@ -1,5 +1,5 @@
 using System.Reflection;
-using SocialEventManager.Shared.Common.Constants;
+using SocialEventManager.Shared.Constants;
 
 namespace SocialEventManager.Shared.Extensions;
 

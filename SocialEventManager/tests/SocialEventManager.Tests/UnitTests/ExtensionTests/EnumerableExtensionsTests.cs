@@ -1,6 +1,5 @@
 using FluentAssertions;
 using SocialEventManager.DAL.Entities;
-using SocialEventManager.Shared.Common.Constants;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Tests.DataMembers.Common;
