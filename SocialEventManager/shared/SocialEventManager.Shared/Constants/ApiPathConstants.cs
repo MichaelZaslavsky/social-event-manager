@@ -3,13 +3,13 @@ namespace SocialEventManager.Shared.Constants;
 public static class ApiPathConstants
 {
     public const string ApiController = Api + Controller;
-    public const string Roles = Api + "roles";
-    public const string Ready = "ready";
-    public const string HealthReady = $"/{Health}/{Ready}";
-    public const string HealthLive = $"/{Health}/live";
-
     public const string ChatHub = "/chathub";
+    public const string ContactUs = Api + "contact-us";
     public const string Hangfire = "/hangfire";
+    public const string HealthLive = $"/{Health}/live";
+    public const string HealthReady = $"/{Health}/{Ready}";
+    public const string Ready = "ready";
+    public const string Roles = Api + "roles";
 
     private const string Api = "api/";
     private const string Controller = "[controller]";

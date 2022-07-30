@@ -96,6 +96,7 @@ services:
       - Redis__1=redis-replica:6379?password=${REDIS_REPLICA_PASSWORD}
       - Redis__2=redis-replica:6379?password=${REDIS_REPLICA_PASSWORD}
       - Redis__3=redis-replica:6379?password=${REDIS_REPLICA_PASSWORD}
+      - Email__UserName=${EMAIL__USERNAME}
     volumes:
       - .:/home/runner/work/social-event-manager/social-event-manager/SocialEventManager
       - .:/tests

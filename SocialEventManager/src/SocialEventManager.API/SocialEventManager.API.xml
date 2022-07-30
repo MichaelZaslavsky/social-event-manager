@@ -37,6 +37,24 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:SocialEventManager.API.Controllers.ContactUsController">
+            <summary>
+            Allows contact us.
+            </summary>
+        </member>
+        <member name="M:SocialEventManager.API.Controllers.ContactUsController.#ctor(SocialEventManager.BLL.Services.ContactUs.IContactUsService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SocialEventManager.API.Controllers.ContactUsController"/> class.
+            </summary>
+            <param name="contactUsService">Contacts us service.</param>
+        </member>
+        <member name="M:SocialEventManager.API.Controllers.ContactUsController.Post(SocialEventManager.BLL.Models.ContactUs.ContactUsDto)">
+            <summary>
+            Sends an email to <see cref="F:SocialEventManager.Shared.Constants.ContactConstants.Email"/>.
+            </summary>
+            <param name="contactUs">Requested information for contacting us.</param>
+            <returns>An empty ActionResult.</returns>
+        </member>
         <member name="T:SocialEventManager.API.Controllers.RolesController">
             <summary>
             Represents roles.

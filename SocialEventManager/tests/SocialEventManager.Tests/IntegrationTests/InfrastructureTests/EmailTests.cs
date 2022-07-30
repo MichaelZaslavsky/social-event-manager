@@ -3,6 +3,7 @@ using MimeKit;
 using MimeKit.Text;
 using netDumbster.smtp;
 using SocialEventManager.Shared.Constants;
+using SocialEventManager.Tests.Common.Constants;
 using SocialEventManager.Tests.Common.DataMembers;
 using SocialEventManager.Tests.Common.Helpers;
 using Xunit;
@@ -16,6 +17,7 @@ namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests;
 /// Install it and then run smtp4dev on port 25 before running the email tests.
 /// The emails will be displayed in a local mailbox which can be visualized at http://localhost:5000/.
 /// </summary>
+[Collection(TestConstants.SmtpDependent)]
 [IntegrationTest]
 [Category(CategoryConstants.Infrastructure)]
 public class EmailTests
@@ -34,5 +36,7 @@ public class EmailTests
         SmtpMessage actual = emails[0];
         actual.Subject.Should().Be(message.Subject);
         actual.MessageParts.Select(mp => mp.BodyData).First().Should().Be(message.GetTextBody(TextFormat.Html));
+
+        smtp.Stop();
     }
 }

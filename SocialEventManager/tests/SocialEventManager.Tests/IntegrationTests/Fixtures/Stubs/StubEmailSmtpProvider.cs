@@ -7,8 +7,8 @@ namespace SocialEventManager.Tests.IntegrationTests.Fixtures.Stubs;
 
 internal class StubEmailSmtpProvider : IEmailProvider
 {
-    public async Task SendEmailAsync(MimeMessage email)
+    public async Task SendEmailAsync(MimeMessage message)
     {
-        await EmailHelpers.SendEmailAsync(new(), email, EmailData.FakePorts);
+        await EmailHelpers.SendEmailAsync(new(), message, EmailData.FakePorts);
     }
 }

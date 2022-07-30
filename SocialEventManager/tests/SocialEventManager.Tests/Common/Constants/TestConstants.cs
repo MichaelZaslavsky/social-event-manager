@@ -6,6 +6,7 @@ internal static class TestConstants
 {
     public const string DatabaseDependent = "Database dependent";
     public const string StorageDependent = "Storage dependent";
+    public const string SmtpDependent = "Smtp dependent";
     public const string SomeText = "Some Text";
     public const string LoremIpsum = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
     public const string ValidEmail = "valid-email@email-domain.com";

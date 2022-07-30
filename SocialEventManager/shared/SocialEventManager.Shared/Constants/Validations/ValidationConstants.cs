@@ -7,4 +7,11 @@ public static class ValidationConstants
     public const string WereNotFound = "were not found.";
     public const string NotAValidIdentifier = "Not a valid identifier.";
     public const string TheFieldMustNotHaveTheDefaultValue = "The {0} field must not have the default value.";
+
+    public static string LessThanMinimumLength(string fieldName, int minLength) =>
+        $"The field {fieldName} must be a string or array type with a minimum length of '{minLength}'.";
+
+    public static string InvalidEmail(string fieldName) => $"The {fieldName} field is not a valid e-mail address.";
+
+    public static string TheFieldIsRequired(string fieldName) => $"The {fieldName} field is required.";
 }
