@@ -9,6 +9,7 @@ public static class GlobalConstants
     public const string Fake = nameof(Fake);
     public const string Stub = nameof(Stub);
     public const string InterfacePrefix = "I";
+    public const string Localhost = "localhost";
     public const string Cascade = "CASCADE";
     public const int Size = 1000;
 }

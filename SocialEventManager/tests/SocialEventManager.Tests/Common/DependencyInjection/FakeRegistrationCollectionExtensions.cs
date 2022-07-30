@@ -1,7 +1,9 @@
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
+using SocialEventManager.Infrastructure.Email;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
+using SocialEventManager.Tests.IntegrationTests.Fixtures.Stubs;
 
 namespace SocialEventManager.Tests.Common.DependencyInjection;
 
@@ -29,6 +31,8 @@ public static class FakeRegistrationCollectionExtensions
                 services.AddTransient(type, fakeTypesByName[name]);
             }
         }
+
+        services.AddScoped<IEmailProvider, StubEmailSmtpProvider>();
 
         return services;
     }

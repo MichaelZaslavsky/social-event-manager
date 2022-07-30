@@ -189,6 +189,8 @@ My Events:
 
 ✔️ Versioning
 
+✔️ Email
+
 ❌ Authorization / Authentication
 
 ❌ Security checks
