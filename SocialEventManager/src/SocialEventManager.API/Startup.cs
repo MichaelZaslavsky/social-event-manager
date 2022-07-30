@@ -62,7 +62,7 @@ public class Startup
             .AddRateLimiting(Configuration)
             .AddSqlServer(Configuration)
             .AddHangfire(Configuration)
-            .RegisterDi()
+            .RegisterDependencies()
             .AddIdentityConfigurations()
             .AddRedisClients(Configuration)
             .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())

@@ -5,9 +5,9 @@ using SocialEventManager.Infrastructure.Loggers;
 
 namespace SocialEventManager.API.DependencyInjection;
 
-public static class DiSetupCollectionExtensions
+public static class ServicesCollectionExtensions
 {
-    public static IServiceCollection RegisterDi(this IServiceCollection services)
+    public static IServiceCollection RegisterDependencies(this IServiceCollection services)
     {
         services.RegisterServices()
             .AddTransient<IUnitOfWork, UnitOfWork>()
