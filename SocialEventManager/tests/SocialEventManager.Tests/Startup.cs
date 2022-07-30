@@ -23,7 +23,8 @@ public class Startup
             .AddUserSecrets<Startup>()
             .Build();
 
-        services.AddLogging(builder => builder.SetMinimumLevel(LogLevel.Debug))
+        services.Configure(Configuration)
+            .AddLogging(builder => builder.SetMinimumLevel(LogLevel.Debug))
             .AddSingleton<IInMemoryDatabase, InMemoryDatabase>(_ =>
                 new InMemoryDatabase(Configuration.GetConnectionString(DbConstants.SocialEventManagerTest)))
             .AddSingleton(Configuration)

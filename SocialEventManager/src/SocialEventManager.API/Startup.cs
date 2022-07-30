@@ -33,7 +33,7 @@ public class Startup
     // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
     public void ConfigureServices(IServiceCollection services)
     {
-        services.Configure<BasicAuthenticationConfiguration>(Configuration.GetSection(AuthConstants.BasicAuthentication))
+        services.Configure(Configuration)
             .AddControllers(options =>
             {
                 options.Filters.Add(typeof(TrackActionPerformanceFilter));
