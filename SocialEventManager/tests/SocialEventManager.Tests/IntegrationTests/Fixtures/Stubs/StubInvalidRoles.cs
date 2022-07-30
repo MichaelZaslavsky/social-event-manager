@@ -4,7 +4,7 @@ using SocialEventManager.Tests.IntegrationTests.Data;
 
 namespace SocialEventManager.Tests.IntegrationTests.Fixtures.Stubs;
 
-public class InvalidRolesStub : BaseStub<Role>, IRolesRepository
+public class StubInvalidRoles : StubBase<Role>, IRolesRepository
 {
     public Task<IEnumerable<Role>> GetByUserIdAsync(Guid userId) => Task.FromResult<IEnumerable<Role>>(null!);
 

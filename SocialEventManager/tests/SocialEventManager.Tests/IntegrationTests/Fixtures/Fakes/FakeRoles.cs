@@ -1,10 +1,11 @@
 using SocialEventManager.DAL.Entities;
 using SocialEventManager.DAL.Repositories.Roles;
 using SocialEventManager.Tests.IntegrationTests.Data;
+using SocialEventManager.Tests.IntegrationTests.Fixtures.Stubs;
 
-namespace SocialEventManager.Tests.IntegrationTests.Fixtures.Stubs;
+namespace SocialEventManager.Tests.IntegrationTests.Fixtures.Fakes;
 
-public class RolesStub : BaseStub<Role>, IRolesRepository
+public class FakeRoles : StubBase<Role>, IRolesRepository
 {
     public Task<Guid> InsertRole(Role role)
     {

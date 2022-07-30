@@ -42,7 +42,7 @@ public class RolesControllerTests : IntegrationTest
     public async Task CreateRole_Should_ReturnBadRequest_When_RoleNameIsDuplicated(ApplicationRole applicationRole)
     {
         HttpClient client = Factory.WithWebHostBuilder(builder =>
-            builder.ConfigureTestServices(services => services.AddTransient<IRolesRepository, InvalidRolesStub>()))
+            builder.ConfigureTestServices(services => services.AddTransient<IRolesRepository, StubInvalidRoles>()))
             .CreateClient(new WebApplicationFactoryClientOptions());
 
         (HttpStatusCode statusCode, string message) = await client.CreateAsyncWithError(ApiPathConstants.Roles, applicationRole);
