@@ -79,17 +79,10 @@ public class Startup
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider apiVersionDescriptionProvider)
     {
-        app.UseApiExceptionHandler(options =>
-        {
-            options.AddResponseDetails = ErrorResponseHandler.UpdateApiErrorResponse;
-            options.DetermineLogLevel = ErrorResponseHandler.DetermineLogLevel;
-        })
-        .UseResponseCompression()
-
         // TODO: Currently, the Hangfire dashboard is opened to all users. Need to implement an authorization scenario.
         // A helpful link for implementing it:
         // https://sahansera.dev/securing-hangfire-dashboard-with-endpoint-routing-auth-policy-aspnetcore/
-        .UseHangfireDashboard(ApiPathConstants.Hangfire, new DashboardOptions
+        app.UseHangfireDashboard(ApiPathConstants.Hangfire, new DashboardOptions
         {
             Authorization = new[] { new AllowAllConnectionsFilter() },
             IgnoreAntiforgeryToken = true,
@@ -104,7 +97,12 @@ public class Startup
             app.UseHsts();
         }
 
-        app.UseSecurityHeaders(SecurityPolicyConfigurations.GetPermissionPolicies())
+        app.UseApiExceptionHandler(options =>
+            {
+                options.AddResponseDetails = ErrorResponseHandler.UpdateApiErrorResponse;
+                options.DetermineLogLevel = ErrorResponseHandler.DetermineLogLevel;
+            })
+            .UseResponseCompression().UseSecurityHeaders(SecurityPolicyConfigurations.GetPermissionPolicies())
             .UseHttpsRedirection()
             .UseSwagger()
             .UseSwaggerUI(options =>
