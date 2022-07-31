@@ -14,13 +14,13 @@ namespace SocialEventManager.API.Authentication;
 // Temporary implementation of basic authentication until there is an authentication in the application.
 public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 {
-    private readonly IOptions<BasicAuthenticationConfiguration> _authenticationConfig;
+    private readonly BasicAuthenticationConfiguration _authenticationConfig;
 
     public BasicAuthenticationHandler(IOptionsMonitor<AuthenticationSchemeOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock,
         IOptions<BasicAuthenticationConfiguration> authenticationConfig)
         : base(options, logger, encoder, clock)
     {
-        _authenticationConfig = authenticationConfig;
+        _authenticationConfig = authenticationConfig.Value;
     }
 
     protected override Task<AuthenticateResult> HandleAuthenticateAsync()
@@ -35,8 +35,8 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
             LoginModel? login = GetLoginCredentials();
 
             if (login is not null
-                && login.UserName == _authenticationConfig.Value.UserName
-                && login.Password == _authenticationConfig.Value.Password)
+                && login.UserName == _authenticationConfig.UserName
+                && login.Password == _authenticationConfig.Password)
             {
                 Claim[] claims = new[]
                 {
