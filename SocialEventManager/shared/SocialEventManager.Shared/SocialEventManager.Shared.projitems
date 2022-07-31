@@ -28,6 +28,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Constants\Validations\AuthValidationConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\Validations\RoleValidationConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\Validations\UserValidationConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\BackgroundJobType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\EnumerationExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\HttpClientExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\IdentityErrorExtensions.cs" />

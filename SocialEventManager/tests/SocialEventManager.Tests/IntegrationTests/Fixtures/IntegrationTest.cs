@@ -28,17 +28,18 @@ public class IntegrationTest : IClassFixture<ApiWebApplicationFactory>
     {
         IEnumerable<Type> storages = Assembly.GetExecutingAssembly()
             .GetTypes()
-            .Where(t => t.BaseType?.IsGenericType == true
-                && t.BaseType.GetGenericTypeDefinition() == typeof(StorageBase<,>));
+            .Where(t =>
+                t.BaseType?.IsGenericType == true
+                && (t.BaseType.GetGenericTypeDefinition() == typeof(ListStorage<,>) || t.BaseType.GetGenericTypeDefinition() == typeof(DictionaryStorage<,,>)));
 
         foreach (Type storage in storages)
         {
             PropertyInfo instance = storage.GetProperty(
-                nameof(StorageBase<object, object>.Instance), BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy)!;
+                nameof(StorageBase<object>.Instance), BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy)!;
 
             object? value = instance.GetValue(storage, null);
 
-            storage.GetMethod(nameof(StorageBase<object, object>.Init))?
+            storage.GetMethod(nameof(StorageBase<object>.Init))?
                 .Invoke(value, null);
         }
     }

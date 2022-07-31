@@ -35,14 +35,17 @@ jobs:
       working-directory: ./SocialEventManager
       run: docker-compose up --exit-code-from socialeventmanager.tests socialeventmanager.tests
       env:
-        SA_PASSWORD: ${{ secrets.SA_PASSWORD }}
-        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-        DB_USER: ${{ secrets.DB_USER }}
         ConnectionStrings__SocialEventManager: ${{ secrets.ConnectionStrings__SocialEventManager }}
         ConnectionStrings__SocialEventManagerHangfire: ${{ secrets.ConnectionStrings__SocialEventManagerHangfire }}
         ConnectionStrings__SocialEventManagerTest: ${{ secrets.ConnectionStrings__SocialEventManagerTest }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        DB_USER: ${{ secrets.DB_USER }}
+        Email__UserName: ${{ secrets.EMAIL__USERNAME }}
+        Email__Password: ${{ secrets.EMAIL__PASSWORD }}
+        Email__Host: ${{ secrets.EMAIL__HOST }}
         REDIS_MASTER_PASSWORD: ${{ secrets.REDIS_MASTER_PASSWORD }}
         REDIS_REPLICA_PASSWORD: ${{ secrets.REDIS_REPLICA_PASSWORD }}
+        SA_PASSWORD: ${{ secrets.SA_PASSWORD }}
         
     - name: Publish coverage report to coveralls.io
       uses: coverallsapp/github-action@master

@@ -17,7 +17,7 @@ namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests;
 /// Install it and then run smtp4dev on port 25 before running the email tests.
 /// The emails will be displayed in a local mailbox which can be visualized at http://localhost:5000/.
 /// </summary>
-[Collection(TestConstants.SmtpDependent)]
+[Collection(TestConstants.StorageDependent)]
 [IntegrationTest]
 [Category(CategoryConstants.Infrastructure)]
 public class EmailTests
