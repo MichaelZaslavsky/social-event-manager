@@ -4,7 +4,7 @@ using SocialEventManager.Shared.Helpers;
 
 namespace SocialEventManager.Tests.Common.DataMembers.Storages;
 
-internal sealed class RolesStorage : StorageBase<RolesStorage, Role>
+internal sealed class RolesStorage : ListStorage<RolesStorage, Role>
 {
     public override void Init()
     {

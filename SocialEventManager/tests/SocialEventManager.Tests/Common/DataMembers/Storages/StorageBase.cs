@@ -1,8 +1,6 @@
 namespace SocialEventManager.Tests.Common.DataMembers.Storages;
 
-internal abstract class StorageBase<TStorage, TEntity>
-    where TStorage : class
-    where TEntity : class
+internal abstract class StorageBase<TStorage>
 {
     private static readonly Lazy<TStorage> Lazy = new(() => Activator.CreateInstance<TStorage>());
 
@@ -13,8 +11,6 @@ internal abstract class StorageBase<TStorage, TEntity>
             return Lazy.Value;
         }
     }
-
-    public List<TEntity> Data { get; set; } = new();
 
     public abstract void Init();
 }

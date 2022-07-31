@@ -1,4 +1,5 @@
 using AutoMapper;
+using Hangfire;
 using SocialEventManager.BLL.Models.ContactUs;
 using SocialEventManager.Infrastructure.Email;
 using SocialEventManager.Shared.Models;
@@ -16,9 +17,11 @@ public class ContactUsService : IContactUsService
         _mapper = mapper;
     }
 
-    public async Task ContactUsAsync(ContactUsDto contactUs)
+    public Task ContactUsAsync(ContactUsDto contactUs)
     {
         EmailDto email = _mapper.Map<EmailDto>(contactUs);
-        await _emailService.SendEmailAsync(email);
+        BackgroundJob.Enqueue(() => _emailService.SendEmailAsync(email));
+
+        return Task.CompletedTask;
     }
 }

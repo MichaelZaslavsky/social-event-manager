@@ -3,16 +3,18 @@ using FluentAssertions;
 using netDumbster.smtp;
 using SocialEventManager.BLL.Models.ContactUs;
 using SocialEventManager.Shared.Constants;
+using SocialEventManager.Shared.Enums;
 using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Tests.Common.Constants;
 using SocialEventManager.Tests.Common.DataMembers;
+using SocialEventManager.Tests.Common.Helpers;
 using SocialEventManager.Tests.IntegrationTests.Fixtures;
 using Xunit;
 using Xunit.Categories;
 
 namespace SocialEventManager.Tests.IntegrationTests.ControllerTests;
 
-[Collection(TestConstants.SmtpDependent)]
+[Collection(TestConstants.StorageDependent)]
 [IntegrationTest]
 [Category(CategoryConstants.Contacts)]
 public class ContactUsControllerTests : IntegrationTest
@@ -29,6 +31,7 @@ public class ContactUsControllerTests : IntegrationTest
         SimpleSmtpServer smtp = SimpleSmtpServer.Start(EmailData.FakePort);
 
         await Client.CreateAsync(ApiPathConstants.ContactUs, contactUs);
+        await BackgroundJobHelpers.WaitForCompletion(BackgroundJobType.Email);
 
         SmtpMessage[] emails = smtp.ReceivedEmail;
         emails.Should().HaveCount(1);
