@@ -32,21 +32,9 @@ public class EmailService : IEmailService
         };
 
         email.From.Add(MailboxAddress.Parse(_emailConfiguration.Value.UserName));
-
-        foreach (string to in request.To)
-        {
-            email.To.Add(MailboxAddress.Parse(to));
-        }
-
-        foreach (string cc in request.Cc)
-        {
-            email.Cc.Add(MailboxAddress.Parse(cc));
-        }
-
-        foreach (string bcc in request.Bcc)
-        {
-            email.To.Add(MailboxAddress.Parse(bcc));
-        }
+        email.To.AddRange(request.To.Select(to => MailboxAddress.Parse(to)));
+        email.Cc.AddRange(request.Cc.Select(cc => MailboxAddress.Parse(cc)));
+        email.Bcc.AddRange(request.Bcc.Select(bcc => MailboxAddress.Parse(bcc)));
 
         return email;
     }
