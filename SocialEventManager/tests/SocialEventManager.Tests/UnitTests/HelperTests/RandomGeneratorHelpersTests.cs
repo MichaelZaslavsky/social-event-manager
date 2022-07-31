@@ -12,7 +12,7 @@ namespace SocialEventManager.Tests.UnitTests.HelperTests;
 public class RandomGeneratorHelpersTests
 {
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public void GenerateRandomValue_Should_ReturnValueOfRequestedLength_When_LengthIsPositive(int length)
     {
         string value = RandomGeneratorHelpers.GenerateRandomValue(length);

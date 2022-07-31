@@ -9,7 +9,7 @@ namespace SocialEventManager.Tests.UnitTests.HelperTests;
 public class ArgumentNullExceptionHelpersTests
 {
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public void ThrowIfNull_Should_ReturnOk_When_AllParametersAreNotNull(string argument1, int argument2, bool argument3)
     {
         Exception? exception = Record.Exception(() =>

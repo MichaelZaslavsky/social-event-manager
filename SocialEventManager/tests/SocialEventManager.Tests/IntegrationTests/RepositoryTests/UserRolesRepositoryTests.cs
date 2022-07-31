@@ -67,7 +67,7 @@ public class UserRolesRepositoryTests : RepositoryTestBase<IUserRolesRepository,
     }
 
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public async Task InsertAsync_Should_VerifyNeverCalled_When_UserIdHasDifferentValue(Guid userId, string roleName)
     {
         await MockRepository.Object.InsertAsync(userId, roleName);
@@ -75,7 +75,7 @@ public class UserRolesRepositoryTests : RepositoryTestBase<IUserRolesRepository,
     }
 
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public async Task InsertAsync_Should_VerifyCalledOnce_When_UserIdAndRoleNameValuesAreRepeated(Guid userId, string roleName)
     {
         await MockRepository.Object.InsertAsync(userId, roleName);
@@ -107,7 +107,7 @@ public class UserRolesRepositoryTests : RepositoryTestBase<IUserRolesRepository,
     }
 
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public async Task GetUserRoles_Should_ReturnEmptyUserRoles_When_FilteringByNonExistingRoleName(string roleName)
     {
         IEnumerable<UserRole> actualUserRoles = await Repository.GetUserRoles(roleName);
@@ -115,7 +115,7 @@ public class UserRolesRepositoryTests : RepositoryTestBase<IUserRolesRepository,
     }
 
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public async Task GetUserRoles_Should_VerifyNeverCalled_When_RoleNameHasDifferentValue(string roleName)
     {
         await MockRepository.Object.GetUserRoles(roleName);
@@ -123,7 +123,7 @@ public class UserRolesRepositoryTests : RepositoryTestBase<IUserRolesRepository,
     }
 
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public async Task GetUserRoles_Should_VerifyCalledOnce_When_RoleNameHasSameValue(string roleName)
     {
         await MockRepository.Object.GetUserRoles(roleName);
@@ -184,7 +184,7 @@ public class UserRolesRepositoryTests : RepositoryTestBase<IUserRolesRepository,
     }
 
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public async Task DeleteUserRole_Should_ReturnFalse_When_UserRolesNotExist(Guid userId, string roleName)
     {
         bool isDeleted = await Repository.DeleteUserRole(userId, roleName);
@@ -192,7 +192,7 @@ public class UserRolesRepositoryTests : RepositoryTestBase<IUserRolesRepository,
     }
 
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public async Task DeleteUserRole_Should_VerifyNeverCalled_When_RoleNameHasDifferentValue(Guid userId, string roleName)
     {
         await MockRepository.Object.DeleteUserRole(userId, roleName);
@@ -200,7 +200,7 @@ public class UserRolesRepositoryTests : RepositoryTestBase<IUserRolesRepository,
     }
 
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public async Task DeleteUserRole_Should_VerifyCalledOnce_When_UserIdAndRoleNameValuesAreRepeated(Guid userId, string roleName)
     {
         await MockRepository.Object.DeleteUserRole(userId, roleName);
@@ -218,7 +218,7 @@ public class UserRolesRepositoryTests : RepositoryTestBase<IUserRolesRepository,
     }
 
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public async Task IsInRole_Should_ReturnFalse_When_UserIdOrRoleNameNotExists(Guid userId, string roleName)
     {
         bool isInRole = await Repository.IsInRole(userId, roleName);
@@ -246,7 +246,7 @@ public class UserRolesRepositoryTests : RepositoryTestBase<IUserRolesRepository,
     }
 
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public async Task IsInRole_Should_VerifyNeverCalled_When_RoleNameHasDifferentValue(Guid userId, string roleName)
     {
         await MockRepository.Object.IsInRole(userId, roleName);
@@ -254,7 +254,7 @@ public class UserRolesRepositoryTests : RepositoryTestBase<IUserRolesRepository,
     }
 
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public async Task IsInRole_Should_VerifyCalledOnce_When_UserIdAndRoleNameValuesAreRepeated(Guid userId, string roleName)
     {
         await MockRepository.Object.IsInRole(userId, roleName);

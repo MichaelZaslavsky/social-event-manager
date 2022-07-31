@@ -85,7 +85,7 @@ public class UserClaimsRepositoryTests : RepositoryTestBase<IUserClaimsRepositor
     }
 
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public async Task GetUserClaims_Should_ReturnEmptyUserClaims_When_FilteringByNonExistingValueOrType(string type, string value)
     {
         IEnumerable<UserClaim> actualUserClaims = await Repository.GetUserClaims(type, value);
@@ -93,7 +93,7 @@ public class UserClaimsRepositoryTests : RepositoryTestBase<IUserClaimsRepositor
     }
 
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public async Task GetUserClaims_Should_VerifyNeverCalled_When_TypeHasDifferentValue(string type, string value)
     {
         await MockRepository.Object.GetUserClaims(type, value);
@@ -101,7 +101,7 @@ public class UserClaimsRepositoryTests : RepositoryTestBase<IUserClaimsRepositor
     }
 
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public async Task GetUserClaims_Should_VerifyCalledOnce_When_TypeAndValueValuesAreRepetead(string type, string value)
     {
         await MockRepository.Object.GetUserClaims(type, value);
@@ -136,7 +136,7 @@ public class UserClaimsRepositoryTests : RepositoryTestBase<IUserClaimsRepositor
     }
 
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public async Task DeleteUserClaims_Should_ReturnFalse_When_UserClaimsNotExists(IEnumerable<UserClaim> userClaims)
     {
         bool isDeleted = await Repository.DeleteUserClaims(userClaims);
@@ -144,7 +144,7 @@ public class UserClaimsRepositoryTests : RepositoryTestBase<IUserClaimsRepositor
     }
 
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public async Task DeleteUserClaims_Should_VerifyNeverCalled_When_UserClaimsHaveDifferentValue(IEnumerable<UserClaim> userClaims)
     {
         await MockRepository.Object.DeleteUserClaims(userClaims);
@@ -152,7 +152,7 @@ public class UserClaimsRepositoryTests : RepositoryTestBase<IUserClaimsRepositor
     }
 
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public async Task DeleteUserClaims_Should_VerifyCalledOnce_When_UserClaimsHaveSameValue(IEnumerable<UserClaim> userClaims)
     {
         await MockRepository.Object.DeleteUserClaims(userClaims);

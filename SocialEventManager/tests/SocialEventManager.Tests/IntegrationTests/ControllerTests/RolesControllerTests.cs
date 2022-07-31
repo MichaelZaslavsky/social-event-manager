@@ -29,7 +29,7 @@ public class RolesControllerTests : IntegrationTest
     }
 
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public async Task CreateRole_Should_ReturnOk_When_RoleIsValid(ApplicationRole applicationRole)
     {
         applicationRole.Id = Guid.NewGuid().ToString();
@@ -39,7 +39,7 @@ public class RolesControllerTests : IntegrationTest
     }
 
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public async Task CreateRole_Should_ReturnBadRequest_When_RoleNameIsDuplicated(ApplicationRole applicationRole)
     {
         HttpClient client = Factory.WithWebHostBuilder(builder =>

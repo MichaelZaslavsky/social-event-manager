@@ -14,7 +14,7 @@ namespace SocialEventManager.Tests.UnitTests.HelperTests;
 public class ArgumentExceptionHelpersTests
 {
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public void ThrowIfNullOrEmpty_Should_NotThrowArgumentException_When_ArgumentHasValue(IEnumerable<object> argument)
     {
         Exception? exception = Record.Exception(() => ArgumentExceptionHelpers.ThrowIfNullOrEmpty(argument, nameof(argument)));
@@ -33,7 +33,7 @@ public class ArgumentExceptionHelpersTests
     }
 
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public void ThrowIfNullOrWhiteSpace_Should_NotThrowArgumentException_When_ArgumentHasValue(string argument)
     {
         Exception? exception = Record.Exception(() => ArgumentExceptionHelpers.ThrowIfNullOrWhiteSpace(argument, nameof(argument)));

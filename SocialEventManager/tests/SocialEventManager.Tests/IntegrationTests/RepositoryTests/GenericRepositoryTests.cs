@@ -94,7 +94,7 @@ public class GenericRepositoryTests : RepositoryTestBase<IRolesRepository, Role>
     }
 
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public async Task GetAsync_Should_VerifyNeverCalled_When_RoleIdHasDifferentValue(Guid roleId)
     {
         await MockRepository.Object.GetAsync(roleId);
@@ -102,7 +102,7 @@ public class GenericRepositoryTests : RepositoryTestBase<IRolesRepository, Role>
     }
 
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public async Task GetAsync_Should_VerifyCalledOnce_When_RoleIdHasSameValue(Guid roleId)
     {
         await MockRepository.Object.GetAsync(roleId);
