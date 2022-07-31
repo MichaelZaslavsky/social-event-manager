@@ -182,7 +182,7 @@ public class ExtendedRepositoryTests : RepositoryTestBase<IRolesRepository, Role
     }
 
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public async Task DeleteAsync_Should_VerifyNeverCalled_When_RoleIdHasDifferentValue(Guid roleId)
     {
         await MockRepository.Object.DeleteAsync(roleId, nameof(Role.Id));
@@ -190,7 +190,7 @@ public class ExtendedRepositoryTests : RepositoryTestBase<IRolesRepository, Role
     }
 
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public async Task DeleteAsync_Should_VerifyCalledOnce_When_RoleIdHasSameValue(Guid roleId)
     {
         await MockRepository.Object.DeleteAsync(roleId, nameof(Role.Id));

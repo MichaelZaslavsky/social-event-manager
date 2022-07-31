@@ -10,7 +10,7 @@ namespace SocialEventManager.Tests.IntegrationTests.EqualityComparerTests;
 public class UserClaimEqualityComparerTests
 {
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public void CompareUserClaims_Should_ReturnTrue_When_UserClaimsAreTheSame(UserClaim userClaim)
     {
         UserClaimEqualityComparer comparer = new();
@@ -36,7 +36,7 @@ public class UserClaimEqualityComparerTests
     }
 
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     [MemberData(nameof(UserClaimData.UserClaimsWithOneNull), MemberType = typeof(UserClaimData))]
     public void CompareUserClaims_Should_ReturnFalse_When_OneOfTheUserClaimsIsNull(UserClaim? userClaim, UserClaim? otherUserClaim)
     {
@@ -54,7 +54,7 @@ public class UserClaimEqualityComparerTests
     }
 
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public void CompareUserClaims_GetHashCode_Should_ReturnDifferentHash_When_UserClaimsAreDifferent(UserClaim userClaim, UserClaim otherUserClaim)
     {
         UserClaimEqualityComparer comparer = new();

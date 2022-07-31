@@ -126,7 +126,7 @@ public class RolesRepositoryTests : RepositoryTestBase<IRolesRepository, Role>
     }
 
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public async Task GetByUserIdAsync_Should_VerifyNeverCalled_When_UserIdHasDifferentValue(Guid userId)
     {
         await MockRepository.Object.GetByUserIdAsync(userId);
@@ -134,7 +134,7 @@ public class RolesRepositoryTests : RepositoryTestBase<IRolesRepository, Role>
     }
 
     [Theory]
-    [InlineAutoData]
+    [AutoData]
     public async Task GetByUserIdAsync_Should_VerifyCalledOnce_When_UserIdHasSameValue(Guid userId)
     {
         await MockRepository.Object.GetByUserIdAsync(userId);
