@@ -6,7 +6,7 @@ using SocialEventManager.Tests.Common.DependencyInjection;
 
 namespace SocialEventManager.Tests.IntegrationTests.Fixtures;
 
-public class ApiWebApplicationFactory : WebApplicationFactory<API.Startup>
+public class ApiWebApplicationFactory : WebApplicationFactory<Program>
 {
     public IConfiguration Configuration { get; private set; } = null!;
 

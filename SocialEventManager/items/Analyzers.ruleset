@@ -29,6 +29,7 @@
     <Rule Id="SA1309" Action="None" />
     <Rule Id="SA1404" Action="None" />
     <Rule Id="SA1600" Action="None" />
+    <Rule Id="SA1601" Action="None" />
     <Rule Id="SA1602" Action="None" />
     <Rule Id="SA1611" Action="None" />
     <Rule Id="SA1615" Action="None" />
