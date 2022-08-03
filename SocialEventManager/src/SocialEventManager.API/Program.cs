@@ -22,6 +22,8 @@ using SocialEventManager.Infrastructure.Middleware;
 using SocialEventManager.Infrastructure.Migrations;
 using SocialEventManager.Shared.Constants;
 
+const int FiftyMb = 52428800;
+
 try
 {
     WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -29,7 +31,14 @@ try
     string environmentName = Environment.GetEnvironmentVariable(ApiConstants.AspNetCoreEnvironment)!;
     ArgumentNullException.ThrowIfNull(environmentName);
 
-    builder.WebHost.ConfigureKestrel(options => options.AddServerHeader = false)
+    builder.WebHost
+        .ConfigureKestrel(options =>
+        {
+            options.AddServerHeader = false;
+            options.Limits.MaxConcurrentConnections = 100;
+            options.Limits.MaxConcurrentUpgradedConnections = 100;
+            options.Limits.MaxRequestBodySize = FiftyMb;
+        })
         .UseSerilog((provider, _, loggerConfig) => loggerConfig.WithSerilogLogger(provider, builder.Configuration));
 
     builder.Host.ConfigureLogging(logging =>
