@@ -20,7 +20,7 @@ public class Startup
     {
         Configuration = new ConfigurationBuilder()
             .AddEnvironmentVariables()
-            .AddUserSecrets<Startup>()
+            .AddUserSecrets<Program>()
             .Build();
 
         services.Configure(Configuration)
