@@ -249,11 +249,7 @@ Backup*/
 UpgradeLog*.XML
 UpgradeLog*.htm
 ServiceFabricBackup/
-.gitignore.bak
-*.rptproj.bak
-*.yml.bak
-README.md.bak
-pull-dog.json.bak
+*.bak
 
 # SQL Server files
 *.mdf
