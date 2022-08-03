@@ -4,7 +4,7 @@ public static class ApiPathConstants
 {
     public const string ApiController = Api + Controller;
     public const string ChatHub = "/chathub";
-    public const string ContactUs = Api + "contact-us";
+    public const string Contact = Api + "contact";
     public const string Hangfire = "/hangfire";
     public const string HealthLive = $"/{Health}/live";
     public const string HealthReady = $"/{Health}/{Ready}";

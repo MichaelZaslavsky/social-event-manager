@@ -1,10 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace SocialEventManager.BLL.Models.ContactUs;
+namespace SocialEventManager.BLL.Models.Contact;
 
-public record ContactUsDto
+public record ContactDto
 {
-    public ContactUsDto(string name, string email, string text)
+    public ContactDto(string name, string email, string text)
     {
         Name = name;
         Email = email;
