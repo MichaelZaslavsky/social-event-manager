@@ -227,7 +227,7 @@ Contributions are what make the open source community such an amazing place to l
 
 ## License
 
-Distributed under the GNU General Public License v3.0. See `LICENSE` for more information.
+Distributed under the MIT license. See `LICENSE` for more information.
 
 ## Contact
 
