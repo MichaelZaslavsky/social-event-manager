@@ -19,7 +19,7 @@ public static class ApiConstants
     public const string ApiVersion = "x-api-version";
     public const string Version = "version";
     public const string Ver = "ver";
-    public const string License = "GPL-3.0 License";
+    public const string License = "MIT";
     public const string LicenseUrl = "https://github.com/MichaelZaslavsky/social-event-manager/blob/master/LICENSE";
     public const string SeqServerUrlSettingPath = "Serilog:SeqServerUrl";
     public const string Assembly = nameof(Assembly);
