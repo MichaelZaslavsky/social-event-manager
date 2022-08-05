@@ -5,7 +5,7 @@ using SocialEventManager.Tests.IntegrationTests.Fixtures.Stubs;
 
 namespace SocialEventManager.Tests.IntegrationTests.Fixtures.Fakes;
 
-public class FakeRoles : StubBase<Role>, IRolesRepository
+internal class FakeRoles : StubBase<Role>, IRolesRepository
 {
     public Task<Guid> InsertRole(Role role)
     {
@@ -22,7 +22,7 @@ public class FakeRoles : StubBase<Role>, IRolesRepository
         return Task.FromResult(RolesStorage.Instance.Data.Where(r => userRoles.All(ur => ur == r.Id)));
     }
 
-    public new Task<Role?> GetSingleOrDefaultAsync<TFilter>(TFilter filterValue, string columnName)
+    public override Task<Role?> GetSingleOrDefaultAsync<TFilter>(TFilter filterValue, string columnName)
     {
         Role? role = columnName switch
         {

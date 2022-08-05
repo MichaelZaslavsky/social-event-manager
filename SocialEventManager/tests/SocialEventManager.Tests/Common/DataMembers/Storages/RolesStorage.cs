@@ -1,5 +1,7 @@
 using System.Globalization;
 using SocialEventManager.DAL.Entities;
+using SocialEventManager.DAL.Enums;
+using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Shared.Helpers;
 
 namespace SocialEventManager.Tests.Common.DataMembers.Storages;
@@ -8,7 +10,7 @@ internal sealed class RolesStorage : ListStorage<RolesStorage, Role>
 {
     public override void Init()
     {
-        string name = RandomGeneratorHelpers.GenerateRandomValue();
+        string roleName = RoleType.User.GetDescription();
 
         Data = new List<Role>
         {
@@ -16,8 +18,8 @@ internal sealed class RolesStorage : ListStorage<RolesStorage, Role>
             {
                 Id = Guid.NewGuid(),
                 ConcurrencyStamp = RandomGeneratorHelpers.GenerateRandomValue(),
-                Name = RandomGeneratorHelpers.GenerateRandomValue(),
-                NormalizedName = name.ToUpper(CultureInfo.InvariantCulture),
+                Name = roleName,
+                NormalizedName = roleName.ToUpper(CultureInfo.InvariantCulture),
             },
         };
     }
