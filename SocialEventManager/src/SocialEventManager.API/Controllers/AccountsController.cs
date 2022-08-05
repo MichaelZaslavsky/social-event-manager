@@ -71,12 +71,12 @@ public class AccountsController : ControllerBase
         string role = RoleType.User.GetDescription();
         await _userManager.AddToRoleAsync(currentUser, role);
 
-        await _userManager.AddClaimsAsync(applicationUser, new List<Claim>
-            {
-                new Claim(ClaimTypes.Sid, currentUser.Id),
-                new Claim(ClaimTypes.Email, currentUser.Email),
-                new Claim(ClaimTypes.Role, role),
-            });
+        await _userManager.AddClaimsAsync(applicationUser, new Claim[]
+        {
+            new(ClaimTypes.Sid, currentUser.Id),
+            new(ClaimTypes.Email, currentUser.Email),
+            new(ClaimTypes.Role, role),
+        });
 
         return Ok();
     }
