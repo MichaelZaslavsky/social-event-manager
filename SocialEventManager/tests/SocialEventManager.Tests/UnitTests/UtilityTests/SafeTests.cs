@@ -15,133 +15,133 @@ public class SafeTests
 
     [Theory]
     [AutoData]
-    public void Execute_Should_ReturnValue_When_FunctionIsValidWithOneArgument(string argument1)
+    public void Execute_ReturnsValue_WhenFunctionIsValidWithOneArgument(string argument1)
     {
-        string? actual = Safe.Execute(Func, argument1);
+        string? actual = Safe.Execute(() => Func(argument1));
         actual.Should().Be(argument1);
     }
 
     [Theory]
     [AutoData]
-    public void Execute_Should_Return_Value_When_FunctionIsValidWithTwoArguments(string argument1, string argument2)
+    public void Execute_ReturnsValue_WhenFunctionIsValidWithTwoArguments(string argument1, string argument2)
     {
-        string? actual = Safe.Execute(Func, argument1, argument2);
+        string? actual = Safe.Execute(() => Func(argument1, argument2));
         actual.Should().Be(argument1 + argument2);
     }
 
     [Theory]
     [AutoData]
-    public void Execute_Should_ReturnValue_When_FunctionIsValidWithThreeArguments(string argument1, string argument2, string argument3)
+    public void Execute_ReturnsValue_WhenFunctionIsValidWithThreeArguments(string argument1, string argument2, string argument3)
     {
-        string? actual = Safe.Execute(Func, argument1, argument2, argument3);
+        string? actual = Safe.Execute(() => Func(argument1, argument2, argument3));
         actual.Should().Be(argument1 + argument2 + argument3);
     }
 
     [Theory]
     [AutoData]
-    public void Execute_Should_ReturnValue_When_FunctionIsValidWithFourArguments(string argument1, string argument2, string argument3, string argument4)
+    public void Execute_ReturnsValue_WhenFunctionIsValidWithFourArguments(string argument1, string argument2, string argument3, string argument4)
     {
-        string? actual = Safe.Execute(Func, argument1, argument2, argument3, argument4);
+        string? actual = Safe.Execute(() => Func(argument1, argument2, argument3, argument4));
         actual.Should().Be(argument1 + argument2 + argument3 + argument4);
     }
 
     [Theory]
     [AutoData]
-    public void Execute_Should_ReturnDefaultValue_When_FunctionThrowsArgumentNullExceptionWithOneArgument(string argument1)
+    public void Execute_ReturnsDefaultValue_WhenFunctionThrowsArgumentNullExceptionWithOneArgument(string argument1)
     {
-        string? actual = Safe.Execute(FuncThrowsArgumentNullException, argument1);
+        string? actual = Safe.Execute(() => FuncThrowsArgumentNullException(argument1));
         actual.Should().Be(default);
     }
 
     [Theory]
     [AutoData]
-    public void Execute_Should_ReturnResultFallback_When_FunctionThrowsArgumentNullExceptionWithTwoArguments(string argument1, string argument2)
+    public void Execute_ReturnsResultFallback_WhenFunctionThrowsArgumentNullExceptionWithTwoArguments(string argument1, string argument2)
     {
-        string? actual = Safe.Execute(FuncThrowsArgumentNullException, argument1, argument2);
+        string? actual = Safe.Execute(() => FuncThrowsArgumentNullException(argument1, argument2));
         actual.Should().Be(default);
     }
 
     [Theory]
     [AutoData]
-    public void Execute_Should_ReturnResultFallback_When_FunctionThrowsArgumentNullExceptionWithThreeArguments(string argument1, string argument2, string argument3)
+    public void Execute_ReturnsResultFallback_WhenFunctionThrowsArgumentNullExceptionWithThreeArguments(string argument1, string argument2, string argument3)
     {
-        string? actual = Safe.Execute(FuncThrowsArgumentNullException, argument1, argument2, argument3);
+        string? actual = Safe.Execute(() => FuncThrowsArgumentNullException(argument1, argument2, argument3));
         actual.Should().Be(default);
     }
 
     [Theory]
     [AutoData]
-    public void Execute_Should_ReturnResultFallback_When_FunctionThrowsArgumentNullExceptionWithFourArguments(
+    public void Execute_ReturnsResultFallback_WhenFunctionThrowsArgumentNullExceptionWithFourArguments(
         string argument1, string argument2, string argument3, string argument4)
     {
-        string? actual = Safe.Execute(FuncThrowsArgumentNullException, argument1, argument2, argument3, argument4);
+        string? actual = Safe.Execute(() => FuncThrowsArgumentNullException(argument1, argument2, argument3, argument4));
         actual.Should().Be(default);
     }
 
     [Theory]
     [AutoData]
-    public void ExecuteWithResultFallback_Should_ReturnValue_When_FunctionIsValidWithOneArgument(string argument1, string result)
+    public void ExecuteWithResultFallback_ReturnsValue_WhenFunctionIsValidWithOneArgument(string argument1, string result)
     {
-        string? actual = Safe.ExecuteWithResultFallback(Func, argument1, result);
+        string? actual = Safe.ExecuteWithResultFallback(() => Func(argument1), result);
         actual.Should().Be(argument1);
     }
 
     [Theory]
     [AutoData]
-    public void ExecuteWithResultFallback_Should_ReturnValue_When_FunctionIsValidWithTwoArguments(string argument1, string argument2, string result)
+    public void ExecuteWithResultFallback_ReturnsValue_WhenFunctionIsValidWithTwoArguments(string argument1, string argument2, string result)
     {
-        string? actual = Safe.ExecuteWithResultFallback(Func, argument1, argument2, result);
+        string? actual = Safe.ExecuteWithResultFallback(() => Func(argument1, argument2), result);
         actual.Should().Be(argument1 + argument2);
     }
 
     [Theory]
     [AutoData]
-    public void ExecuteWithResultFallback_Should_ReturnValue_When_FunctionIsValidWithThreeArguments(string argument1, string argument2, string argument3, string result)
+    public void ExecuteWithResultFallback_ReturnsValue_WhenFunctionIsValidWithThreeArguments(string argument1, string argument2, string argument3, string result)
     {
-        string? actual = Safe.ExecuteWithResultFallback(Func, argument1, argument2, argument3, result);
+        string? actual = Safe.ExecuteWithResultFallback(() => Func(argument1, argument2, argument3), result);
         actual.Should().Be(argument1 + argument2 + argument3);
     }
 
     [Theory]
     [AutoData]
-    public void ExecuteWithResultFallback_Should_ReturnValue_When_FunctionIsValidWithFourArguments(string argument1, string argument2, string argument3, string argument4, string result)
+    public void ExecuteWithResultFallback_ReturnsValue_WhenFunctionIsValidWithFourArguments(string argument1, string argument2, string argument3, string argument4, string result)
     {
-        string? actual = Safe.ExecuteWithResultFallback(Func, argument1, argument2, argument3, argument4, result);
+        string? actual = Safe.ExecuteWithResultFallback(() => Func(argument1, argument2, argument3, argument4), result);
         actual.Should().Be(argument1 + argument2 + argument3 + argument4);
     }
 
     [Theory]
     [AutoData]
-    public void ExecuteWithResultFallback_Should_ReturnResultFallback_When_FunctionThrowsArgumentNullExceptionWithOneArgument(string argument1, string result)
+    public void ExecuteWithResultFallback_ReturnsResultFallback_WhenFunctionThrowsArgumentNullExceptionWithOneArgument(string argument1, string result)
     {
-        string? actual = Safe.ExecuteWithResultFallback(FuncThrowsArgumentNullException, argument1, result);
+        string? actual = Safe.ExecuteWithResultFallback(() => FuncThrowsArgumentNullException(argument1), result);
         actual.Should().Be(result);
     }
 
     [Theory]
     [AutoData]
-    public void ExecuteWithResultFallback_Should_ReturnResultFallback_When_FunctionThrowsArgumentNullExceptionWithTwoArguments(
+    public void ExecuteWithResultFallback_ReturnsResultFallback_WhenFunctionThrowsArgumentNullExceptionWithTwoArguments(
         string argument1, string argument2, string result)
     {
-        string? actual = Safe.ExecuteWithResultFallback(FuncThrowsArgumentNullException, argument1, argument2, result);
+        string? actual = Safe.ExecuteWithResultFallback(() => FuncThrowsArgumentNullException(argument1, argument2), result);
         actual.Should().Be(result);
     }
 
     [Theory]
     [AutoData]
-    public void ExecuteWithResultFallback_Should_ReturnResultFallback_When_FunctionThrowsArgumentNullExceptionWithThreeArguments(
+    public void ExecuteWithResultFallback_ReturnsResultFallback_WhenFunctionThrowsArgumentNullExceptionWithThreeArguments(
         string argument1, string argument2, string argument3, string result)
     {
-        string? actual = Safe.ExecuteWithResultFallback(FuncThrowsArgumentNullException, argument1, argument2, argument3, result);
+        string? actual = Safe.ExecuteWithResultFallback(() => FuncThrowsArgumentNullException(argument1, argument2, argument3), result);
         actual.Should().Be(result);
     }
 
     [Theory]
     [AutoData]
-    public void ExecuteWithResultFallback_Should_ReturnResultFallback_When_FunctionThrowsArgumentNullExceptionWithFourArguments(
+    public void ExecuteWithResultFallback_ReturnsResultFallback_WhenFunctionThrowsArgumentNullExceptionWithFourArguments(
         string argument1, string argument2, string argument3, string argument4, string result)
     {
-        string? actual = Safe.ExecuteWithResultFallback(FuncThrowsArgumentNullException, argument1, argument2, argument3, argument4, result);
+        string? actual = Safe.ExecuteWithResultFallback(() => FuncThrowsArgumentNullException(argument1, argument2, argument3, argument4), result);
         actual.Should().Be(result);
     }
 
@@ -151,140 +151,140 @@ public class SafeTests
 
     [Theory]
     [AutoData]
-    public async Task ExecuteAsync_Should_ReturnValue_When_FunctionIsValidWithOneArgument(string argument1)
+    public async Task ExecuteAsync_ReturnsValue_WhenFunctionIsValidWithOneArgument(string argument1)
     {
-        string? actual = await Safe.ExecuteAsync(FuncAsync, argument1);
+        string? actual = await Safe.ExecuteAsync(() => FuncAsync(argument1));
         actual.Should().Be(argument1);
     }
 
     [Theory]
     [AutoData]
-    public async Task ExecuteAsync_Should_ReturnValue_When_FunctionIsValidWithTwoArguments(string argument1, string argument2)
+    public async Task ExecuteAsync_ReturnsValue_WhenFunctionIsValidWithTwoArguments(string argument1, string argument2)
     {
-        string? actual = await Safe.ExecuteAsync(FuncAsync, argument1, argument2);
+        string? actual = await Safe.ExecuteAsync(() => FuncAsync(argument1, argument2));
         actual.Should().Be(argument1 + argument2);
     }
 
     [Theory]
     [AutoData]
-    public async Task ExecuteAsync_Should_ReturnValue_When_FunctionIsValidWithThreeArguments(string argument1, string argument2, string argument3)
+    public async Task ExecuteAsync_ReturnsValue_WhenFunctionIsValidWithThreeArguments(string argument1, string argument2, string argument3)
     {
-        string? actual = await Safe.ExecuteAsync(FuncAsync, argument1, argument2, argument3);
+        string? actual = await Safe.ExecuteAsync(() => FuncAsync(argument1, argument2, argument3));
         actual.Should().Be(argument1 + argument2 + argument3);
     }
 
     [Theory]
     [AutoData]
-    public async Task ExecuteAsync_Should_ReturnValue_When_FunctionIsValidWithFourArguments(
+    public async Task ExecuteAsync_ReturnsValue_WhenFunctionIsValidWithFourArguments(
         string argument1, string argument2, string argument3, string argument4)
     {
-        string? actual = await Safe.ExecuteAsync(FuncAsync, argument1, argument2, argument3, argument4);
+        string? actual = await Safe.ExecuteAsync(() => FuncAsync(argument1, argument2, argument3, argument4));
         actual.Should().Be(argument1 + argument2 + argument3 + argument4);
     }
 
     [Theory]
     [AutoData]
-    public async Task ExecuteAsync_Should_ReturnDefaultValue_When_FunctionThrowsArgumentNullExceptionWithOneArgument(string argument1)
+    public async Task ExecuteAsync_ReturnsDefaultValue_WhenFunctionThrowsArgumentNullExceptionWithOneArgument(string argument1)
     {
-        string? actual = await Safe.ExecuteAsync(FuncThrowsArgumentNullExceptionAsync, argument1);
+        string? actual = await Safe.ExecuteAsync(() => FuncThrowsArgumentNullExceptionAsync(argument1));
         actual.Should().Be(default);
     }
 
     [Theory]
     [AutoData]
-    public async Task ExecuteAsync_Should_ReturnResultFallback_When_FunctionThrowsArgumentNullExceptionWithTwoArguments(
+    public async Task ExecuteAsync_ReturnsResultFallback_WhenFunctionThrowsArgumentNullExceptionWithTwoArguments(
         string argument1, string argument2)
     {
-        string? actual = await Safe.ExecuteAsync(FuncThrowsArgumentNullExceptionAsync, argument1, argument2);
+        string? actual = await Safe.ExecuteAsync(() => FuncThrowsArgumentNullExceptionAsync(argument1, argument2));
         actual.Should().Be(default);
     }
 
     [Theory]
     [AutoData]
-    public async Task ExecuteAsync_Should_ReturnResultFallback_When_FunctionThrowsArgumentNullExceptionWithThreeArguments(
+    public async Task ExecuteAsync_ReturnsResultFallback_WhenFunctionThrowsArgumentNullExceptionWithThreeArguments(
         string argument1, string argument2, string argument3)
     {
-        string? actual = await Safe.ExecuteAsync(FuncThrowsArgumentNullExceptionAsync, argument1, argument2, argument3);
+        string? actual = await Safe.ExecuteAsync(() => FuncThrowsArgumentNullExceptionAsync(argument1, argument2, argument3));
         actual.Should().Be(default);
     }
 
     [Theory]
     [AutoData]
-    public async Task ExecuteAsync_Should_ReturnResultFallback_When_FunctionThrowsArgumentNullExceptionWithFourArguments(
+    public async Task ExecuteAsync_ReturnsResultFallback_WhenFunctionThrowsArgumentNullExceptionWithFourArguments(
         string argument1, string argument2, string argument3, string argument4)
     {
-        string? actual = await Safe.ExecuteAsync(FuncThrowsArgumentNullExceptionAsync, argument1, argument2, argument3, argument4);
+        string? actual = await Safe.ExecuteAsync(() => FuncThrowsArgumentNullExceptionAsync(argument1, argument2, argument3, argument4));
         actual.Should().Be(default);
     }
 
     [Theory]
     [AutoData]
-    public async Task ExecuteWithResultFallbackAsync_Should_ReturnValue_When_FunctionIsValidWithOneArgument(string argument1, string result)
+    public async Task ExecuteWithResultFallbackAsync_ReturnsValue_WhenFunctionIsValidWithOneArgument(string argument1, string result)
     {
-        string? actual = await Safe.ExecuteWithResultFallbackAsync(FuncAsync, argument1, result);
+        string? actual = await Safe.ExecuteWithResultFallbackAsync(() => FuncAsync(argument1), result);
         actual.Should().Be(argument1);
     }
 
     [Theory]
     [AutoData]
-    public async Task ExecuteWithResultFallbackAsync_Should_ReturnValue_When_FunctionIsValidWithTwoArguments(
+    public async Task ExecuteWithResultFallbackAsync_ReturnsValue_WhenFunctionIsValidWithTwoArguments(
         string argument1, string argument2, string result)
     {
-        string? actual = await Safe.ExecuteWithResultFallbackAsync(FuncAsync, argument1, argument2, result);
+        string? actual = await Safe.ExecuteWithResultFallbackAsync(() => FuncAsync(argument1, argument2), result);
         actual.Should().Be(argument1 + argument2);
     }
 
     [Theory]
     [AutoData]
-    public async Task ExecuteWithResultFallbackAsync_Should_ReturnValue_When_FunctionIsValidWithThreeArguments(
+    public async Task ExecuteWithResultFallbackAsync_ReturnsValue_WhenFunctionIsValidWithThreeArguments(
         string argument1, string argument2, string argument3, string result)
     {
-        string? actual = await Safe.ExecuteWithResultFallbackAsync(FuncAsync, argument1, argument2, argument3, result);
+        string? actual = await Safe.ExecuteWithResultFallbackAsync(() => FuncAsync(argument1, argument2, argument3), result);
         actual.Should().Be(argument1 + argument2 + argument3);
     }
 
     [Theory]
     [AutoData]
-    public async Task ExecuteWithResultFallbackAsync_Should_ReturnValue_When_FunctionIsValidWithFourArguments(
+    public async Task ExecuteWithResultFallbackAsync_ReturnsValue_WhenFunctionIsValidWithFourArguments(
         string argument1, string argument2, string argument3, string argument4, string result)
     {
-        string? actual = await Safe.ExecuteWithResultFallbackAsync(FuncAsync, argument1, argument2, argument3, argument4, result);
+        string? actual = await Safe.ExecuteWithResultFallbackAsync(() => FuncAsync(argument1, argument2, argument3, argument4), result);
         actual.Should().Be(argument1 + argument2 + argument3 + argument4);
     }
 
     [Theory]
     [AutoData]
-    public async Task ExecuteWithResultFallbackAsync_Should_ReturnResultFallback_When_FunctionThrowsArgumentNullExceptionWithOneArgument(
+    public async Task ExecuteWithResultFallbackAsync_ReturnsResultFallback_WhenFunctionThrowsArgumentNullExceptionWithOneArgument(
         string argument1, string result)
     {
-        string? actual = await Safe.ExecuteWithResultFallbackAsync(FuncThrowsArgumentNullExceptionAsync, argument1, result);
+        string? actual = await Safe.ExecuteWithResultFallbackAsync(() => FuncThrowsArgumentNullExceptionAsync(argument1), result);
         actual.Should().Be(result);
     }
 
     [Theory]
     [AutoData]
-    public async Task ExecuteWithResultFallbackAsync_Should_ReturnResultFallback_When_FunctionThrowsArgumentNullExceptionWithTwoArguments(
+    public async Task ExecuteWithResultFallbackAsync_ReturnsResultFallback_WhenFunctionThrowsArgumentNullExceptionWithTwoArguments(
     string argument1, string argument2, string result)
     {
-        string? actual = await Safe.ExecuteWithResultFallbackAsync(FuncThrowsArgumentNullExceptionAsync, argument1, argument2, result);
+        string? actual = await Safe.ExecuteWithResultFallbackAsync(() => FuncThrowsArgumentNullExceptionAsync(argument1, argument2), result);
         actual.Should().Be(result);
     }
 
     [Theory]
     [AutoData]
-    public async Task ExecuteWithResultFallbackAsync_Should_ReturnResultFallback_When_FunctionThrowsArgumentNullExceptionWithThreeArguments(
+    public async Task ExecuteWithResultFallbackAsync_ReturnsResultFallback_WhenFunctionThrowsArgumentNullExceptionWithThreeArguments(
         string argument1, string argument2, string argument3, string result)
     {
-        string? actual = await Safe.ExecuteWithResultFallbackAsync(FuncThrowsArgumentNullExceptionAsync, argument1, argument2, argument3, result);
+        string? actual = await Safe.ExecuteWithResultFallbackAsync(() => FuncThrowsArgumentNullExceptionAsync(argument1, argument2, argument3), result);
         actual.Should().Be(result);
     }
 
     [Theory]
     [AutoData]
-    public async Task ExecuteWithResultFallbackAsync_Should_ReturnResultFallback_When_FunctionThrowsArgumentNullExceptionWithFourArguments(
+    public async Task ExecuteWithResultFallbackAsync_ReturnsResultFallback_WhenFunctionThrowsArgumentNullExceptionWithFourArguments(
         string argument1, string argument2, string argument3, string argument4, string result)
     {
-        string? actual = await Safe.ExecuteWithResultFallbackAsync(FuncThrowsArgumentNullExceptionAsync, argument1, argument2, argument3, argument4, result);
+        string? actual = await Safe.ExecuteWithResultFallbackAsync(() => FuncThrowsArgumentNullExceptionAsync(argument1, argument2, argument3, argument4), result);
         actual.Should().Be(result);
     }
 
