@@ -31,7 +31,7 @@
             <param name="loginModel">The user and password for login.</param>
             <returns>An empty ActionResult.</returns>
         </member>
-        <member name="M:SocialEventManager.API.Controllers.AccountsController.LogOut">
+        <member name="M:SocialEventManager.API.Controllers.AccountsController.Logout">
             <summary>
             Logouts the current user from the application.
             </summary>
