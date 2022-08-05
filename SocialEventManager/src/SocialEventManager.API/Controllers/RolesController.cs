@@ -34,6 +34,7 @@ public class RolesController : ControllerBase
     /// <returns>An empty ActionResult.</returns>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create(ApplicationRole role)
     {
         IdentityResult result = await _roleManager.CreateAsync(role);
