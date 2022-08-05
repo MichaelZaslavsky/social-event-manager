@@ -85,7 +85,7 @@ public static class UserClaimData
 
     #region Private Methods
 
-    private static UserClaim GetMockUserClaim(Guid? userId = null, string type = ClaimTypes.Name, string? value = null, int id = 1)
+    public static UserClaim GetMockUserClaim(Guid? userId = null, string type = ClaimTypes.Name, string? value = null, int id = 1)
     {
         return new()
         {

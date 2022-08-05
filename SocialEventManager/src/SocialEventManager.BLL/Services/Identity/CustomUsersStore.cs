@@ -143,7 +143,7 @@ public class CustomUsersStore :
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(normalizedUserName);
 
-        AccountDto account = await _accountsService.GetAccountByUserName(normalizedUserName);
+        AccountDto account = await _accountsService.GetAccountByNormalizedUserName(normalizedUserName);
         return _mapper.Map<ApplicationUser>(account);
     }
 

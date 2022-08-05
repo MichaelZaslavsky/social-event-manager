@@ -1,3 +1,4 @@
+using System.Globalization;
 using SocialEventManager.DAL.Entities;
 using SocialEventManager.Shared.Helpers;
 using SocialEventManager.Tests.Common.Constants;
@@ -21,7 +22,7 @@ internal sealed class AccountsStorage : ListStorage<AccountsStorage, Account>
                 Email = TestConstants.ValidEmail,
                 EmailConfirmed = true,
                 NormalizedEmail = TestConstants.ValidEmail.ToUpper(),
-                NormalizedUserName = name.ToUpper(),
+                NormalizedUserName = name.ToUpper(CultureInfo.InvariantCulture),
                 ConcurrencyStamp = RandomGeneratorHelpers.GenerateRandomValue(),
                 SecurityStamp = RandomGeneratorHelpers.GenerateRandomValue(),
             },

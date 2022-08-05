@@ -10,6 +10,7 @@ internal static class TestConstants
     public const string LoremIpsum = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
     public const string ValidEmail = "valid-email@email-domain.com";
     public const string OtherValidEmail = "other-valid-email@email-domain.com";
+    public const string ValidUserName = "ValidUserName";
 
     public static string ValueCannotBeNullOrEmpty(string paramName) => $"{ExceptionConstants.ValueCannotBeNullOrEmpty} {Parameter(paramName)}";
 

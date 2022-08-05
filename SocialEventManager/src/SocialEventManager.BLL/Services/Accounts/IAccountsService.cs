@@ -8,9 +8,9 @@ public interface IAccountsService
 
     Task<AccountDto> GetAccount(Guid userId);
 
-    Task<AccountDto> GetAccountByUserName(string userName);
+    Task<AccountDto> GetAccountByNormalizedUserName(string normalizedUserName);
 
-    Task<AccountDto> GetAccountByEmail(string email);
+    Task<AccountDto> GetAccountByEmail(string normalizedEmail);
 
     Task<IEnumerable<AccountDto>> GetAccounts(string roleName);
 
