@@ -10,6 +10,6 @@ public class StubInvalidRoles : StubBase<Role>, IRolesRepository
 
     public Task<Guid> InsertRole(Role role) => Task.FromResult<Guid>(default);
 
-    public new Task<Role?> GetSingleOrDefaultAsync<TFilter>(TFilter filterValue, string columnName) =>
+    public override Task<Role?> GetSingleOrDefaultAsync<TFilter>(TFilter filterValue, string columnName) =>
         Task.FromResult(RolesStorage.Instance.Data?[0]);
 }
