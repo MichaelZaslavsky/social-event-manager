@@ -2,6 +2,7 @@ namespace SocialEventManager.Shared.Constants;
 
 public static class ApiPathConstants
 {
+    public const string Action = "[action]";
     public const string ApiController = Api + Controller;
     public const string ChatHub = "/chathub";
     public const string Contact = Api + "contact";
