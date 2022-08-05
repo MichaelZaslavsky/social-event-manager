@@ -35,15 +35,15 @@ public class AccountsService : ServiceBase<IAccountsRepository, Account>, IAccou
         return Mapper.Map<AccountDto>(account);
     }
 
-    public async Task<AccountDto> GetAccountByUserName(string userName)
+    public async Task<AccountDto> GetAccountByNormalizedUserName(string normalizedUserName)
     {
-        Account? account = await Repository.GetSingleOrDefaultAsync(userName, nameof(Account.UserName));
+        Account? account = await Repository.GetSingleOrDefaultAsync(normalizedUserName, nameof(Account.NormalizedUserName));
         return Mapper.Map<AccountDto>(account);
     }
 
-    public async Task<AccountDto> GetAccountByEmail(string email)
+    public async Task<AccountDto> GetAccountByEmail(string normalizedEmail)
     {
-        Account? account = await Repository.GetSingleOrDefaultAsync(email, nameof(Account.Email));
+        Account? account = await Repository.GetSingleOrDefaultAsync(normalizedEmail, nameof(Account.NormalizedEmail));
         return Mapper.Map<AccountDto>(account);
     }
 

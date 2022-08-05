@@ -1,7 +1,9 @@
 using System.Globalization;
+using SocialEventManager.BLL.Models.Users;
 using SocialEventManager.DAL.Entities;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Helpers;
+using SocialEventManager.Tests.Common.Constants;
 using Xunit;
 
 namespace SocialEventManager.Tests.Common.DataMembers;
@@ -93,32 +95,73 @@ public static class AccountData
             },
         };
 
-    public static Account GetMockAccount(Guid? userId = null, int id = 1, string? userName = null, string? passwordHash = null, string? email = null,
-        bool emailConfirmed = false, string? phoneNumber = null, bool phoneNumberConfirmed = false, DateTime? lockoutEnd = null, bool lockoutEnabled = false,
-        int accessFailedCount = 0, string? concurrencyStamp = null, string? securityStamp = null, bool twoFactorEnabled = false,
+    public static TheoryData<RegisterUserDto, Account> ValidRegisterUserData =>
+        new()
+        {
+            {
+                GetMockRegisterUser(email: TestConstants.OtherValidEmail),
+                GetMockAccount(email: TestConstants.OtherValidEmail)
+            },
+        };
+
+    public static TheoryData<RegisterUserDto, string> InvalidRegisterUserData =>
+        new()
+        {
+            {
+                GetMockRegisterUser(email: TestConstants.OtherValidEmail, userName: "invalid user"),
+                "\"Username 'invalid user' is invalid, can only contain letters or digits.(InvalidUserName)\""
+            },
+            {
+                GetMockRegisterUser(email: TestConstants.OtherValidEmail, password: "1"),
+                "\"'ConfirmPassword' and 'Password' do not match.\""
+            },
+            {
+                GetMockRegisterUser(email: TestConstants.OtherValidEmail, confirmPassword: "1"),
+                "\"'ConfirmPassword' and 'Password' do not match.\""
+            },
+            {
+                GetMockRegisterUser(email: "invalid-email"),
+                "\"The Email field is not a valid e-mail address.\""
+            },
+        };
+
+    public static Account GetMockAccount(Guid? userId = null, int id = 1, string userName = TestConstants.ValidUserName, string? passwordHash = null,
+        string? email = null, bool emailConfirmed = false, string? phoneNumber = null, bool phoneNumberConfirmed = false, DateTime? lockoutEnd = null,
+        bool lockoutEnabled = false, int accessFailedCount = 0, string? concurrencyStamp = null, string? securityStamp = null, bool twoFactorEnabled = false,
         string? normalizedEmail = null, string? normalizedUserName = null)
     {
         email ??= $"{RandomGeneratorHelpers.GenerateRandomValue()}@gmail.com";
-        userName ??= RandomGeneratorHelpers.GenerateRandomValue();
 
-        return new Account
+        return new()
         {
             Id = id,
             UserId = userId ?? Guid.NewGuid(),
-            UserName = userName ?? RandomGeneratorHelpers.GenerateRandomValue(),
+            UserName = userName,
             PasswordHash = passwordHash ?? Guid.NewGuid().ToString(),
             Email = email,
             EmailConfirmed = emailConfirmed,
-            PhoneNumber = phoneNumber ?? DataConstants.PhoneNumber,
+            PhoneNumber = phoneNumber,
             PhoneNumberConfirmed = phoneNumberConfirmed,
             LockoutEnd = lockoutEnd,
             LockoutEnabled = lockoutEnabled,
             AccessFailedCount = accessFailedCount,
             NormalizedEmail = normalizedEmail ?? email.ToUpper(CultureInfo.InvariantCulture),
-            NormalizedUserName = normalizedUserName ?? userName!.ToUpper(CultureInfo.InvariantCulture),
+            NormalizedUserName = normalizedUserName ?? userName.ToUpper(CultureInfo.InvariantCulture),
             ConcurrencyStamp = concurrencyStamp ?? Guid.NewGuid().ToString(),
             SecurityStamp = securityStamp ?? Guid.NewGuid().ToString(),
             TwoFactorEnabled = twoFactorEnabled,
+        };
+    }
+
+    public static RegisterUserDto GetMockRegisterUser(
+        string userName = TestConstants.ValidUserName, string password = "123456789", string confirmPassword = "123456789", string email = TestConstants.ValidEmail)
+    {
+        return new()
+        {
+            UserName = userName,
+            Password = password,
+            ConfirmPassword = confirmPassword,
+            Email = email,
         };
     }
 
@@ -150,7 +193,7 @@ public static class AccountData
         string? securityStamp = nullifySecurityStamp ? null : Guid.NewGuid().ToString();
         string? passwordHash = nullifyPasswordHash ? null : Guid.NewGuid().ToString();
 
-        return new Account
+        return new()
         {
             Id = 1,
             UserId = Guid.NewGuid(),
@@ -189,7 +232,7 @@ public static class AccountData
         string phoneNumber = RandomGeneratorHelpers.GenerateRandomValue(phoneNumberLength);
         string securityStamp = RandomGeneratorHelpers.GenerateRandomValue(securityStampLength);
 
-        return new Account
+        return new()
         {
             Id = 1,
             UserId = Guid.NewGuid(),

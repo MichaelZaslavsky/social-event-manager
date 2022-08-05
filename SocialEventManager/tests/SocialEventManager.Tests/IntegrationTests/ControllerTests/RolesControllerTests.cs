@@ -38,7 +38,7 @@ public class RolesControllerTests : IntegrationTest
 
         await Client.CreateAsync(ApiPathConstants.Roles, applicationRole);
 
-        RolesStorage.Instance.Data.Should().HaveCount(initialCount + 1)
+        RolesStorage.Instance.Data.Should().HaveCount(++initialCount)
             .And.ContainSingle(r => r.Name == applicationRole.Name);
     }
 
