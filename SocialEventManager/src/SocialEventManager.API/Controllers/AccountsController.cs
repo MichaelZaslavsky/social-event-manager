@@ -45,7 +45,7 @@ public class AccountsController : ControllerBase
     /// <param name="user">The user to register.</param>
     /// <returns>An empty ActionResult.</returns>
     [HttpPost]
-    [Route("register")]
+    [Route(ApiPathConstants.Action)]
     [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
@@ -87,7 +87,7 @@ public class AccountsController : ControllerBase
     /// <param name="loginModel">The user and password for login.</param>
     /// <returns>An empty ActionResult.</returns>
     [HttpPost]
-    [Route("login")]
+    [Route(ApiPathConstants.Action)]
     [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -110,8 +110,8 @@ public class AccountsController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpPost]
-    [Route("logout")]
-    public async Task<IActionResult> LogOut()
+    [Route(ApiPathConstants.Action)]
+    public async Task<IActionResult> Logout()
     {
         await _signInManager.SignOutAsync();
         return Ok();
