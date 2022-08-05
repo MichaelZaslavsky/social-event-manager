@@ -48,7 +48,7 @@ public class AccountsController : ControllerBase
     [Route(ApiPathConstants.Action)]
     [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
     public async Task<IActionResult> Register(RegisterUserDto user)
     {
         ApplicationUser applicationUser = _mapper.Map<ApplicationUser>(user);
