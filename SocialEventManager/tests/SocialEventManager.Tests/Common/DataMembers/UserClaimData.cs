@@ -2,6 +2,7 @@ using System.Security.Claims;
 using SocialEventManager.DAL.Entities;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Helpers;
+using SocialEventManager.Tests.Common.Constants;
 using Xunit;
 
 namespace SocialEventManager.Tests.Common.DataMembers;
@@ -9,13 +10,6 @@ namespace SocialEventManager.Tests.Common.DataMembers;
 public static class UserClaimData
 {
     private const string TableName = TableNameConstants.UserClaims;
-
-    private static readonly string Length256;
-
-    static UserClaimData()
-    {
-        Length256 = DataConstants.Length256;
-    }
 
     public static TheoryData<UserClaim> ValidUserClaim =>
         new() { GetMockUserClaim(userId: Guid.NewGuid()) };
@@ -56,7 +50,7 @@ public static class UserClaimData
         new()
         {
             {
-                GetMockUserClaim(type: Length256),
+                GetMockUserClaim(type: TestConstants.Length256),
                 ExceptionConstants.ExceedMaximumAllowedLength
             },
         };

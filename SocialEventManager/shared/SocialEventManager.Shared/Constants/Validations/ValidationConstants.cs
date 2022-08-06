@@ -14,4 +14,14 @@ public static class ValidationConstants
     public static string InvalidEmail(string fieldName) => $"The {fieldName} field is not a valid e-mail address.";
 
     public static string TheFieldIsRequired(string fieldName) => $"The {fieldName} field is required.";
+
+    public static string FieldMaximumLength(string fieldName, int length) => FieldLength(fieldName, length, true);
+
+    public static string FieldMinimumLength(string fieldName, int length) => FieldLength(fieldName, length, false);
+
+    private static string FieldLength(string fieldName, int length, bool isMaximum)
+    {
+        string maxOrMin = isMaximum ? "maximum" : "minimum";
+        return $"The field {fieldName} must be a string or array type with a {maxOrMin} length of '{length}'.";
+    }
 }

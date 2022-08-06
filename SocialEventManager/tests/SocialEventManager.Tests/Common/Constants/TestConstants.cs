@@ -1,4 +1,5 @@
 using SocialEventManager.Shared.Constants;
+using SocialEventManager.Shared.Helpers;
 
 namespace SocialEventManager.Tests.Common.Constants;
 
@@ -17,4 +18,6 @@ internal static class TestConstants
     public static string ValueCannotBeNullOrWhiteSpace(string paramName) => $"{ExceptionConstants.ValueCannotBeNullOrWhiteSpace} {Parameter(paramName)}";
 
     private static string Parameter(string paramName) => $"(Parameter '{paramName}')";
+
+    public static string Length256 => RandomGeneratorHelpers.GenerateRandomValue(256);
 }
