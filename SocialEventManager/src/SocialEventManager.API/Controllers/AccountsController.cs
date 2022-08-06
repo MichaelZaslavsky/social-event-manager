@@ -84,7 +84,7 @@ public class AccountsController : ControllerBase
     /// <summary>
     /// Logins the specified user into the application.
     /// </summary>
-    /// <param name="loginModel">The user and password for login.</param>
+    /// <param name="login">The user and password for login.</param>
     /// <returns>An empty ActionResult.</returns>
     [HttpPost]
     [Route(ApiPathConstants.Action)]
@@ -92,9 +92,9 @@ public class AccountsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    public async Task<IActionResult> Login(LoginModel loginModel)
+    public async Task<IActionResult> Login(LoginModel login)
     {
-        SignInResult result = await _signInManager.PasswordSignInAsync(loginModel.UserName, loginModel.Password, isPersistent: true, lockoutOnFailure: false);
+        SignInResult result = await _signInManager.PasswordSignInAsync(login.UserName, login.Password, isPersistent: true, lockoutOnFailure: false);
 
         if (result.IsLockedOut)
         {
@@ -112,6 +112,7 @@ public class AccountsController : ControllerBase
     /// <returns></returns>
     [HttpPost]
     [Route(ApiPathConstants.Action)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> Logout()
     {
         await _signInManager.SignOutAsync();

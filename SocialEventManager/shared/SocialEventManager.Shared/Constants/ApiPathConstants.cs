@@ -10,6 +10,8 @@ public static class ApiPathConstants
     public const string Hangfire = "/hangfire";
     public const string HealthLive = $"/{Health}/live";
     public const string HealthReady = $"/{Health}/{Ready}";
+    public const string LoginAccounts = Accounts + "/login";
+    public const string LogoutAccounts = Accounts + "/logout";
     public const string Ready = "ready";
     public const string RegisterAccounts = Accounts + "/register";
     public const string Roles = Api + "roles";

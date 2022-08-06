@@ -18,7 +18,7 @@ internal sealed class AccountsStorage : ListStorage<AccountsStorage, Account>
                 Id = 1,
                 UserId = Guid.NewGuid(),
                 UserName = name,
-                PasswordHash = RandomGeneratorHelpers.GenerateRandomValue(),
+                PasswordHash = RandomGeneratorHelpers.GenerateRandomValue() + "=",
                 Email = TestConstants.ValidEmail,
                 EmailConfirmed = true,
                 NormalizedEmail = TestConstants.ValidEmail.ToUpper(),

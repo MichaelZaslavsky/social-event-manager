@@ -2,6 +2,7 @@ using System.Globalization;
 using SocialEventManager.BLL.Models.Users;
 using SocialEventManager.DAL.Entities;
 using SocialEventManager.Shared.Constants;
+using SocialEventManager.Shared.Constants.Validations;
 using SocialEventManager.Shared.Helpers;
 using SocialEventManager.Tests.Common.Constants;
 using Xunit;
@@ -11,13 +12,6 @@ namespace SocialEventManager.Tests.Common.DataMembers;
 public static class AccountData
 {
     private const string TableName = TableNameConstants.Accounts;
-
-    private static readonly string Length256;
-
-    static AccountData()
-    {
-        Length256 = DataConstants.Length256;
-    }
 
     public static TheoryData<IEnumerable<Account>> AccountWithSameUserId =>
         new() { GetMockAccount(sameUserId: true) };
@@ -74,23 +68,23 @@ public static class AccountData
         new()
         {
             {
-                GetMockAccount(email: Length256),
+                GetMockAccount(email: TestConstants.Length256),
                 ExceptionConstants.ExceedMaximumAllowedLength
             },
             {
-                GetMockAccount(normalizedEmail: Length256),
+                GetMockAccount(normalizedEmail: TestConstants.Length256),
                 ExceptionConstants.ExceedMaximumAllowedLength
             },
             {
-                GetMockAccount(userName: Length256),
+                GetMockAccount(userName: TestConstants.Length256),
                 ExceptionConstants.ExceedMaximumAllowedLength
             },
             {
-                GetMockAccount(normalizedUserName: Length256),
+                GetMockAccount(normalizedUserName: TestConstants.Length256),
                 ExceptionConstants.ExceedMaximumAllowedLength
             },
             {
-                GetMockAccount(concurrencyStamp: Length256),
+                GetMockAccount(concurrencyStamp: TestConstants.Length256),
                 ExceptionConstants.ExceedMaximumAllowedLength
             },
         };
@@ -122,6 +116,30 @@ public static class AccountData
             {
                 GetMockRegisterUser(email: "invalid-email"),
                 "\"The Email field is not a valid e-mail address.\""
+            },
+            {
+                GetMockRegisterUser(userName: "1"),
+                ValidationConstants.FieldMinimumLength(nameof(RegisterUserDto.UserName), LengthConstants.Length2)
+            },
+            {
+                GetMockRegisterUser(userName: TestConstants.Length256),
+                ValidationConstants.FieldMaximumLength(nameof(RegisterUserDto.UserName), LengthConstants.Length255)
+            },
+            {
+                GetMockRegisterUser(userName: null!),
+                ValidationConstants.TheFieldIsRequired(nameof(RegisterUserDto.UserName))
+            },
+            {
+                GetMockRegisterUser(password: null!),
+                ValidationConstants.TheFieldIsRequired(nameof(RegisterUserDto.Password))
+            },
+            {
+                GetMockRegisterUser(confirmPassword: null!),
+                ValidationConstants.TheFieldIsRequired(nameof(RegisterUserDto.ConfirmPassword))
+            },
+            {
+                GetMockRegisterUser(email: null!),
+                ValidationConstants.TheFieldIsRequired(nameof(RegisterUserDto.Email))
             },
         };
 

@@ -1,10 +1,12 @@
 using System.Net;
 using System.Security.Claims;
+using AutoFixture.Xunit2;
 using FluentAssertions;
 using SocialEventManager.BLL.Models.Users;
 using SocialEventManager.DAL.Entities;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
+using SocialEventManager.Shared.Helpers;
 using SocialEventManager.Tests.Common.Constants;
 using SocialEventManager.Tests.Common.DataMembers;
 using SocialEventManager.Tests.Common.DataMembers.Storages;
@@ -54,6 +56,33 @@ public class AccountsControllerTests : IntegrationTest
         message.Should().Contain(expected);
 
         initialAccounts.Should().BeEquivalentTo(AccountsStorage.Instance.Data);
+    }
+
+    [Theory]
+    [AutoData]
+    public async Task Login_Should_ReturnBadRequest_When_UserIsInvalid(LoginModel login)
+    {
+        (HttpStatusCode statusCode, _) = await Client.CreateAsyncWithError(ApiPathConstants.LoginAccounts, login);
+        statusCode.Should().Be(HttpStatusCode.BadRequest);
+    }
+
+    [Fact]
+    public async Task Login_Should_ReturnInternalServerError_When_PasswordIsWrong()
+    {
+        LoginModel login = new()
+        {
+            UserName = AccountsStorage.Instance.Data[0].UserName,
+            Password = RandomGeneratorHelpers.GenerateRandomValue(),
+        };
+
+        (HttpStatusCode statusCode, _) = await Client.CreateAsyncWithError(ApiPathConstants.LoginAccounts, login);
+        statusCode.Should().Be(HttpStatusCode.InternalServerError);
+    }
+
+    [Fact]
+    public async Task Logout_Should_ReturnOk_When_PasswordIsWrong()
+    {
+        await Client.CreateAsync(ApiPathConstants.LogoutAccounts);
     }
 
     private static void AssertAccount(Account expectedAccount, Account actualAccount, int lastAccountId, string password, string confirmPassword)

@@ -4,6 +4,7 @@ using SocialEventManager.DAL.Enums;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Shared.Helpers;
+using SocialEventManager.Tests.Common.Constants;
 using Xunit;
 
 namespace SocialEventManager.Tests.Common.DataMembers;
@@ -11,13 +12,6 @@ namespace SocialEventManager.Tests.Common.DataMembers;
 public static class RoleData
 {
     private const string TableName = TableNameConstants.Roles;
-
-    private static readonly string Length256;
-
-    static RoleData()
-    {
-        Length256 = DataConstants.Length256;
-    }
 
     public static TheoryData<Role> ValidRole =>
         new()
@@ -75,15 +69,15 @@ public static class RoleData
         new()
         {
             {
-                GetMockRole(concurrencyStamp: Length256),
+                GetMockRole(concurrencyStamp: TestConstants.Length256),
                 ExceptionConstants.ExceedMaximumAllowedLength
             },
             {
-                GetMockRole(name: Length256),
+                GetMockRole(name: TestConstants.Length256),
                 ExceptionConstants.ExceedMaximumAllowedLength
             },
             {
-                GetMockRole(normalizedName: Length256),
+                GetMockRole(normalizedName: TestConstants.Length256),
                 ExceptionConstants.ExceedMaximumAllowedLength
             },
         };
