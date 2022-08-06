@@ -52,12 +52,11 @@ public static class LoggerExtensions
         }
 
         List<string> excludedClaims = new() { "nbf", "exp", "auth_time", "amr", "sub", "at_hash", "s_hash", "sid", "name", "preferred_username" };
-        const string userIdClaimType = "sub";
         const string userNameClaimType = "name";
 
         UserInformation userInfo = new()
         {
-            UserId = principal.Claims.FirstOrDefault(c => c.Type == userIdClaimType)?.Value,
+            UserId = principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid)?.Value,
             UserName = principal.Claims.FirstOrDefault(c => c.Type == userNameClaimType)?.Value,
             UserClaims = new Dictionary<string, IList<string>>(),
         };
