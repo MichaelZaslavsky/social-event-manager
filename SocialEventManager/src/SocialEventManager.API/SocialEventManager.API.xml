@@ -28,7 +28,7 @@
             <summary>
             Logins the specified user into the application.
             </summary>
-            <param name="login">The user and password for login.</param>
+            <param name="user">The user and password for login.</param>
             <returns>An empty ActionResult.</returns>
         </member>
         <member name="M:SocialEventManager.API.Controllers.AccountsController.Logout">
