@@ -56,4 +56,10 @@
 		<Folder Include="db\datasets\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Update="db\migrations\*">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
 </Project>
