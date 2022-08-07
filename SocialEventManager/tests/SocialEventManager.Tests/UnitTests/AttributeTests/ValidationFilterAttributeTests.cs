@@ -4,11 +4,15 @@ using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using SocialEventManager.Infrastructure.Attributes;
+using SocialEventManager.Shared.Constants;
 using SocialEventManager.Tests.Common.Helpers;
 using Xunit;
+using Xunit.Categories;
 
 namespace SocialEventManager.Tests.UnitTests.AttributeTests;
 
+[UnitTest]
+[Category(CategoryConstants.Attributes)]
 public class ValidationFilterAttributeTests
 {
     [Fact]
