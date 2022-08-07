@@ -28,8 +28,4 @@ internal class PerformContextMock
     public Mock<IJobCancellationToken> CancellationToken { get; set; }
 
     public PerformContext Object => _context.Value;
-
-    public static void SomeMethod()
-    {
-    }
 }
