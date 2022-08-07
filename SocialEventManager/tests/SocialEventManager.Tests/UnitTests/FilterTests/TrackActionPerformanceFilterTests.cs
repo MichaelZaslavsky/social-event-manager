@@ -16,7 +16,7 @@ public class TrackActionPerformanceFilterTests
     }
 
     [Fact]
-    public void OnActionExecution_Should_NotThrowException_When_Called()
+    public void OnActionExecuting_Should_NotThrowException_When_Called()
     {
         TrackActionPerformanceFilter trackPerformance = new(_logger);
 
