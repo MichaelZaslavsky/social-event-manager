@@ -11,7 +11,6 @@ public class HangfireServerEventsLogAttributeTests
     public void OnPerforming_Should_NotThrowException_When_Called()
     {
         HangfireServerEventsLogAttribute serverEventsLog = new();
-
         PerformContextMock context = new();
 
         Exception? executingException = Record.Exception(() => serverEventsLog.OnPerforming(new(context.Object)));
@@ -22,7 +21,6 @@ public class HangfireServerEventsLogAttributeTests
     public void OnPerformed_Should_NotThrowException_When_Called()
     {
         HangfireServerEventsLogAttribute serverEventsLog = new();
-
         PerformedContextMock context = new();
 
         Exception? executingException = Record.Exception(() => serverEventsLog.OnPerformed(context.Object));
