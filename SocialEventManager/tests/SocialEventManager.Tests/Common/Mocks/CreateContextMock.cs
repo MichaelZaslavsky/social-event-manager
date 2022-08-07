@@ -15,7 +15,7 @@ internal class CreateContextMock
     {
         Storage = new();
         Connection = new();
-        Job = Job.FromExpression(() => Method());
+        Job = Job.FromExpression(() => SomeMethod());
         InitialState = new();
 
         _context = new(() => new(Storage.Object, Connection.Object, Job, InitialState.Object));
@@ -31,7 +31,8 @@ internal class CreateContextMock
 
     public CreateContext Object => _context.Value;
 
-    public static void Method()
+    public static void SomeMethod()
     {
+        // This is an illustration of a background job.
     }
 }
