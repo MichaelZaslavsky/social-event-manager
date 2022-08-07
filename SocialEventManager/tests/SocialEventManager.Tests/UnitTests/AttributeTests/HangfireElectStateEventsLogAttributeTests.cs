@@ -4,7 +4,7 @@ using SocialEventManager.Infrastructure.Filters.BackgroundJobs;
 using SocialEventManager.Tests.Common.Mocks;
 using Xunit;
 
-namespace SocialEventManager.Tests.UnitTests.FilterTests;
+namespace SocialEventManager.Tests.UnitTests.AttributeTests;
 
 public class HangfireElectStateEventsLogAttributeTests
 {
