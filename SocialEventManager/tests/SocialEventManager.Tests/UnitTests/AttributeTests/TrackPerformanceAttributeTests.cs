@@ -16,7 +16,7 @@ public class TrackPerformanceAttributeTests
     }
 
     [Fact]
-    public void Init_Should_NotThrowException_When_Called()
+    public void OnActionExecution_Should_NotThrowException_When_Called()
     {
         TrackPerformanceAttribute trackPerformance = new(_logger);
 
