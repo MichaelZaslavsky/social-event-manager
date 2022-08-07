@@ -1,10 +1,14 @@
 using FluentAssertions;
 using SocialEventManager.Infrastructure.Filters.BackgroundJobs;
+using SocialEventManager.Shared.Constants;
 using SocialEventManager.Tests.Common.Mocks;
 using Xunit;
+using Xunit.Categories;
 
 namespace SocialEventManager.Tests.UnitTests.AttributeTests;
 
+[UnitTest]
+[Category(CategoryConstants.Attributes)]
 public class HangfireClientEventsLogAttributeTests
 {
     [Fact]
