@@ -26,5 +26,6 @@ internal class BackgroundJobMock
 
     public static void SomeMethod()
     {
+        // This is an illustration of a background job.
     }
 }
