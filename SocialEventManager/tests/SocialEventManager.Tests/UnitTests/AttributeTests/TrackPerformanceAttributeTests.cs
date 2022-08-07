@@ -1,16 +1,16 @@
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
-using SocialEventManager.Infrastructure.Filters;
+using SocialEventManager.Infrastructure.Attributes;
 using SocialEventManager.Tests.Common.Helpers;
 using Xunit;
 
-namespace SocialEventManager.Tests.UnitTests.FilterTests;
+namespace SocialEventManager.Tests.UnitTests.AttributeTests;
 
-public class TrackActionPerformanceFilterTests
+public class TrackPerformanceAttributeTests
 {
-    private readonly ILogger<TrackActionPerformanceFilter> _logger;
+    private readonly ILogger<TrackPerformanceAttribute> _logger;
 
-    public TrackActionPerformanceFilterTests(ILogger<TrackActionPerformanceFilter> logger)
+    public TrackPerformanceAttributeTests(ILogger<TrackPerformanceAttribute> logger)
     {
         _logger = logger;
     }
@@ -18,7 +18,7 @@ public class TrackActionPerformanceFilterTests
     [Fact]
     public void Init_Should_NotThrowException_When_Called()
     {
-        TrackActionPerformanceFilter trackPerformance = new(_logger);
+        TrackPerformanceAttribute trackPerformance = new(_logger);
 
         Exception? executingException = Record.Exception(() => trackPerformance.OnActionExecuting(ActionContextHelpers.GetMockActionExecutingContext()));
         executingException.Should().BeNull();
