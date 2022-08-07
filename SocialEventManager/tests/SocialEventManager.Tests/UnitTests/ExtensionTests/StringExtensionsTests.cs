@@ -13,7 +13,7 @@ public class StringExtensionsTests
 {
     [Theory]
     [MemberData(nameof(StringData.NullOrEmptyData), MemberType = typeof(StringData))]
-    public void IsNullOrEmpty_Should_ReturnCorrectResult_WhenCalled(string? value, bool expectedResult)
+    public void IsNullOrEmpty_Should_ReturnCorrectResult_When_Called(string? value, bool expectedResult)
     {
         bool actualResult = value.IsNullOrEmpty();
         actualResult.Should().Be(expectedResult);
@@ -22,7 +22,7 @@ public class StringExtensionsTests
     [Theory]
     [MemberData(nameof(StringData.NullOrEmptyData), MemberType = typeof(StringData))]
     [MemberData(nameof(StringData.WhiteSpaceData), MemberType = typeof(StringData))]
-    public void IsNullOrWhiteSpace_Should_ReturnCorrectResult_WhenCalled(string? value, bool expectedResult)
+    public void IsNullOrWhiteSpace_Should_ReturnCorrectResult_When_Called(string? value, bool expectedResult)
     {
         bool actualResult = value.IsNullOrWhiteSpace();
         actualResult.Should().Be(expectedResult);
