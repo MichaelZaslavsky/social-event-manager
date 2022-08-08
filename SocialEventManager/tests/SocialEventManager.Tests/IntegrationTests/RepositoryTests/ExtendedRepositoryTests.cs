@@ -1,6 +1,5 @@
 using System.Data.SqlClient;
 using AutoFixture.Xunit2;
-using DeepEqual.Syntax;
 using FluentAssertions;
 using Moq;
 using SocialEventManager.DAL.Entities;
@@ -33,7 +32,7 @@ public class ExtendedRepositoryTests : RepositoryTestBase<IRolesRepository, Role
         await Db.InsertAsync(role);
 
         IEnumerable<Role> actualRoles = await Repository.GetAsync(role.Name, nameof(Role.Name));
-        actualRoles.Should().ContainSingle(r => r.IsDeepEqual(role));
+        actualRoles.Should().ContainEquivalentOf(role);
     }
 
     [Theory]
