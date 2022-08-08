@@ -2,7 +2,7 @@ using SocialEventManager.DAL.Infrastructure;
 
 namespace SocialEventManager.Tests.IntegrationTests.Fixtures.Stubs;
 
-public abstract class StubBase<TEntity> : IGenericRepository<TEntity>
+internal abstract class StubBase<TEntity> : IGenericRepository<TEntity>
     where TEntity : class
 {
     public virtual Task<bool> DeleteAsync(TEntity entity) => Task.FromResult(false);
