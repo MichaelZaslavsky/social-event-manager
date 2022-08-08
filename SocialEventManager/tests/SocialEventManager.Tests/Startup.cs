@@ -31,7 +31,7 @@ public class Startup
             .RegisterServices()
             .AddRedisClients(Configuration);
 
-        services.AddScoped(sp =>
+        services.AddSingleton(sp =>
         {
             IInMemoryDatabase provider = sp.GetRequiredService<IInMemoryDatabase>();
             Mock<IDbSession> mock = provider.GetMockDbSession();
