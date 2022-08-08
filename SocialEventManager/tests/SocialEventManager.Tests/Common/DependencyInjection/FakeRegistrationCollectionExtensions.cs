@@ -1,4 +1,5 @@
 using System.Reflection;
+using MailKit.Net.Smtp;
 using Microsoft.Extensions.DependencyInjection;
 using SocialEventManager.Infrastructure.Email;
 using SocialEventManager.Shared.Constants;
@@ -33,6 +34,7 @@ public static class FakeRegistrationCollectionExtensions
         }
 
         services.AddScoped<IEmailProvider, StubEmailSmtpProvider>();
+        services.AddScoped<ISmtpClient, StubSmtpClient>();
 
         return services;
     }
