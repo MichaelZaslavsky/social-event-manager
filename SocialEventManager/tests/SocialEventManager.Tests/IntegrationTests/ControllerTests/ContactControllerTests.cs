@@ -1,7 +1,10 @@
 using System.Net;
 using FluentAssertions;
+using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.DependencyInjection;
 using netDumbster.smtp;
 using SocialEventManager.BLL.Models.Contact;
+using SocialEventManager.Infrastructure.Email;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Enums;
 using SocialEventManager.Shared.Extensions;
@@ -50,5 +53,31 @@ public class ContactControllerTests : IntegrationTest
         (HttpStatusCode statusCode, string message) = await Client.CreateAsyncWithError(ApiPathConstants.Contact, contact);
         statusCode.Should().Be(HttpStatusCode.BadRequest);
         message.Should().Contain(expected);
+    }
+
+    [Theory]
+    [MemberData(nameof(ContactData.ValidContact), MemberType = typeof(ContactData))]
+    public async Task Post_Should_ReturnOk_When_ContactDetailsIsValidAndEmailProviderIsNotFaked(ContactDto contact)
+    {
+        SimpleSmtpServer smtp = SimpleSmtpServer.Start(EmailData.FakePort);
+
+        await Factory.DisposeAsync();
+
+        HttpClient client = Factory
+            .WithWebHostBuilder(builder => builder.ConfigureTestServices(services => services.AddScoped<IEmailProvider, EmailSmtpProvider>()))
+            .CreateClient();
+
+        await client.CreateAsync(ApiPathConstants.Contact, contact);
+
+        await BackgroundJobHelpers.WaitForCompletion(BackgroundJobType.Email);
+
+        SmtpMessage[] emails = smtp.ReceivedEmail;
+        emails.Should().HaveCount(1);
+
+        SmtpMessage actual = emails[0];
+        actual.Subject.Should().Be(MessageConstants.ContactInfo(contact.Name, contact.Email));
+        actual.MessageParts.Select(mp => mp.BodyData).First().Should().Be(contact.Text);
+
+        smtp.Stop();
     }
 }
