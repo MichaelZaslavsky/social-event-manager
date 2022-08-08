@@ -1,4 +1,3 @@
-using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
 using SocialEventManager.Shared.Constants;
@@ -15,7 +14,7 @@ public class IntegrationTest : IClassFixture<ApiWebApplicationFactory>
         Client = Factory.CreateClient();
 
         byte[] byteArray = Encoding.ASCII.GetBytes("TempUser:TempPassword");
-        Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(AuthConstants.Scheme, Convert.ToBase64String(byteArray));
+        Client.DefaultRequestHeaders.Authorization = new(AuthConstants.Scheme, Convert.ToBase64String(byteArray));
 
         InitStorages();
     }

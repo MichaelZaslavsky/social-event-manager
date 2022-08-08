@@ -1,7 +1,6 @@
 using System.Net;
 using AutoFixture.Xunit2;
 using FluentAssertions;
-using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using SocialEventManager.BLL.Models.Identity;
@@ -50,7 +49,7 @@ public class RolesControllerTests : IntegrationTest
 
         HttpClient client = Factory.WithWebHostBuilder(builder =>
             builder.ConfigureTestServices(services => services.AddTransient<IRolesRepository, StubInvalidRoles>()))
-            .CreateClient(new WebApplicationFactoryClientOptions());
+                .CreateClient(new());
 
         (HttpStatusCode statusCode, string message) = await client.CreateAsyncWithError(ApiPathConstants.Roles, applicationRole);
         statusCode.Should().Be(HttpStatusCode.BadRequest);
