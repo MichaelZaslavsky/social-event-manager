@@ -1,6 +1,5 @@
 using System.Data.SqlClient;
 using AutoFixture.Xunit2;
-using DeepEqual.Syntax;
 using FluentAssertions;
 using Moq;
 using SocialEventManager.DAL.Entities;
@@ -103,7 +102,7 @@ public class UserRolesRepositoryTests : RepositoryTestBase<IUserRolesRepository,
         UserRole userRole = await CreateUserRoleAndRelatedData(account, role);
 
         IEnumerable<UserRole> actualUserRoles = await Repository.GetUserRoles(role.Name);
-        actualUserRoles.Should().ContainSingle(actualUserRole => actualUserRole.IsDeepEqual(userRole));
+        actualUserRoles.Should().ContainEquivalentOf(userRole);
     }
 
     [Theory]

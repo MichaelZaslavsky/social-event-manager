@@ -1,6 +1,5 @@
 using System.Data.SqlClient;
 using AutoFixture.Xunit2;
-using DeepEqual.Syntax;
 using FluentAssertions;
 using Moq;
 using SocialEventManager.DAL.Entities;
@@ -32,7 +31,7 @@ public class UserClaimsRepositoryTests : RepositoryTestBase<IUserClaimsRepositor
         userClaim.Id = await CreateUserClaimAndRelatedData(userClaim);
 
         IEnumerable<UserClaim> actualUserClaims = await Repository.GetUserClaims(userClaim.Type, userClaim.Value);
-        actualUserClaims.Should().ContainSingle(uc => uc.IsDeepEqual(userClaim));
+        actualUserClaims.Should().ContainEquivalentOf(userClaim);
     }
 
     [Theory]
@@ -45,7 +44,7 @@ public class UserClaimsRepositoryTests : RepositoryTestBase<IUserClaimsRepositor
         userClaims.ForEach(async userClaim =>
         {
             IEnumerable<UserClaim> actualUserClaims = await Repository.GetUserClaims(userClaim.Type, userClaim.Value);
-            actualUserClaims.Should().ContainSingle(actualUserClaim => actualUserClaim.IsDeepEqual(userClaim));
+            actualUserClaims.Should().ContainEquivalentOf(userClaim);
         });
     }
 
@@ -63,7 +62,7 @@ public class UserClaimsRepositoryTests : RepositoryTestBase<IUserClaimsRepositor
         userClaims.ForEach(async userClaim =>
         {
             IEnumerable<UserClaim> actualUserClaims = await Repository.GetUserClaims(userClaim.Type, userClaim.Value);
-            actualUserClaims.Should().ContainSingle(actualUserClaim => actualUserClaim.IsDeepEqual(userClaim));
+            actualUserClaims.Should().ContainEquivalentOf(userClaim);
         });
     }
 
