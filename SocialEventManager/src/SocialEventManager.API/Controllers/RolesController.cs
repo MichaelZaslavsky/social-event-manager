@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
-using SocialEventManager.Shared.Models.Identity;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
+using SocialEventManager.Shared.Models.Identity;
 
 namespace SocialEventManager.API.Controllers;
 

@@ -15,11 +15,11 @@ using SocialEventManager.API.HealthChecks;
 using SocialEventManager.API.Hubs;
 using SocialEventManager.API.Utilities.Extensions;
 using SocialEventManager.API.Utilities.Handlers;
+using SocialEventManager.DAL.Migrations;
 using SocialEventManager.Infrastructure.Attributes;
 using SocialEventManager.Infrastructure.Filters;
 using SocialEventManager.Infrastructure.Filters.BackgroundJobs;
 using SocialEventManager.Infrastructure.Middleware;
-using SocialEventManager.Infrastructure.Migrations;
 using SocialEventManager.Shared.Constants;
 
 const int FiftyMb = 52428800;

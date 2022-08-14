@@ -3,11 +3,11 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
+using SocialEventManager.Shared.Constants;
+using SocialEventManager.Shared.Enums;
+using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Shared.Models.Identity;
 using SocialEventManager.Shared.Models.Users;
-using SocialEventManager.Shared.Enums;
-using SocialEventManager.Shared.Constants;
-using SocialEventManager.Shared.Extensions;
 
 namespace SocialEventManager.API.Controllers;
 

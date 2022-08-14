@@ -5,9 +5,9 @@ using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Options;
 using SocialEventManager.API.Configurations;
-using SocialEventManager.Shared.Models.Users;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Constants.Validations;
+using SocialEventManager.Shared.Models.Users;
 
 namespace SocialEventManager.API.Authentication;
 

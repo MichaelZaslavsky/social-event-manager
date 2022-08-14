@@ -4,7 +4,7 @@ using Microsoft.Extensions.Hosting;
 using Serilog;
 using SocialEventManager.Shared.Constants;
 
-namespace SocialEventManager.Infrastructure.Migrations;
+namespace SocialEventManager.DAL.Migrations;
 
 public class DbMigrations
 {

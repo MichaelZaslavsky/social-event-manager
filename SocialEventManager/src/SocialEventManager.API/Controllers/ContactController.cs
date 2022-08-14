@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using SocialEventManager.Shared.Models.Contact;
 using SocialEventManager.BLL.Services.Contact;
 using SocialEventManager.Shared.Constants;
+using SocialEventManager.Shared.Models.Contact;
 
 namespace SocialEventManager.API.Controllers;
 

@@ -1,6 +1,6 @@
-using SocialEventManager.Shared.Models.Identity;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Helpers;
+using SocialEventManager.Shared.Models.Identity;
 using Xunit;
 
 namespace SocialEventManager.Tests.Common.DataMembers;

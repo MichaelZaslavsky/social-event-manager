@@ -1,5 +1,5 @@
-using SocialEventManager.Shared.Models.Contact;
 using SocialEventManager.Shared.Constants.Validations;
+using SocialEventManager.Shared.Models.Contact;
 using SocialEventManager.Tests.Common.Constants;
 using Xunit;
 

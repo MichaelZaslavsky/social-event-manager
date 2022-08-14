@@ -9,7 +9,7 @@ using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Shared.Helpers.Queries;
 using SocialEventManager.Shared.Utilities.Attributes;
 
-namespace SocialEventManager.Infrastructure.Migrations;
+namespace SocialEventManager.DAL.Migrations;
 
 public class EnumLookupTableCreator
 {
