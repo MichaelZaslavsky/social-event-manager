@@ -1,15 +1,15 @@
 using System.Security.Claims;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
-using SocialEventManager.Shared.Models.Accounts;
-using SocialEventManager.Shared.Models.Identity;
-using SocialEventManager.Shared.Models.Users;
 using SocialEventManager.BLL.Services.Accounts;
 using SocialEventManager.BLL.Services.Users;
 using SocialEventManager.DAL.Infrastructure;
 using SocialEventManager.Shared.Constants.Validations;
 using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Shared.Helpers;
+using SocialEventManager.Shared.Models.Accounts;
+using SocialEventManager.Shared.Models.Identity;
+using SocialEventManager.Shared.Models.Users;
 
 namespace SocialEventManager.BLL.Services.Identity;
 

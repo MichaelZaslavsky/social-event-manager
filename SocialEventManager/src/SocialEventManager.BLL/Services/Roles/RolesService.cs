@@ -1,11 +1,11 @@
 using AutoMapper;
-using SocialEventManager.Shared.Models.Roles;
 using SocialEventManager.BLL.Services.Infrastructure;
-using SocialEventManager.Shared.Entities;
 using SocialEventManager.DAL.Repositories.Roles;
 using SocialEventManager.Shared.Constants.Validations;
+using SocialEventManager.Shared.Entities;
 using SocialEventManager.Shared.Exceptions;
 using SocialEventManager.Shared.Extensions;
+using SocialEventManager.Shared.Models.Roles;
 
 namespace SocialEventManager.BLL.Services.Roles;
 

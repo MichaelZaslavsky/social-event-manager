@@ -1,11 +1,11 @@
-using SocialEventManager.Shared.Models.Roles;
-using SocialEventManager.Shared.Models.Users;
 using SocialEventManager.BLL.Services.Infrastructure;
 using SocialEventManager.BLL.Services.Roles;
-using SocialEventManager.Shared.Entities;
 using SocialEventManager.DAL.Repositories.Users;
 using SocialEventManager.Shared.Constants.Validations;
+using SocialEventManager.Shared.Entities;
 using SocialEventManager.Shared.Exceptions;
+using SocialEventManager.Shared.Models.Roles;
+using SocialEventManager.Shared.Models.Users;
 
 namespace SocialEventManager.BLL.Services.Users;
 

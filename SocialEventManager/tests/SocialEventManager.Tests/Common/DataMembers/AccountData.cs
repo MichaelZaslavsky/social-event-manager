@@ -1,9 +1,9 @@
 using System.Globalization;
-using SocialEventManager.Shared.Models.Users;
-using SocialEventManager.Shared.Entities;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Constants.Validations;
+using SocialEventManager.Shared.Entities;
 using SocialEventManager.Shared.Helpers;
+using SocialEventManager.Shared.Models.Users;
 using SocialEventManager.Tests.Common.Constants;
 using Xunit;
 
