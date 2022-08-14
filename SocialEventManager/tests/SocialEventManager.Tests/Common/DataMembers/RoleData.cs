@@ -1,7 +1,7 @@
 using System.Globalization;
+using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Entities;
 using SocialEventManager.Shared.Enums;
-using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Shared.Helpers;
 using SocialEventManager.Tests.Common.Constants;

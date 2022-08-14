@@ -1,9 +1,8 @@
 using Dapper;
-using SocialEventManager.DAL.Constants;
 using SocialEventManager.DAL.Infrastructure;
+using SocialEventManager.DAL.Queries;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Entities;
-using SocialEventManager.Shared.Helpers.Queries;
 
 namespace SocialEventManager.DAL.Repositories.Users;
 

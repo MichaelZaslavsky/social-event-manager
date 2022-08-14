@@ -1,4 +1,4 @@
-namespace SocialEventManager.Shared.Helpers.Queries;
+namespace SocialEventManager.DAL.Queries;
 
 public static class SchemaQueryHelpers
 {
