@@ -6,3 +6,4 @@
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("General", "RCS1130:Bitwise operation on enum without Flags attribute.", Justification = "<Pending>", Scope = "member", Target = "~M:SocialEventManager.API.DependencyInjection.SwaggerServiceCollectionExtensions.AddSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection)~Microsoft.Extensions.DependencyInjection.IServiceCollection")]
+[assembly: SuppressMessage("Roslynator", "RCS1093:Remove file with no code.", Justification = "<Pending>")]

@@ -108,7 +108,6 @@ static void ConfigureServices(IServiceCollection services, IConfiguration config
         .AddSqlServer(config)
         .AddHangfire(config)
         .RegisterDependencies()
-        .AddIdentityConfigurations()
         .AddRedisClients(config)
         .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
         .AddScoped<ValidationFilterAttribute>()
