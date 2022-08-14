@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using SocialEventManager.BLL.Models.Contact;
+using SocialEventManager.Shared.Models.Contact;
 using SocialEventManager.BLL.Services.Contact;
 using SocialEventManager.Shared.Constants;
 

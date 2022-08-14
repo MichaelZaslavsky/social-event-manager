@@ -3,7 +3,7 @@ using FluentAssertions;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using netDumbster.smtp;
-using SocialEventManager.BLL.Models.Contact;
+using SocialEventManager.Shared.Models.Contact;
 using SocialEventManager.Infrastructure.Email;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Enums;

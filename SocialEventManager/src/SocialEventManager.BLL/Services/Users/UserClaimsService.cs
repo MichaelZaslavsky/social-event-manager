@@ -1,13 +1,13 @@
 using AutoMapper;
-using SocialEventManager.BLL.Models.Users;
 using SocialEventManager.BLL.Services.Infrastructure;
-using SocialEventManager.DAL.Entities;
-using SocialEventManager.DAL.EqualityComparers;
 using SocialEventManager.DAL.Infrastructure;
 using SocialEventManager.DAL.Repositories.Users;
 using SocialEventManager.Shared.Constants.Validations;
+using SocialEventManager.Shared.Entities;
+using SocialEventManager.Shared.EqualityComparers;
 using SocialEventManager.Shared.Exceptions;
 using SocialEventManager.Shared.Extensions;
+using SocialEventManager.Shared.Models.Users;
 
 namespace SocialEventManager.BLL.Services.Users;
 

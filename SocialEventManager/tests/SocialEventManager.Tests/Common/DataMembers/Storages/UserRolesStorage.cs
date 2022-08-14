@@ -1,4 +1,4 @@
-using SocialEventManager.DAL.Entities;
+using SocialEventManager.Shared.Entities;
 
 namespace SocialEventManager.Tests.Common.DataMembers.Storages;
 

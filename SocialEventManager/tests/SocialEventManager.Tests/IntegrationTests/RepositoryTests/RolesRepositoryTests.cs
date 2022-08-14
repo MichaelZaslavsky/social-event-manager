@@ -2,7 +2,7 @@ using System.Data.SqlClient;
 using AutoFixture.Xunit2;
 using FluentAssertions;
 using Moq;
-using SocialEventManager.DAL.Entities;
+using SocialEventManager.Shared.Entities;
 using SocialEventManager.DAL.Infrastructure;
 using SocialEventManager.DAL.Repositories.Roles;
 using SocialEventManager.Shared.Constants;

@@ -1,4 +1,4 @@
-using SocialEventManager.BLL.Models.Identity;
+using SocialEventManager.Shared.Models.Identity;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Helpers;
 using Xunit;

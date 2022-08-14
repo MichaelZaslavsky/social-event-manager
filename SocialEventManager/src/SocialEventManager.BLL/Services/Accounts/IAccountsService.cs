@@ -1,4 +1,4 @@
-using SocialEventManager.BLL.Models.Accounts;
+using SocialEventManager.Shared.Models.Accounts;
 
 namespace SocialEventManager.BLL.Services.Accounts;
 

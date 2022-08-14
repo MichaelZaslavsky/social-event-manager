@@ -1,4 +1,4 @@
-using SocialEventManager.Shared.Models;
+using SocialEventManager.Shared.Models.Email;
 
 namespace SocialEventManager.Infrastructure.Email;
 

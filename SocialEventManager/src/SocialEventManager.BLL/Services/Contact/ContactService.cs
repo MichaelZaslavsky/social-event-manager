@@ -1,8 +1,8 @@
 using AutoMapper;
 using Hangfire;
-using SocialEventManager.BLL.Models.Contact;
 using SocialEventManager.Infrastructure.Email;
-using SocialEventManager.Shared.Models;
+using SocialEventManager.Shared.Models.Contact;
+using SocialEventManager.Shared.Models.Email;
 
 namespace SocialEventManager.BLL.Services.Contact;
 

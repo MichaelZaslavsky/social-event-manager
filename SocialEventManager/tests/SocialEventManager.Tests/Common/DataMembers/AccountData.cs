@@ -1,6 +1,6 @@
 using System.Globalization;
-using SocialEventManager.BLL.Models.Users;
-using SocialEventManager.DAL.Entities;
+using SocialEventManager.Shared.Models.Users;
+using SocialEventManager.Shared.Entities;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Constants.Validations;
 using SocialEventManager.Shared.Helpers;

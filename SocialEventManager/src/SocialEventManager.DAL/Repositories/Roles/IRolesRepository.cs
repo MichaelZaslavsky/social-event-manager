@@ -1,4 +1,4 @@
-using SocialEventManager.DAL.Entities;
+using SocialEventManager.Shared.Entities;
 using SocialEventManager.DAL.Infrastructure;
 
 namespace SocialEventManager.DAL.Repositories.Roles;

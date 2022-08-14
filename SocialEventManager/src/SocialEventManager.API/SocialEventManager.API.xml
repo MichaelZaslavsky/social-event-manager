@@ -9,7 +9,7 @@
             Represents user accounts.
             </summary>
         </member>
-        <member name="M:SocialEventManager.API.Controllers.AccountsController.#ctor(Microsoft.AspNetCore.Identity.UserManager{SocialEventManager.BLL.Models.Identity.ApplicationUser},Microsoft.AspNetCore.Identity.SignInManager{SocialEventManager.BLL.Models.Identity.ApplicationUser},AutoMapper.IMapper)">
+        <member name="M:SocialEventManager.API.Controllers.AccountsController.#ctor(Microsoft.AspNetCore.Identity.UserManager{SocialEventManager.Shared.Models.Identity.ApplicationUser},Microsoft.AspNetCore.Identity.SignInManager{SocialEventManager.Shared.Models.Identity.ApplicationUser},AutoMapper.IMapper)">
             <summary>
             Initializes a new instance of the <see cref="T:SocialEventManager.API.Controllers.AccountsController"/> class.
             </summary>
@@ -17,14 +17,14 @@
             <param name="signInManager">Provides the APIs for user sign in.</param>
             <param name="mapper">Provides objects mappings.</param>
         </member>
-        <member name="M:SocialEventManager.API.Controllers.AccountsController.Register(SocialEventManager.BLL.Models.Users.RegisterUserDto)">
+        <member name="M:SocialEventManager.API.Controllers.AccountsController.Register(SocialEventManager.Shared.Models.Users.RegisterUserDto)">
             <summary>
             Registers user to the application.
             </summary>
             <param name="user">The user to register.</param>
             <returns>An empty ActionResult.</returns>
         </member>
-        <member name="M:SocialEventManager.API.Controllers.AccountsController.Login(SocialEventManager.BLL.Models.Users.LoginModel)">
+        <member name="M:SocialEventManager.API.Controllers.AccountsController.Login(SocialEventManager.Shared.Models.Users.LoginModel)">
             <summary>
             Logins the specified user into the application.
             </summary>
@@ -48,7 +48,7 @@
             </summary>
             <param name="contactService">Contact us service.</param>
         </member>
-        <member name="M:SocialEventManager.API.Controllers.ContactController.Post(SocialEventManager.BLL.Models.Contact.ContactDto)">
+        <member name="M:SocialEventManager.API.Controllers.ContactController.Post(SocialEventManager.Shared.Models.Contact.ContactDto)">
             <summary>
             Sends an email to <see cref="F:SocialEventManager.Shared.Constants.ContactConstants.Email"/>.
             </summary>
@@ -60,13 +60,13 @@
             Represents roles.
             </summary>
         </member>
-        <member name="M:SocialEventManager.API.Controllers.RolesController.#ctor(Microsoft.AspNetCore.Identity.RoleManager{SocialEventManager.BLL.Models.Identity.ApplicationRole})">
+        <member name="M:SocialEventManager.API.Controllers.RolesController.#ctor(Microsoft.AspNetCore.Identity.RoleManager{SocialEventManager.Shared.Models.Identity.ApplicationRole})">
             <summary>
             Initializes a new instance of the <see cref="T:SocialEventManager.API.Controllers.RolesController"/> class.
             </summary>
             <param name="roleManager">Provides the APIs for managing roles in a persistence store.</param>
         </member>
-        <member name="M:SocialEventManager.API.Controllers.RolesController.Create(SocialEventManager.BLL.Models.Identity.ApplicationRole)">
+        <member name="M:SocialEventManager.API.Controllers.RolesController.Create(SocialEventManager.Shared.Models.Identity.ApplicationRole)">
             <summary>
             Creates a new role.
             </summary>

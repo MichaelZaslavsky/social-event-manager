@@ -74,7 +74,7 @@ public class EnumLookupTableCreator
 
     private static IEnumerable<Type> GetEnumTypes(DbTypes dbTypes)
     {
-        Assembly assembly = Assembly.Load($"{nameof(SocialEventManager)}.{nameof(DAL)}");
+        Assembly assembly = Assembly.Load($"{nameof(SocialEventManager)}.{nameof(Shared)}");
         return GetEnumTypes(dbTypes, assembly);
     }
 

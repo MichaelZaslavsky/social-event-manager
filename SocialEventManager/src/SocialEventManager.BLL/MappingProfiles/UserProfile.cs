@@ -1,8 +1,8 @@
 using System.Security.Claims;
 using AutoMapper;
-using SocialEventManager.BLL.Models.Identity;
-using SocialEventManager.BLL.Models.Users;
-using SocialEventManager.DAL.Entities;
+using SocialEventManager.Shared.Models.Identity;
+using SocialEventManager.Shared.Models.Users;
+using SocialEventManager.Shared.Entities;
 
 namespace SocialEventManager.BLL.MappingProfiles;
 

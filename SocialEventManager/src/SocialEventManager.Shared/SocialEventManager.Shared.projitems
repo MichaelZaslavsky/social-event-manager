@@ -28,7 +28,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)Constants\Validations\AuthValidationConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\Validations\RoleValidationConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\Validations\UserValidationConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Account.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\ClaimBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Role.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\UserClaim.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\UserRole.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\BackgroundJobType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\RoleType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\SchemaType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EqualityComparers\UserClaimEqualityComparer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\EnumerationExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\HttpClientExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\IdentityErrorExtensions.cs" />
@@ -44,7 +52,27 @@
     <Compile Include="$(MSBuildThisFileDirectory)Constants\TableNameConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\Validations\ValidationConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Queries\TableQueryHelpers.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\EmailDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Accounts\AccountBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Accounts\AccountDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Accounts\AccountForCreationDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Accounts\AccountForUpdateDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Contact\ContactDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Email\EmailDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Identity\ApplicationRole.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Identity\ApplicationUser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Roles\RoleBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Roles\RoleDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Roles\RoleForCreationDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Roles\RoleForUpdateDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Users\LoginModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Users\RegisterUserDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Users\UserClaimBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Users\UserClaimDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Users\UserClaimForCreationDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Users\UserClaimForUpdateDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Users\UserRoleBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Users\UserRoleDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Users\UserRoleForCreationDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Attributes\DbEntityAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Attributes\EnumTableAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Attributes\NotDefaultAttribute.cs" />
@@ -57,5 +85,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\StringExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions\ValidationException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\RandomGeneratorHelpers.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Models\Email\" />
   </ItemGroup>
 </Project>

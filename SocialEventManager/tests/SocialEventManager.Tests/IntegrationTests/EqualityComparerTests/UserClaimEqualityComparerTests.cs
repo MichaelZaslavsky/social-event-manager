@@ -1,7 +1,7 @@
 using AutoFixture.Xunit2;
 using FluentAssertions;
-using SocialEventManager.DAL.Entities;
-using SocialEventManager.DAL.EqualityComparers;
+using SocialEventManager.Shared.Entities;
+using SocialEventManager.Shared.EqualityComparers;
 using SocialEventManager.Tests.Common.DataMembers;
 using Xunit;
 

@@ -1,6 +1,6 @@
 using FluentAssertions;
-using SocialEventManager.DAL.Enums;
 using SocialEventManager.Shared.Constants;
+using SocialEventManager.Shared.Enums;
 using SocialEventManager.Shared.Extensions;
 using Xunit;
 using Xunit.Categories;
