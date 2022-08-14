@@ -1,6 +1,6 @@
 using System.Security.Claims;
-using SocialEventManager.Shared.Entities;
 using SocialEventManager.Shared.Constants;
+using SocialEventManager.Shared.Entities;
 using SocialEventManager.Shared.Helpers;
 using SocialEventManager.Tests.Common.Constants;
 using Xunit;

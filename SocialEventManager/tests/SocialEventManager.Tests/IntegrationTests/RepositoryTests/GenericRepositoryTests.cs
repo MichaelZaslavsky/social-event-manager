@@ -1,9 +1,9 @@
 using AutoFixture.Xunit2;
 using FluentAssertions;
 using Moq;
-using SocialEventManager.Shared.Entities;
 using SocialEventManager.DAL.Repositories.Roles;
 using SocialEventManager.Shared.Constants;
+using SocialEventManager.Shared.Entities;
 using SocialEventManager.Tests.Common.Constants;
 using SocialEventManager.Tests.Common.DataMembers;
 using SocialEventManager.Tests.IntegrationTests.Infrastructure;

@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
-using SocialEventManager.Shared.Entities;
 using SocialEventManager.DAL.Repositories.Users;
+using SocialEventManager.Shared.Entities;
 using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Tests.Common.DataMembers.Storages;
 using SocialEventManager.Tests.IntegrationTests.Fixtures.Stubs;

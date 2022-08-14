@@ -4,8 +4,8 @@ using Dapper.Contrib.Extensions;
 using ServiceStack.DataAnnotations;
 using ServiceStack.OrmLite;
 using ServiceStack.OrmLite.Converters;
+using SocialEventManager.DAL.Queries;
 using SocialEventManager.Shared.Extensions;
-using SocialEventManager.Shared.Helpers.Queries;
 
 namespace SocialEventManager.Tests.IntegrationTests.Infrastructure;
 

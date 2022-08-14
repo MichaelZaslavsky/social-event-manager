@@ -1,8 +1,8 @@
 using Dapper;
 using Newtonsoft.Json;
-using SocialEventManager.Shared.Entities;
 using SocialEventManager.DAL.Infrastructure;
 using SocialEventManager.Shared.Constants;
+using SocialEventManager.Shared.Entities;
 
 namespace SocialEventManager.DAL.Repositories.Users;
 

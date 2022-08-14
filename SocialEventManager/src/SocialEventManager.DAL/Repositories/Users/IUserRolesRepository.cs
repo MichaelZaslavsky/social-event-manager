@@ -1,5 +1,5 @@
-using SocialEventManager.Shared.Entities;
 using SocialEventManager.DAL.Infrastructure;
+using SocialEventManager.Shared.Entities;
 
 namespace SocialEventManager.DAL.Repositories.Users;
 

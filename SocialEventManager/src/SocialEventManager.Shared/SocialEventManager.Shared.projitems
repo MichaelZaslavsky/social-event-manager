@@ -46,12 +46,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\HashingHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\HealthCheckHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\MessageHelpers.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Queries\RoleQueryHelpers.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Queries\SchemaQueryHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\LengthConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\TableNameConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\Validations\ValidationConstants.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Queries\TableQueryHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Accounts\AccountBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Accounts\AccountDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Accounts\AccountForCreationDto.cs" />

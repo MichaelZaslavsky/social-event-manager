@@ -1,6 +1,6 @@
 using SocialEventManager.Shared.Constants;
 
-namespace SocialEventManager.Shared.Helpers.Queries;
+namespace SocialEventManager.DAL.Queries;
 
 public static class TableQueryHelpers
 {

@@ -1,4 +1,4 @@
-namespace SocialEventManager.DAL.Constants;
+namespace SocialEventManager.DAL.Queries;
 
 public static class QueryConstants
 {

@@ -3,10 +3,10 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Reflection;
 using Serilog;
+using SocialEventManager.DAL.Queries;
 using SocialEventManager.DAL.Utilities.Enums;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
-using SocialEventManager.Shared.Helpers.Queries;
 using SocialEventManager.Shared.Utilities.Attributes;
 
 namespace SocialEventManager.DAL.Migrations;
