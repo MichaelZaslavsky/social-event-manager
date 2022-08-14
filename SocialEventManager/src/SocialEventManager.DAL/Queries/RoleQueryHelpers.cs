@@ -1,4 +1,5 @@
 using SocialEventManager.Shared.Constants;
+using SocialEventManager.Shared.Entities;
 
 namespace SocialEventManager.DAL.Queries;
 
@@ -11,8 +12,8 @@ public static class RoleQueryHelpers
             (
                 SELECT  TOP 1 1
                 FROM    {TableNameConstants.Roles} R
-                WHERE   {userRolesAlias}.RoleId = R.Id
-                        AND R.NormalizedName = @RoleName
+                WHERE   {userRolesAlias}.{nameof(UserRole.RoleId)} = R.{nameof(Role.Id)}
+                        AND R.{nameof(Role.NormalizedName)} = @RoleName
             )";
     }
 }

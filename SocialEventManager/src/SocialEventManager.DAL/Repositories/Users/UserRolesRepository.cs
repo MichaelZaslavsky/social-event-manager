@@ -19,11 +19,11 @@ public class UserRolesRepository : GenericRepository<UserRole>, IUserRolesReposi
     public async Task<int> InsertAsync(Guid userId, string roleName)
     {
         string sql = $@"
-            INSERT  INTO {TableNameConstants.UserRoles} (UserId, RoleId)
+            INSERT  INTO {TableNameConstants.UserRoles} ({nameof(UserRole.UserId)}, {nameof(UserRole.RoleId)})
             SELECT  @UserId,
-                    R.Id
+                    R.{nameof(Role.Id)}
             FROM    {TableNameConstants.Roles} R
-            WHERE   R.NormalizedName = @RoleName;
+            WHERE   R.{nameof(Role.NormalizedName)} = @RoleName;
 
             {QueryConstants.SelectScopeIdentity}";
 
@@ -45,7 +45,7 @@ public class UserRolesRepository : GenericRepository<UserRole>, IUserRolesReposi
         string sql = $@"
             DELETE  UR
             FROM    {TableNameConstants.UserRoles} UR
-            WHERE   UR.UserId = @UserId
+            WHERE   UR.{nameof(UserRole.UserId)} = @UserId
                     AND {RoleQueryHelpers.ExistsByRoleName()};";
 
         return await _session.Connection.ExecuteAsync(sql, new DynamicParameters(new { userId, roleName }), _session.Transaction) > 0;
@@ -58,9 +58,9 @@ public class UserRolesRepository : GenericRepository<UserRole>, IUserRolesReposi
             (
                 SELECT  TOP 1 1
                 FROM    {TableNameConstants.UserRoles} UR
-                        INNER JOIN {TableNameConstants.Roles} R ON UR.RoleId = R.Id
-                WHERE   UR.UserId = @UserId
-                        AND R.NormalizedName = @RoleName
+                        INNER JOIN {TableNameConstants.Roles} R ON UR.{nameof(UserRole.RoleId)} = R.Id
+                WHERE   UR.{nameof(UserRole.UserId)} = @UserId
+                        AND R.{nameof(Role.NormalizedName)} = @RoleName
             )
             BEGIN
                 SELECT 1;
