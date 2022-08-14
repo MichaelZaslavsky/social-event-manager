@@ -20,10 +20,7 @@ public class SqlMapperUtilitiesTests
     }
 
     [Theory]
-    [InlineData(typeof(Account), TableNameConstants.Accounts)]
     [InlineData(typeof(Role), TableNameConstants.Roles)]
-    [InlineData(typeof(UserRole), TableNameConstants.UserRoles)]
-    [InlineData(typeof(UserClaim), TableNameConstants.UserClaims)]
     public void GetTableName_Should_ReturnTableName_When_TypeHasTableAttribute(Type type, string expectedTableName)
     {
         string actualTableName = SqlMapperUtilities.GetTableName(type);
@@ -31,7 +28,7 @@ public class SqlMapperUtilitiesTests
     }
 
     [Theory]
-    [InlineData(typeof(ClaimBase))]
+    [InlineData(typeof(Role))]
     public void GetTableName_Should_ReturnTableName_When_TypeIsDefinedInTableNameMapper(Type type)
     {
         SqlMapperExtensions.TableNameMapper = (type) => type.Name;

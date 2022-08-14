@@ -6,3 +6,4 @@
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>", Scope = "member", Target = "~M:SocialEventManager.Tests.Startup.Configure(Microsoft.Extensions.Logging.ILoggerFactory,Xunit.DependencyInjection.ITestOutputHelperAccessor)")]
+[assembly: SuppressMessage("Roslynator", "RCS1093:Remove file with no code.", Justification = "<Pending>")]

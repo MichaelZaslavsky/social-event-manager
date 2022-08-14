@@ -1,0 +1,81 @@
+// This is an example of a partial Identity implementation with Dapper.
+// It was just for learning purposes.
+// It is much more recommended to use the Identity packages with EF and not reinventing the wheel.
+
+/*
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
+using SocialEventManager.BLL.Services.Identity;
+using SocialEventManager.Shared.Models.Identity;
+
+namespace SocialEventManager.API.DependencyInjection;
+
+public static class IdentityServiceCollectionExtensions
+{
+    public static IServiceCollection AddIdentityConfigurations(this IServiceCollection services)
+    {
+        services.AddIdentity<ApplicationUser, ApplicationRole>()
+            .AddRoleManager<RoleManager<ApplicationRole>>()
+            .AddUserStore<CustomUsersStore>()
+            .AddRoleStore<CustomRolesStore>()
+            .AddErrorDescriber<IdentityErrorDescriber>()
+            .AddDefaultTokenProviders();
+
+        services
+            .Configure((Action<IdentityOptions>)(options =>
+            {
+                SetPasswordSettings(options.Password);
+                SetLockSettings(options.Lockout);
+                SetUserSettings(options.User);
+            }))
+            .ConfigureApplicationCookie(options =>
+            {
+                SetCookieSettings(options.Cookie);
+                SetPathSettings(options);
+
+                options.ExpireTimeSpan = TimeSpan.FromHours(12);
+                options.SlidingExpiration = true;
+            });
+
+        return services;
+    }
+
+    #region Private Methods
+
+    private static void SetPasswordSettings(PasswordOptions password)
+    {
+        password.RequireDigit = false;
+        password.RequiredLength = 6;
+        password.RequireNonAlphanumeric = false;
+        password.RequireUppercase = false;
+        password.RequireLowercase = false;
+    }
+
+    private static void SetLockSettings(LockoutOptions lockout)
+    {
+        lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+        lockout.MaxFailedAccessAttempts = 3;
+    }
+
+    private static void SetUserSettings(UserOptions user)
+    {
+        user.RequireUniqueEmail = true;
+    }
+
+    private static void SetCookieSettings(CookieBuilder cookie)
+    {
+        cookie.HttpOnly = true;
+    }
+
+    private static void SetPathSettings(CookieAuthenticationOptions options)
+    {
+        const string accountPath = "/api/Account";
+
+        options.LoginPath = $"{accountPath}/login";
+        options.LogoutPath = $"{accountPath}/logout";
+        options.AccessDeniedPath = $"{accountPath}/access-denied";
+    }
+
+    #endregion Private Methods
+}
+*/
