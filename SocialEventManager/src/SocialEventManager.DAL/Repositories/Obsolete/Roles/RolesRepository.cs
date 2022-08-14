@@ -30,6 +30,7 @@ public class RolesRepository : GenericRepository<Role>, IRolesRepository
             sql, new DynamicParameters(new { role.Id, role.ConcurrencyStamp, role.Name, role.NormalizedName }), _session.Transaction);
     }
 
+    /*
     public async Task<IEnumerable<Role>> GetByUserIdAsync(Guid userId)
     {
         string sql = $@"
@@ -45,4 +46,5 @@ public class RolesRepository : GenericRepository<Role>, IRolesRepository
 
         return await _session.Connection.QueryAsync<Role>(sql, new DynamicParameters(new { userId }), _session.Transaction);
     }
+    */
 }
