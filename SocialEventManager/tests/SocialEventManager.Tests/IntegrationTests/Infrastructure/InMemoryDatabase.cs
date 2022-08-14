@@ -81,7 +81,7 @@ public class InMemoryDatabase : IInMemoryDatabase
     public async Task CleanupAsync()
     {
         using IDbConnection db = await OpenConnectionAsync();
-        await db.ExecuteNonQueryAsync(TableQueryHelpers.SafelyDropAllTables());
+        await db.ExecuteNonQueryAsync(TableQueryHelpers.SafelyDropAllTables);
 
         return;
     }
