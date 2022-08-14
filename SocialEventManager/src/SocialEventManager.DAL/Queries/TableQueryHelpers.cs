@@ -46,18 +46,15 @@ public static class TableQueryHelpers
             );";
     }
 
-    public static string SafelyDropAllTables()
-    {
-        return @"
-            DECLARE @sql NVARCHAR(MAX) = N'';
-            SELECT @sql += N'
-            ALTER TABLE ' + QUOTENAME(OBJECT_SCHEMA_NAME(parent_object_id))
-                + '.' + QUOTENAME(OBJECT_NAME(parent_object_id)) +
-                ' DROP CONSTRAINT ' + QUOTENAME(name) + ';'
-            FROM sys.foreign_keys;
+    public const string SafelyDropAllTables = @"
+        DECLARE @sql NVARCHAR(MAX) = N'';
+        SELECT @sql += N'
+        ALTER TABLE ' + QUOTENAME(OBJECT_SCHEMA_NAME(parent_object_id))
+            + '.' + QUOTENAME(OBJECT_NAME(parent_object_id)) +
+            ' DROP CONSTRAINT ' + QUOTENAME(name) + ';'
+        FROM sys.foreign_keys;
 
-            EXEC sp_executesql @sql;
+        EXEC sp_executesql @sql;
 
-            EXEC sp_MSforeachtable 'DROP TABLE ?'";
-    }
+        EXEC sp_MSforeachtable 'DROP TABLE ?'";
 }
