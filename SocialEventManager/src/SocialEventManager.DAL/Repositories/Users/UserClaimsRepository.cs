@@ -21,8 +21,8 @@ public class UserClaimsRepository : GenericRepository<UserClaim>, IUserClaimsRep
         string sql = $@"
             SELECT  UC.*
             FROM    {TableNameConstants.UserClaims} UC
-            WHERE   UC.[Type] = @Type
-                    AND UC.[Value] = @Value;";
+            WHERE   UC.[{nameof(UserClaim.Type)}] = @Type
+                    AND UC.[{nameof(UserClaim.Value)}] = @Value;";
 
         return await _session.Connection.QueryAsync<UserClaim>(sql, new DynamicParameters(new { type, value }), _session.Transaction);
     }
@@ -41,8 +41,8 @@ public class UserClaimsRepository : GenericRepository<UserClaim>, IUserClaimsRep
                         [Type]  NVARCHAR(255)       N'$.Type',
                         [Value] NVARCHAR(255)       N'$.Value'
                     ) AS UCJ ON UC.UserId = UCJ.UserId
-                        AND UC.[Type] = UCJ.[Type]
-                        AND UC.[Value] = UCJ.[Value];";
+                        AND UC.[{nameof(UserClaim.Type)}] = UCJ.[Type]
+                        AND UC.[{nameof(UserClaim.Value)}] = UCJ.[Value];";
 
         return await _session.Connection.ExecuteAsync(sql, new DynamicParameters(new { userClaimsJson }), _session.Transaction) > 0;
     }

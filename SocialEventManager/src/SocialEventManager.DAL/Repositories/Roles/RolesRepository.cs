@@ -18,7 +18,7 @@ public class RolesRepository : GenericRepository<Role>, IRolesRepository
     public async Task<Guid> InsertRole(Role role)
     {
         string sql = $@"
-            INSERT INTO {TableNameConstants.Roles} (Id, ConcurrencyStamp, [Name], NormalizedName)
+            INSERT INTO {TableNameConstants.Roles} ({nameof(Role.Id)}, {nameof(Role.ConcurrencyStamp)}, [{nameof(Role.Name)}], {nameof(Role.NormalizedName)})
             OUTPUT Inserted.Id
             VALUES (@Id, @ConcurrencyStamp, @Name, @NormalizedName);";
 
@@ -35,8 +35,8 @@ public class RolesRepository : GenericRepository<Role>, IRolesRepository
                     (
                         SELECT  TOP 1 1
                         FROM    {TableNameConstants.UserRoles} UR
-                        WHERE   R.Id = UR.RoleId
-                                AND UR.UserId = @UserId
+                        WHERE   R.{nameof(Role.Id)} = UR.{nameof(UserRole.RoleId)}
+                                AND UR.{nameof(UserRole.UserId)} = @UserId
                     );";
 
         return await _session.Connection.QueryAsync<Role>(sql, new DynamicParameters(new { userId }), _session.Transaction);
