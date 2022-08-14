@@ -2,6 +2,7 @@
 // It was just for learning purposes.
 // It is much more recommended to use the Identity packages with EF and not reinventing the wheel.
 
+/*
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Entities;
 
@@ -21,3 +22,4 @@ public static class RoleQueryHelpers
             )";
     }
 }
+*/

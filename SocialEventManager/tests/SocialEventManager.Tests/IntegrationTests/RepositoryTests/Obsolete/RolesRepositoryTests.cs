@@ -3,7 +3,6 @@
 // It is much more recommended to use the Identity packages with EF and not reinventing the wheel.
 
 using System.Data.SqlClient;
-using AutoFixture.Xunit2;
 using FluentAssertions;
 using Moq;
 using SocialEventManager.DAL.Repositories.Roles;
@@ -127,7 +126,6 @@ public class RolesRepositoryTests : RepositoryTestBase<IRolesRepository, Role>
         Func<Task> func = async () => await Repository.GetByUserIdAsync(Guid.NewGuid());
         await func.Should().ThrowAsync<SqlException>().WithMessage(ExceptionConstants.InvalidObjectName(tableName));
     }
-    */
 
     [Theory]
     [AutoData]
@@ -144,6 +142,7 @@ public class RolesRepositoryTests : RepositoryTestBase<IRolesRepository, Role>
         await MockRepository.Object.GetByUserIdAsync(userId);
         MockRepository.Verify(r => r.GetByUserIdAsync(userId), Times.Once);
     }
+    */
 
     [Theory]
     [MemberData(nameof(RoleData.RoleWithValidLength), MemberType = typeof(RoleData))]
