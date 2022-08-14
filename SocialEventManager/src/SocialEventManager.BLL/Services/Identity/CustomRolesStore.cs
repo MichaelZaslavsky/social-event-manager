@@ -1,10 +1,10 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
-using SocialEventManager.BLL.Models.Identity;
-using SocialEventManager.BLL.Models.Roles;
 using SocialEventManager.BLL.Services.Roles;
 using SocialEventManager.DAL.Infrastructure;
 using SocialEventManager.Shared.Constants.Validations;
+using SocialEventManager.Shared.Models.Identity;
+using SocialEventManager.Shared.Models.Roles;
 
 namespace SocialEventManager.BLL.Services.Identity;
 

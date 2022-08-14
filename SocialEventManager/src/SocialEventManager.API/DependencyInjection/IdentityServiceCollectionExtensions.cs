@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
-using SocialEventManager.BLL.Models.Identity;
+using SocialEventManager.Shared.Models.Identity;
 using SocialEventManager.BLL.Services.Identity;
 
 namespace SocialEventManager.API.DependencyInjection;

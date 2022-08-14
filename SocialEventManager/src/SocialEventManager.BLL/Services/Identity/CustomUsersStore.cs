@@ -1,9 +1,9 @@
 using System.Security.Claims;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
-using SocialEventManager.BLL.Models.Accounts;
-using SocialEventManager.BLL.Models.Identity;
-using SocialEventManager.BLL.Models.Users;
+using SocialEventManager.Shared.Models.Accounts;
+using SocialEventManager.Shared.Models.Identity;
+using SocialEventManager.Shared.Models.Users;
 using SocialEventManager.BLL.Services.Accounts;
 using SocialEventManager.BLL.Services.Users;
 using SocialEventManager.DAL.Infrastructure;

@@ -1,7 +1,7 @@
 using AutoMapper;
-using SocialEventManager.BLL.Models.Identity;
-using SocialEventManager.BLL.Models.Roles;
-using SocialEventManager.DAL.Entities;
+using SocialEventManager.Shared.Models.Identity;
+using SocialEventManager.Shared.Models.Roles;
+using SocialEventManager.Shared.Entities;
 
 namespace SocialEventManager.BLL.MappingProfiles;
 

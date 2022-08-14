@@ -1,6 +1,6 @@
 using Dapper.Contrib.Extensions;
 using FluentAssertions;
-using SocialEventManager.DAL.Entities;
+using SocialEventManager.Shared.Entities;
 using SocialEventManager.DAL.Infrastructure;
 using SocialEventManager.Shared.Constants;
 using Xunit;

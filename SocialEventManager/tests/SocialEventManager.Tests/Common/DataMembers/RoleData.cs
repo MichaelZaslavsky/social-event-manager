@@ -1,6 +1,6 @@
 using System.Globalization;
-using SocialEventManager.DAL.Entities;
-using SocialEventManager.DAL.Enums;
+using SocialEventManager.Shared.Entities;
+using SocialEventManager.Shared.Enums;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Shared.Helpers;

@@ -1,4 +1,4 @@
-using SocialEventManager.BLL.Models.Roles;
+using SocialEventManager.Shared.Models.Roles;
 
 namespace SocialEventManager.BLL.Services.Roles;
 

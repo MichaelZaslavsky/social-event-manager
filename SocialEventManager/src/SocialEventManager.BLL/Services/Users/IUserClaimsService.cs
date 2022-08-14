@@ -1,4 +1,4 @@
-using SocialEventManager.BLL.Models.Users;
+using SocialEventManager.Shared.Models.Users;
 
 namespace SocialEventManager.BLL.Services.Users;
 

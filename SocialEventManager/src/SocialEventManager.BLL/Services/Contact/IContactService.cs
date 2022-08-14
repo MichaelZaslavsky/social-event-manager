@@ -1,4 +1,4 @@
-using SocialEventManager.BLL.Models.Contact;
+using SocialEventManager.Shared.Models.Contact;
 
 namespace SocialEventManager.BLL.Services.Contact;
 

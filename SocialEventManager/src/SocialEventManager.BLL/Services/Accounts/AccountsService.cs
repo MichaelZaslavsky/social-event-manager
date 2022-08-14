@@ -1,13 +1,13 @@
 using AutoMapper;
-using SocialEventManager.BLL.Models.Accounts;
-using SocialEventManager.BLL.Models.Users;
 using SocialEventManager.BLL.Services.Infrastructure;
 using SocialEventManager.BLL.Services.Users;
-using SocialEventManager.DAL.Entities;
 using SocialEventManager.DAL.Repositories.Accounts;
 using SocialEventManager.Shared.Constants.Validations;
+using SocialEventManager.Shared.Entities;
 using SocialEventManager.Shared.Exceptions;
 using SocialEventManager.Shared.Extensions;
+using SocialEventManager.Shared.Models.Accounts;
+using SocialEventManager.Shared.Models.Users;
 
 namespace SocialEventManager.BLL.Services.Accounts;
 

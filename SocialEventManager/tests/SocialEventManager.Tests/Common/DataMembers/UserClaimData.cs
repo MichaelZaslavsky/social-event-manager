@@ -1,5 +1,5 @@
 using System.Security.Claims;
-using SocialEventManager.DAL.Entities;
+using SocialEventManager.Shared.Entities;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Helpers;
 using SocialEventManager.Tests.Common.Constants;

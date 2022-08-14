@@ -1,4 +1,4 @@
-using SocialEventManager.DAL.Entities;
+using SocialEventManager.Shared.Entities;
 using SocialEventManager.DAL.Repositories.Roles;
 using SocialEventManager.Tests.Common.DataMembers.Storages;
 using SocialEventManager.Tests.IntegrationTests.Fixtures.Stubs;

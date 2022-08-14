@@ -2,7 +2,7 @@ using Microsoft.Extensions.Options;
 using MimeKit;
 using MimeKit.Text;
 using SocialEventManager.Shared.Configurations;
-using SocialEventManager.Shared.Models;
+using SocialEventManager.Shared.Models.Email;
 
 namespace SocialEventManager.Infrastructure.Email;
 

@@ -1,7 +1,7 @@
 using AutoMapper;
-using SocialEventManager.BLL.Models.Contact;
 using SocialEventManager.Shared.Constants;
-using SocialEventManager.Shared.Models;
+using SocialEventManager.Shared.Models.Contact;
+using SocialEventManager.Shared.Models.Email;
 
 namespace SocialEventManager.BLL.MappingProfiles;
 
