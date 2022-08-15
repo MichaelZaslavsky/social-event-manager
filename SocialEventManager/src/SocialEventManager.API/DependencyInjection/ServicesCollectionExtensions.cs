@@ -2,6 +2,7 @@ using AspNetCoreRateLimit;
 using MailKit.Net.Smtp;
 using SocialEventManager.BLL.Services.DependencyInjection;
 using SocialEventManager.DAL.Infrastructure;
+using SocialEventManager.Infrastructure.Auth;
 using SocialEventManager.Infrastructure.Email;
 using SocialEventManager.Infrastructure.Loggers;
 
@@ -14,6 +15,7 @@ public static class ServicesCollectionExtensions
         services.RegisterServices()
             .AddTransient<IUnitOfWork, UnitOfWork>()
             .AddScoped<IEmailProvider, EmailSmtpProvider>()
+            .AddScoped<IJwtHandler, JwtHandler>()
             .AddScoped<ISmtpClient, SmtpClient>()
             .AddSingleton<IScopeInformation, ScopeInformation>()
             .AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();

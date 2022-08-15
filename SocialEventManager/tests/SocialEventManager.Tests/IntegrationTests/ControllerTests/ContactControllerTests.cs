@@ -3,6 +3,7 @@ using FluentAssertions;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using netDumbster.smtp;
+using SocialEventManager.Infrastructure.Auth;
 using SocialEventManager.Infrastructure.Email;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Enums;
@@ -22,8 +23,8 @@ namespace SocialEventManager.Tests.IntegrationTests.ControllerTests;
 [Category(CategoryConstants.Contacts)]
 public class ContactControllerTests : IntegrationTest
 {
-    public ContactControllerTests(ApiWebApplicationFactory fixture)
-      : base(fixture)
+    public ContactControllerTests(ApiWebApplicationFactory fixture, IJwtHandler jwtHandler)
+      : base(fixture, jwtHandler)
     {
     }
 

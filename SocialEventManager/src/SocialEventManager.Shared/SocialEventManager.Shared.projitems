@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Configurations\EmailConfiguration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configurations\JwtConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\ApiConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\ApiPathConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\AuthConstants.cs" />

@@ -5,6 +5,7 @@ namespace SocialEventManager.Tests.Common.Constants;
 
 internal static class TestConstants
 {
+    public const string TestingEnvironmentName = "Development";
     public const string DatabaseDependent = "Database dependent";
     public const string StorageDependent = "Storage dependent";
     public const string SomeText = "Some Text";

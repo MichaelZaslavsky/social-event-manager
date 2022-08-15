@@ -114,19 +114,20 @@ My Events:
 3.  Create `.env` file in the same folder where `docker-compose.yml` file is and add the following keys:
 
     ```yml
-	Email__Host=smtp.gmail.com,
-	Email__UserName=<SomeEmail>,
-	Email__Password=<AppPassword>,
-    SA_PASSWORD=<SomePassword1>
-    DB_USER=<SomeDBUser>
-    DB_PASSWORD=<SomePassord2>
-    ConnectionStrings__SocialEventManager=Server=sql-server-database;Database=SocialEventManager;User Id=db_admin;Password=${DB_ADMIN_PASSWORD}
+	BasicAuthentication__UserName=<SomeSwaggerUserName>
+    BasicAuthentication__Password=<SomePassword5>
+	ConnectionStrings__SocialEventManager=Server=sql-server-database;Database=SocialEventManager;User Id=db_admin;Password=${DB_ADMIN_PASSWORD}
     ConnectionStrings__SocialEventManagerHangfire=Server=sql-server-database;Database=SocialEventManagerHangfire;User Id=db_admin;Password=${DB_ADMIN_PASSWORD}
     ConnectionStrings__SocialEventManagerTest=Server=sql-server-database;Database=SocialEventManagerTest;User Id=sa;Password=${SA_PASSWORD}
+	DB_USER=<SomeDBUser>
+    DB_PASSWORD=<SomePassord2>
+	Email__Host=smtp.gmail.com
+	Email__Password=<AppPassword>
+	Email__UserName=<SomeEmail>
+	Jwt__Key=<JwtSecretKey>
     REDIS_MASTER_PASSWORD=<SomePassword3>
     REDIS_REPLICA_PASSWORD=<SomePassword4>
-    BasicAuthentication__UserName=<SomeSwaggerUserName>,
-    BasicAuthentication__Password=<SomePassword5>
+	SA_PASSWORD=<SomePassword1>
     ```
 
 4.  Make sure Docker is installed in your computer and is running

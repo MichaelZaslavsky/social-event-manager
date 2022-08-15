@@ -3,9 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Moq;
 using SocialEventManager.API.DependencyInjection;
-using SocialEventManager.BLL.Services.DependencyInjection;
 using SocialEventManager.DAL.Infrastructure;
 using SocialEventManager.Shared.Constants;
+using SocialEventManager.Tests.Common.Constants;
 using SocialEventManager.Tests.IntegrationTests.Infrastructure;
 using Xunit.DependencyInjection;
 using Xunit.DependencyInjection.Logging;
@@ -18,7 +18,12 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
+        const string environmentName = TestConstants.TestingEnvironmentName;
+
         Configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile(ApiConstants.AppSettingsJson, optional: false, reloadOnChange: true)
+            .AddJsonFile($"{ApiConstants.AppSettings}.{environmentName}.json", optional: true)
             .AddEnvironmentVariables()
             .AddUserSecrets<Program>()
             .Build();
@@ -28,7 +33,7 @@ public class Startup
             .AddSingleton<IInMemoryDatabase, InMemoryDatabase>(_ =>
                 new InMemoryDatabase(Configuration.GetConnectionString(DbConstants.SocialEventManagerTest)))
             .AddSingleton(Configuration)
-            .RegisterServices()
+            .RegisterDependencies()
             .AddRedisClients(Configuration);
 
         services.AddSingleton(sp =>
