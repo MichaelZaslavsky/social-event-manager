@@ -112,10 +112,13 @@ public static class SwaggerServiceCollectionExtensions
 
     private static void AddSecurity(this SwaggerGenOptions options)
     {
-        options.AddSecurityDefinition(AuthConstants.BasicAuth, new OpenApiSecurityScheme
+        options.AddSecurityDefinition(AuthConstants.Bearer, new()
         {
             Type = SecuritySchemeType.Http,
             Scheme = AuthConstants.Scheme,
+            BearerFormat = AuthConstants.Jwt,
+            In = ParameterLocation.Header,
+            Name = AuthConstants.Authorization,
             Description = AuthConstants.SwaggerAuthenticationDescription,
         });
 
@@ -126,11 +129,11 @@ public static class SwaggerServiceCollectionExtensions
                 {
                     Reference = new()
                     {
+                        Id = AuthConstants.Bearer,
                         Type = ReferenceType.SecurityScheme,
-                        Id = AuthConstants.BasicAuth,
                     },
                 },
-                new List<string>()
+                Array.Empty<string>()
             },
         });
     }
