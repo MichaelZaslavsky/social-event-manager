@@ -2,6 +2,7 @@
 // It was just for learning purposes.
 // It is much more recommended to use the Identity packages with EF and not reinventing the wheel.
 
+/*
 using System.ComponentModel.DataAnnotations;
 
 namespace SocialEventManager.Shared.Models.Users;
@@ -24,3 +25,4 @@ public record LoginModel
     [DataType(DataType.Password)]
     public string Password { get; init; } = null!;
 }
+*/
