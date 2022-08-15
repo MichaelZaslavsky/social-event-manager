@@ -1,5 +1,6 @@
 using System.Net;
 using FluentAssertions;
+using SocialEventManager.Infrastructure.Auth;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Tests.IntegrationTests.Fixtures;
 using Xunit;
@@ -11,8 +12,8 @@ namespace SocialEventManager.Tests.IntegrationTests.ControllerTests;
 [Category(CategoryConstants.HealthChecks)]
 public class HealthCheckTests : IntegrationTest
 {
-    public HealthCheckTests(ApiWebApplicationFactory fixture)
-      : base(fixture)
+    public HealthCheckTests(ApiWebApplicationFactory fixture, IJwtHandler jwtHandler)
+      : base(fixture, jwtHandler)
     {
     }
 

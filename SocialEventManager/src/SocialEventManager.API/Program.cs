@@ -1,6 +1,5 @@
 using AspNetCoreRateLimit;
 using Hangfire;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Mvc.Formatters;
@@ -8,7 +7,6 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.SignalR;
 using Serilog;
 using Serilog.Enrichers.AspnetcoreHttpcontext;
-using SocialEventManager.API.Authentication;
 using SocialEventManager.API.Configurations;
 using SocialEventManager.API.DependencyInjection;
 using SocialEventManager.API.HealthChecks;
@@ -97,10 +95,8 @@ static void ConfigureServices(IServiceCollection services, IConfiguration config
                 .AllowAnyMethod();
         }))
         .AddVersionedApiExplorer(options => options.GroupNameFormat = "'v'VV")
-        .AddAuthentication(AuthConstants.AuthenticationScheme)
-        .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>(AuthConstants.AuthenticationScheme, null);
-
-    services.AddSupportedApiVersioning()
+        .ConfigureAuthentication(config)
+        .AddSupportedApiVersioning()
         .AddSwagger()
         .AddOptions()
         .AddMemoryCache()

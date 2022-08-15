@@ -1,6 +1,7 @@
 using System.Reflection;
-using System.Text;
+using SocialEventManager.Infrastructure.Auth;
 using SocialEventManager.Shared.Constants;
+using SocialEventManager.Tests.Common.Constants;
 using SocialEventManager.Tests.Common.DataMembers.Storages;
 using Xunit;
 
@@ -8,20 +9,28 @@ namespace SocialEventManager.Tests.IntegrationTests.Fixtures;
 
 public class IntegrationTest : IClassFixture<ApiWebApplicationFactory>
 {
-    public IntegrationTest(ApiWebApplicationFactory fixture)
+    protected const string Email = TestConstants.ValidEmail;
+
+    private readonly IJwtHandler _jwtHandler;
+
+    public IntegrationTest(ApiWebApplicationFactory fixture, IJwtHandler jwtHandler)
     {
+        _jwtHandler = jwtHandler;
         Factory = fixture;
         Client = Factory.CreateClient();
 
-        byte[] byteArray = Encoding.ASCII.GetBytes("TempUser:TempPassword");
-        Client.DefaultRequestHeaders.Authorization = new(AuthConstants.Scheme, Convert.ToBase64String(byteArray));
-
         InitStorages();
+        SetAuthorization(Email);
     }
 
     protected ApiWebApplicationFactory Factory { get; }
 
     protected HttpClient Client { get; }
+
+    protected void SetAuthorization(string email)
+    {
+        Client.DefaultRequestHeaders.Authorization = new(AuthConstants.Bearer, _jwtHandler.GenerateToken(email));
+    }
 
     private static void InitStorages()
     {
