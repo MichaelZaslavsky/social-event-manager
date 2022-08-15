@@ -1,8 +1,6 @@
 using System.Text;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using SocialEventManager.API.Authentication;
 using SocialEventManager.Shared.Configurations;
 using SocialEventManager.Shared.Constants;
 
@@ -30,7 +28,7 @@ public static class AuthenticationServiceCollectionExtensions
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfiguration.Key)),
                 ClockSkew = TimeSpan.Zero,
             };
-        }).AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>(AuthConstants.AuthenticationScheme, null);
+        });
 
         return services;
     }

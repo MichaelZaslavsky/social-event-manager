@@ -114,8 +114,6 @@ My Events:
 3.  Create `.env` file in the same folder where `docker-compose.yml` file is and add the following keys:
 
     ```yml
-	BasicAuthentication__UserName=<SomeSwaggerUserName>
-    BasicAuthentication__Password=<SomePassword5>
 	ConnectionStrings__SocialEventManager=Server=sql-server-database;Database=SocialEventManager;User Id=db_admin;Password=${DB_ADMIN_PASSWORD}
     ConnectionStrings__SocialEventManagerHangfire=Server=sql-server-database;Database=SocialEventManagerHangfire;User Id=db_admin;Password=${DB_ADMIN_PASSWORD}
     ConnectionStrings__SocialEventManagerTest=Server=sql-server-database;Database=SocialEventManagerTest;User Id=sa;Password=${SA_PASSWORD}

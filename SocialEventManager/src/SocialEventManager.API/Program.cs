@@ -87,7 +87,7 @@ static void ConfigureServices(IServiceCollection services, IConfiguration config
         });
 
     services.AddCors(options => options.AddPolicy(
-        name: ApiConstants.AllowOrigin,
+        ApiConstants.AllowOrigin,
         builder =>
         {
             builder.WithOrigins("https://localhost:44351", "http://localhost:4200")
@@ -95,9 +95,9 @@ static void ConfigureServices(IServiceCollection services, IConfiguration config
                 .AllowAnyMethod();
         }))
         .AddVersionedApiExplorer(options => options.GroupNameFormat = "'v'VV")
+        .AddSwagger()
         .ConfigureAuthentication(config)
         .AddSupportedApiVersioning()
-        .AddSwagger()
         .AddOptions()
         .AddMemoryCache()
         .AddRateLimiting(config)
