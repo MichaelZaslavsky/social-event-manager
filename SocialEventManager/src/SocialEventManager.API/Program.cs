@@ -2,6 +2,7 @@ using AspNetCoreRateLimit;
 using Hangfire;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.SignalR;
@@ -78,6 +79,7 @@ static void ConfigureServices(IServiceCollection services, IConfiguration config
     services.Configure(config)
         .AddControllers(options =>
         {
+            options.Filters.Add(new AuthorizeFilter());
             options.Filters.Add(typeof(TrackActionPerformanceFilter));
             options.ConfigureGlobalResponseTypeAttributes();
             options.ReturnHttpNotAcceptable = true;
