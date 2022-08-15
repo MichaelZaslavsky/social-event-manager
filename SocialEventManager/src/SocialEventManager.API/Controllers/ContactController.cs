@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SocialEventManager.BLL.Services.Contact;
 using SocialEventManager.Shared.Constants;
@@ -12,6 +13,7 @@ namespace SocialEventManager.API.Controllers;
 [Route(ApiPathConstants.ApiController)]
 [ApiVersion("1.0")]
 [Consumes(MediaTypeConstants.ApplicationJson)]
+[AllowAnonymous]
 public class ContactController : ControllerBase
 {
     private readonly IContactService _contactService;
