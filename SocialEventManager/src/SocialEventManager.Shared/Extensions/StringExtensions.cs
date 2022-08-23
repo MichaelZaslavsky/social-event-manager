@@ -1,4 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Text;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace SocialEventManager.Shared.Extensions;
 
@@ -52,6 +54,18 @@ public static class StringExtensions
 
         int endStringLastIndex = source.LastIndexOf(fromEnd, comparisonType);
         return GetSubStringForEndIndex(source, endStringLastIndex);
+    }
+
+    public static string Encode(this string input)
+    {
+        byte[] encodedInput = Encoding.UTF8.GetBytes(input);
+        return WebEncoders.Base64UrlEncode(encodedInput);
+    }
+
+    public static string Decode(this string input)
+    {
+        byte[] decodedInput = WebEncoders.Base64UrlDecode(input);
+        return Encoding.UTF8.GetString(decodedInput);
     }
 
     #region Private methods

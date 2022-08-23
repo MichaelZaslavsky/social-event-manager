@@ -194,7 +194,7 @@ My Events:
 
 ✔️ Email
 
-❌ Authorization / Authentication
+✔️ Authorization / Authentication
 
 ❌ Security checks
 

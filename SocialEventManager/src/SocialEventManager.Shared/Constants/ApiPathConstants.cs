@@ -14,6 +14,7 @@ public static class ApiPathConstants
     public const string LogoutAccounts = Accounts + "/logout";
     public const string Ready = "ready";
     public const string RegisterAccounts = Accounts + "/register";
+    public const string ResetPassword = "reset-password";
     public const string Roles = Api + "roles";
 
     private const string Api = "api/";
