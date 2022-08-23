@@ -98,6 +98,8 @@ static void ConfigureServices(IServiceCollection services, IConfiguration config
         }))
         .AddVersionedApiExplorer(options => options.GroupNameFormat = "'v'VV")
         .AddSwagger()
+        .ConfigureSqlContext(config)
+        .ConfigureIdentity()
         .ConfigureAuthentication(config)
         .AddSupportedApiVersioning()
         .AddOptions()
