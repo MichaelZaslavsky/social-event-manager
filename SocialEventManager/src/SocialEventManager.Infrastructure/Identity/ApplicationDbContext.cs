@@ -40,7 +40,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
     private static void SeedRoles(ModelBuilder builder)
     {
         builder.Entity<IdentityRole<Guid>>().HasData(
-            new IdentityRole<Guid>()
+            new IdentityRole<Guid>
             {
                 Id = Guid.NewGuid(),
                 Name = Shared.Constants.UserRoles.User,

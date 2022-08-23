@@ -39,10 +39,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Enums\BackgroundJobType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\RoleType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\SchemaType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\UserLoginResult.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EqualityComparers\Obsolete\UserClaimEqualityComparer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\EnumerationExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\HttpClientExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\IdentityErrorExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\SignInResultExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TypeExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ArgumentExceptionHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ArgumentNullExceptionHelpers.cs" />
@@ -53,6 +55,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Constants\TableNameConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\Validations\ValidationConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Auth\ApplicationUser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Auth\ForgotPasswordDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Auth\ResetPasswordDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Auth\UserLoginDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Auth\UserRegistrationDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Obsolete\Accounts\AccountBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Obsolete\Accounts\AccountDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Obsolete\Accounts\AccountForCreationDto.cs" />
