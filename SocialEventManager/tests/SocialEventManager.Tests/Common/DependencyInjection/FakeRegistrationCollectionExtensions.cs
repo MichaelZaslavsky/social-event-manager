@@ -1,9 +1,12 @@
 using System.Reflection;
 using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using SocialEventManager.Infrastructure.Email;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
+using SocialEventManager.Shared.Models.Auth;
+using SocialEventManager.Tests.IntegrationTests.Fixtures.Fakes;
 using SocialEventManager.Tests.IntegrationTests.Fixtures.Stubs;
 
 namespace SocialEventManager.Tests.Common.DependencyInjection;
@@ -33,6 +36,8 @@ public static class FakeRegistrationCollectionExtensions
             }
         }
 
+        services.AddTransient<UserManager<ApplicationUser>, FakeUserManager>();
+        services.AddTransient<SignInManager<ApplicationUser>, FakeSignInManager>();
         services.AddScoped<IEmailProvider, StubEmailSmtpProvider>();
         services.AddScoped<ISmtpClient, StubSmtpClient>();
 

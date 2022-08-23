@@ -11,11 +11,9 @@ public class IntegrationTest : IClassFixture<ApiWebApplicationFactory>
 {
     protected const string Email = TestConstants.ValidEmail;
 
-    private readonly IJwtHandler _jwtHandler;
-
     public IntegrationTest(ApiWebApplicationFactory fixture, IJwtHandler jwtHandler)
     {
-        _jwtHandler = jwtHandler;
+        JwtHandler = jwtHandler;
         Factory = fixture;
         Client = Factory.CreateClient();
 
@@ -23,13 +21,15 @@ public class IntegrationTest : IClassFixture<ApiWebApplicationFactory>
         SetAuthorization(Email);
     }
 
+    protected IJwtHandler JwtHandler { get; }
+
     protected ApiWebApplicationFactory Factory { get; }
 
     protected HttpClient Client { get; }
 
     protected void SetAuthorization(string email)
     {
-        Client.DefaultRequestHeaders.Authorization = new(AuthConstants.Bearer, _jwtHandler.GenerateToken(email));
+        Client.DefaultRequestHeaders.Authorization = new(AuthConstants.Bearer, JwtHandler.GenerateToken(email));
     }
 
     private static void InitStorages()

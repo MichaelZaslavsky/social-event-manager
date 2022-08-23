@@ -32,4 +32,19 @@ public class JwtHandler : IJwtHandler
 
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
+
+    public IDictionary<string, string> GetTokenInfo(string token)
+    {
+        Dictionary<string, string> tokenInfo = new();
+
+        JwtSecurityTokenHandler handler = new();
+        JwtSecurityToken jwtSecurityToken = handler.ReadJwtToken(token);
+
+        foreach (Claim claim in jwtSecurityToken.Claims)
+        {
+            tokenInfo.Add(claim.Type, claim.Value);
+        }
+
+        return tokenInfo;
+    }
 }

@@ -1,9 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace SocialEventManager.DAL.Migrations
 {
+    [ExcludeFromCodeCoverage]
     public partial class IdentityMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

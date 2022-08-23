@@ -1,3 +1,4 @@
+using AutoFixture.Xunit2;
 using FluentAssertions;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
@@ -62,5 +63,34 @@ public class StringExtensionsTests
     {
         string actualResult = value.TakeUntilLast(fromEnd, comparisonType);
         actualResult.Should().Be(expectedValue);
+    }
+
+    [Theory]
+    [AutoData]
+    public void Encode_ReturnsEncodedValue_WhenCalled(string input)
+    {
+        string actual = input.Encode();
+        actual.Should().NotBeNullOrWhiteSpace();
+        actual.Should().NotBe(input);
+    }
+
+    [Theory]
+    [InlineData("aW5wdXQyZGI2NmMzMS00OGExLTQwZDYtOTc4Mi1hMjdlNmNjMWY1NDE")]
+    public void Decode_ReturnsDecodedValue_WhenCalled(string input)
+    {
+        string actual = input.Decode();
+        actual.Should().NotBeNullOrWhiteSpace();
+        actual.Should().NotBe(input);
+    }
+
+    [Theory]
+    [AutoData]
+    public void EncodeAndDecode_ReturnsInitialInput_WhenCalled(string input)
+    {
+        string actual = input
+            .Encode()
+            .Decode();
+
+        actual.Should().Be(input);
     }
 }
