@@ -21,11 +21,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)Constants\DbConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\ExceptionConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\GlobalConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants\IdentityConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\LinkConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\MessageConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\MediaTypeConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\PathConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\SchemaConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants\UserRoles.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\Validations\AuthValidationConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\Validations\RoleValidationConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\Validations\UserValidationConstants.cs" />
@@ -50,6 +52,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Constants\LengthConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\TableNameConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\Validations\ValidationConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Auth\ApplicationUser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Obsolete\Accounts\AccountBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Obsolete\Accounts\AccountDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Obsolete\Accounts\AccountForCreationDto.cs" />

@@ -128,9 +128,13 @@ My Events:
 	SA_PASSWORD=<SomePassword1>
     ```
 
-4.  Make sure Docker is installed in your computer and is running
+4. Create Identity tables into the SocialEvenetManager database:
+   - Open Package Manager Console (Tools => NuGet Package Manager => Package Manager Console)
+   - Run "Update-Database"
 
-5.  Set docker-compose as startup project and run it
+5.  Make sure Docker is installed in your computer and is running
+
+6.  Set docker-compose as startup project and run it
     - You may open the Swagger https://localhost:8080/swagger/index.html
     - You may open Serilog http://localhost:5341/#/events
 
