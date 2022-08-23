@@ -52,9 +52,9 @@ public class AccountsController : ControllerBase
     [HttpPost]
     [Route(ApiPathConstants.Action)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> ForgotPassword(ForgotPasswordDto forgotPassword)
+    public async Task<IActionResult> ForgotPassword(ForgotPasswordDto forgotPasswordDto)
     {
-        await _authService.ForgotPasswordAsync(forgotPassword);
+        await _authService.ForgotPasswordAsync(forgotPasswordDto);
         return Ok();
     }
 
@@ -63,9 +63,9 @@ public class AccountsController : ControllerBase
     [Consumes(MediaTypeConstants.ApplicationFormUrlEncoded)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(IEnumerable<string>))]
-    public async Task<IActionResult> ResetPassword([FromForm] ResetPasswordDto resetPassword)
+    public async Task<IActionResult> ResetPassword([FromForm] ResetPasswordDto resetPasswordDto)
     {
-        IdentityResult result = await _authService.ResetPasswordAsync(resetPassword);
+        IdentityResult result = await _authService.ResetPasswordAsync(resetPasswordDto);
 
         return result.Succeeded
             ? Ok()

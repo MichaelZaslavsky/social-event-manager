@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +11,7 @@ namespace SocialEventManager.Infrastructure.Identity;
 
 using SocialEventManager.Shared.Constants;
 
+[ExcludeFromCodeCoverage]
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
@@ -44,7 +47,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
             {
                 Id = Guid.NewGuid(),
                 Name = Shared.Constants.UserRoles.User,
-                NormalizedName = Shared.Constants.UserRoles.User.ToUpper(),
+                NormalizedName = Shared.Constants.UserRoles.User.ToUpper(CultureInfo.InvariantCulture),
             });
     }
 }
