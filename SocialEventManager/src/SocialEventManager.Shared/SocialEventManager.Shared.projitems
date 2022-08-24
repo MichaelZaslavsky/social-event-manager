@@ -29,8 +29,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Constants\SchemaConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\UserRoles.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\Validations\AuthValidationConstants.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Constants\Validations\RoleValidationConstants.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Constants\Validations\UserValidationConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants\Validations\Obsolete\RoleValidationConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants\Validations\Obsolete\UserValidationConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Obsolete\Account.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Obsolete\ClaimBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Obsolete\Role.cs" />
@@ -94,6 +94,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\RandomGeneratorHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Constants\Validations\Obsolete\" />
     <Folder Include="$(MSBuildThisFileDirectory)Entities\Obsolete\" />
     <Folder Include="$(MSBuildThisFileDirectory)EqualityComparers\Obsolete\" />
     <Folder Include="$(MSBuildThisFileDirectory)Models\Email\" />
