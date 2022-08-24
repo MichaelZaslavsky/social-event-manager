@@ -33,7 +33,7 @@ public class AccountsControllerTests : IntegrationTest
 
     [Theory]
     [MemberData(nameof(UserData.ValidUserRegistration), MemberType = typeof(UserData))]
-    public async Task Register_ReturnsOk_WhenUserIsValid(UserRegistrationDto userRegistration)
+    public async Task Register_Should_ReturnOk_When_UserIsValid(UserRegistrationDto userRegistration)
     {
         int initialCount = UserStorage.Instance.Data.Count;
 
@@ -53,7 +53,7 @@ public class AccountsControllerTests : IntegrationTest
     [Theory]
     [MemberData(nameof(UserData.ExistingUserRegistrationData), MemberType = typeof(UserData))]
     [MemberData(nameof(UserData.InvalidUserRegistrationData), MemberType = typeof(UserData))]
-    public async Task Register_ReturnsBadRequest_WhenUserIsInvalid(UserRegistrationDto userRegistration, string expected)
+    public async Task Register_Should_ReturnBadRequest_When_UserIsInvalid(UserRegistrationDto userRegistration, string expected)
     {
         int initialCount = UserStorage.Instance.Data.Count;
 
@@ -66,7 +66,7 @@ public class AccountsControllerTests : IntegrationTest
 
     [Theory]
     [MemberData(nameof(UserData.ValidUserRegistration), MemberType = typeof(UserData))]
-    public async Task Login_ReturnsOk_WhenUserIsValid(UserRegistrationDto userRegistration)
+    public async Task Login_Should_ReturnOk_When_UserIsValid(UserRegistrationDto userRegistration)
     {
         int initialCount = UserStorage.Instance.Data.Count;
 
@@ -86,7 +86,7 @@ public class AccountsControllerTests : IntegrationTest
 
     [Theory]
     [MemberData(nameof(UserData.NonExistingUserLoginData), MemberType = typeof(UserData))]
-    public async Task Login_ReturnsUnauthorized_WhenUserDoesNotExist(UserLoginDto userLogin, string expected)
+    public async Task Login_Should_ReturnUnauthorized_When_UserDoesNotExist(UserLoginDto userLogin, string expected)
     {
         int initialCount = UserStorage.Instance.Data.Count;
 
@@ -100,7 +100,7 @@ public class AccountsControllerTests : IntegrationTest
 
     [Theory]
     [MemberData(nameof(UserData.ValidUserRegistration), MemberType = typeof(UserData))]
-    public async Task Login_ReturnsUnauthorized_WhenPasswordIsIncorrect(UserRegistrationDto userRegistration)
+    public async Task Login_Should_ReturnUnauthorized_When_PasswordIsIncorrect(UserRegistrationDto userRegistration)
     {
         int initialCount = UserStorage.Instance.Data.Count;
 
@@ -117,7 +117,7 @@ public class AccountsControllerTests : IntegrationTest
 
     [Theory]
     [MemberData(nameof(UserData.ValidUserLogin), MemberType = typeof(UserData))]
-    public async Task Login_ReturnsUnauthorized_WhenUserIsLocked(UserLoginDto userLogin)
+    public async Task Login_Should_ReturnUnauthorized_When_UserIsLocked(UserLoginDto userLogin)
     {
         int initialCount = UserStorage.Instance.Data.Count;
         UserStorage.Instance.Data.Single(u => u.Email == userLogin.Email).LockoutEnd = DateTime.UtcNow.AddMinutes(30);
@@ -132,7 +132,7 @@ public class AccountsControllerTests : IntegrationTest
 
     [Theory]
     [MemberData(nameof(UserData.ExistingForgotPasswordUser), MemberType = typeof(UserData))]
-    public async Task ForgotPassword_ReturnsOk_WhenUserExists(ForgotPasswordDto forgotPassword)
+    public async Task ForgotPassword_Should_ReturnOk_When_UserExists(ForgotPasswordDto forgotPassword)
     {
         SimpleSmtpServer smtp = SimpleSmtpServer.Start(EmailData.FakePort);
 
@@ -155,14 +155,14 @@ public class AccountsControllerTests : IntegrationTest
 
     [Theory]
     [MemberData(nameof(UserData.NonExistingForgotPasswordUser), MemberType = typeof(UserData))]
-    public async Task ForgotPassword_ReturnsOk_WhenUserDoesNotExists(ForgotPasswordDto forgotPassword)
+    public async Task ForgotPassword_Should_ReturnOk_When_UserDoesNotExists(ForgotPasswordDto forgotPassword)
     {
         await Client.CreateAsync(TestApiPathConstants.AccountsForgotPassword, forgotPassword);
     }
 
     [Theory]
     [MemberData(nameof(UserData.ExistingResetPasswordUser), MemberType = typeof(UserData))]
-    public async Task ResetPassword_ReturnsOk_WhenUserExists(ResetPasswordDto resetPassword)
+    public async Task ResetPassword_Should_ReturnOk_When_UserExists(ResetPasswordDto resetPassword)
     {
         string expectedPasswordHash = UserStorage.Instance.Data.Single(u => u.Email == resetPassword.Email).PasswordHash;
         FormUrlEncodedContent formContent = ConvertToFormEncodedContent(resetPassword);
@@ -179,7 +179,7 @@ public class AccountsControllerTests : IntegrationTest
     [Theory]
     [MemberData(nameof(UserData.NonExistingResetPasswordUserData), MemberType = typeof(UserData))]
     [MemberData(nameof(UserData.InvalidTokenResetPasswordData), MemberType = typeof(UserData))]
-    public async Task ResetPassword_ReturnsBadRequest_WhenResetPasswordDataIsInvalid(ResetPasswordDto resetPassword, string expected)
+    public async Task ResetPassword_Should_ReturnBadRequest_When_ResetPasswordDataIsInvalid(ResetPasswordDto resetPassword, string expected)
     {
         FormUrlEncodedContent formContent = ConvertToFormEncodedContent(resetPassword);
 
