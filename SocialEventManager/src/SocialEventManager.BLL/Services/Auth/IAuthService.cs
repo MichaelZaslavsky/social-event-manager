@@ -8,6 +8,8 @@ public interface IAuthService
 {
     Task<IdentityResult> RegisterUserAsync(UserRegistrationDto userRegistration);
 
+    Task<IdentityResult> ConfirmEmailAsync(ConfirmEmailDto confirmEmail);
+
     Task<(UserLoginResult Result, string? Token)> LoginAsync(UserLoginDto userLogin);
 
     Task ForgotPasswordAsync(ForgotPasswordDto forgotPassword);

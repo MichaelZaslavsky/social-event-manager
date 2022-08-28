@@ -67,6 +67,27 @@ public class FakeUserManager : UserManager<ApplicationUser>
     public override Task<ApplicationUser> FindByEmailAsync(string email) =>
         Task.FromResult(UserStorage.Instance.Data.SingleOrDefault(u => u.Email == email))!;
 
+    public override Task<string> GenerateEmailConfirmationTokenAsync(ApplicationUser user) => Task.FromResult(TestConstants.ValidToken);
+
+    public override Task<IdentityResult> ConfirmEmailAsync(ApplicationUser user, string token)
+    {
+        if (token != TestConstants.ValidToken)
+        {
+            return Task.FromResult(IdentityResult.Failed(new IdentityErrorDescriber().InvalidToken()));
+        }
+
+        ApplicationUser? applicationUser = UserStorage.Instance.Data.SingleOrDefault(u => u.Email == user.Email);
+
+        if (applicationUser is null)
+        {
+            return Task.FromResult(IdentityResult.Failed(new IdentityErrorDescriber().InvalidEmail(user.Email)));
+        }
+
+        applicationUser.EmailConfirmed = true;
+
+        return Task.FromResult(IdentityResult.Success);
+    }
+
     public override Task<string> GeneratePasswordResetTokenAsync(ApplicationUser user) => Task.FromResult(TestConstants.ValidToken);
 
     public override Task<IdentityResult> ResetPasswordAsync(ApplicationUser user, string token, string newPassword)

@@ -41,6 +41,24 @@ internal static class UserData
             },
         };
 
+    public static TheoryData<ConfirmEmailDto> ValidConfirmEmail =>
+        new()
+        {
+            { GetConfirmEmail() },
+        };
+
+    public static TheoryData<ConfirmEmailDto, string> NonExistingConfirmEmailUserData =>
+        new()
+        {
+            { GetConfirmEmail(email: TestConstants.OtherValidEmail), AuthConstants.ConfirmEmailFailed },
+        };
+
+    public static TheoryData<ConfirmEmailDto, string> InvalidConfirmEmailTokenData =>
+        new()
+        {
+            { GetConfirmEmail(token: TestConstants.SomeText), new IdentityErrorDescriber().InvalidToken().Description },
+        };
+
     public static TheoryData<UserLoginDto> ValidUserLogin =>
         new()
         {
@@ -99,6 +117,8 @@ internal static class UserData
         string firstName = TestConstants.SomeText,
         string lastName = TestConstants.MoreText,
         string email = TestConstants.ValidEmail,
+        bool emailConfirmed = true,
+        string? passwordHash = null,
         DateTimeOffset? lockoutEnd = null)
     {
         string normalizedEmail = email.ToUpper(CultureInfo.InvariantCulture);
@@ -112,6 +132,8 @@ internal static class UserData
             NormalizedEmail = normalizedEmail,
             UserName = email,
             NormalizedUserName = normalizedEmail,
+            EmailConfirmed = emailConfirmed,
+            PasswordHash = passwordHash ?? Guid.NewGuid().ToString() + "==",
             LockoutEnd = lockoutEnd,
         };
     }
@@ -139,6 +161,15 @@ internal static class UserData
             Email = email,
             Password = password,
             ConfirmPassword = confirmPassword,
+        };
+    }
+
+    private static ConfirmEmailDto GetConfirmEmail(string email = TestConstants.ValidEmail, string token = TestConstants.ValidToken)
+    {
+        return new()
+        {
+            Email = email,
+            Token = token.Encode(),
         };
     }
 

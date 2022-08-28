@@ -45,9 +45,26 @@ public class AuthService : IAuthService
         if (result.Succeeded)
         {
             await _userManager.AddToRoleAsync(user, UserRoles.User);
+            await SendConfirmEmail(userRegistration);
         }
 
         return result;
+    }
+
+    public async Task<IdentityResult> ConfirmEmailAsync(ConfirmEmailDto confirmEmail)
+    {
+        ApplicationUser? user = await _userManager.FindByEmailAsync(confirmEmail.Email);
+        if (user is null)
+        {
+            return IdentityResult.Failed(new IdentityError
+            {
+                Code = nameof(AuthConstants.ConfirmEmailFailed),
+                Description = AuthConstants.ConfirmEmailFailed,
+            });
+        }
+
+        string token = confirmEmail.Token.Decode();
+        return await _userManager.ConfirmEmailAsync(user, token);
     }
 
     public async Task<(UserLoginResult Result, string? Token)> LoginAsync(UserLoginDto userLogin)
@@ -56,6 +73,11 @@ public class AuthService : IAuthService
         if (user is null)
         {
             return (UserLoginResult.EmailNotFound, null);
+        }
+
+        if (!user.EmailConfirmed)
+        {
+            return (UserLoginResult.EmailNotVerified, null);
         }
 
         SignInResult signInResult = await _signInManager.PasswordSignInAsync(user, userLogin.Password, true, true);
@@ -76,7 +98,7 @@ public class AuthService : IAuthService
             return;
         }
 
-        string url = await GenerateResetPasswordUrl(forgotPassword.Email, user);
+        string url = await GenerateResetPasswordUrl(user);
 
         EmailDto email = new(AuthConstants.ForgotPasswordSubject, AuthConstants.ForgotPasswordBody(user.FirstName, url), new[] { forgotPassword.Email });
         BackgroundJob.Enqueue(() => _emailService.SendEmailAsync(email));
@@ -98,13 +120,34 @@ public class AuthService : IAuthService
         return await _userManager.ResetPasswordAsync(user, token, resetPassword.NewPassword);
     }
 
-    private async Task<string> GenerateResetPasswordUrl(string email, ApplicationUser user)
+    private async Task SendConfirmEmail(UserRegistrationDto userRegistration)
     {
-        string validToken = await GenerateEncodedToken(user);
-        return $"{_config[ConfigurationConstants.AppUrl]}/{ApiPathConstants.ResetPassword}?email={email}&token={validToken}";
+        ApplicationUser user = await _userManager.FindByEmailAsync(userRegistration.Email);
+        string url = await GenerateConfirmEmailUrl(user);
+
+        EmailDto email = new(AuthConstants.VerifyEmailSubject, AuthConstants.VerifyEmailBody(user.FirstName, url), new[] { userRegistration.Email });
+        BackgroundJob.Enqueue(() => _emailService.SendEmailAsync(email));
     }
 
-    private async Task<string> GenerateEncodedToken(ApplicationUser user)
+    private async Task<string> GenerateConfirmEmailUrl(ApplicationUser user)
+    {
+        string validToken = await GenerateEncodedEmailConfirmationToken(user);
+        return $"{_config[ConfigurationConstants.AppUrl]}/{ApiPathConstants.ConfirmEmail}?email={user.Email}&token={validToken}";
+    }
+
+    private async Task<string> GenerateEncodedEmailConfirmationToken(ApplicationUser user)
+    {
+        string token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+        return token.Encode();
+    }
+
+    private async Task<string> GenerateResetPasswordUrl(ApplicationUser user)
+    {
+        string validToken = await GenerateEncodedPasswordResetToken(user);
+        return $"{_config[ConfigurationConstants.AppUrl]}/{ApiPathConstants.ResetPassword}?email={user.Email}&token={validToken}";
+    }
+
+    private async Task<string> GenerateEncodedPasswordResetToken(ApplicationUser user)
     {
         string token = await _userManager.GeneratePasswordResetTokenAsync(user);
         return token.Encode();

@@ -55,6 +55,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Constants\TableNameConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\Validations\ValidationConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Auth\ApplicationUser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Auth\ConfirmEmailDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Auth\ForgotPasswordDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Auth\ResetPasswordDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Auth\UserLoginDto.cs" />

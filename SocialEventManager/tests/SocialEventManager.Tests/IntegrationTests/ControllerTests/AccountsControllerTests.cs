@@ -35,9 +35,11 @@ public class AccountsControllerTests : IntegrationTest
     [MemberData(nameof(UserData.ValidUserRegistration), MemberType = typeof(UserData))]
     public async Task Register_Should_ReturnOk_When_UserIsValid(UserRegistrationDto userRegistration)
     {
+        SimpleSmtpServer smtp = SimpleSmtpServer.Start(EmailData.FakePort);
         int initialCount = UserStorage.Instance.Data.Count;
 
         await Client.CreateAsync(TestApiPathConstants.AccountsRegister, userRegistration);
+        await BackgroundJobHelpers.WaitForCompletion(BackgroundJobType.Email);
 
         UserStorage.Instance.Data.Should().HaveCount(initialCount + 1);
 
@@ -48,6 +50,9 @@ public class AccountsControllerTests : IntegrationTest
         IdentityUserRole<Guid> actualUserRole = UserRoleStorage.Instance.Data.Single(ur => ur.UserId == actual.Id);
         IdentityRole<Guid> actualRole = RoleStorage.Instance.Data.Single(r => r.Id == actualUserRole.RoleId);
         AssertRole(UserRoles.User, actualRole);
+        AssertSmtpEmail(userRegistration, smtp);
+
+        smtp.Stop();
     }
 
     [Theory]
@@ -65,23 +70,79 @@ public class AccountsControllerTests : IntegrationTest
     }
 
     [Theory]
+    [MemberData(nameof(UserData.ValidConfirmEmail), MemberType = typeof(UserData))]
+    public async Task ConfirmEmail_ReturnOk_When_DataIsValid(ConfirmEmailDto confirmEmail)
+    {
+        FormUrlEncodedContent formContent = ConvertToFormEncodedContent(confirmEmail);
+
+        HttpRequestMessage request = new(HttpMethod.Post, TestApiPathConstants.AccountsConfirmEmail) { Content = formContent };
+        HttpResponseMessage actual = await Client.SendAsync(request);
+        actual.StatusCode.Should().Be(HttpStatusCode.OK);
+
+        bool actualEmailConfirmed = UserStorage.Instance.Data.Single(u => u.Email == confirmEmail.Email).EmailConfirmed;
+        actualEmailConfirmed.Should().BeTrue();
+    }
+
+    [Theory]
+    [MemberData(nameof(UserData.NonExistingConfirmEmailUserData), MemberType = typeof(UserData))]
+    public async Task ConfirmEmail_ReturnBadRequest_When_UserDoesNotExist(ConfirmEmailDto confirmEmail, string expected)
+    {
+        FormUrlEncodedContent formContent = ConvertToFormEncodedContent(confirmEmail);
+
+        HttpRequestMessage request = new(HttpMethod.Post, TestApiPathConstants.AccountsConfirmEmail) { Content = formContent };
+        HttpResponseMessage actual = await Client.SendAsync(request);
+        actual.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+
+        string message = await actual.Content.ReadAsStringAsync();
+        message.Should().Contain(expected);
+
+        bool? actualEmailConfirmed = UserStorage.Instance.Data.SingleOrDefault(u => u.Email == confirmEmail.Email)?.EmailConfirmed;
+        actualEmailConfirmed.Should().BeNull();
+    }
+
+    [Theory]
+    [MemberData(nameof(UserData.InvalidConfirmEmailTokenData), MemberType = typeof(UserData))]
+    public async Task ConfirmEmail_ReturnBadRequest_When_ToeknIsInvalid(ConfirmEmailDto confirmEmail, string expected)
+    {
+        UserStorage.Instance.Data.Single(u => u.Email == confirmEmail.Email).EmailConfirmed = false;
+
+        FormUrlEncodedContent formContent = ConvertToFormEncodedContent(confirmEmail);
+
+        HttpRequestMessage request = new(HttpMethod.Post, TestApiPathConstants.AccountsConfirmEmail) { Content = formContent };
+        HttpResponseMessage actual = await Client.SendAsync(request);
+        actual.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+
+        string message = await actual.Content.ReadAsStringAsync();
+        message.Should().Contain(expected);
+
+        bool actualEmailConfirmed = UserStorage.Instance.Data.Single(u => u.Email == confirmEmail.Email).EmailConfirmed;
+        actualEmailConfirmed.Should().BeFalse();
+    }
+
+    [Theory]
     [MemberData(nameof(UserData.ValidUserRegistration), MemberType = typeof(UserData))]
     public async Task Login_Should_ReturnOk_When_UserIsValid(UserRegistrationDto userRegistration)
     {
+        SimpleSmtpServer smtp = SimpleSmtpServer.Start(EmailData.FakePort);
         int initialCount = UserStorage.Instance.Data.Count;
 
         await Client.CreateAsync(TestApiPathConstants.AccountsRegister, userRegistration);
+        await BackgroundJobHelpers.WaitForCompletion(BackgroundJobType.Email);
+
+        UserStorage.Instance.Data.Last().EmailConfirmed = true;
 
         UserLoginDto userLogin = UserData.GetUserLogin(userRegistration.Email, userRegistration.Password);
         string? actual = await Client.CreateAndDeserializeAsync<UserLoginDto, string?>(TestApiPathConstants.AccountsLogin, userLogin);
-
-        UserStorage.Instance.Data.Should().HaveCount(initialCount + 1);
 
         actual.Should().NotBeNullOrWhiteSpace();
         IDictionary<string, string> tokenInfo = JwtHandler.GetTokenInfo(actual!);
 
         tokenInfo.ContainsKey(JwtRegisteredClaimNames.Email);
         tokenInfo[JwtRegisteredClaimNames.Email].Should().Be(userRegistration.Email);
+
+        UserStorage.Instance.Data.Should().HaveCount(initialCount + 1);
+
+        smtp.Stop();
     }
 
     [Theory]
@@ -91,28 +152,46 @@ public class AccountsControllerTests : IntegrationTest
         int initialCount = UserStorage.Instance.Data.Count;
 
         (HttpStatusCode statusCode, string message) = await Client.CreateAsyncWithError(TestApiPathConstants.AccountsLogin, userLogin);
-
-        UserStorage.Instance.Data.Should().HaveCount(initialCount);
-
         statusCode.Should().Be(HttpStatusCode.Unauthorized);
         message.Should().Contain(expected);
+
+        UserStorage.Instance.Data.Should().HaveCount(initialCount);
     }
 
     [Theory]
     [MemberData(nameof(UserData.ValidUserRegistration), MemberType = typeof(UserData))]
     public async Task Login_Should_ReturnUnauthorized_When_PasswordIsIncorrect(UserRegistrationDto userRegistration)
     {
+        SimpleSmtpServer smtp = SimpleSmtpServer.Start(EmailData.FakePort);
         int initialCount = UserStorage.Instance.Data.Count;
 
         await Client.CreateAsync(TestApiPathConstants.AccountsRegister, userRegistration);
+        await BackgroundJobHelpers.WaitForCompletion(BackgroundJobType.Email);
+
+        UserStorage.Instance.Data.Last().EmailConfirmed = true;
 
         UserLoginDto userLogin = UserData.GetUserLogin(userRegistration.Email, RandomGeneratorHelpers.GenerateRandomValue());
         (HttpStatusCode statusCode, string message) = await Client.CreateAsyncWithError(TestApiPathConstants.AccountsLogin, userLogin);
+        statusCode.Should().Be(HttpStatusCode.Unauthorized);
+        message.Should().Contain(AuthConstants.EmailOrPasswordIsIncorrect);
 
         UserStorage.Instance.Data.Should().HaveCount(initialCount + 1);
 
+        smtp.Stop();
+    }
+
+    [Theory]
+    [MemberData(nameof(UserData.ValidUserLogin), MemberType = typeof(UserData))]
+    public async Task Login_ReturnUnauthorized_When_EmailIsNotVerified(UserLoginDto userLogin)
+    {
+        int initialCount = UserStorage.Instance.Data.Count;
+        UserStorage.Instance.Data.Single(u => u.Email == userLogin.Email).EmailConfirmed = false;
+
+        (HttpStatusCode statusCode, string message) = await Client.CreateAsyncWithError(TestApiPathConstants.AccountsLogin, userLogin);
         statusCode.Should().Be(HttpStatusCode.Unauthorized);
-        message.Should().Contain(AuthConstants.EmailOrPasswordIsIncorrect);
+        message.Should().Contain(AuthConstants.EmailNotVerified);
+
+        UserStorage.Instance.Data.Should().HaveCount(initialCount);
     }
 
     [Theory]
@@ -123,11 +202,10 @@ public class AccountsControllerTests : IntegrationTest
         UserStorage.Instance.Data.Single(u => u.Email == userLogin.Email).LockoutEnd = DateTime.UtcNow.AddMinutes(30);
 
         (HttpStatusCode statusCode, string message) = await Client.CreateAsyncWithError(TestApiPathConstants.AccountsLogin, userLogin);
-
-        UserStorage.Instance.Data.Should().HaveCount(initialCount);
-
         statusCode.Should().Be(HttpStatusCode.Unauthorized);
         message.Should().Contain(AuthConstants.UserIsLocked);
+
+        UserStorage.Instance.Data.Should().HaveCount(initialCount);
     }
 
     [Theory]
@@ -142,7 +220,7 @@ public class AccountsControllerTests : IntegrationTest
         SmtpMessage[] emails = smtp.ReceivedEmail;
         emails.Should().HaveCount(1);
 
-        string expected = $"http://localhost:3000/reset-password?email=valid-email@email-domain.com&token={TestConstants.ValidToken.Encode()}";
+        string expected = $"http://localhost:3000/{ApiPathConstants.ResetPassword}?email=valid-email@email-domain.com&token={TestConstants.ValidToken.Encode()}";
 
         SmtpMessage actual = emails[0];
         actual.Subject.Should().Be(AuthConstants.ForgotPasswordSubject);
@@ -208,6 +286,20 @@ public class AccountsControllerTests : IntegrationTest
         actual.ConcurrencyStamp.Should().NotBeEmpty();
     }
 
+    private static void AssertSmtpEmail(UserRegistrationDto expected, SimpleSmtpServer smtp)
+    {
+        SmtpMessage[] emails = smtp.ReceivedEmail;
+        emails.Should().HaveCount(1);
+
+        string expectedUrl = $"http://localhost:3000/{ApiPathConstants.ConfirmEmail}?email={expected.Email}&token={TestConstants.ValidToken.Encode()}";
+
+        SmtpMessage actual = emails[0];
+        actual.Subject.Should().Be(AuthConstants.VerifyEmailSubject);
+        actual.MessageParts.Select(mp => mp.BodyData).First().Should().Be(AuthConstants.VerifyEmailBody(expected.FirstName, expectedUrl));
+        actual.ToAddresses.Should().HaveCount(1);
+        actual.ToAddresses[0].Address.Should().Be(expected.Email);
+    }
+
     private static FormUrlEncodedContent ConvertToFormEncodedContent(ResetPasswordDto resetPassword)
     {
         return new(new[]
@@ -216,6 +308,15 @@ public class AccountsControllerTests : IntegrationTest
             new KeyValuePair<string, string>(nameof(ResetPasswordDto.Token), resetPassword.Token),
             new KeyValuePair<string, string>(nameof(ResetPasswordDto.NewPassword), resetPassword.NewPassword),
             new KeyValuePair<string, string>(nameof(ResetPasswordDto.ConfirmPassword), resetPassword.ConfirmPassword),
+        });
+    }
+
+    private static FormUrlEncodedContent ConvertToFormEncodedContent(ConfirmEmailDto confirmEmail)
+    {
+        return new(new[]
+        {
+            new KeyValuePair<string, string>(nameof(ConfirmEmailDto.Email), confirmEmail.Email),
+            new KeyValuePair<string, string>(nameof(ConfirmEmailDto.Token), confirmEmail.Token),
         });
     }
 }

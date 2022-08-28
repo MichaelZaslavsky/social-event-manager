@@ -14,6 +14,7 @@ public static class IdentityServiceCollectionExtensions
         {
             opt.Password.RequiredLength = IdentityConstants.MinPasswordLength;
             opt.User.RequireUniqueEmail = true;
+            opt.SignIn.RequireConfirmedEmail = true;
             opt.Lockout.MaxFailedAccessAttempts = IdentityConstants.MaxFailedAccessAttempts;
         }).AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
