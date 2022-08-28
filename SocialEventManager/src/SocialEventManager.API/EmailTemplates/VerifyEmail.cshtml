@@ -1,0 +1,7 @@
+@model SocialEventManager.Shared.Models.Email.VerifyEmail
+@{
+    Layout = "~/EmailTemplates/_Layout.cshtml";
+}
+
+<h1>Hi @Model.FirstName,</h1>
+<p>Thank you for signing up. To login to Social Event Manager verify your email address by <a href='@Model.ConfirmEmailUrl'>clicking here</a>."</p>

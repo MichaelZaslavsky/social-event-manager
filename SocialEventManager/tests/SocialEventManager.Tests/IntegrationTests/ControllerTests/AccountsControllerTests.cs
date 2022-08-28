@@ -220,11 +220,11 @@ public class AccountsControllerTests : IntegrationTest
         SmtpMessage[] emails = smtp.ReceivedEmail;
         emails.Should().HaveCount(1);
 
-        string expected = $"http://localhost:3000/{ApiPathConstants.ResetPassword}?email=valid-email@email-domain.com&token={TestConstants.ValidToken.Encode()}";
+        string expected = $"http://localhost:3000/{ApiPathConstants.ResetPassword}?email={forgotPassword.Email}&amp;token={TestConstants.ValidToken.Encode()}";
 
         SmtpMessage actual = emails[0];
         actual.Subject.Should().Be(AuthConstants.ForgotPasswordSubject);
-        actual.MessageParts.Select(mp => mp.BodyData).First().Should().Be(AuthConstants.ForgotPasswordBody(TestConstants.SomeText, expected));
+        actual.MessageParts.Select(mp => mp.BodyData).First().Should().Contain(expected);
         actual.ToAddresses.Should().HaveCount(1);
         actual.ToAddresses[0].Address.Should().Be(forgotPassword.Email);
 
@@ -291,11 +291,11 @@ public class AccountsControllerTests : IntegrationTest
         SmtpMessage[] emails = smtp.ReceivedEmail;
         emails.Should().HaveCount(1);
 
-        string expectedUrl = $"http://localhost:3000/{ApiPathConstants.ConfirmEmail}?email={expected.Email}&token={TestConstants.ValidToken.Encode()}";
+        string expectedUrl = $"http://localhost:3000/{ApiPathConstants.ConfirmEmail}?email={expected.Email}&amp;token={TestConstants.ValidToken.Encode()}";
 
         SmtpMessage actual = emails[0];
         actual.Subject.Should().Be(AuthConstants.VerifyEmailSubject);
-        actual.MessageParts.Select(mp => mp.BodyData).First().Should().Be(AuthConstants.VerifyEmailBody(expected.FirstName, expectedUrl));
+        actual.MessageParts.Select(mp => mp.BodyData).First().Should().Contain(expectedUrl);
         actual.ToAddresses.Should().HaveCount(1);
         actual.ToAddresses[0].Address.Should().Be(expected.Email);
     }

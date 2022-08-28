@@ -44,4 +44,10 @@
 
 	<Import Project="..\SocialEventManager.Shared\SocialEventManager.Shared.projitems" Label="Shared" />
 
+	<ItemGroup>
+		<None Update="EmailTemplates\*">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
 </Project>

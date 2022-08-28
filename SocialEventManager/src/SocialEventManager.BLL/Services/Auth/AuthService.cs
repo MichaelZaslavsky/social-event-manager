@@ -2,6 +2,7 @@ using AutoMapper;
 using Hangfire;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using SocialEventManager.BLL.Services.Email;
 using SocialEventManager.Infrastructure.Auth;
 using SocialEventManager.Infrastructure.Email;
 using SocialEventManager.Shared.Constants;
@@ -20,6 +21,7 @@ public class AuthService : IAuthService
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly IEmailService _emailService;
+    private readonly IEmailRenderer _renderer;
 
     public AuthService(
         IConfiguration config,
@@ -27,9 +29,11 @@ public class AuthService : IAuthService
         IMapper mapper,
         UserManager<ApplicationUser> userManager,
         SignInManager<ApplicationUser> signInManager,
-        IEmailService emailService)
+        IEmailService emailService,
+        IEmailRenderer renderer)
     {
         _config = config;
+        _renderer = renderer;
         _jwtHandler = jwtHandler;
         _mapper = mapper;
         _userManager = userManager;
@@ -99,8 +103,9 @@ public class AuthService : IAuthService
         }
 
         string url = await GenerateResetPasswordUrl(user);
+        string html = await _renderer.RenderAsync(new ForgotPassword(user.FirstName, url));
 
-        EmailDto email = new(AuthConstants.ForgotPasswordSubject, AuthConstants.ForgotPasswordBody(user.FirstName, url), new[] { forgotPassword.Email });
+        EmailDto email = new(AuthConstants.ForgotPasswordSubject, html, new[] { forgotPassword.Email });
         BackgroundJob.Enqueue(() => _emailService.SendEmailAsync(email));
     }
 
@@ -124,8 +129,9 @@ public class AuthService : IAuthService
     {
         ApplicationUser user = await _userManager.FindByEmailAsync(userRegistration.Email);
         string url = await GenerateConfirmEmailUrl(user);
+        string html = await _renderer.RenderAsync(new VerifyEmail(user.FirstName, url));
 
-        EmailDto email = new(AuthConstants.VerifyEmailSubject, AuthConstants.VerifyEmailBody(user.FirstName, url), new[] { userRegistration.Email });
+        EmailDto email = new(AuthConstants.VerifyEmailSubject, html, new[] { userRegistration.Email });
         BackgroundJob.Enqueue(() => _emailService.SendEmailAsync(email));
     }
 
