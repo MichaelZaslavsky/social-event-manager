@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -27,6 +28,12 @@ public class Startup
             .AddEnvironmentVariables()
             .AddUserSecrets<Program>()
             .Build();
+
+        services.AddRazorPages();
+
+        DiagnosticListener listener = new("Microsoft.AspNetCore");
+        services.AddSingleton(listener)
+            .AddSingleton<DiagnosticSource>(listener);
 
         services.Configure(Configuration)
             .AddLogging(builder => builder.SetMinimumLevel(LogLevel.Debug))

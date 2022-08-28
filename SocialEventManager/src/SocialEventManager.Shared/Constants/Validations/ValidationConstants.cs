@@ -19,6 +19,9 @@ public static class ValidationConstants
 
     public static string FieldMinimumLength(string fieldName, int length) => FieldLength(fieldName, length, false);
 
+    public static string CouldNotFindThisView(string viewPath, string searchedLocations) =>
+        $"Could not find this view: {viewPath}. Searched locations:\n{searchedLocations}";
+
     private static string FieldLength(string fieldName, int length, bool isMaximum)
     {
         string maxOrMin = isMaximum ? "maximum" : "minimum";

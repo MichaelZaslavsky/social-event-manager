@@ -88,6 +88,8 @@ static void ConfigureServices(IServiceCollection services, IConfiguration config
             options.Conventions.Add(new RouteTokenTransformerConvention(new SlugifyParameterTransformer()));
         });
 
+    services.AddRazorPages();
+
     services.AddCors(options => options.AddPolicy(
         ApiConstants.AllowOrigin,
         builder =>

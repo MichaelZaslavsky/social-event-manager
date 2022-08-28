@@ -60,6 +60,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Auth\ResetPasswordDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Auth\UserLoginDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Auth\UserRegistrationDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Email\ForgotPassword.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Email\VerifyEmail.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Obsolete\Accounts\AccountBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Obsolete\Accounts\AccountDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Obsolete\Accounts\AccountForCreationDto.cs" />
@@ -98,7 +100,6 @@
     <Folder Include="$(MSBuildThisFileDirectory)Constants\Validations\Obsolete\" />
     <Folder Include="$(MSBuildThisFileDirectory)Entities\Obsolete\" />
     <Folder Include="$(MSBuildThisFileDirectory)EqualityComparers\Obsolete\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Models\Email\" />
     <Folder Include="$(MSBuildThisFileDirectory)Models\Identity\Obsolete\" />
     <Folder Include="$(MSBuildThisFileDirectory)Models\Obsolete\" />
   </ItemGroup>
