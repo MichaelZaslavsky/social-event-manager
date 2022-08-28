@@ -69,7 +69,6 @@ public class ContactControllerTests : IntegrationTest
             .CreateClient();
 
         await client.CreateAsync(ApiPathConstants.Contact, contact);
-
         await BackgroundJobHelpers.WaitForCompletion(BackgroundJobType.Email);
 
         SmtpMessage[] emails = smtp.ReceivedEmail;
