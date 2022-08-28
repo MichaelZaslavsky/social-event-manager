@@ -13,6 +13,9 @@ public enum UserLoginResult
     [Description(AuthConstants.EmailOrPasswordIsIncorrect)]
     IncorrectPassword = 2,
 
+    [Description(AuthConstants.EmailNotVerified)]
+    EmailNotVerified = 3,
+
     [Description(AuthConstants.UserIsLocked)]
-    Locked = 3,
+    Locked = 4,
 }

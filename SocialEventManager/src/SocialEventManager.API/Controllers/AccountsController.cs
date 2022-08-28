@@ -38,6 +38,20 @@ public class AccountsController : ControllerBase
 
     [HttpPost]
     [Route(ApiPathConstants.Action)]
+    [Consumes(MediaTypeConstants.ApplicationFormUrlEncoded)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(IEnumerable<string>))]
+    public async Task<IActionResult> ConfirmEmail([FromForm] ConfirmEmailDto confirmEmailDto)
+    {
+        IdentityResult result = await _authService.ConfirmEmailAsync(confirmEmailDto);
+
+        return result.Succeeded
+            ? Ok()
+            : BadRequest(BuildErrorDescriptions(result));
+    }
+
+    [HttpPost]
+    [Route(ApiPathConstants.Action)]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
     [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(string))]
     public async Task<IActionResult> Login(UserLoginDto userLogin)
