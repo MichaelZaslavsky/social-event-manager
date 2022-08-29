@@ -123,8 +123,10 @@ My Events:
 	Email__Password=<AppPassword>
 	Email__UserName=<SomeEmail>
 	Jwt__Key=<JwtSecretKey>
-    REDIS_MASTER_PASSWORD=<SomePassword3>
-    REDIS_REPLICA_PASSWORD=<SomePassword4>
+	HangfireSettings__Password=<SomePassword3>
+	HangfireSettings__UserName=<SomeUserName>
+    REDIS_MASTER_PASSWORD=<SomePassword4>
+    REDIS_REPLICA_PASSWORD=<SomePassword5>
 	SA_PASSWORD=<SomePassword1>
     ```
 
