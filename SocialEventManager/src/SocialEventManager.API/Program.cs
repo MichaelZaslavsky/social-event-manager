@@ -122,14 +122,7 @@ static void ConfigureServices(IServiceCollection services, IConfiguration config
 
 static void ConfigureApplication(WebApplication app, IApiVersionDescriptionProvider apiVersionDescriptionProvider)
 {
-    // TODO: Currently, the Hangfire dashboard is opened to all users. Need to implement an authorization scenario.
-    // A helpful link for implementing it:
-    // https://sahansera.dev/securing-hangfire-dashboard-with-endpoint-routing-auth-policy-aspnetcore/
-    app.UseHangfireDashboard(ApiPathConstants.Hangfire, new DashboardOptions
-    {
-        Authorization = new[] { new AllowAllConnectionsFilter() },
-        IgnoreAntiforgeryToken = true,
-    });
+    app.UseHangfireDashboard(app.Configuration);
 
     if (!app.Environment.IsDevelopment())
     {
