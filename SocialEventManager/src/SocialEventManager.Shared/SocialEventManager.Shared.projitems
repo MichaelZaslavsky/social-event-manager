@@ -44,7 +44,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)EqualityComparers\Obsolete\UserClaimEqualityComparer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\EnumerationExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\HttpClientExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Extensions\IdentityErrorExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\Obsolete\IdentityErrorExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\SignInResultExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TypeExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ArgumentExceptionHelpers.cs" />
@@ -101,6 +101,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)Constants\Validations\Obsolete\" />
     <Folder Include="$(MSBuildThisFileDirectory)Entities\Obsolete\" />
     <Folder Include="$(MSBuildThisFileDirectory)EqualityComparers\Obsolete\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Extensions\Obsolete\" />
     <Folder Include="$(MSBuildThisFileDirectory)Models\Identity\Obsolete\" />
     <Folder Include="$(MSBuildThisFileDirectory)Models\Obsolete\" />
   </ItemGroup>
