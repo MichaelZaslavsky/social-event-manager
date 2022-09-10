@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using SocialEventManager.Shared.Constants;
 
 namespace SocialEventManager.Shared.Models.Contact;
 
@@ -12,7 +13,7 @@ public record ContactDto
     }
 
     [Required]
-    [MinLength(2)]
+    [StringLength(LengthConstants.Length255, MinimumLength = LengthConstants.Length2)]
     public string Name { get; init; }
 
     [Required]
@@ -20,6 +21,6 @@ public record ContactDto
     public string Email { get; init; }
 
     [Required]
-    [MinLength(10)]
+    [StringLength(LengthConstants.LengthMax, MinimumLength = LengthConstants.Length2)]
     public string Text { get; init; }
 }

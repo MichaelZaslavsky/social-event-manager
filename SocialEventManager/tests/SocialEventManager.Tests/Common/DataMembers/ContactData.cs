@@ -1,4 +1,6 @@
+using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Constants.Validations;
+using SocialEventManager.Shared.Helpers;
 using SocialEventManager.Shared.Models.Contact;
 using SocialEventManager.Tests.Common.Constants;
 using Xunit;
@@ -20,11 +22,19 @@ internal static class ContactData
         {
             {
                 GetContact(name: "1"),
-                ValidationConstants.LessThanMinimumLength(nameof(ContactDto.Name), 2)
+                ValidationConstants.LengthNotInRange(nameof(ContactDto.Name), LengthConstants.Length2, LengthConstants.Length255)
             },
             {
-                GetContact(text: "123456789"),
-                ValidationConstants.LessThanMinimumLength(nameof(ContactDto.Text), 10)
+                GetContact(name: RandomGeneratorHelpers.GenerateRandomValue(LengthConstants.Length255 + 1)),
+                ValidationConstants.LengthNotInRange(nameof(ContactDto.Name), LengthConstants.Length2, LengthConstants.Length255)
+            },
+            {
+                GetContact(text: "1"),
+                ValidationConstants.LengthNotInRange(nameof(ContactDto.Text), LengthConstants.Length2, LengthConstants.LengthMax)
+            },
+            {
+                GetContact(text: RandomGeneratorHelpers.GenerateRandomValue(LengthConstants.LengthMax + 1)),
+                ValidationConstants.LengthNotInRange(nameof(ContactDto.Text), LengthConstants.Length2, LengthConstants.LengthMax)
             },
             {
                 GetContact(email: TestConstants.SomeText),
