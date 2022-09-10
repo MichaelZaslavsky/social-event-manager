@@ -17,7 +17,7 @@ public class DbMigrations
 
     public async Task Migrate(string environmentName)
     {
-        string location = GetLocation(environmentName);
+        IEnumerable<string> locations = GetLocations(environmentName);
         SqlConnection connection = new(_config.GetConnectionString(DbConstants.SocialEventManager));
         connection.Open();
 
@@ -27,7 +27,7 @@ public class DbMigrations
 
             Evolve.Evolve evolve = new(connection, msg => Log.Information(msg))
             {
-                Locations = new[] { location },
+                Locations = locations,
                 IsEraseDisabled = true,
                 MetadataTableSchema = SchemaConstants.Migration,
                 MetadataTableName = TableNameConstants.Changelog,
@@ -45,14 +45,17 @@ public class DbMigrations
 
     #region Private Methods
 
-    private static string GetLocation(string environmentName)
+    private static IEnumerable<string> GetLocations(string environmentName)
     {
-        string location = PathConstants.Migrations;
+        List<string> locations = new() { PathConstants.Migrations };
 
         // Exclude db/datasets from production and staging environments
-        return environmentName == Environments.Production || environmentName == Environments.Staging
-            ? location
-            : location + ";" + PathConstants.DataSets;
+        if (environmentName == Environments.Development)
+        {
+            locations.Add(PathConstants.DataSets);
+        }
+
+        return locations;
     }
 
     #endregion Private Methods
