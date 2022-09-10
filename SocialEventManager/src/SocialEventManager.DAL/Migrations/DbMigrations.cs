@@ -47,10 +47,12 @@ public class DbMigrations
 
     private static string GetLocation(string environmentName)
     {
+        string location = PathConstants.Migrations;
+
         // Exclude db/datasets from production and staging environments
         return environmentName == Environments.Production || environmentName == Environments.Staging
-            ? PathConstants.Migrations
-            : PathConstants.Db;
+            ? location
+            : location + ";" + PathConstants.DataSets;
     }
 
     #endregion Private Methods
