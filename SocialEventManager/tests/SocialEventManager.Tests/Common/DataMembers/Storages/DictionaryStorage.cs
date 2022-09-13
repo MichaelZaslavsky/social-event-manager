@@ -1,4 +1,5 @@
 namespace SocialEventManager.Tests.Common.DataMembers.Storages;
+
 internal abstract class DictionaryStorage<TStorage, TKey, TValue> : StorageBase<TStorage>
     where TStorage : class
     where TKey : notnull

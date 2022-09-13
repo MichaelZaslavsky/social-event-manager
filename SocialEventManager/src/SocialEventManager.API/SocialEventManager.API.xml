@@ -11,13 +11,13 @@
         </member>
         <member name="M:SocialEventManager.API.Controllers.ContactController.#ctor(SocialEventManager.BLL.Services.Contact.IContactService)">
             <summary>
-            Initializes a new instance of the <see cref="T:SocialEventManager.API.Controllers.ContactController"/> class.
+            Initializes a new instance of the <see cref="T:SocialEventManager.API.Controllers.ContactController" /> class.
             </summary>
             <param name="contactService">Contact us service.</param>
         </member>
         <member name="M:SocialEventManager.API.Controllers.ContactController.Post(SocialEventManager.Shared.Models.Contact.ContactDto)">
             <summary>
-            Sends an email to <see cref="F:SocialEventManager.Shared.Constants.ContactConstants.Email"/>.
+            Sends an email to <see cref="F:SocialEventManager.Shared.Constants.ContactConstants.Email" />.
             </summary>
             <param name="contact">Requested information for contacting us.</param>
             <returns>An empty ActionResult.</returns>
