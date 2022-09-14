@@ -1,5 +1,5 @@
+using Bogus;
 using SocialEventManager.Shared.Constants;
-using SocialEventManager.Shared.Helpers;
 using Xunit;
 
 namespace SocialEventManager.Tests.DataMembers.Common;
@@ -11,7 +11,7 @@ internal static class StringData
         {
             { null, true },
             { string.Empty, true },
-            { RandomGeneratorHelpers.GenerateRandomValue(), false },
+            { new Faker().Random.String(), false },
         };
 
     public static TheoryData<string?> NullOrWhiteSpaceData =>
@@ -35,7 +35,7 @@ internal static class StringData
             { DataConstants.RandomText, "Random Text", StringComparison.Ordinal, string.Empty },
             { DataConstants.RandomText, null, StringComparison.Ordinal, DataConstants.RandomText },
             { DataConstants.RandomText, string.Empty, StringComparison.Ordinal, DataConstants.RandomText },
-            { DataConstants.RandomText, RandomGeneratorHelpers.GenerateRandomValue(), StringComparison.Ordinal, DataConstants.RandomText },
+            { DataConstants.RandomText, new Faker().Random.String(), StringComparison.Ordinal, DataConstants.RandomText },
         };
 
     public static TheoryData<string, string, StringComparison, string> TakeAfterFirstData =>
@@ -61,7 +61,7 @@ internal static class StringData
             { DataConstants.RandomText, "Random Text", StringComparison.Ordinal, string.Empty },
             { DataConstants.RandomText, null, StringComparison.Ordinal, DataConstants.RandomText },
             { DataConstants.RandomText, string.Empty, StringComparison.Ordinal, DataConstants.RandomText },
-            { DataConstants.RandomText, RandomGeneratorHelpers.GenerateRandomValue(), StringComparison.Ordinal, DataConstants.RandomText },
+            { DataConstants.RandomText, new Faker().Random.String(), StringComparison.Ordinal, DataConstants.RandomText },
         };
 
     public static TheoryData<string, string, StringComparison, string> TakeUntilFirstData =>

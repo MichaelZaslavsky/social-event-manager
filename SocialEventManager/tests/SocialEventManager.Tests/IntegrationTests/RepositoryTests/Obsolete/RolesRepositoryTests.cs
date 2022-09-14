@@ -3,12 +3,12 @@
 // It is much more recommended to use the Identity packages with EF and not reinventing the wheel.
 
 using System.Data.SqlClient;
+using Bogus;
 using FluentAssertions;
 using Moq;
 using SocialEventManager.DAL.Repositories.Roles;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Entities;
-using SocialEventManager.Shared.Helpers;
 using SocialEventManager.Tests.Common.Constants;
 using SocialEventManager.Tests.Common.DataMembers;
 using SocialEventManager.Tests.IntegrationTests.Infrastructure;
@@ -70,7 +70,7 @@ public class RolesRepositoryTests : RepositoryTestBase<IRolesRepository, Role>
     {
         await Db.InsertAsync(role);
 
-        Role duplicatedIdRole = RoleData.GetMockRole(RandomGeneratorHelpers.GenerateRandomValue(), role.Id);
+        Role duplicatedIdRole = RoleData.GetMockRole(new Faker().Random.String(), role.Id);
 
         Func<Task> func = async () => await Db.InsertAsync(duplicatedIdRole);
         string message = (await func.Should().ThrowAsync<SqlException>()).Subject.First().Message;

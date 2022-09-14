@@ -1,9 +1,9 @@
 using System.Globalization;
+using Bogus;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Entities;
 using SocialEventManager.Shared.Enums;
 using SocialEventManager.Shared.Extensions;
-using SocialEventManager.Shared.Helpers;
 using SocialEventManager.Tests.Common.Constants;
 using Xunit;
 
@@ -107,9 +107,9 @@ internal static class RoleData
         new()
         {
             Id = Guid.NewGuid(),
-            ConcurrencyStamp = RandomGeneratorHelpers.GenerateRandomValue(concurrencyStampLength),
-            Name = RandomGeneratorHelpers.GenerateRandomValue(nameLength),
-            NormalizedName = RandomGeneratorHelpers.GenerateRandomValue(normalizedNameLength),
+            ConcurrencyStamp = new Faker().Random.String(concurrencyStampLength),
+            Name = new Faker().Random.String(nameLength),
+            NormalizedName = new Faker().Random.String(normalizedNameLength),
         };
 
     #endregion Private Methods
