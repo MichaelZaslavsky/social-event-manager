@@ -56,7 +56,6 @@ public class AccountsControllerTests : IntegrationTest
     }
 
     [Theory]
-    [MemberData(nameof(UserData.ExistingUserRegistrationData), MemberType = typeof(UserData))]
     [MemberData(nameof(UserData.InvalidUserRegistrationData), MemberType = typeof(UserData))]
     public async Task Register_Should_ReturnBadRequest_When_UserIsInvalid(UserRegistrationDto userRegistration, string expected)
     {
@@ -64,6 +63,19 @@ public class AccountsControllerTests : IntegrationTest
 
         (HttpStatusCode statusCode, string message) = await Client.CreateAsyncWithError(TestApiPathConstants.AccountsRegister, userRegistration);
         statusCode.Should().Be(HttpStatusCode.BadRequest);
+        message.Should().Contain(expected);
+
+        UserStorage.Instance.Data.Should().HaveCount(initialCount);
+    }
+
+    [Theory]
+    [MemberData(nameof(UserData.ExistingUserRegistrationData), MemberType = typeof(UserData))]
+    public async Task Register_Should_ReturnUnprocessableEntity_When_UserAlreadyExists(UserRegistrationDto userRegistration, string expected)
+    {
+        int initialCount = UserStorage.Instance.Data.Count;
+
+        (HttpStatusCode statusCode, string message) = await Client.CreateAsyncWithError(TestApiPathConstants.AccountsRegister, userRegistration);
+        statusCode.Should().Be(HttpStatusCode.UnprocessableEntity);
         message.Should().Contain(expected);
 
         UserStorage.Instance.Data.Should().HaveCount(initialCount);
@@ -85,13 +97,13 @@ public class AccountsControllerTests : IntegrationTest
 
     [Theory]
     [MemberData(nameof(UserData.NonExistingConfirmEmailUserData), MemberType = typeof(UserData))]
-    public async Task ConfirmEmail_ReturnBadRequest_When_UserDoesNotExist(ConfirmEmailDto confirmEmail, string expected)
+    public async Task ConfirmEmail_ReturnUnprocessableEntity_When_UserDoesNotExist(ConfirmEmailDto confirmEmail, string expected)
     {
         FormUrlEncodedContent formContent = ConvertToFormEncodedContent(confirmEmail);
 
         HttpRequestMessage request = new(HttpMethod.Post, TestApiPathConstants.AccountsConfirmEmail) { Content = formContent };
         HttpResponseMessage actual = await Client.SendAsync(request);
-        actual.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+        actual.StatusCode.Should().Be(HttpStatusCode.UnprocessableEntity);
 
         string message = await actual.Content.ReadAsStringAsync();
         message.Should().Contain(expected);
@@ -102,7 +114,7 @@ public class AccountsControllerTests : IntegrationTest
 
     [Theory]
     [MemberData(nameof(UserData.InvalidConfirmEmailTokenData), MemberType = typeof(UserData))]
-    public async Task ConfirmEmail_ReturnBadRequest_When_ToeknIsInvalid(ConfirmEmailDto confirmEmail, string expected)
+    public async Task ConfirmEmail_ReturnUnprocessableEntity_When_ToeknIsInvalid(ConfirmEmailDto confirmEmail, string expected)
     {
         UserStorage.Instance.Data.Single(u => u.Email == confirmEmail.Email).EmailConfirmed = false;
 
@@ -110,7 +122,7 @@ public class AccountsControllerTests : IntegrationTest
 
         HttpRequestMessage request = new(HttpMethod.Post, TestApiPathConstants.AccountsConfirmEmail) { Content = formContent };
         HttpResponseMessage actual = await Client.SendAsync(request);
-        actual.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+        actual.StatusCode.Should().Be(HttpStatusCode.UnprocessableEntity);
 
         string message = await actual.Content.ReadAsStringAsync();
         message.Should().Contain(expected);
@@ -257,14 +269,14 @@ public class AccountsControllerTests : IntegrationTest
     [Theory]
     [MemberData(nameof(UserData.NonExistingResetPasswordUserData), MemberType = typeof(UserData))]
     [MemberData(nameof(UserData.InvalidTokenResetPasswordData), MemberType = typeof(UserData))]
-    public async Task ResetPassword_Should_ReturnBadRequest_When_ResetPasswordDataIsInvalid(ResetPasswordDto resetPassword, string expected)
+    public async Task ResetPassword_Should_ReturnUnprocessableEntity_When_ResetPasswordDataIsInvalid(ResetPasswordDto resetPassword, string expected)
     {
         FormUrlEncodedContent formContent = ConvertToFormEncodedContent(resetPassword);
 
         HttpRequestMessage request = new(HttpMethod.Post, TestApiPathConstants.AccountsResetPassword) { Content = formContent };
         HttpResponseMessage actual = await Client.SendAsync(request);
 
-        actual.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+        actual.StatusCode.Should().Be(HttpStatusCode.UnprocessableEntity);
         string message = await actual.Content.ReadAsStringAsync();
         message.Should().Contain(expected);
     }
