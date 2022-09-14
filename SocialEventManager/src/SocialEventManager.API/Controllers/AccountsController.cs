@@ -1,9 +1,8 @@
+using LanguageExt.Common;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SocialEventManager.BLL.Services;
 using SocialEventManager.Shared.Constants;
-using SocialEventManager.Shared.Enums;
 using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Shared.Models.Auth;
 
@@ -26,28 +25,22 @@ public class AccountsController : ControllerBase
     [HttpPost]
     [Route(ApiPathConstants.Action)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(IEnumerable<string>))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
     public async Task<IActionResult> Register(UserRegistrationDto userRegistration)
     {
-        IdentityResult result = await _authService.RegisterUserAsync(userRegistration);
-
-        return result.Succeeded
-            ? Ok()
-            : BadRequest(BuildErrorDescriptions(result));
+        Result<bool> result = await _authService.RegisterUserAsync(userRegistration);
+        return result.ToOk(value => value);
     }
 
     [HttpPost]
     [Route(ApiPathConstants.Action)]
     [Consumes(MediaTypeConstants.ApplicationFormUrlEncoded)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(IEnumerable<string>))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
     public async Task<IActionResult> ConfirmEmail([FromForm] ConfirmEmailDto confirmEmailDto)
     {
-        IdentityResult result = await _authService.ConfirmEmailAsync(confirmEmailDto);
-
-        return result.Succeeded
-            ? Ok()
-            : BadRequest(BuildErrorDescriptions(result));
+        Result<bool> result = await _authService.ConfirmEmailAsync(confirmEmailDto);
+        return result.ToOk(value => value);
     }
 
     [HttpPost]
@@ -56,11 +49,8 @@ public class AccountsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(string))]
     public async Task<IActionResult> Login(UserLoginDto userLogin)
     {
-        (UserLoginResult result, string? token) = await _authService.LoginAsync(userLogin);
-
-        return result == UserLoginResult.Success
-            ? Ok(token)
-            : Unauthorized(result.GetDescription());
+        Result<string?> result = await _authService.LoginAsync(userLogin);
+        return result.ToOk(value => value);
     }
 
     [HttpPost]
@@ -76,15 +66,10 @@ public class AccountsController : ControllerBase
     [Route(ApiPathConstants.Action)]
     [Consumes(MediaTypeConstants.ApplicationFormUrlEncoded)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(IEnumerable<string>))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
     public async Task<IActionResult> ResetPassword([FromForm] ResetPasswordDto resetPasswordDto)
     {
-        IdentityResult result = await _authService.ResetPasswordAsync(resetPasswordDto);
-
-        return result.Succeeded
-            ? Ok()
-            : BadRequest(BuildErrorDescriptions(result));
+        Result<bool> result = await _authService.ResetPasswordAsync(resetPasswordDto);
+        return result.ToOk(value => value);
     }
-
-    private static IEnumerable<string> BuildErrorDescriptions(IdentityResult result) => result.Errors.Select(error => error.Description);
 }

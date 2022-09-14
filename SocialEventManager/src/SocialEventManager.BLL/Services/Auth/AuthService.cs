@@ -1,5 +1,6 @@
 using AutoMapper;
 using Hangfire;
+using LanguageExt.Common;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using SocialEventManager.BLL.Services.Email;
@@ -41,7 +42,7 @@ public class AuthService : IAuthService
         _emailService = emailService;
     }
 
-    public async Task<IdentityResult> RegisterUserAsync(UserRegistrationDto userRegistration)
+    public async Task<Result<bool>> RegisterUserAsync(UserRegistrationDto userRegistration)
     {
         ApplicationUser user = _mapper.Map<ApplicationUser>(userRegistration);
         IdentityResult result = await _userManager.CreateAsync(user, userRegistration.Password);
@@ -52,10 +53,10 @@ public class AuthService : IAuthService
             await SendConfirmEmail(userRegistration);
         }
 
-        return result;
+        return result.ToResult();
     }
 
-    public async Task<IdentityResult> ConfirmEmailAsync(ConfirmEmailDto confirmEmail)
+    public async Task<Result<bool>> ConfirmEmailAsync(ConfirmEmailDto confirmEmail)
     {
         ApplicationUser? user = await _userManager.FindByEmailAsync(confirmEmail.Email);
         if (user is null)
@@ -64,34 +65,32 @@ public class AuthService : IAuthService
             {
                 Code = nameof(AuthConstants.ConfirmEmailFailed),
                 Description = AuthConstants.ConfirmEmailFailed,
-            });
+            }).ToResult();
         }
 
         string token = confirmEmail.Token.Decode();
-        return await _userManager.ConfirmEmailAsync(user, token);
+        return (await _userManager.ConfirmEmailAsync(user, token)).ToResult();
     }
 
-    public async Task<(UserLoginResult Result, string? Token)> LoginAsync(UserLoginDto userLogin)
+    public async Task<Result<string?>> LoginAsync(UserLoginDto userLogin)
     {
         ApplicationUser? user = await _userManager.FindByEmailAsync(userLogin.Email);
         if (user is null)
         {
-            return (UserLoginResult.EmailNotFound, null);
+            return new Result<string?>(new UnauthorizedAccessException(UserLoginResult.EmailNotFound.GetDescription(), null));
         }
 
         if (!user.EmailConfirmed)
         {
-            return (UserLoginResult.EmailNotVerified, null);
+            return new Result<string?>(new UnauthorizedAccessException(UserLoginResult.EmailNotVerified.GetDescription(), null));
         }
 
         SignInResult signInResult = await _signInManager.PasswordSignInAsync(user, userLogin.Password, true, true);
         UserLoginResult userLoginResult = signInResult.ToUserLoginResult();
 
-        string? token = userLoginResult == UserLoginResult.Success
+        return userLoginResult == UserLoginResult.Success
             ? _jwtHandler.GenerateToken(userLogin.Email)
-            : null;
-
-        return (userLoginResult, token);
+            : new Result<string?>(new UnauthorizedAccessException(userLoginResult.GetDescription()));
     }
 
     public async Task ForgotPasswordAsync(ForgotPasswordDto forgotPassword)
@@ -109,7 +108,7 @@ public class AuthService : IAuthService
         BackgroundJob.Enqueue(() => _emailService.SendEmailAsync(email));
     }
 
-    public async Task<IdentityResult> ResetPasswordAsync(ResetPasswordDto resetPassword)
+    public async Task<Result<bool>> ResetPasswordAsync(ResetPasswordDto resetPassword)
     {
         ApplicationUser? user = await _userManager.FindByEmailAsync(resetPassword.Email);
         if (user is null)
@@ -118,11 +117,11 @@ public class AuthService : IAuthService
             {
                 Code = nameof(AuthConstants.ResetPasswordFailed),
                 Description = AuthConstants.ResetPasswordFailed,
-            });
+            }).ToResult();
         }
 
         string token = resetPassword.Token.Decode();
-        return await _userManager.ResetPasswordAsync(user, token, resetPassword.NewPassword);
+        return (await _userManager.ResetPasswordAsync(user, token, resetPassword.NewPassword)).ToResult();
     }
 
     private async Task SendConfirmEmail(UserRegistrationDto userRegistration)

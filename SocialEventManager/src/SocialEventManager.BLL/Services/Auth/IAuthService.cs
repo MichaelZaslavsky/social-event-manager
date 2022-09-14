@@ -1,18 +1,17 @@
-using Microsoft.AspNetCore.Identity;
-using SocialEventManager.Shared.Enums;
+using LanguageExt.Common;
 using SocialEventManager.Shared.Models.Auth;
 
 namespace SocialEventManager.BLL.Services;
 
 public interface IAuthService
 {
-    Task<IdentityResult> RegisterUserAsync(UserRegistrationDto userRegistration);
+    Task<Result<bool>> RegisterUserAsync(UserRegistrationDto userRegistration);
 
-    Task<IdentityResult> ConfirmEmailAsync(ConfirmEmailDto confirmEmail);
+    Task<Result<bool>> ConfirmEmailAsync(ConfirmEmailDto confirmEmail);
 
-    Task<(UserLoginResult Result, string? Token)> LoginAsync(UserLoginDto userLogin);
+    Task<Result<string?>> LoginAsync(UserLoginDto userLogin);
 
     Task ForgotPasswordAsync(ForgotPasswordDto forgotPassword);
 
-    Task<IdentityResult> ResetPasswordAsync(ResetPasswordDto resetPassword);
+    Task<Result<bool>> ResetPasswordAsync(ResetPasswordDto resetPassword);
 }
