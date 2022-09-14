@@ -1,4 +1,5 @@
 using System.Net;
+using FluentValidation;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Exceptions;
 
@@ -16,8 +17,8 @@ public static class ExceptionExtensions
         return ex switch
         {
             NotFoundException => (HttpStatusCode.NotFound, ExceptionConstants.NotFound),
-            BadRequestException => (HttpStatusCode.BadRequest, ExceptionConstants.BadRequest),
-            ValidationException => (HttpStatusCode.UnprocessableEntity, ExceptionConstants.UnprocessableEntity),
+            BadRequestException or ValidationException => (HttpStatusCode.BadRequest, ExceptionConstants.BadRequest),
+            UnprocessableEntityException => (HttpStatusCode.UnprocessableEntity, ExceptionConstants.UnprocessableEntity),
             _ => (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError),
         };
     }

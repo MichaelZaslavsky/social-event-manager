@@ -1,4 +1,5 @@
 using System.Data.SqlClient;
+using FluentValidation;
 using Newtonsoft.Json;
 using Serilog;
 using Serilog.Events;
@@ -18,9 +19,10 @@ public static class ErrorResponseHandler
 
         error.Data = name switch
         {
-            nameof(ValidationException) => new ApiErrorData(JsonConvert.SerializeObject(((ValidationException)ex).ValdationErrors), LinkConstants.UnprocessableEntity),
+            nameof(ValidationException) => new ApiErrorData(JsonConvert.SerializeObject(ex.Message), LinkConstants.BadRequestException),
             nameof(BadRequestException) => new ApiErrorData(ex.Message, LinkConstants.BadRequestException),
             nameof(NotFoundException) => new ApiErrorData(ex.Message, LinkConstants.NotFoundException),
+            nameof(UnprocessableEntityException) => new ApiErrorData(ex.Message, LinkConstants.UnprocessableEntity),
             nameof(NullReferenceException) => new ApiErrorData(ExceptionConstants.NullReferenceException, LinkConstants.NullReferenceException),
             nameof(ArgumentNullException) => new ApiErrorData(ExceptionConstants.ArgumentNullException, LinkConstants.ArgumentNullException),
             nameof(ArgumentException) => new ApiErrorData(ExceptionConstants.ArgumentException, LinkConstants.ArgumentException),
