@@ -25,7 +25,7 @@ public class AccountsController : ControllerBase
     [HttpPost]
     [Route(ApiPathConstants.Action)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+    [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(string))]
     public async Task<IActionResult> Register(UserRegistrationDto userRegistration)
     {
         Result<bool> result = await _authService.RegisterUserAsync(userRegistration);
@@ -36,7 +36,7 @@ public class AccountsController : ControllerBase
     [Route(ApiPathConstants.Action)]
     [Consumes(MediaTypeConstants.ApplicationFormUrlEncoded)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+    [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(string))]
     public async Task<IActionResult> ConfirmEmail([FromForm] ConfirmEmailDto confirmEmailDto)
     {
         Result<bool> result = await _authService.ConfirmEmailAsync(confirmEmailDto);
@@ -66,7 +66,7 @@ public class AccountsController : ControllerBase
     [Route(ApiPathConstants.Action)]
     [Consumes(MediaTypeConstants.ApplicationFormUrlEncoded)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+    [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(string))]
     public async Task<IActionResult> ResetPassword([FromForm] ResetPasswordDto resetPasswordDto)
     {
         Result<bool> result = await _authService.ResetPasswordAsync(resetPasswordDto);
