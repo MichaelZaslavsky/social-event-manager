@@ -22,7 +22,7 @@ public static class ResultExtensions
     {
         return exception switch
         {
-            ValidationException ex => new BadRequestObjectResult(ex.Message),
+            BadRequestException or ValidationException => new BadRequestObjectResult(exception.Message),
             UnauthorizedAccessException ex => new UnauthorizedObjectResult(ex.Message),
             NotFoundException ex => new NotFoundObjectResult(ex.Message),
             UnprocessableEntityException ex => new UnprocessableEntityObjectResult(ex.Message),

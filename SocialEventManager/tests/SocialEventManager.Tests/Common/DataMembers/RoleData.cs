@@ -9,7 +9,7 @@ using Xunit;
 
 namespace SocialEventManager.Tests.Common.DataMembers;
 
-public static class RoleData
+internal static class RoleData
 {
     private const string TableName = TableNameConstants.Roles;
 

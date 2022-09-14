@@ -6,7 +6,7 @@ using Xunit;
 
 namespace SocialEventManager.Tests.Common.DataMembers;
 
-public static class ExceptionData
+internal static class ExceptionData
 {
     public static TheoryData<Exception?, (HttpStatusCode, string)> ExceptionDataForHttpStatusAndTitle =>
         new()

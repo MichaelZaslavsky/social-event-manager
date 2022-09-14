@@ -4,7 +4,7 @@ using Xunit;
 
 namespace SocialEventManager.Tests.DataMembers.Common;
 
-public static class StringData
+internal static class StringData
 {
     public static TheoryData<string?, bool> NullOrEmptyData =>
         new()
