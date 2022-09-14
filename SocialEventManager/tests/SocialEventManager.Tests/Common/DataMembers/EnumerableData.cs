@@ -8,7 +8,7 @@ using Xunit;
 
 namespace SocialEventManager.Tests.DataMembers.Common;
 
-public static class EnumerableData
+internal static class EnumerableData
 {
     public static TheoryData<IEnumerable<int>, bool> EmptyData =>
         new()
