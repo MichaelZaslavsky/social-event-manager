@@ -43,6 +43,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Enums\UserLoginResult.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EqualityComparers\Obsolete\UserClaimEqualityComparer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\EnumerationExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\GuidExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\HttpClientExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\Obsolete\IdentityErrorExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\SignInResultExtensions.cs" />
