@@ -11,11 +11,6 @@ public class UnprocessableEntityException : ApplicationException
     {
     }
 
-    public UnprocessableEntityException(string name, object key)
-        : base($"{name} ({key}) is unprocessable")
-    {
-    }
-
     public UnprocessableEntityException(string message, Exception innerException)
         : base(message, innerException)
     {
