@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net;
+using Bogus;
 using FluentAssertions;
 using Microsoft.AspNetCore.Identity;
 using netDumbster.smtp;
@@ -8,7 +9,6 @@ using SocialEventManager.Infrastructure.Auth;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Enums;
 using SocialEventManager.Shared.Extensions;
-using SocialEventManager.Shared.Helpers;
 using SocialEventManager.Shared.Models.Auth;
 using SocialEventManager.Tests.Common.Constants;
 using SocialEventManager.Tests.Common.DataMembers;
@@ -182,7 +182,7 @@ public class AccountsControllerTests : IntegrationTest
 
         UserStorage.Instance.Data.Last().EmailConfirmed = true;
 
-        UserLoginDto userLogin = UserData.GetUserLogin(userRegistration.Email, RandomGeneratorHelpers.GenerateRandomValue());
+        UserLoginDto userLogin = UserData.GetUserLogin(userRegistration.Email, new Faker().Random.String(10));
         (HttpStatusCode statusCode, string message) = await Client.CreateAsyncWithError(TestApiPathConstants.AccountsLogin, userLogin);
         statusCode.Should().Be(HttpStatusCode.Unauthorized);
         message.Should().Contain(AuthConstants.EmailOrPasswordIsIncorrect);

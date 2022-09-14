@@ -1,9 +1,9 @@
 using System.Reflection;
+using Bogus;
 using Dapper.Contrib.Extensions;
 using FluentAssertions;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
-using SocialEventManager.Shared.Helpers;
 using Xunit;
 
 namespace SocialEventManager.Tests.UnitTests.ExtensionTests;
@@ -22,7 +22,7 @@ public class TypeExtensionsTests
     [Fact]
     public void GetNonPublicStaticMethod_Should_ReturnArgumentOutOfRangeException_When_MethodNameDoesNotExist()
     {
-        string methodName = RandomGeneratorHelpers.GenerateRandomValue();
+        string methodName = new Faker().Random.String();
         Type type = typeof(SqlMapperExtensions);
 
         Action action = () => type.GetNonPublicStaticMethod(methodName);

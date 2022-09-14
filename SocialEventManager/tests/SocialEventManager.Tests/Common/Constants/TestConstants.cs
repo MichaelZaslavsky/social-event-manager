@@ -1,5 +1,5 @@
+using Bogus;
 using SocialEventManager.Shared.Constants;
-using SocialEventManager.Shared.Helpers;
 
 namespace SocialEventManager.Tests.Common.Constants;
 
@@ -27,5 +27,5 @@ internal static class TestConstants
 
     private static string Parameter(string paramName) => $"(Parameter '{paramName}')";
 
-    public static string Length256 => RandomGeneratorHelpers.GenerateRandomValue(256);
+    public static string Length256 => new Faker().Random.String(256);
 }

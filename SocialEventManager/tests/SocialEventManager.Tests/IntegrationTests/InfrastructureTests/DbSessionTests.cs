@@ -1,10 +1,10 @@
 using System.Data;
+using Bogus;
 using FluentAssertions;
 using Microsoft.Extensions.Configuration;
 using SocialEventManager.DAL.Infrastructure;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
-using SocialEventManager.Shared.Helpers;
 using Xunit;
 using Xunit.Categories;
 
@@ -37,7 +37,7 @@ public class DbSessionTests
     [Fact]
     public void InitDbSession_Should_ThrowArgumentException_When_ConnectionStringIsInvalid()
     {
-        string connectionString = RandomGeneratorHelpers.GenerateRandomValue();
+        string connectionString = new Faker().Random.String();
         Action action = () => new DbSession(connectionString);
         action.Should().Throw<ArgumentException>().WithMessage(ExceptionConstants.InvalidConnectionString);
     }

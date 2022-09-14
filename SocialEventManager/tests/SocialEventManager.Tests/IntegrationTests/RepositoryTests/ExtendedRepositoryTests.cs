@@ -1,11 +1,11 @@
 using System.Data.SqlClient;
 using AutoFixture.Xunit2;
+using Bogus;
 using FluentAssertions;
 using Moq;
 using SocialEventManager.DAL.Repositories.Roles;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Entities;
-using SocialEventManager.Shared.Helpers;
 using SocialEventManager.Tests.Common.Constants;
 using SocialEventManager.Tests.Common.DataMembers;
 using SocialEventManager.Tests.IntegrationTests.Infrastructure;
@@ -176,7 +176,7 @@ public class ExtendedRepositoryTests : RepositoryTestBase<IRolesRepository, Role
     [Fact]
     public async Task DeleteAsync_Should_ThrowSqlException_When_RoleIdIsInvalid()
     {
-        Func<Task> func = async () => await Repository.DeleteAsync(RandomGeneratorHelpers.NextInt32(), nameof(Role.Id));
+        Func<Task> func = async () => await Repository.DeleteAsync(new Faker().Random.Int(), nameof(Role.Id));
         await func.Should().ThrowAsync<SqlException>().WithMessage(ExceptionConstants.UniqueIdentifierIsIncompatibleWithInt);
     }
 
