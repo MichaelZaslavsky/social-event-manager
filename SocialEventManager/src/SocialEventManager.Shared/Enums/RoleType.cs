@@ -1,7 +1,9 @@
 using System.ComponentModel;
+using NetEscapades.EnumGenerators;
 
 namespace SocialEventManager.Shared.Enums;
 
+[EnumExtensions]
 public enum RoleType
 {
     [Description(nameof(Admin))]
