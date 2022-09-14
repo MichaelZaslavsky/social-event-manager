@@ -1,4 +1,5 @@
 using System.Net;
+using FluentValidation;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Exceptions;
 using Xunit;
@@ -12,7 +13,8 @@ public static class ExceptionData
         {
             { new NotFoundException(), (HttpStatusCode.NotFound, ExceptionConstants.NotFound) },
             { new BadRequestException(), (HttpStatusCode.BadRequest, ExceptionConstants.BadRequest) },
-            { new ValidationException(), (HttpStatusCode.UnprocessableEntity, ExceptionConstants.UnprocessableEntity) },
+            { new ValidationException(ExceptionConstants.BadRequest), (HttpStatusCode.BadRequest, ExceptionConstants.BadRequest) },
+            { new UnprocessableEntityException(), (HttpStatusCode.UnprocessableEntity, ExceptionConstants.UnprocessableEntity) },
             { null, (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError) },
             { new NullReferenceException(), (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError) },
             { new ArgumentNullException(), (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError) },

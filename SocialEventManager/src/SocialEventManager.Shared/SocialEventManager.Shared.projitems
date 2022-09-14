@@ -98,7 +98,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\ExceptionExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\SqlConnectionExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\StringExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Exceptions\ValidationException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\RandomGeneratorHelpers.cs" />
   </ItemGroup>
   <ItemGroup>

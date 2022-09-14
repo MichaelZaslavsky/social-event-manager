@@ -1,11 +1,10 @@
+using FluentValidation;
 using LanguageExt.Common;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SocialEventManager.Shared.Exceptions;
 
 namespace SocialEventManager.Shared.Extensions;
-
-using FluentValidation;
 
 public static class ResultExtensions
 {
