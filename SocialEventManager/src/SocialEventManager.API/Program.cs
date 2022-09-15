@@ -1,4 +1,7 @@
+using System.Reflection;
 using AspNetCoreRateLimit;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Hangfire;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
@@ -99,6 +102,8 @@ static void ConfigureServices(IServiceCollection services, IConfiguration config
                 .AllowAnyMethod();
         }))
         .AddVersionedApiExplorer(options => options.GroupNameFormat = "'v'VV")
+        .AddFluentValidationAutoValidation()
+        .AddValidatorsFromAssembly(Assembly.GetExecutingAssembly())
         .AddSwagger()
         .ConfigureSqlContext(config)
         .ConfigureIdentity()
