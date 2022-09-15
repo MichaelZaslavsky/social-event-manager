@@ -138,14 +138,8 @@ internal static class UserData
         };
     }
 
-    public static UserLoginDto GetUserLogin(string email = TestConstants.ValidEmail, string password = TestConstants.ValidPassword)
-    {
-        return new()
-        {
-            Email = email,
-            Password = password,
-        };
-    }
+    public static UserLoginDto GetUserLogin(string email = TestConstants.ValidEmail, string password = TestConstants.ValidPassword) =>
+        new(email, password);
 
     private static UserRegistrationDto GetUserRegistration(
         string firstName = TestConstants.SomeText,
@@ -154,26 +148,13 @@ internal static class UserData
         string password = TestConstants.ValidPassword,
         string confirmPassword = TestConstants.ValidPassword)
     {
-        return new()
-        {
-            FirstName = firstName,
-            LastName = lastName,
-            Email = email,
-            Password = password,
-            ConfirmPassword = confirmPassword,
-        };
+        return new(firstName, lastName, email, password, confirmPassword);
     }
 
-    private static ConfirmEmailDto GetConfirmEmail(string email = TestConstants.ValidEmail, string token = TestConstants.ValidToken)
-    {
-        return new()
-        {
-            Email = email,
-            Token = token.Encode(),
-        };
-    }
+    private static ConfirmEmailDto GetConfirmEmail(string email = TestConstants.ValidEmail, string token = TestConstants.ValidToken) =>
+        new(email, token.Encode());
 
-    private static ForgotPasswordDto GetForgotPassword(string email = TestConstants.ValidEmail) => new() { Email = email };
+    private static ForgotPasswordDto GetForgotPassword(string email = TestConstants.ValidEmail) => new(email);
 
     private static ResetPasswordDto GetResetPassword(
         string email = TestConstants.ValidEmail,
@@ -181,12 +162,6 @@ internal static class UserData
         string newPassword = TestConstants.ValidPassword,
         string confirmPassword = TestConstants.ValidPassword)
     {
-        return new()
-        {
-            Email = email,
-            Token = token.Encode(),
-            NewPassword = newPassword,
-            ConfirmPassword = confirmPassword,
-        };
+        return new(email, token.Encode(), newPassword, confirmPassword);
     }
 }

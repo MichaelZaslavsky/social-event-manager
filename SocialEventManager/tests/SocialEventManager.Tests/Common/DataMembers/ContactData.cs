@@ -22,19 +22,19 @@ internal static class ContactData
         {
             {
                 GetContact(name: "1"),
-                ValidationConstants.LengthNotInRange(nameof(ContactDto.Name), LengthConstants.Length2, LengthConstants.Length255)
+                ValidationConstants.LengthNotInRange(nameof(ContactDto.Name), LengthConstants.Length2, LengthConstants.Length255, LengthConstants.Length2 - 1)
             },
             {
                 GetContact(name: new Faker().Random.String(LengthConstants.Length255 + 1)),
-                ValidationConstants.LengthNotInRange(nameof(ContactDto.Name), LengthConstants.Length2, LengthConstants.Length255)
+                ValidationConstants.LengthNotInRange(nameof(ContactDto.Name), LengthConstants.Length2, LengthConstants.Length255, LengthConstants.Length255 + 1)
             },
             {
                 GetContact(text: "1"),
-                ValidationConstants.LengthNotInRange(nameof(ContactDto.Text), LengthConstants.Length2, LengthConstants.LengthMax)
+                ValidationConstants.LengthNotInRange(nameof(ContactDto.Text), LengthConstants.Length2, LengthConstants.LengthMax, LengthConstants.Length2 - 1)
             },
             {
                 GetContact(text: new Faker().Random.String(LengthConstants.LengthMax + 1)),
-                ValidationConstants.LengthNotInRange(nameof(ContactDto.Text), LengthConstants.Length2, LengthConstants.LengthMax)
+                ValidationConstants.LengthNotInRange(nameof(ContactDto.Text), LengthConstants.Length2, LengthConstants.LengthMax, LengthConstants.LengthMax + 1)
             },
             {
                 GetContact(email: TestConstants.SomeText),

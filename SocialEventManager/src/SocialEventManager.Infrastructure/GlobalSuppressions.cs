@@ -10,3 +10,8 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Roslynator", "RCS1093:Remove file with no code.", Justification = "<Pending>")]
 [assembly: SuppressMessage("StyleCop.CSharp.NamingRules", "SA1313:Parameter names should begin with lower-case letter", Justification = "<Pending>", Scope = "type", Target = "~T:SocialEventManager.Shared.Models.Email.ForgotPassword")]
 [assembly: SuppressMessage("StyleCop.CSharp.NamingRules", "SA1313:Parameter names should begin with lower-case letter", Justification = "<Pending>", Scope = "type", Target = "~T:SocialEventManager.Shared.Models.Email.VerifyEmail")]
+[assembly: SuppressMessage("StyleCop.CSharp.NamingRules", "SA1313:Parameter names should begin with lower-case letter", Justification = "<Pending>", Scope = "type", Target = "~T:SocialEventManager.Shared.Models.Contact.ContactDto")]
+[assembly: SuppressMessage("StyleCop.CSharp.NamingRules", "SA1313:Parameter names should begin with lower-case letter", Justification = "<Pending>", Scope = "type", Target = "~T:SocialEventManager.Shared.Models.Auth.ForgotPasswordDto")]
+[assembly: SuppressMessage("StyleCop.CSharp.NamingRules", "SA1313:Parameter names should begin with lower-case letter", Justification = "<Pending>", Scope = "type", Target = "~T:SocialEventManager.Shared.Models.Auth.ResetPasswordDto")]
+[assembly: SuppressMessage("StyleCop.CSharp.NamingRules", "SA1313:Parameter names should begin with lower-case letter", Justification = "<Pending>", Scope = "namespace", Target = "~N:SocialEventManager.Shared.Models.Auth")]
+[assembly: SuppressMessage("StyleCop.CSharp.NamingRules", "SA1313:Parameter names should begin with lower-case letter", Justification = "<Pending>", Scope = "namespace", Target = "~N:SocialEventManager.Shared.Models.Auth")]
