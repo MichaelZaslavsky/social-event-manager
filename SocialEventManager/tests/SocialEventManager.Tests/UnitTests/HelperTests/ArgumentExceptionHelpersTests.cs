@@ -17,7 +17,7 @@ public class ArgumentExceptionHelpersTests
     [AutoData]
     public void ThrowIfNullOrEmpty_Should_NotThrowArgumentException_When_ArgumentHasValue(IEnumerable<object> argument)
     {
-        Exception? exception = Record.Exception(() => ArgumentExceptionHelpers.ThrowIfNullOrEmpty(argument, nameof(argument)));
+        Exception? exception = Record.Exception(() => ArgumentExceptionHelpers.ThrowIfNullOrEmpty(argument));
         exception.Should().BeNull();
     }
 
@@ -25,7 +25,7 @@ public class ArgumentExceptionHelpersTests
     [MemberData(nameof(EnumerableData.NullOrEmpty), MemberType = typeof(EnumerableData))]
     public void ThrowIfNullOrEmpty_Should_ThrowArgumentException_When_ArgumentIsNullOrEmpty(IEnumerable<object>? argument)
     {
-        Action action = () => ArgumentExceptionHelpers.ThrowIfNullOrEmpty(argument, nameof(argument));
+        Action action = () => ArgumentExceptionHelpers.ThrowIfNullOrEmpty(argument);
 
         action.Should()
             .Throw<ArgumentException>()
@@ -33,10 +33,22 @@ public class ArgumentExceptionHelpersTests
     }
 
     [Theory]
+    [InlineData(null, TestConstants.SomeText)]
+    [InlineData(new object[] { }, TestConstants.SomeText)]
+    public void ThrowIfNullOrEmpty_Should_ThrowArgumentException_When_ArgumentIsNullOrEmptyAndParamNameIsPassed(IEnumerable<object>? argument, string paramName)
+    {
+        Action action = () => ArgumentExceptionHelpers.ThrowIfNullOrEmpty(argument, paramName);
+
+        action.Should()
+            .Throw<ArgumentException>()
+            .WithMessage(TestConstants.ValueCannotBeNullOrEmpty(paramName));
+    }
+
+    [Theory]
     [AutoData]
     public void ThrowIfNullOrWhiteSpace_Should_NotThrowArgumentException_When_ArgumentHasValue(string argument)
     {
-        Exception? exception = Record.Exception(() => ArgumentExceptionHelpers.ThrowIfNullOrWhiteSpace(argument, nameof(argument)));
+        Exception? exception = Record.Exception(() => ArgumentExceptionHelpers.ThrowIfNullOrWhiteSpace(argument));
         exception.Should().BeNull();
     }
 
@@ -44,10 +56,23 @@ public class ArgumentExceptionHelpersTests
     [MemberData(nameof(StringData.NullOrWhiteSpaceData), MemberType = typeof(StringData))]
     public void ThrowIfNullOrWhiteSpace_Should_ThrowArgumentException_When_ArgumentIsNullOrEmpty(string? argument)
     {
-        Action action = () => ArgumentExceptionHelpers.ThrowIfNullOrWhiteSpace(argument, nameof(argument));
+        Action action = () => ArgumentExceptionHelpers.ThrowIfNullOrWhiteSpace(argument);
 
         action.Should()
             .Throw<ArgumentException>()
             .WithMessage(TestConstants.ValueCannotBeNullOrWhiteSpace(nameof(argument)));
+    }
+
+    [Theory]
+    [InlineData(null, TestConstants.SomeText)]
+    [InlineData("", TestConstants.SomeText)]
+    [InlineData(" ", TestConstants.SomeText)]
+    public void ThrowIfNullOrWhiteSpace_Should_ThrowArgumentException_When_ArgumentIsNullOrEmptyAndParamNameIsPassed(string? argument, string paramName)
+    {
+        Action action = () => ArgumentExceptionHelpers.ThrowIfNullOrWhiteSpace(argument, paramName);
+
+        action.Should()
+            .Throw<ArgumentException>()
+            .WithMessage(TestConstants.ValueCannotBeNullOrWhiteSpace(paramName));
     }
 }
