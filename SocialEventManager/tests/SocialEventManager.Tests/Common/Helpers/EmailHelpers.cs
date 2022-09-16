@@ -25,7 +25,7 @@ internal static class EmailHelpers
                     || ex.Message == ExceptionConstants.ConnectionRefused
                     || ex.Message == ExceptionConstants.CannotAssignRequestedAddress)
             {
-                Log.Information($"Email SMTP server does not set for port {port}.");
+                Log.Information("Email SMTP server does not set for port {port}.", port);
             }
         }
     }

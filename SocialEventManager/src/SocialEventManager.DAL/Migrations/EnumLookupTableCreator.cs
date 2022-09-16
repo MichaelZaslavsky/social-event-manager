@@ -23,7 +23,7 @@ public class EnumLookupTableCreator
 
     public async Task Run()
     {
-        Log.Debug($"[{_connection.Database}]: Checking for {SchemaConstants.Enum}...");
+        Log.Debug("[{Database}]: Checking for {SchemaConstants.Enum}...", _connection.Database, SchemaConstants.Enum);
 
         await EnsureSchemaExists();
         HashSet<string> enumTableNames = await GetEnumTableNames();
@@ -33,7 +33,7 @@ public class EnumLookupTableCreator
 
         await Task.WhenAll(upsertLookupTasks);
 
-        Log.Debug($"[{_connection.Database}]: Synced all platform enum tables.");
+        Log.Debug("[{Database}]: Synced all platform enum tables.", _connection.Database);
     }
 
     #region Private Methods
@@ -46,19 +46,19 @@ public class EnumLookupTableCreator
 
     private async Task CreateSchemaIfNotExists()
     {
-        Log.Debug($"[{_connection.Database}]: Checking for {SchemaConstants.Enum}...");
+        Log.Debug("[{Database}]: Checking for {Enum}...", _connection.Database, SchemaConstants.Enum);
 
         int rowCount = await _connection.ExecuteScalarAsync<int>(SchemaQueryHelpers.CreateSchemaIfNotExists(SchemaConstants.Enum));
 
         if (rowCount == 1)
         {
-            Log.Debug($"[{_connection.Database}]: Created schema {SchemaConstants.Enum}.");
+            Log.Debug("[{Database}]: Created schema {Enum}.", _connection.Database, SchemaConstants.Enum);
         }
     }
 
     private async Task RecreateType()
     {
-        Log.Debug($"[{_connection.Database}]: Recreating {SchemaConstants.Enum}.{TypeName}...");
+        Log.Debug("[{Database}]: Recreating {Enum}.{TypeName}...", _connection.Database, SchemaConstants.Enum, TypeName);
         await _connection.ExecuteNonQueryAsync(TableQueryHelpers.RecreateType(SchemaConstants.Enum, TypeName));
     }
 
@@ -126,12 +126,12 @@ public class EnumLookupTableCreator
 
     private async Task CreateTable(string tableName)
     {
-        Log.Debug($"[{_connection.Database}]: Creating table {SchemaConstants.Enum}.{tableName}...");
+        Log.Debug("[{Database}]: Creating table {Enum}.{tableName}...", _connection.Database, SchemaConstants.Enum, tableName);
 
         string command = TableQueryHelpers.CreateBasicTable(SchemaConstants.Enum, tableName);
         await _connection.ExecuteNonQueryAsync(command);
 
-        Log.Debug($"[{_connection.Database}]: Created table {SchemaConstants.Enum}.{tableName}.");
+        Log.Debug("[{Database}]: Created table {SchemaConstants.Enum}.{tableName}.", _connection.Database, SchemaConstants.Enum, tableName);
     }
 
     private void MergeValues(Type type, string tableName)
@@ -171,7 +171,7 @@ public class EnumLookupTableCreator
 
         cmd.ExecuteNonQuery();
 
-        Log.Debug($"Synced enums values for {tableName}.");
+        Log.Debug("Synced enums values for {tableName}.", tableName);
     }
 
     #endregion Private Methods
