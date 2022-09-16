@@ -9,7 +9,7 @@ public class ChatHubLogFilter : IHubFilter
     public async ValueTask<object?> InvokeMethodAsync(HubInvocationContext invocationContext, Func<HubInvocationContext, ValueTask<object?>> next)
     {
         string message = JsonConvert.SerializeObject(invocationContext.HubMethodArguments);
-        Log.Information($"Conversation message: '{message}'");
+        Log.Information("Conversation message: '{message}'", message);
 
         return await next(invocationContext);
     }

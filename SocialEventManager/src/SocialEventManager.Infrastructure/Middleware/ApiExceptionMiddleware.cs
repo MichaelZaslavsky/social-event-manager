@@ -49,7 +49,7 @@ public class ApiExceptionMiddleware
         string message = GetInnermostExceptionMessage(ex);
 
         LogEventLevel level = _options.DetermineLogLevel?.Invoke(ex) ?? LogEventLevel.Error;
-        Log.Write(level, ex, $"{ExceptionConstants.AnErrorOccurred}: {message} -- {error.Id}.");
+        Log.Write(level, ex, "{AnErrorOccurred}: {message} -- {error.Id}.", ExceptionConstants.AnErrorOccurred, message, error.Id);
 
         string result = JsonConvert.SerializeObject(error);
         context.Response.ContentType = MediaTypeConstants.ApplicationJson;
