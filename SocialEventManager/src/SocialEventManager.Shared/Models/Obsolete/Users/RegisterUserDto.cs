@@ -9,7 +9,7 @@ namespace SocialEventManager.Shared.Models.Users;
 /// </summary>
 [Obsolete(GlobalConstants.DapperIdentityObsoleteReason)]
 [ExcludeFromCodeCoverage]
-public record RegisterUserDto
+public sealed record RegisterUserDto
 {
     /// <summary>
     /// Gets the name of the registered user.

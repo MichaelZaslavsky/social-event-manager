@@ -1,6 +1,6 @@
 namespace SocialEventManager.API.Utilities.Logging;
 
-public record UserInformation
+public sealed record UserInformation
 {
     public string? UserId { get; init; }
 

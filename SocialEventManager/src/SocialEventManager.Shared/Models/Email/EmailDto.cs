@@ -4,7 +4,7 @@ using SocialEventManager.Shared.Extensions;
 
 namespace SocialEventManager.Shared.Models.Email;
 
-public record EmailDto
+public sealed record EmailDto
 {
     public EmailDto()
     {

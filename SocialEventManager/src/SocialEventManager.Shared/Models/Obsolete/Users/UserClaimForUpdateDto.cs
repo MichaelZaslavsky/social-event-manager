@@ -5,4 +5,4 @@ namespace SocialEventManager.Shared.Models.Users;
 
 [Obsolete(GlobalConstants.DapperIdentityObsoleteReason)]
 [ExcludeFromCodeCoverage]
-public record UserClaimForUpdateDto : UserClaimDto;
+public sealed record UserClaimForUpdateDto : UserClaimDto;
