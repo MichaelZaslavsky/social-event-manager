@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Hangfire;
 using Hangfire.Client;
 using Hangfire.Common;
@@ -31,6 +32,7 @@ internal sealed class CreateContextMock
 
     public CreateContext Object => _context.Value;
 
+    [ExcludeFromCodeCoverage]
     public static void SomeMethod()
     {
         // This is an illustration of a background job.

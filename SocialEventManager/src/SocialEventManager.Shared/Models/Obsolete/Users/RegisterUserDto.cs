@@ -1,9 +1,5 @@
-// This is an example of a partial Identity implementation with Dapper.
-// It was just for learning purposes.
-// It is much more recommended to use the Identity packages with EF and not reinventing the wheel.
-
-/*
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using SocialEventManager.Shared.Constants;
 
 namespace SocialEventManager.Shared.Models.Users;
@@ -11,6 +7,8 @@ namespace SocialEventManager.Shared.Models.Users;
 /// <summary>
 /// The user data for registration.
 /// </summary>
+[Obsolete(GlobalConstants.DapperIdentityObsoleteReason)]
+[ExcludeFromCodeCoverage]
 public record RegisterUserDto
 {
     /// <summary>
@@ -44,4 +42,3 @@ public record RegisterUserDto
     [EmailAddress]
     public string Email { get; init; } = null!;
 }
-*/

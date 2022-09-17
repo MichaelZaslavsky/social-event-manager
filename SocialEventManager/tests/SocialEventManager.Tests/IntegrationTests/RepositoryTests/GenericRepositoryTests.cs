@@ -215,6 +215,7 @@ public sealed class GenericRepositoryTests : RepositoryTestBase<IRolesRepository
     }
 
     [Fact]
+    [Obsolete(GlobalConstants.DapperIdentityObsoleteReason)]
     public void InitializeConstructor_Should_ThrowSqlException_When_DbSessionIsNull()
     {
         Action action = () => new RolesRepository(null!);

@@ -1,15 +1,14 @@
-// This is an example of a partial Identity implementation with Dapper.
-// It was just for learning purposes.
-// It is much more recommended to use the Identity packages with EF and not reinventing the wheel.
-
-/*
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Identity;
+using SocialEventManager.Shared.Constants;
 
 namespace SocialEventManager.Shared.Models.Identity;
 
 /// <summary>
 /// The role.
 /// </summary>
+[Obsolete(GlobalConstants.DapperIdentityObsoleteReason)]
+[ExcludeFromCodeCoverage]
 public sealed class ApplicationRole : IdentityRole
 {
     public ApplicationRole()
@@ -21,4 +20,3 @@ public sealed class ApplicationRole : IdentityRole
     {
     }
 }
-*/

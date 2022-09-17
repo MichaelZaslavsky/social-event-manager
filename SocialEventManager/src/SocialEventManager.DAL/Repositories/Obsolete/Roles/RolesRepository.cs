@@ -1,7 +1,4 @@
-// This is an example of a partial Identity implementation with Dapper.
-// It was just for learning purposes.
-// It is much more recommended to use the Identity packages with EF and not reinventing the wheel.
-
+using System.Diagnostics.CodeAnalysis;
 using Dapper;
 using SocialEventManager.DAL.Infrastructure;
 using SocialEventManager.Shared.Constants;
@@ -9,6 +6,8 @@ using SocialEventManager.Shared.Entities;
 
 namespace SocialEventManager.DAL.Repositories.Roles;
 
+[Obsolete(GlobalConstants.DapperIdentityObsoleteReason)]
+[ExcludeFromCodeCoverage]
 public sealed class RolesRepository : GenericRepository<Role>, IRolesRepository
 {
     private readonly IDbSession _session;
@@ -30,7 +29,6 @@ public sealed class RolesRepository : GenericRepository<Role>, IRolesRepository
             sql, new DynamicParameters(new { role.Id, role.ConcurrencyStamp, role.Name, role.NormalizedName }), _session.Transaction);
     }
 
-    /*
     public async Task<IEnumerable<Role>> GetByUserIdAsync(Guid userId)
     {
         string sql = $@"
@@ -46,5 +44,4 @@ public sealed class RolesRepository : GenericRepository<Role>, IRolesRepository
 
         return await _session.Connection.QueryAsync<Role>(sql, new DynamicParameters(new { userId }), _session.Transaction);
     }
-    */
 }

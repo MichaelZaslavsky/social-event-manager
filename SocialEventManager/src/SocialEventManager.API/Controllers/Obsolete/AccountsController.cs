@@ -1,8 +1,4 @@
-// This is an example of a partial Identity implementation with Dapper.
-// It was just for learning purposes.
-// It is much more recommended to use the Identity packages with EF.
-
-/*
+using System.Diagnostics.CodeAnalysis;
 using System.Security.Claims;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -14,7 +10,7 @@ using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Shared.Models.Identity;
 using SocialEventManager.Shared.Models.Users;
 
-namespace SocialEventManager.API.Controllers;
+namespace SocialEventManager.API.Controllers.Obsolete;
 
 using Microsoft.AspNetCore.Identity;
 
@@ -22,9 +18,11 @@ using Microsoft.AspNetCore.Identity;
 /// Represents user accounts.
 /// </summary>
 [ApiController]
-[Route(ApiPathConstants.ApiController)]
+[Route(ApiPathConstants.ApiController + nameof(Obsolete))]
 [ApiVersion("1.0")]
 [Consumes(MediaTypeConstants.ApplicationJson)]
+[Obsolete(GlobalConstants.DapperIdentityObsoleteReason)]
+[ExcludeFromCodeCoverage]
 public sealed class AccountsController : ControllerBase
 {
     private readonly UserManager<ApplicationUser> _userManager;
@@ -124,4 +122,3 @@ public sealed class AccountsController : ControllerBase
         return Ok();
     }
 }
-*/

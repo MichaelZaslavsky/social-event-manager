@@ -1,14 +1,12 @@
-// This is an example of a partial Identity implementation with Dapper.
-// It was just for learning purposes.
-// It is much more recommended to use the Identity packages with EF and not reinventing the wheel.
-
-/*
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Utilities.Attributes;
 
 namespace SocialEventManager.Shared.Models.Roles;
 
+[Obsolete(GlobalConstants.DapperIdentityObsoleteReason)]
+[ExcludeFromCodeCoverage]
 public abstract record RoleBase
 {
     [Required]
@@ -30,4 +28,3 @@ public abstract record RoleBase
     [MaxLength(LengthConstants.Length255)]
     public string NormalizedName { get; init; } = null!;
 }
-*/

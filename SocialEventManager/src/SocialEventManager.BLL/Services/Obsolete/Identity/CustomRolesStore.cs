@@ -1,19 +1,18 @@
-// This is an example of a partial Identity implementation with Dapper.
-// It was just for learning purposes.
-// It is much more recommended to use the Identity packages with EF and not reinventing the wheel.
-
-/*
+using System.Diagnostics.CodeAnalysis;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using SocialEventManager.BLL.Services.Roles;
 using SocialEventManager.DAL.Infrastructure;
+using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Constants.Validations;
 using SocialEventManager.Shared.Models.Identity;
 using SocialEventManager.Shared.Models.Roles;
 
 namespace SocialEventManager.BLL.Services.Identity;
 
-public sealed class CustomRolesStore : IRoleStore<ApplicationRole>
+[Obsolete(GlobalConstants.DapperIdentityObsoleteReason)]
+[ExcludeFromCodeCoverage]
+public class CustomRolesStore : IRoleStore<ApplicationRole>
 {
     private readonly IRolesService _rolesService;
     private readonly IUnitOfWork _unitOfWork;
@@ -161,4 +160,3 @@ public sealed class CustomRolesStore : IRoleStore<ApplicationRole>
         return _mapper.Map<ApplicationRole>(role);
     }
 }
-*/

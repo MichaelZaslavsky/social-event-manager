@@ -1,14 +1,12 @@
-// This is an example of a partial Identity implementation with Dapper.
-// It was just for learning purposes.
-// It is much more recommended to use the Identity packages with EF and not reinventing the wheel.
-
-/*
 using System.Diagnostics.CodeAnalysis;
+using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Entities;
 using SocialEventManager.Shared.Helpers;
 
 namespace SocialEventManager.Shared.EqualityComparers;
 
+[Obsolete(GlobalConstants.DapperIdentityObsoleteReason)]
+[ExcludeFromCodeCoverage]
 public sealed class UserClaimEqualityComparer : IEqualityComparer<UserClaim>
 {
     public bool Equals(UserClaim? userClaim, UserClaim? otherUserClaim)
@@ -31,4 +29,3 @@ public sealed class UserClaimEqualityComparer : IEqualityComparer<UserClaim>
     public int GetHashCode([DisallowNull] UserClaim obj) =>
         HashingHelpers.RSHash(obj.UserId, obj.Type, obj.Value);
 }
-*/

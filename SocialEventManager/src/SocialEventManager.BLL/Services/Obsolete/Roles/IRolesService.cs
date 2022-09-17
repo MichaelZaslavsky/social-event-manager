@@ -1,12 +1,9 @@
-// This is an example of a partial Identity implementation with Dapper.
-// It was just for learning purposes.
-// It is much more recommended to use the Identity packages with EF and not reinventing the wheel.
-
-/*
+using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Models.Roles;
 
 namespace SocialEventManager.BLL.Services.Roles;
 
+[Obsolete(GlobalConstants.DapperIdentityObsoleteReason)]
 public interface IRolesService
 {
     Task<Guid> CreateRole(RoleForCreationDto roleForCreation);
@@ -21,4 +18,3 @@ public interface IRolesService
 
     Task<bool> DeleteRole(Guid roleId);
 }
-*/

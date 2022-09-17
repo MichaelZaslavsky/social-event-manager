@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Hangfire;
 using Hangfire.Common;
 
@@ -24,6 +25,7 @@ internal sealed class BackgroundJobMock
 
     public BackgroundJob Object => _object.Value;
 
+    [ExcludeFromCodeCoverage]
     public static void SomeMethod()
     {
         // This is an illustration of a background job.

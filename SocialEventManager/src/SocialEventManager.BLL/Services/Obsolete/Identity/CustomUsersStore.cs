@@ -1,14 +1,11 @@
-// This is an example of a partial Identity implementation with Dapper.
-// It was just for learning purposes.
-// It is much more recommended to use the Identity packages with EF and not reinventing the wheel.
-
-/*
+using System.Diagnostics.CodeAnalysis;
 using System.Security.Claims;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using SocialEventManager.BLL.Services.Accounts;
 using SocialEventManager.BLL.Services.Users;
 using SocialEventManager.DAL.Infrastructure;
+using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Constants.Validations;
 using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Shared.Helpers;
@@ -18,7 +15,9 @@ using SocialEventManager.Shared.Models.Users;
 
 namespace SocialEventManager.BLL.Services.Identity;
 
-public sealed class CustomUsersStore :
+[Obsolete(GlobalConstants.DapperIdentityObsoleteReason)]
+[ExcludeFromCodeCoverage]
+public class CustomUsersStore :
     IUserPasswordStore<ApplicationUser>,
     IUserEmailStore<ApplicationUser>,
     IUserRoleStore<ApplicationUser>,
@@ -245,7 +244,7 @@ public sealed class CustomUsersStore :
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
-        ArgumentExceptionHelpers.ThrowIfNullOrWhiteSpace(roleName, nameof(roleName));
+        ArgumentExceptionHelpers.ThrowIfNullOrWhiteSpace(roleName);
 
         UserRoleForCreationDto userRoleForCreation = new(user.Id, roleName);
 
@@ -272,7 +271,7 @@ public sealed class CustomUsersStore :
     public async Task<IList<ApplicationUser>> GetUsersInRoleAsync(string roleName, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
-        ArgumentExceptionHelpers.ThrowIfNullOrWhiteSpace(roleName, nameof(roleName));
+        ArgumentExceptionHelpers.ThrowIfNullOrWhiteSpace(roleName);
 
         IEnumerable<AccountDto> accounts = await _accountsService.GetAccounts(roleName);
         return _mapper.Map<IList<ApplicationUser>>(accounts);
@@ -282,7 +281,7 @@ public sealed class CustomUsersStore :
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
-        ArgumentExceptionHelpers.ThrowIfNullOrWhiteSpace(roleName, nameof(roleName));
+        ArgumentExceptionHelpers.ThrowIfNullOrWhiteSpace(roleName);
 
         UserRoleBase userRoleBase = new(user.Id, roleName);
 
@@ -297,7 +296,7 @@ public sealed class CustomUsersStore :
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
-        ArgumentExceptionHelpers.ThrowIfNullOrWhiteSpace(roleName, nameof(roleName));
+        ArgumentExceptionHelpers.ThrowIfNullOrWhiteSpace(roleName);
 
         UserRoleDto userRole = new(user.Id, roleName);
         return await _userRolesService.IsInRole(userRole);
@@ -462,4 +461,3 @@ public sealed class CustomUsersStore :
         await _userClaimsService.DeleteUserClaims(userClaims, userId);
     }
 }
-*/
