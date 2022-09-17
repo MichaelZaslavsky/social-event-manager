@@ -11,7 +11,7 @@ namespace SocialEventManager.Tests.UnitTests.ExtensionTests;
 
 [UnitTest]
 [Category(CategoryConstants.Extensions)]
-public class SignInResultExtensionsTests
+public sealed class SignInResultExtensionsTests
 {
     [Theory]
     [MemberData(nameof(SignInResultData.SignInResultToUserLoginResult), MemberType = typeof(SignInResultData))]

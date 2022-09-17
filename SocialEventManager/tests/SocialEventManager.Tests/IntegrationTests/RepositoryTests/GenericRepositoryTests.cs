@@ -16,7 +16,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests;
 [Collection(TestConstants.DatabaseDependent)]
 [IntegrationTest]
 [Category(CategoryConstants.Infrastructure)]
-public class GenericRepositoryTests : RepositoryTestBase<IRolesRepository, Role>
+public sealed class GenericRepositoryTests : RepositoryTestBase<IRolesRepository, Role>
 {
     public GenericRepositoryTests(IInMemoryDatabase db, IRolesRepository rolesRepository)
         : base(db, rolesRepository)

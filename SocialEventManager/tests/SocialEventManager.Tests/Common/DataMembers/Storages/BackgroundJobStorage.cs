@@ -2,7 +2,7 @@ using SocialEventManager.Shared.Enums;
 
 namespace SocialEventManager.Tests.Common.DataMembers.Storages;
 
-internal class BackgroundJobStorage : DictionaryStorage<BackgroundJobStorage, BackgroundJobType, bool>
+internal sealed class BackgroundJobStorage : DictionaryStorage<BackgroundJobStorage, BackgroundJobType, bool>
 {
     public override void Init()
     {

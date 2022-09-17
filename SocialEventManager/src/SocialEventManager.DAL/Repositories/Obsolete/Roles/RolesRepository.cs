@@ -9,7 +9,7 @@ using SocialEventManager.Shared.Entities;
 
 namespace SocialEventManager.DAL.Repositories.Roles;
 
-public class RolesRepository : GenericRepository<Role>, IRolesRepository
+public sealed class RolesRepository : GenericRepository<Role>, IRolesRepository
 {
     private readonly IDbSession _session;
 

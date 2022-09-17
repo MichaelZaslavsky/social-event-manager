@@ -10,7 +10,7 @@ using SocialEventManager.Tests.IntegrationTests.Fixtures.Stubs;
 
 namespace SocialEventManager.Tests.IntegrationTests.Fixtures.Fakes;
 
-internal class FakeAccounts : StubBase<Account>, IAccountsRepository
+internal sealed class FakeAccounts : StubBase<Account>, IAccountsRepository
 {
     public override Task<Account?> GetSingleOrDefaultAsync<TFilter>(TFilter filterValue, string columnName)
     {

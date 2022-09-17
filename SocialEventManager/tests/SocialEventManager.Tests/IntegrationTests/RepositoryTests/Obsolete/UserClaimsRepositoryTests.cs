@@ -22,7 +22,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests;
 [Collection(TestConstants.DatabaseDependent)]
 [IntegrationTest]
 [Category(CategoryConstants.Identity)]
-public class UserClaimsRepositoryTests : RepositoryTestBase<IUserClaimsRepository, UserClaim>
+public sealed class UserClaimsRepositoryTests : RepositoryTestBase<IUserClaimsRepository, UserClaim>
 {
     public UserClaimsRepositoryTests(IInMemoryDatabase db, IUserClaimsRepository userClaimsRepository)
         : base(db, userClaimsRepository)

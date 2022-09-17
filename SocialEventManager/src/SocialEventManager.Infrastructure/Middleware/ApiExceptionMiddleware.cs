@@ -8,7 +8,7 @@ using SocialEventManager.Shared.Extensions;
 
 namespace SocialEventManager.Infrastructure.Middleware;
 
-public class ApiExceptionMiddleware
+public sealed class ApiExceptionMiddleware
 {
     private readonly RequestDelegate _next;
     private readonly ApiExceptionOptions _options;

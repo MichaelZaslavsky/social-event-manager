@@ -1,6 +1,6 @@
 namespace SocialEventManager.Infrastructure.Middleware;
 
-public class ApiErrorData
+public sealed class ApiErrorData
 {
     public ApiErrorData(string detail)
     {

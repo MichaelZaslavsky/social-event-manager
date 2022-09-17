@@ -6,7 +6,7 @@ using Xunit;
 
 namespace SocialEventManager.Tests.UnitTests.HelperTests;
 
-public class ArgumentNullExceptionHelpersTests
+public sealed class ArgumentNullExceptionHelpersTests
 {
     [Theory]
     [AutoData]

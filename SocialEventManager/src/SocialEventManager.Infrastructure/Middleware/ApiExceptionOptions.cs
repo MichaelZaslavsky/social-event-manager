@@ -3,7 +3,7 @@ using Serilog.Events;
 
 namespace SocialEventManager.Infrastructure.Middleware;
 
-public class ApiExceptionOptions
+public sealed class ApiExceptionOptions
 {
     public Action<HttpContext, Exception, ApiError> AddResponseDetails { get; set; } = null!;
 

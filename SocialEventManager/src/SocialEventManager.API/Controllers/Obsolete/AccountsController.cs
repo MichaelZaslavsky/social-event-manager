@@ -25,7 +25,7 @@ using Microsoft.AspNetCore.Identity;
 [Route(ApiPathConstants.ApiController)]
 [ApiVersion("1.0")]
 [Consumes(MediaTypeConstants.ApplicationJson)]
-public class AccountsController : ControllerBase
+public sealed class AccountsController : ControllerBase
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;

@@ -9,7 +9,7 @@ namespace SocialEventManager.Tests.UnitTests.ExtensionTests;
 
 [UnitTest]
 [Category(CategoryConstants.Extensions)]
-public class EnumerationExtensionsTests
+public sealed class EnumerationExtensionsTests
 {
     [Theory]
     [InlineData(RoleType.Admin, "Admin")]

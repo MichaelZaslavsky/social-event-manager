@@ -10,7 +10,7 @@ namespace SocialEventManager.Tests.UnitTests.AttributeTests;
 
 [UnitTest]
 [Category(CategoryConstants.Attributes)]
-public class RequestHeaderMatchesMediaTypeAttributeTests
+public sealed class RequestHeaderMatchesMediaTypeAttributeTests
 {
     [Theory]
     [InlineData(null, null, new string[] { }, "requestHeaderToMatch")]

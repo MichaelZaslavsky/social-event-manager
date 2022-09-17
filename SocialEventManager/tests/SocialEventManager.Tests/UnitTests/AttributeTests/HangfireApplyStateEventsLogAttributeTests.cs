@@ -9,7 +9,7 @@ namespace SocialEventManager.Tests.UnitTests.AttributeTests;
 
 [UnitTest]
 [Category(CategoryConstants.Attributes)]
-public class HangfireApplyStateEventsLogAttributeTests
+public sealed class HangfireApplyStateEventsLogAttributeTests
 {
     [Fact]
     public void OnStateApplied_Should_NotThrowException_When_Called()

@@ -4,7 +4,7 @@ using Serilog;
 
 namespace SocialEventManager.API.Hubs;
 
-public class ChatHubLogFilter : IHubFilter
+public sealed class ChatHubLogFilter : IHubFilter
 {
     public async ValueTask<object?> InvokeMethodAsync(HubInvocationContext invocationContext, Func<HubInvocationContext, ValueTask<object?>> next)
     {

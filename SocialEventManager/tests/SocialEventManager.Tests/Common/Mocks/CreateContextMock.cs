@@ -7,7 +7,7 @@ using Moq;
 
 namespace SocialEventManager.Tests.Common.Mocks;
 
-internal class CreateContextMock
+internal sealed class CreateContextMock
 {
     private readonly Lazy<CreateContext> _context;
 

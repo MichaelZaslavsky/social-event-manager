@@ -10,7 +10,7 @@ namespace SocialEventManager.Tests.UnitTests.AttributeTests;
 
 [UnitTest]
 [Category(CategoryConstants.Attributes)]
-public class TrackPerformanceAttributeTests
+public sealed class TrackPerformanceAttributeTests
 {
     private readonly ILogger<TrackPerformanceAttribute> _logger;
 

@@ -7,7 +7,7 @@ using SocialEventManager.Shared.Configurations;
 
 namespace SocialEventManager.Infrastructure.Auth;
 
-public class JwtHandler : IJwtHandler
+public sealed class JwtHandler : IJwtHandler
 {
     private readonly JwtConfiguration _jwtConfiguration;
 

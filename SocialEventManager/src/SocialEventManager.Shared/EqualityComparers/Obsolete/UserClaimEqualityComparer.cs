@@ -9,7 +9,7 @@ using SocialEventManager.Shared.Helpers;
 
 namespace SocialEventManager.Shared.EqualityComparers;
 
-public class UserClaimEqualityComparer : IEqualityComparer<UserClaim>
+public sealed class UserClaimEqualityComparer : IEqualityComparer<UserClaim>
 {
     public bool Equals(UserClaim? userClaim, UserClaim? otherUserClaim)
     {

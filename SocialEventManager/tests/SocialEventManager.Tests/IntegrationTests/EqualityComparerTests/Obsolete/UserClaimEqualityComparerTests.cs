@@ -12,7 +12,7 @@ using Xunit;
 
 namespace SocialEventManager.Tests.IntegrationTests.EqualityComparerTests;
 
-public class UserClaimEqualityComparerTests
+public sealed class UserClaimEqualityComparerTests
 {
     [Theory]
     [AutoData]

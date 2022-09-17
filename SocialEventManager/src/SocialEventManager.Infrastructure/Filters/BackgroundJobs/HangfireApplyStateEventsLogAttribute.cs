@@ -5,7 +5,7 @@ using Hangfire.Storage;
 
 namespace SocialEventManager.Infrastructure.Filters.BackgroundJobs;
 
-public class HangfireApplyStateEventsLogAttribute : JobFilterAttribute, IApplyStateFilter
+public sealed class HangfireApplyStateEventsLogAttribute : JobFilterAttribute, IApplyStateFilter
 {
     private static readonly ILog Logger = LogProvider.GetCurrentClassLogger();
 

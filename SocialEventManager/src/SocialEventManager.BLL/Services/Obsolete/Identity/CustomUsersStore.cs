@@ -18,7 +18,7 @@ using SocialEventManager.Shared.Models.Users;
 
 namespace SocialEventManager.BLL.Services.Identity;
 
-public class CustomUsersStore :
+public sealed class CustomUsersStore :
     IUserPasswordStore<ApplicationUser>,
     IUserEmailStore<ApplicationUser>,
     IUserRoleStore<ApplicationUser>,

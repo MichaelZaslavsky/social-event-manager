@@ -13,7 +13,7 @@ namespace SocialEventManager.Tests.UnitTests.ExtensionTests;
 
 [UnitTest]
 [Category(CategoryConstants.Extensions)]
-public class ResultExtensionsTests
+public sealed class ResultExtensionsTests
 {
     [Theory]
     [AutoData]

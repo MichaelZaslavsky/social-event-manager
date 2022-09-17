@@ -11,7 +11,7 @@ namespace SocialEventManager.Tests.UnitTests.HelperTests;
 
 [UnitTest]
 [Category(CategoryConstants.Helpers)]
-public class ArgumentExceptionHelpersTests
+public sealed class ArgumentExceptionHelpersTests
 {
     [Theory]
     [AutoData]

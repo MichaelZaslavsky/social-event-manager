@@ -1,6 +1,6 @@
 namespace SocialEventManager.Shared.Exceptions;
 
-public class UnprocessableEntityException : ApplicationException
+public sealed class UnprocessableEntityException : ApplicationException
 {
     public UnprocessableEntityException()
     {

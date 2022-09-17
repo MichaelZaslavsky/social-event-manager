@@ -10,7 +10,7 @@ namespace SocialEventManager.Tests.UnitTests.UtilityTests;
 
 [UnitTest]
 [Category(CategoryConstants.Utilities)]
-public class RazorEmailRendererTests
+public sealed class RazorEmailRendererTests
 {
     private readonly IEmailRenderer _emailRenderer;
 

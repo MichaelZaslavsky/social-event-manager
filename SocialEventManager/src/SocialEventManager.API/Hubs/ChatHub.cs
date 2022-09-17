@@ -4,7 +4,7 @@ using SocialEventManager.Shared.Constants;
 
 namespace SocialEventManager.API.Hubs;
 
-public class ChatHub : Hub
+public sealed class ChatHub : Hub
 {
     public async Task SendMessage(Guid userId, string message)
     {

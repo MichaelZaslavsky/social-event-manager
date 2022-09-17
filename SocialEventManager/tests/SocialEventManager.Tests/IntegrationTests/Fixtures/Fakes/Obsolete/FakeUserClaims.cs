@@ -10,7 +10,7 @@ using SocialEventManager.Tests.IntegrationTests.Fixtures.Stubs;
 
 namespace SocialEventManager.Tests.IntegrationTests.Fixtures.Fakes;
 
-internal class FakeUserClaims : StubBase<UserClaim>, IUserClaimsRepository
+internal sealed class FakeUserClaims : StubBase<UserClaim>, IUserClaimsRepository
 {
     public override Task InsertAsync(IEnumerable<UserClaim> userClaims)
     {

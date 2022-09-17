@@ -9,7 +9,7 @@ using SocialEventManager.Tests.Common.Helpers;
 
 namespace SocialEventManager.Tests.IntegrationTests.Fixtures.Stubs;
 
-internal class StubSmtpClient : SmtpClient, ISmtpClient
+internal sealed class StubSmtpClient : SmtpClient, ISmtpClient
 {
     public new Task AuthenticateAsync(string userName, string password, CancellationToken cancellationToken = default)
     {

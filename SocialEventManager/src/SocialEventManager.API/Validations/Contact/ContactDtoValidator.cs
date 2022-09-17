@@ -4,7 +4,7 @@ using SocialEventManager.Shared.Models.Contact;
 
 namespace SocialEventManager.API.Validations.Contact;
 
-public class ContactDtoValidator : AbstractValidator<ContactDto>
+public sealed class ContactDtoValidator : AbstractValidator<ContactDto>
 {
     public ContactDtoValidator()
     {

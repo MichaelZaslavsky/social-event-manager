@@ -3,7 +3,7 @@ using SocialEventManager.Shared.Constants;
 
 namespace SocialEventManager.Infrastructure.Loggers;
 
-public class ScopeInformation : IScopeInformation
+public sealed class ScopeInformation : IScopeInformation
 {
     public ScopeInformation()
     {

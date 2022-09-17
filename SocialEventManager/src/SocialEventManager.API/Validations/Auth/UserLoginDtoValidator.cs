@@ -4,7 +4,7 @@ using SocialEventManager.Shared.Models.Auth;
 
 namespace SocialEventManager.API.Validations.Auth;
 
-public class UserLoginDtoValidator : AbstractValidator<UserLoginDto>
+public sealed class UserLoginDtoValidator : AbstractValidator<UserLoginDto>
 {
     public UserLoginDtoValidator()
     {

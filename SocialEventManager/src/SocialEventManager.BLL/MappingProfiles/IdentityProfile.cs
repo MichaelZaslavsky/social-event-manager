@@ -3,7 +3,7 @@ using SocialEventManager.Shared.Models.Auth;
 
 namespace SocialEventManager.BLL.MappingConfigurations;
 
-public class IdentityProfile : Profile
+public sealed class IdentityProfile : Profile
 {
     public IdentityProfile()
     {

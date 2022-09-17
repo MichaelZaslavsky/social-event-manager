@@ -3,7 +3,7 @@ using Hangfire.Common;
 
 namespace SocialEventManager.Tests.Common.Mocks;
 
-internal class BackgroundJobMock
+internal sealed class BackgroundJobMock
 {
     private readonly Lazy<BackgroundJob> _object;
 

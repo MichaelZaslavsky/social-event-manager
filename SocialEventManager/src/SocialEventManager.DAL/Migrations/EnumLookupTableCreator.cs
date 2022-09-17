@@ -11,7 +11,7 @@ using SocialEventManager.Shared.Utilities.Attributes;
 
 namespace SocialEventManager.DAL.Migrations;
 
-public class EnumLookupTableCreator
+public sealed class EnumLookupTableCreator
 {
     private const string TypeName = "LoadedValues";
     private readonly SqlConnection _connection;

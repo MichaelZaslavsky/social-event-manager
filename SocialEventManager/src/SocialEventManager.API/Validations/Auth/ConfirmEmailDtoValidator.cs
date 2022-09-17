@@ -4,7 +4,7 @@ using SocialEventManager.Shared.Models.Auth;
 
 namespace SocialEventManager.API.Validations.Auth;
 
-public class ConfirmEmailDtoValidator : AbstractValidator<ConfirmEmailDto>
+public sealed class ConfirmEmailDtoValidator : AbstractValidator<ConfirmEmailDto>
 {
     public ConfirmEmailDtoValidator()
     {

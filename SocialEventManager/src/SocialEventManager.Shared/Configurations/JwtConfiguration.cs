@@ -2,7 +2,7 @@ using SocialEventManager.Shared.Constants;
 
 namespace SocialEventManager.Shared.Configurations;
 
-public class JwtConfiguration
+public sealed class JwtConfiguration
 {
     private readonly string _key = null!;
     private readonly string _expiryInDays = null!;

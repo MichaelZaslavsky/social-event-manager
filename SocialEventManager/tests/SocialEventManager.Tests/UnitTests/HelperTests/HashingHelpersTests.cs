@@ -9,7 +9,7 @@ namespace SocialEventManager.Tests.UnitTests.HelperTests;
 
 [UnitTest]
 [Category(CategoryConstants.Helpers)]
-public class HashingHelpersTests
+public sealed class HashingHelpersTests
 {
     [Theory]
     [InlineData(TestConstants.SomeText, TestConstants.LoremIpsum)]

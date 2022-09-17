@@ -5,7 +5,7 @@ using SocialEventManager.Infrastructure.Loggers;
 
 namespace SocialEventManager.Infrastructure.Attributes;
 
-public class TrackPerformanceAttribute : ActionFilterAttribute
+public sealed class TrackPerformanceAttribute : ActionFilterAttribute
 {
     private readonly ILogger<TrackPerformanceAttribute> _logger;
     private readonly Stopwatch _timer;

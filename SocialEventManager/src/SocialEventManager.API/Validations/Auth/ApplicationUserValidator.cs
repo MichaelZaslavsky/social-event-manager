@@ -4,7 +4,7 @@ using SocialEventManager.Shared.Models.Auth;
 
 namespace SocialEventManager.API.Validations.Auth;
 
-public class ApplicationUserValidator : AbstractValidator<ApplicationUser>
+public sealed class ApplicationUserValidator : AbstractValidator<ApplicationUser>
 {
     public ApplicationUserValidator()
     {

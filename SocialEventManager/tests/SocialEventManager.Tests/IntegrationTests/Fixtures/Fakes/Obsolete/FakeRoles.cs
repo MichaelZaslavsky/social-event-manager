@@ -10,7 +10,7 @@ using SocialEventManager.Tests.IntegrationTests.Fixtures.Stubs;
 
 namespace SocialEventManager.Tests.IntegrationTests.Fixtures.Fakes;
 
-internal class FakeRoles : StubBase<Role>, IRolesRepository
+internal sealed class FakeRoles : StubBase<Role>, IRolesRepository
 {
     public Task<Guid> InsertRole(Role role)
     {

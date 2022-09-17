@@ -11,7 +11,7 @@ using SocialEventManager.Shared.Entities;
 
 namespace SocialEventManager.DAL.Repositories.Users;
 
-public class UserClaimsRepository : GenericRepository<UserClaim>, IUserClaimsRepository
+public sealed class UserClaimsRepository : GenericRepository<UserClaim>, IUserClaimsRepository
 {
     private readonly IDbSession _session;
 

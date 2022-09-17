@@ -6,7 +6,7 @@ using SocialEventManager.Shared.Models.Email;
 
 namespace SocialEventManager.BLL.Services.Contact;
 
-public class ContactService : IContactService
+public sealed class ContactService : IContactService
 {
     private readonly IEmailService _emailService;
     private readonly IMapper _mapper;

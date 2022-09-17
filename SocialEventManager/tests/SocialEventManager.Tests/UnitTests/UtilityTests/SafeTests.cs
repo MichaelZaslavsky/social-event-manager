@@ -9,7 +9,7 @@ namespace SocialEventManager.Tests.UnitTests.UtilityTests;
 
 [UnitTest]
 [Category(CategoryConstants.Utilities)]
-public class SafeTests
+public sealed class SafeTests
 {
     #region Synchronous
 

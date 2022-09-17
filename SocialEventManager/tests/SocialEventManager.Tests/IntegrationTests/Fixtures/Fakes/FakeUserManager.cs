@@ -8,7 +8,7 @@ using SocialEventManager.Tests.Common.DataMembers.Storages.Identity;
 
 namespace SocialEventManager.Tests.IntegrationTests.Fixtures.Fakes;
 
-public class FakeUserManager : UserManager<ApplicationUser>
+public sealed class FakeUserManager : UserManager<ApplicationUser>
 {
     private readonly IPasswordHasher<ApplicationUser> _passwordHasher;
 

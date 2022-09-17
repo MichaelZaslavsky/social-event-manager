@@ -10,7 +10,7 @@ using SocialEventManager.Shared.Models.Roles;
 
 namespace SocialEventManager.BLL.MappingProfiles;
 
-public class RoleProfile : Profile
+public sealed class RoleProfile : Profile
 {
     public RoleProfile()
     {

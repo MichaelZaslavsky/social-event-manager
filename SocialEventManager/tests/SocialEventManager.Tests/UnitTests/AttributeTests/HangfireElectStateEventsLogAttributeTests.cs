@@ -10,7 +10,7 @@ namespace SocialEventManager.Tests.UnitTests.AttributeTests;
 
 [UnitTest]
 [Category(CategoryConstants.Attributes)]
-public class HangfireElectStateEventsLogAttributeTests
+public sealed class HangfireElectStateEventsLogAttributeTests
 {
     [Fact]
     public void OnStateElection_Should_NotThrowException_When_CandidateStateIsSuccees()

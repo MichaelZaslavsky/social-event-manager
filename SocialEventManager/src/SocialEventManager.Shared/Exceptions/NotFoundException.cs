@@ -1,6 +1,6 @@
 namespace SocialEventManager.Shared.Exceptions;
 
-public class NotFoundException : ApplicationException
+public sealed class NotFoundException : ApplicationException
 {
     public NotFoundException()
     {

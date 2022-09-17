@@ -9,7 +9,7 @@ namespace SocialEventManager.Tests.UnitTests.AttributeTests;
 
 [UnitTest]
 [Category(CategoryConstants.Attributes)]
-public class NotDefaultAttributeTests
+public sealed class NotDefaultAttributeTests
 {
     [Theory]
     [InlineData(null, true)]

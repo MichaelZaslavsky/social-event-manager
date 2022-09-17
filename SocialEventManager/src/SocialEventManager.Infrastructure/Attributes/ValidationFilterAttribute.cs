@@ -4,7 +4,7 @@ using SocialEventManager.Shared.Constants.Validations;
 
 namespace SocialEventManager.Infrastructure.Attributes;
 
-public class ValidationFilterAttribute : IAsyncActionFilter
+public sealed class ValidationFilterAttribute : IAsyncActionFilter
 {
     public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {

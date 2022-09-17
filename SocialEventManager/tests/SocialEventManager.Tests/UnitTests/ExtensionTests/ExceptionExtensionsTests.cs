@@ -10,7 +10,7 @@ namespace SocialEventManager.Tests.UnitTests.ExtensionTests;
 
 [UnitTest]
 [Category(CategoryConstants.Extensions)]
-public class ExceptionExtensionsTests
+public sealed class ExceptionExtensionsTests
 {
     [Theory]
     [MemberData(nameof(ExceptionData.ExceptionDataForHttpStatusAndTitle), MemberType = typeof(ExceptionData))]

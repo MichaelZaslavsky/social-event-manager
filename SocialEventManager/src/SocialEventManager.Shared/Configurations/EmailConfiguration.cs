@@ -2,7 +2,7 @@ using SocialEventManager.Shared.Constants;
 
 namespace SocialEventManager.Shared.Configurations;
 
-public class EmailConfiguration
+public sealed class EmailConfiguration
 {
     private readonly string _userName = null!;
     private readonly string _password = null!;

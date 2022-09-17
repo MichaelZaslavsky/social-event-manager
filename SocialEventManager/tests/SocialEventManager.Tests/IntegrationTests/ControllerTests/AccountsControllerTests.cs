@@ -24,7 +24,7 @@ namespace SocialEventManager.Tests.IntegrationTests.ControllerTests;
 [Collection(TestConstants.StorageDependent)]
 [IntegrationTest]
 [Category(CategoryConstants.Identity)]
-public class AccountsControllerTests : IntegrationTest
+public sealed class AccountsControllerTests : IntegrationTest
 {
     public AccountsControllerTests(ApiWebApplicationFactory fixture, IJwtHandler jwtHandler)
       : base(fixture, jwtHandler)

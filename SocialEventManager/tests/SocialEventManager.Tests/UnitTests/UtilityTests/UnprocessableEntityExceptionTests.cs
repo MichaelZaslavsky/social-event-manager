@@ -10,7 +10,7 @@ namespace SocialEventManager.Tests.UnitTests.UtilityTests;
 
 [UnitTest]
 [Category(CategoryConstants.Utilities)]
-public class UnprocessableEntityExceptionTests
+public sealed class UnprocessableEntityExceptionTests
 {
     [Theory]
     [AutoData]

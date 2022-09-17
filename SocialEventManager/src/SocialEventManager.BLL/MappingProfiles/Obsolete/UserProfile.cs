@@ -11,7 +11,7 @@ using SocialEventManager.Shared.Models.Users;
 
 namespace SocialEventManager.BLL.MappingProfiles;
 
-public class UserProfile : Profile
+public sealed class UserProfile : Profile
 {
     public UserProfile()
     {

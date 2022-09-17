@@ -6,7 +6,7 @@ using SocialEventManager.Shared.Helpers;
 namespace SocialEventManager.API.Utilities.Attributes;
 
 [AttributeUsage(AttributeTargets.All, Inherited = true, AllowMultiple = true)]
-public class RequestHeaderMatchesMediaTypeAttribute : Attribute, IActionConstraint
+public sealed class RequestHeaderMatchesMediaTypeAttribute : Attribute, IActionConstraint
 {
     private readonly MediaTypeCollection _mediaTypes = new();
     private readonly string _requestHeaderToMatch;

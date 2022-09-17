@@ -16,7 +16,7 @@ using SocialEventManager.Shared.Models.Users;
 
 namespace SocialEventManager.BLL.Services.Accounts;
 
-public class AccountsService : ServiceBase<IAccountsRepository, Account>, IAccountsService
+public sealed class AccountsService : ServiceBase<IAccountsRepository, Account>, IAccountsService
 {
     private readonly IUserClaimsService _userClaimsService;
     private readonly IUserRolesService _userRolesService;
