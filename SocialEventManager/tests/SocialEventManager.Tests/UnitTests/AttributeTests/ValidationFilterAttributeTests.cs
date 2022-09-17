@@ -13,7 +13,7 @@ namespace SocialEventManager.Tests.UnitTests.AttributeTests;
 
 [UnitTest]
 [Category(CategoryConstants.Attributes)]
-public class ValidationFilterAttributeTests
+public sealed class ValidationFilterAttributeTests
 {
     [Fact]
     public async Task Init_Should_ReturnNullResult_When_ArgumentsAreValid()

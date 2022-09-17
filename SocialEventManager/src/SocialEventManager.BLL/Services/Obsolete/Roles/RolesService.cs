@@ -14,7 +14,7 @@ using SocialEventManager.Shared.Models.Roles;
 
 namespace SocialEventManager.BLL.Services.Roles;
 
-public class RolesService : ServiceBase<IRolesRepository, Role>, IRolesService
+public sealed class RolesService : ServiceBase<IRolesRepository, Role>, IRolesService
 {
     public RolesService(IRolesRepository rolesRepository, IMapper mapper)
         : base(rolesRepository, mapper)

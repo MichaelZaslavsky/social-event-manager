@@ -10,7 +10,7 @@ namespace SocialEventManager.Tests.UnitTests.ExtensionTests;
 
 [UnitTest]
 [Category(CategoryConstants.Extensions)]
-public class StringExtensionsTests
+public sealed class StringExtensionsTests
 {
     [Theory]
     [MemberData(nameof(StringData.NullOrEmptyData), MemberType = typeof(StringData))]

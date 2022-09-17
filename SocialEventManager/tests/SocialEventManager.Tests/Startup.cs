@@ -13,7 +13,7 @@ using Xunit.DependencyInjection.Logging;
 
 namespace SocialEventManager.Tests;
 
-public class Startup
+public sealed class Startup
 {
     public IConfiguration Configuration { get; set; } = null!;
 

@@ -9,7 +9,7 @@ namespace SocialEventManager.Tests.UnitTests.ExtensionTests;
 
 [UnitTest]
 [Category(CategoryConstants.Extensions)]
-public class GuidExtensionsTests
+public sealed class GuidExtensionsTests
 {
     private const int Base64LengthWithoutEquals = 22;
     private const string EmptyBase64 = "AAAAAAAAAAAAAAAAAAAAAA";

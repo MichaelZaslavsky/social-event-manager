@@ -1,6 +1,6 @@
 namespace SocialEventManager.Shared.Configurations;
 
-public class HangfireSettingsConfiguration
+public sealed class HangfireSettingsConfiguration
 {
     private readonly string _userName = null!;
     private readonly string _password = null!;

@@ -19,7 +19,7 @@ namespace SocialEventManager.Tests.IntegrationTests.RepositoryTests;
 [Collection(TestConstants.DatabaseDependent)]
 [IntegrationTest]
 [Category(CategoryConstants.Identity)]
-public class AccountsRepositoryTests : RepositoryTestBase<IAccountsRepository, Account>
+public sealed class AccountsRepositoryTests : RepositoryTestBase<IAccountsRepository, Account>
 {
     public AccountsRepositoryTests(IInMemoryDatabase db, IAccountsRepository accountsRepository)
         : base(db, accountsRepository)

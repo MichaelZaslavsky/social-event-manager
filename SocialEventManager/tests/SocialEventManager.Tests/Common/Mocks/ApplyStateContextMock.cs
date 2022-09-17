@@ -5,7 +5,7 @@ using Moq;
 
 namespace SocialEventManager.Tests.Common.Mocks;
 
-internal class ApplyStateContextMock
+internal sealed class ApplyStateContextMock
 {
     private readonly Lazy<ApplyStateContext> _context;
 

@@ -12,7 +12,7 @@ using SocialEventManager.Tests.IntegrationTests.Fixtures.Stubs;
 
 namespace SocialEventManager.Tests.IntegrationTests.Fixtures.Fakes;
 
-internal class FakeUserRoles : StubBase<UserRole>, IUserRolesRepository
+internal sealed class FakeUserRoles : StubBase<UserRole>, IUserRolesRepository
 {
     public Task<int> InsertAsync(Guid userId, string roleName)
     {

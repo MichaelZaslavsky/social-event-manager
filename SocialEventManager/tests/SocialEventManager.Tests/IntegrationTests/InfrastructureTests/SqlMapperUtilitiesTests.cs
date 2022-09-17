@@ -10,7 +10,7 @@ namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests;
 
 [IntegrationTest]
 [Category(CategoryConstants.Infrastructure)]
-public class SqlMapperUtilitiesTests
+public sealed class SqlMapperUtilitiesTests
 {
     [Fact]
     public void GetTableName_Should_ReturnTableName_When_ClassHasTableAttribute()

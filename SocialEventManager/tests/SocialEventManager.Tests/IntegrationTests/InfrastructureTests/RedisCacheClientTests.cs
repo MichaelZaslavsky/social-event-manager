@@ -9,7 +9,7 @@ namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests;
 
 [IntegrationTest]
 [Category(CategoryConstants.Infrastructure)]
-public class RedisCacheClientTests
+public sealed class RedisCacheClientTests
 {
     private readonly IRedisClientsManagerAsync _manager;
 

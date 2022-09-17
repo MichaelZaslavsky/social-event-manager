@@ -4,7 +4,7 @@ using SocialEventManager.Shared.Constants.Validations;
 namespace SocialEventManager.Shared.Utilities.Attributes;
 
 [AttributeUsage(AttributeTargets.All, AllowMultiple = false)]
-public class NotDefaultAttribute : ValidationAttribute
+public sealed class NotDefaultAttribute : ValidationAttribute
 {
     public NotDefaultAttribute()
         : base(ValidationConstants.TheFieldMustNotHaveTheDefaultValue)

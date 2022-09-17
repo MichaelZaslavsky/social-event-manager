@@ -9,7 +9,7 @@ namespace SocialEventManager.Tests.UnitTests.ExtensionTests;
 
 [UnitTest]
 [Category(CategoryConstants.Extensions)]
-public class ParallelExtensionsTests
+public sealed class ParallelExtensionsTests
 {
     private int counter = 1;
 

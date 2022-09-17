@@ -10,7 +10,7 @@ namespace SocialEventManager.Tests.UnitTests.UtilityTests;
 
 [UnitTest]
 [Category(CategoryConstants.Utilities)]
-public class BadRequestExceptionTests
+public sealed class BadRequestExceptionTests
 {
     [Theory]
     [AutoData]

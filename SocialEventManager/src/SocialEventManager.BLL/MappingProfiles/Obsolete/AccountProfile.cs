@@ -10,7 +10,7 @@ using SocialEventManager.Shared.Models.Identity;
 
 namespace SocialEventManager.BLL.MappingProfiles;
 
-public class AccountProfile : Profile
+public sealed class AccountProfile : Profile
 {
     public AccountProfile()
     {

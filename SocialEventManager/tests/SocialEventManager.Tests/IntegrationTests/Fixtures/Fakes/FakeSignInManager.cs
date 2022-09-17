@@ -9,7 +9,7 @@ using SocialEventManager.Tests.Common.DataMembers.Storages.Identity;
 
 namespace SocialEventManager.Tests.IntegrationTests.Fixtures.Fakes;
 
-public class FakeSignInManager : SignInManager<ApplicationUser>
+public sealed class FakeSignInManager : SignInManager<ApplicationUser>
 {
     private readonly IPasswordHasher<ApplicationUser> _passwordHasher;
 

@@ -14,7 +14,7 @@ namespace SocialEventManager.API.Controllers;
 [ApiVersion("1.0")]
 [Consumes(MediaTypeConstants.ApplicationJson)]
 [AllowAnonymous]
-public class ContactController : ControllerBase
+public sealed class ContactController : ControllerBase
 {
     private readonly IContactService _contactService;
 

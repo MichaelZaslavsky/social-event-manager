@@ -1,6 +1,6 @@
 namespace SocialEventManager.Infrastructure.Middleware;
 
-public class ApiError
+public sealed class ApiError
 {
     public string Id { get; set; } = null!;
 

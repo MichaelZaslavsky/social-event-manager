@@ -12,7 +12,7 @@ namespace SocialEventManager.Shared.Entities;
 [Table(TableNameConstants.UserClaims)]
 [Alias(nameof(TableNameConstants.UserClaims))]
 [UniqueConstraint(nameof(UserId), nameof(Type))]
-public class UserClaim : ClaimBase
+public sealed class UserClaim : ClaimBase
 {
     [Required]
     [ForeignKey(typeof(Account), OnDelete = GlobalConstants.Cascade)]

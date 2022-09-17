@@ -9,7 +9,7 @@ using SocialEventManager.Tests.Common.DataMembers.Storages;
 
 namespace SocialEventManager.Tests.IntegrationTests.Fixtures.Stubs;
 
-internal class StubInvalidRoles : StubBase<Role>, IRolesRepository
+internal sealed class StubInvalidRoles : StubBase<Role>, IRolesRepository
 {
     public Task<IEnumerable<Role>> GetByUserIdAsync(Guid userId) => Task.FromResult<IEnumerable<Role>>(null!);
 

@@ -7,7 +7,7 @@ using SocialEventManager.Tests.Common.Helpers;
 
 namespace SocialEventManager.Tests.IntegrationTests.Fixtures.Stubs;
 
-internal class StubEmailSmtpProvider : IEmailProvider
+internal sealed class StubEmailSmtpProvider : IEmailProvider
 {
     public async Task SendEmailAsync(MimeMessage message)
     {

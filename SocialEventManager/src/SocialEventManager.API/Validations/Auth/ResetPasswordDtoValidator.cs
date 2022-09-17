@@ -4,7 +4,7 @@ using SocialEventManager.Shared.Models.Auth;
 
 namespace SocialEventManager.API.Validations.Auth;
 
-public class ResetPasswordDtoValidator : AbstractValidator<ResetPasswordDto>
+public sealed class ResetPasswordDtoValidator : AbstractValidator<ResetPasswordDto>
 {
     public ResetPasswordDtoValidator()
     {

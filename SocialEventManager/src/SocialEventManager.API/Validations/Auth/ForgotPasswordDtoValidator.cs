@@ -4,7 +4,7 @@ using SocialEventManager.Shared.Models.Auth;
 
 namespace SocialEventManager.API.Validations.Auth;
 
-public class ForgotPasswordDtoValidator : AbstractValidator<ForgotPasswordDto>
+public sealed class ForgotPasswordDtoValidator : AbstractValidator<ForgotPasswordDto>
 {
     public ForgotPasswordDtoValidator()
     {

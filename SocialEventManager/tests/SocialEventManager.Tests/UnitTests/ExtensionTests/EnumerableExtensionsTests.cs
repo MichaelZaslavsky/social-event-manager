@@ -10,7 +10,7 @@ namespace SocialEventManager.Tests.UnitTests.ExtensionTests;
 
 [UnitTest]
 [Category(CategoryConstants.Extensions)]
-public class EnumerableExtensionsTests
+public sealed class EnumerableExtensionsTests
 {
     [Theory]
     [MemberData(nameof(EnumerableData.EmptyData), MemberType = typeof(EnumerableData))]

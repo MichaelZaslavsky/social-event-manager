@@ -20,7 +20,7 @@ namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests;
 [Collection(TestConstants.StorageDependent)]
 [IntegrationTest]
 [Category(CategoryConstants.Infrastructure)]
-public class EmailTests
+public sealed class EmailTests
 {
     [Theory]
     [MemberData(nameof(EmailData.EmailMessage), MemberType = typeof(EmailData))]

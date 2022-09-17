@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace SocialEventManager.Shared.Models.Identity;
 
-public class ApplicationUser : IdentityUser
+public sealed class ApplicationUser : IdentityUser
 {
     public string AuthenticationType { get; set; } = null!;
 

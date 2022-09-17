@@ -2,7 +2,7 @@ using Hangfire.States;
 
 namespace SocialEventManager.Tests.Common.Mocks;
 
-internal class ElectStateContextMock
+internal sealed class ElectStateContextMock
 {
     private readonly Lazy<ElectStateContext> _context;
 

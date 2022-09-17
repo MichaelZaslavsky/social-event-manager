@@ -6,7 +6,7 @@ using SocialEventManager.Shared.Models.Email;
 
 namespace SocialEventManager.Infrastructure.Email;
 
-public class EmailService : IEmailService
+public sealed class EmailService : IEmailService
 {
     private readonly EmailConfiguration _emailConfiguration;
     private readonly IEmailProvider _emailProvider;

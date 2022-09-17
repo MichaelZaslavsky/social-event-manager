@@ -10,7 +10,7 @@ using SocialEventManager.Shared.Constants.Validations;
 
 namespace SocialEventManager.BLL.Services.Email;
 
-public class RazorEmailRenderer : IEmailRenderer
+public sealed class RazorEmailRenderer : IEmailRenderer
 {
     private readonly IRazorViewEngine _razorViewEngine;
     private readonly ITempDataProvider _tempDataProvider;

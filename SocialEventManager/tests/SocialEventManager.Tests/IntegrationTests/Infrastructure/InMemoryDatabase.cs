@@ -9,7 +9,7 @@ using SocialEventManager.Shared.Extensions;
 
 namespace SocialEventManager.Tests.IntegrationTests.Infrastructure;
 
-public class InMemoryDatabase : IInMemoryDatabase
+public sealed class InMemoryDatabase : IInMemoryDatabase
 {
     private readonly OrmLiteConnectionFactory _dbFactory;
 

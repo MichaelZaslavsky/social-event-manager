@@ -14,7 +14,7 @@ using SocialEventManager.Shared.Models.Email;
 
 namespace SocialEventManager.BLL.Services;
 
-public class AuthService : IAuthService
+public sealed class AuthService : IAuthService
 {
     private readonly IConfiguration _config;
     private readonly IJwtHandler _jwtHandler;

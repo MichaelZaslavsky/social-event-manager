@@ -10,7 +10,7 @@ namespace SocialEventManager.Tests.UnitTests.FilterTests;
 
 [UnitTest]
 [Category(CategoryConstants.Filters)]
-public class TrackActionPerformanceFilterTests
+public sealed class TrackActionPerformanceFilterTests
 {
     private readonly ILogger<TrackActionPerformanceFilter> _logger;
 

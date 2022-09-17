@@ -10,7 +10,7 @@ namespace SocialEventManager.Tests.IntegrationTests.ControllerTests;
 
 [IntegrationTest]
 [Category(CategoryConstants.HealthChecks)]
-public class HealthCheckTests : IntegrationTest
+public sealed class HealthCheckTests : IntegrationTest
 {
     public HealthCheckTests(ApiWebApplicationFactory fixture, IJwtHandler jwtHandler)
       : base(fixture, jwtHandler)

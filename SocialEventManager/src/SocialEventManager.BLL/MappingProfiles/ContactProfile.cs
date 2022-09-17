@@ -5,7 +5,7 @@ using SocialEventManager.Shared.Models.Email;
 
 namespace SocialEventManager.BLL.MappingProfiles;
 
-public class ContactProfile : Profile
+public sealed class ContactProfile : Profile
 {
     public ContactProfile()
     {

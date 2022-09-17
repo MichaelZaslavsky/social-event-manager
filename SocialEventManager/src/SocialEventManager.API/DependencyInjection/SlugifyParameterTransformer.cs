@@ -2,7 +2,7 @@ using System.Text.RegularExpressions;
 
 namespace SocialEventManager.API.DependencyInjection;
 
-public class SlugifyParameterTransformer : IOutboundParameterTransformer
+public sealed class SlugifyParameterTransformer : IOutboundParameterTransformer
 {
     public string? TransformOutbound(object? value)
     {

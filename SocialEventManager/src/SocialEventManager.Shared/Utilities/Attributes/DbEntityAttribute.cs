@@ -3,7 +3,7 @@ using SocialEventManager.DAL.Utilities.Enums;
 namespace SocialEventManager.Shared.Utilities.Attributes;
 
 [AttributeUsage(AttributeTargets.All, AllowMultiple = false)]
-public class DbEntityAttribute : Attribute
+public sealed class DbEntityAttribute : Attribute
 {
     public DbEntityAttribute(DbTypes dbTypes)
     {

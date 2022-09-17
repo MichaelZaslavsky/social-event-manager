@@ -8,7 +8,7 @@ using Xunit;
 
 namespace SocialEventManager.Tests.UnitTests.ExtensionTests;
 
-public class TypeExtensionsTests
+public sealed class TypeExtensionsTests
 {
     [Fact]
     public void GetNonPublicStaticMethod_Should_ReturnMethod_When_MethodNameExists()

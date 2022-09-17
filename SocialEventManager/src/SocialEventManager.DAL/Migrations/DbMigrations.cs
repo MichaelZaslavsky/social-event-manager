@@ -6,7 +6,7 @@ using SocialEventManager.Shared.Constants;
 
 namespace SocialEventManager.DAL.Migrations;
 
-public class DbMigrations
+public sealed class DbMigrations
 {
     private readonly IConfiguration _config;
 

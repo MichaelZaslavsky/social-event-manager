@@ -9,7 +9,7 @@ namespace SocialEventManager.Tests.UnitTests.HelperTests;
 
 [UnitTest]
 [Category(CategoryConstants.Helpers)]
-public class RandomGeneratorHelpersTests
+public sealed class RandomGeneratorHelpersTests
 {
     [Theory]
     [AutoData]

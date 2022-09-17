@@ -12,7 +12,7 @@ namespace SocialEventManager.Infrastructure.Identity;
 using SocialEventManager.Shared.Constants;
 
 [ExcludeFromCodeCoverage]
-public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
+public sealed class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)

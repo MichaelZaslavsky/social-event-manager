@@ -13,7 +13,7 @@ using Dapper.Contrib.Extensions;
 [Table(TableNameConstants.UserRoles)]
 [Alias(nameof(TableNameConstants.UserRoles))]
 [UniqueConstraint(nameof(UserId), nameof(RoleId))]
-public class UserRole
+public sealed class UserRole
 {
     [Computed]
     [PrimaryKey]

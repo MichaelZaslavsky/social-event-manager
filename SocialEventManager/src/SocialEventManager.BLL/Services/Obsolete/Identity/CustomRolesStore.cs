@@ -13,7 +13,7 @@ using SocialEventManager.Shared.Models.Roles;
 
 namespace SocialEventManager.BLL.Services.Identity;
 
-public class CustomRolesStore : IRoleStore<ApplicationRole>
+public sealed class CustomRolesStore : IRoleStore<ApplicationRole>
 {
     private readonly IRolesService _rolesService;
     private readonly IUnitOfWork _unitOfWork;

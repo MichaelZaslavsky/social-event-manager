@@ -13,7 +13,7 @@ namespace SocialEventManager.API.Controllers;
 [ApiVersion("1.0")]
 [Consumes(MediaTypeConstants.ApplicationJson)]
 [AllowAnonymous]
-public class AccountsController : ControllerBase
+public sealed class AccountsController : ControllerBase
 {
     private readonly IAuthService _authService;
 

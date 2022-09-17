@@ -4,7 +4,7 @@ using Hangfire.Server;
 
 namespace SocialEventManager.Infrastructure.Filters.BackgroundJobs;
 
-public class HangfireServerEventsLogAttribute : JobFilterAttribute, IServerFilter
+public sealed class HangfireServerEventsLogAttribute : JobFilterAttribute, IServerFilter
 {
     private static readonly ILog Logger = LogProvider.GetCurrentClassLogger();
 

@@ -7,7 +7,7 @@ namespace SocialEventManager.Shared.Entities;
 [Table(TableNameConstants.Roles)]
 [Alias(nameof(TableNameConstants.Roles))]
 [UniqueConstraint(nameof(Name))]
-public class Role
+public sealed class Role
 {
     [Required]
     [ExplicitKey]

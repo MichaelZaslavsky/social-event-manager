@@ -14,7 +14,7 @@ using SocialEventManager.Shared.Models.Users;
 
 namespace SocialEventManager.BLL.Services.Users;
 
-public class UserRolesService : ServiceBase<IUserRolesRepository, UserRole>, IUserRolesService
+public sealed class UserRolesService : ServiceBase<IUserRolesRepository, UserRole>, IUserRolesService
 {
     private readonly IRolesService _rolesService;
 

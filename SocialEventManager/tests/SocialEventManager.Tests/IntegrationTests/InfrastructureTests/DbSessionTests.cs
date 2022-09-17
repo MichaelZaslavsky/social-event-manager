@@ -12,7 +12,7 @@ namespace SocialEventManager.Tests.IntegrationTests.InfrastructureTests;
 
 [IntegrationTest]
 [Category(CategoryConstants.Infrastructure)]
-public class DbSessionTests
+public sealed class DbSessionTests
 {
     private readonly IConfiguration _configuration;
 

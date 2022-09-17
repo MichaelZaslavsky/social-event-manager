@@ -14,7 +14,7 @@ using Dapper.Contrib.Extensions;
 [Alias(nameof(TableNameConstants.Accounts))]
 [UniqueConstraint(nameof(Email))]
 [UniqueConstraint(nameof(UserId))]
-public class Account
+public sealed class Account
 {
     [Computed]
     [AutoIncrement]

@@ -16,7 +16,7 @@ using SocialEventManager.Shared.Models.Users;
 
 namespace SocialEventManager.BLL.Services.Users;
 
-public class UserClaimsService : ServiceBase<IUserClaimsRepository, UserClaim>, IUserClaimsService
+public sealed class UserClaimsService : ServiceBase<IUserClaimsRepository, UserClaim>, IUserClaimsService
 {
     public UserClaimsService(IUserClaimsRepository userClaimsRepository, IUnitOfWork unitOfWork, IMapper mapper)
         : base(userClaimsRepository, unitOfWork, mapper)

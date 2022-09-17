@@ -11,7 +11,7 @@ using SocialEventManager.Shared.Entities;
 
 namespace SocialEventManager.DAL.Repositories.Users;
 
-public class UserRolesRepository : GenericRepository<UserRole>, IUserRolesRepository
+public sealed class UserRolesRepository : GenericRepository<UserRole>, IUserRolesRepository
 {
     private readonly IDbSession _session;
 

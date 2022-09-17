@@ -2,7 +2,7 @@ using Hangfire.Client;
 
 namespace SocialEventManager.Tests.Common.Mocks;
 
-internal class CreatedContextMock
+internal sealed class CreatedContextMock
 {
     private readonly Lazy<CreatedContext> _context;
 

@@ -26,7 +26,7 @@ namespace SocialEventManager.Tests.IntegrationTests.ControllerTests;
 [Collection(TestConstants.StorageDependent)]
 [IntegrationTest]
 [Category(CategoryConstants.Identity)]
-public class RolesControllerTests : IntegrationTest
+public sealed class RolesControllerTests : IntegrationTest
 {
     public RolesControllerTests(ApiWebApplicationFactory fixture)
       : base(fixture)

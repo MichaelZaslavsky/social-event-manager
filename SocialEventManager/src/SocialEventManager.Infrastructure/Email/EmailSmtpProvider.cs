@@ -6,7 +6,7 @@ using SocialEventManager.Shared.Configurations;
 
 namespace SocialEventManager.Infrastructure.Email;
 
-public class EmailSmtpProvider : IEmailProvider
+public sealed class EmailSmtpProvider : IEmailProvider
 {
     private const int Port = 587;
     private readonly EmailConfiguration _emailConfiguration;
