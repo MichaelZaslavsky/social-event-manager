@@ -1,15 +1,14 @@
-// This is an example of a partial Identity implementation with Dapper.
-// It was just for learning purposes.
-// It is much more recommended to use the Identity packages with EF and not reinventing the wheel.
-
-/*
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using SocialEventManager.BLL.Services.Identity;
+using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Models.Identity;
 
-namespace SocialEventManager.API.DependencyInjection;
+namespace SocialEventManager.API.DependencyInjection.Obsolete;
 
+[Obsolete(GlobalConstants.DapperIdentityObsoleteReason)]
+[ExcludeFromCodeCoverage]
 public static class IdentityServiceCollectionExtensions
 {
     public static IServiceCollection AddIdentityConfigurations(this IServiceCollection services)
@@ -78,4 +77,3 @@ public static class IdentityServiceCollectionExtensions
 
     #endregion Private Methods
 }
-*/

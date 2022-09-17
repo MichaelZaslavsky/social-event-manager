@@ -1,8 +1,4 @@
-// This is an example of a partial Identity implementation with Dapper.
-// It was just for learning purposes.
-// It is much more recommended to use the Identity packages with EF.
-
-/*
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
@@ -16,9 +12,11 @@ namespace SocialEventManager.API.Controllers;
 /// Represents roles.
 /// </summary>
 [ApiController]
-[Route(ApiPathConstants.ApiController)]
+[Route(ApiPathConstants.ApiController + nameof(Obsolete))]
 [ApiVersion("1.0")]
 [Consumes(MediaTypeConstants.ApplicationJson)]
+[Obsolete(GlobalConstants.DapperIdentityObsoleteReason)]
+[ExcludeFromCodeCoverage]
 public sealed class RolesController : ControllerBase
 {
     private readonly RoleManager<ApplicationRole> _roleManager;
@@ -59,4 +57,3 @@ public sealed class RolesController : ControllerBase
         return Ok();
     }
 }
-*/

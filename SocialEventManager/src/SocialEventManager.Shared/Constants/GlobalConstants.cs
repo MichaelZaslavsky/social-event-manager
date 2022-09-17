@@ -12,4 +12,9 @@ public static class GlobalConstants
     public const string Localhost = "localhost";
     public const string Cascade = "CASCADE";
     public const int Size = 1000;
+
+    public const string DapperIdentityObsoleteReason = @"
+        This is an example of a partial Identity implementation with Dapper.
+        It was just for learning purposes.
+        It is much more recommended to use the Identity packages with EF.";
 }

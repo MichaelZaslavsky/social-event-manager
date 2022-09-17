@@ -1,10 +1,10 @@
-// This is an example of a partial Identity implementation with Dapper.
-// It was just for learning purposes.
-// It is much more recommended to use the Identity packages with EF and not reinventing the wheel.
+using System.Diagnostics.CodeAnalysis;
+using SocialEventManager.Shared.Constants;
 
-/*
 namespace SocialEventManager.Shared.Models.Users;
 
+[Obsolete(GlobalConstants.DapperIdentityObsoleteReason)]
+[ExcludeFromCodeCoverage]
 public record UserRoleForCreationDto : UserRoleBase
 {
     public UserRoleForCreationDto(string userId, string roleName)
@@ -12,4 +12,3 @@ public record UserRoleForCreationDto : UserRoleBase
     {
     }
 }
-*/

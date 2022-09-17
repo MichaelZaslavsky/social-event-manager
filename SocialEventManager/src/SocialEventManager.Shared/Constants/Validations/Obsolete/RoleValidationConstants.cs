@@ -1,10 +1,9 @@
-// This is an example of a partial Identity implementation with Dapper.
-// It was just for learning purposes.
-// It is much more recommended to use the Identity packages with EF and not reinventing the wheel.
+using System.Diagnostics.CodeAnalysis;
 
-/*
 namespace SocialEventManager.Shared.Constants.Validations;
 
+[Obsolete(GlobalConstants.DapperIdentityObsoleteReason)]
+[ExcludeFromCodeCoverage]
 public static class RoleValidationConstants
 {
     public static string CouldNotInsertRole(string name) =>
@@ -16,4 +15,3 @@ public static class RoleValidationConstants
     public static string CouldNotDeleteRole(string name) =>
         $"Could not delete role {name}.";
 }
-*/

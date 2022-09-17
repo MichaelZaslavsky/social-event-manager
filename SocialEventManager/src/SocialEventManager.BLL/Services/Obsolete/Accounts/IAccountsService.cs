@@ -1,12 +1,9 @@
-// This is an example of a partial Identity implementation with Dapper.
-// It was just for learning purposes.
-// It is much more recommended to use the Identity packages with EF and not reinventing the wheel.
-
-/*
+using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Models.Accounts;
 
 namespace SocialEventManager.BLL.Services.Accounts;
 
+[Obsolete(GlobalConstants.DapperIdentityObsoleteReason)]
 public interface IAccountsService
 {
     Task<int> CreateAccount(AccountForCreationDto accountForCreation);
@@ -25,4 +22,3 @@ public interface IAccountsService
 
     Task<bool> DeleteAccount(Guid userId);
 }
-*/

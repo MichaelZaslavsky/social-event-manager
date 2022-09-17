@@ -1,8 +1,4 @@
-// This is an example of a partial Identity implementation with Dapper.
-// It was just for learning purposes.
-// It is much more recommended to use the Identity packages with EF and not reinventing the wheel.
-
-/*
+using System.Diagnostics.CodeAnalysis;
 using ServiceStack.DataAnnotations;
 using SocialEventManager.Shared.Constants;
 
@@ -14,6 +10,8 @@ using Dapper.Contrib.Extensions;
 [Alias(nameof(TableNameConstants.Accounts))]
 [UniqueConstraint(nameof(Email))]
 [UniqueConstraint(nameof(UserId))]
+[Obsolete(GlobalConstants.DapperIdentityObsoleteReason)]
+[ExcludeFromCodeCoverage]
 public sealed class Account
 {
     [Computed]
@@ -72,4 +70,3 @@ public sealed class Account
     [Required]
     public bool TwoFactorEnabled { get; set; }
 }
-*/

@@ -1,8 +1,4 @@
-// This is an example of a partial Identity implementation with Dapper.
-// It was just for learning purposes.
-// It is much more recommended to use the Identity packages with EF and not reinventing the wheel.
-
-/*
+using System.Diagnostics.CodeAnalysis;
 using Dapper;
 using Newtonsoft.Json;
 using SocialEventManager.DAL.Infrastructure;
@@ -11,6 +7,8 @@ using SocialEventManager.Shared.Entities;
 
 namespace SocialEventManager.DAL.Repositories.Users;
 
+[Obsolete(GlobalConstants.DapperIdentityObsoleteReason)]
+[ExcludeFromCodeCoverage]
 public sealed class UserClaimsRepository : GenericRepository<UserClaim>, IUserClaimsRepository
 {
     private readonly IDbSession _session;
@@ -52,4 +50,3 @@ public sealed class UserClaimsRepository : GenericRepository<UserClaim>, IUserCl
         return await _session.Connection.ExecuteAsync(sql, new DynamicParameters(new { userClaimsJson }), _session.Transaction) > 0;
     }
 }
-*/

@@ -1,13 +1,11 @@
-// This is an example of a partial Identity implementation with Dapper.
-// It was just for learning purposes.
-// It is much more recommended to use the Identity packages with EF and not reinventing the wheel.
-
-/*
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using SocialEventManager.Shared.Constants;
 
 namespace SocialEventManager.Shared.Models.Users;
 
+[Obsolete(GlobalConstants.DapperIdentityObsoleteReason)]
+[ExcludeFromCodeCoverage]
 public abstract record UserClaimBase
 {
     public int Id { get; init; }
@@ -22,4 +20,3 @@ public abstract record UserClaimBase
     [MaxLength(LengthConstants.LengthMax)]
     public string Value { get; init; } = null!;
 }
-*/

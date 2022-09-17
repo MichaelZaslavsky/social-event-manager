@@ -1,15 +1,14 @@
-// This is an example of a partial Identity implementation with Dapper.
-// It was just for learning purposes.
-// It is much more recommended to use the Identity packages with EF and not reinventing the wheel.
-
-/*
+using System.Diagnostics.CodeAnalysis;
 using AutoMapper;
+using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Entities;
 using SocialEventManager.Shared.Models.Accounts;
 using SocialEventManager.Shared.Models.Identity;
 
 namespace SocialEventManager.BLL.MappingProfiles;
 
+[Obsolete(GlobalConstants.DapperIdentityObsoleteReason)]
+[ExcludeFromCodeCoverage]
 public sealed class AccountProfile : Profile
 {
     public AccountProfile()
@@ -31,4 +30,3 @@ public sealed class AccountProfile : Profile
             .ForMember(dest => dest.LockoutEnd, opt => opt.MapFrom(src => src.LockoutEnd.HasValue ? new DateTimeOffset(src.LockoutEnd.Value) : (DateTimeOffset?)null));
     }
 }
-*/

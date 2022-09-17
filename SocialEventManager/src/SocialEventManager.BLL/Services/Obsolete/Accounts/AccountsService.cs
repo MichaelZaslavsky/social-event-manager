@@ -1,12 +1,9 @@
-// This is an example of a partial Identity implementation with Dapper.
-// It was just for learning purposes.
-// It is much more recommended to use the Identity packages with EF and not reinventing the wheel.
-
-/*
+using System.Diagnostics.CodeAnalysis;
 using AutoMapper;
 using SocialEventManager.BLL.Services.Infrastructure;
 using SocialEventManager.BLL.Services.Users;
 using SocialEventManager.DAL.Repositories.Accounts;
+using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Constants.Validations;
 using SocialEventManager.Shared.Entities;
 using SocialEventManager.Shared.Exceptions;
@@ -16,6 +13,8 @@ using SocialEventManager.Shared.Models.Users;
 
 namespace SocialEventManager.BLL.Services.Accounts;
 
+[Obsolete(GlobalConstants.DapperIdentityObsoleteReason)]
+[ExcludeFromCodeCoverage]
 public sealed class AccountsService : ServiceBase<IAccountsRepository, Account>, IAccountsService
 {
     private readonly IUserClaimsService _userClaimsService;
@@ -111,4 +110,3 @@ public sealed class AccountsService : ServiceBase<IAccountsRepository, Account>,
 
     #endregion Private Methods
 }
-*/

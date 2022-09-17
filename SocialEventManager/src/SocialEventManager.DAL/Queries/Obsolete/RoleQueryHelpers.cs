@@ -1,13 +1,11 @@
-// This is an example of a partial Identity implementation with Dapper.
-// It was just for learning purposes.
-// It is much more recommended to use the Identity packages with EF and not reinventing the wheel.
-
-/*
+using System.Diagnostics.CodeAnalysis;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Entities;
 
 namespace SocialEventManager.DAL.Queries;
 
+[Obsolete(GlobalConstants.DapperIdentityObsoleteReason)]
+[ExcludeFromCodeCoverage]
 public static class RoleQueryHelpers
 {
     public static string ExistsByRoleName(string userRolesAlias = "UR")
@@ -22,4 +20,3 @@ public static class RoleQueryHelpers
             )";
     }
 }
-*/

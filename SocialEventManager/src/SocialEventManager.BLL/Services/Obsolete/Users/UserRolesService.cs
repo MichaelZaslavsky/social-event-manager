@@ -1,11 +1,8 @@
-// This is an example of a partial Identity implementation with Dapper.
-// It was just for learning purposes.
-// It is much more recommended to use the Identity packages with EF and not reinventing the wheel.
-
-/*
+using System.Diagnostics.CodeAnalysis;
 using SocialEventManager.BLL.Services.Infrastructure;
 using SocialEventManager.BLL.Services.Roles;
 using SocialEventManager.DAL.Repositories.Users;
+using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Constants.Validations;
 using SocialEventManager.Shared.Entities;
 using SocialEventManager.Shared.Exceptions;
@@ -14,6 +11,8 @@ using SocialEventManager.Shared.Models.Users;
 
 namespace SocialEventManager.BLL.Services.Users;
 
+[Obsolete(GlobalConstants.DapperIdentityObsoleteReason)]
+[ExcludeFromCodeCoverage]
 public sealed class UserRolesService : ServiceBase<IUserRolesRepository, UserRole>, IUserRolesService
 {
     private readonly IRolesService _rolesService;
@@ -69,4 +68,3 @@ public sealed class UserRolesService : ServiceBase<IUserRolesRepository, UserRol
 
     #endregion Private Methods
 }
-*/
