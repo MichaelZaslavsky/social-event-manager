@@ -5,4 +5,4 @@ namespace SocialEventManager.Shared.Models.Accounts;
 
 [Obsolete(GlobalConstants.DapperIdentityObsoleteReason)]
 [ExcludeFromCodeCoverage]
-public record AccountForCreationDto : AccountBase;
+public sealed record AccountForCreationDto : AccountBase;

@@ -5,7 +5,7 @@ namespace SocialEventManager.Shared.Models.Users;
 
 [Obsolete(GlobalConstants.DapperIdentityObsoleteReason)]
 [ExcludeFromCodeCoverage]
-public record UserRoleDto : UserRoleBase
+public sealed record UserRoleDto : UserRoleBase
 {
     public UserRoleDto(string userId, string roleName)
         : base(userId, roleName)

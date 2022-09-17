@@ -5,4 +5,4 @@ namespace SocialEventManager.Shared.Models.Roles;
 
 [Obsolete(GlobalConstants.DapperIdentityObsoleteReason)]
 [ExcludeFromCodeCoverage]
-public record RoleDto : RoleBase;
+public sealed record RoleDto : RoleBase;

@@ -1,6 +1,6 @@
 namespace SocialEventManager.API.Utilities.Logging;
 
-public record ContextInformation
+public sealed record ContextInformation
 {
     public string? Host { get; init; }
 
