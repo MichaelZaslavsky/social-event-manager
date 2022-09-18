@@ -1,7 +1,11 @@
+using System.Data.SqlClient;
 using System.Globalization;
+using System.Net;
+using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Constants.Validations;
+using SocialEventManager.Shared.Exceptions;
 using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Shared.Models.Auth;
 using SocialEventManager.Tests.Common.Constants;
@@ -39,6 +43,22 @@ internal static class UserData
                 GetUserRegistration(email: null!),
                 ValidationConstants.TheFieldIsRequired(nameof(UserRegistrationDto.Email))
             },
+        };
+
+    public static TheoryData<UserRegistrationDto, HttpStatusCode, string> InvalidUserRegistrationExceptionData =>
+        new()
+        {
+            { GetUserRegistration(firstName: nameof(ValidationException)), HttpStatusCode.BadRequest, ExceptionConstants.BadRequest },
+            { GetUserRegistration(firstName: nameof(BadRequestException)), HttpStatusCode.BadRequest, ExceptionConstants.BadRequest },
+            { GetUserRegistration(firstName: nameof(NotFoundException)), HttpStatusCode.NotFound, ExceptionConstants.NotFound },
+            { GetUserRegistration(firstName: nameof(UnprocessableEntityException)), HttpStatusCode.UnprocessableEntity, ExceptionConstants.UnprocessableEntity },
+            { GetUserRegistration(firstName: nameof(NullReferenceException)), HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError },
+            { GetUserRegistration(firstName: nameof(ArgumentNullException)), HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError },
+            { GetUserRegistration(firstName: nameof(ArgumentException)), HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError },
+            { GetUserRegistration(firstName: nameof(TimeoutException)), HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError },
+            { GetUserRegistration(firstName: nameof(SqlException)), HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError },
+            { GetUserRegistration(firstName: nameof(OutOfMemoryException)), HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError },
+            { GetUserRegistration(firstName: nameof(Exception)), HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError },
         };
 
     public static TheoryData<ConfirmEmailDto> ValidConfirmEmail =>
