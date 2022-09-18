@@ -16,7 +16,7 @@ public sealed class ValidationFilterAttribute : IAsyncActionFilter
 
         if (!context.ModelState.IsValid)
         {
-            context.Result = new UnprocessableEntityObjectResult(context.ModelState);
+            context.Result = new BadRequestObjectResult(context.ModelState);
         }
 
         await next();

@@ -27,7 +27,7 @@ public sealed class ValidationFilterAttributeTests
 
     [Theory]
     [AutoData]
-    public async Task Init_Should_ReturnUnprocessableEntity_When_ModelHasErrors(string key, string errorMessage)
+    public async Task Init_Should_ReturnBadRequest_When_ModelHasErrors(string key, string errorMessage)
     {
         ValidationFilterAttribute validationFilter = new();
 
@@ -37,10 +37,10 @@ public sealed class ValidationFilterAttributeTests
         await validationFilter.OnActionExecutionAsync(context, ActionContextHelpers.GetMockActionExecutionDelegate());
 
         context.Result.Should().NotBeNull()
-            .And.BeOfType<UnprocessableEntityObjectResult>();
+            .And.BeOfType<BadRequestObjectResult>();
 
-        UnprocessableEntityObjectResult result = (context.Result as UnprocessableEntityObjectResult)!;
-        result.StatusCode.Should().Be((int)HttpStatusCode.UnprocessableEntity);
+        BadRequestObjectResult result = (context.Result as BadRequestObjectResult)!;
+        result.StatusCode.Should().Be((int)HttpStatusCode.BadRequest);
 
         result.Value.Should().BeOfType<SerializableError>();
         SerializableError error = (result.Value as SerializableError)!;
