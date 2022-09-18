@@ -16,6 +16,7 @@ public sealed class GuidExtensionsTests
 
     [Theory]
     [AutoData]
+    [InlineData("e7f86dd7-fcae-fdf7-76df-8e7aefcf7ed7")]
     public void EncodeBase64String_DecodeBase64String_Should_ReturnInitialGuid_When_Called(Guid guid)
     {
         string actualBase64 = guid.EncodeBase64String();
@@ -40,5 +41,13 @@ public sealed class GuidExtensionsTests
     {
         Guid actual = ((ReadOnlySpan<char>)base64).DecodeBase64String();
         actual.Should().Be(Guid.Empty);
+    }
+
+    [Theory]
+    [InlineData("123456789-123456789_1234")]
+    public void DecodeBase64String_Should_ReturnExpectedResult_When_StringIsOfValidLength(string base64)
+    {
+        Guid actual = ((ReadOnlySpan<char>)base64).DecodeBase64String();
+        actual.Should().Be("e7f86dd7-fcae-fdf7-76df-8e7aefcf7ed7");
     }
 }
