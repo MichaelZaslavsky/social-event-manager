@@ -4,6 +4,8 @@ using System.Net;
 using Bogus;
 using FluentAssertions;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.DependencyInjection;
 using netDumbster.smtp;
 using SocialEventManager.Infrastructure.Auth;
 using SocialEventManager.Shared.Constants;
@@ -16,6 +18,7 @@ using SocialEventManager.Tests.Common.DataMembers.Identity;
 using SocialEventManager.Tests.Common.DataMembers.Storages.Identity;
 using SocialEventManager.Tests.Common.Helpers;
 using SocialEventManager.Tests.IntegrationTests.Fixtures;
+using SocialEventManager.Tests.IntegrationTests.Fixtures.Fakes;
 using Xunit;
 using Xunit.Categories;
 
@@ -64,6 +67,24 @@ public sealed class AccountsControllerTests : IntegrationTest
         (HttpStatusCode statusCode, string message) = await Client.CreateAsyncWithError(TestApiPathConstants.AccountsRegister, userRegistration);
         statusCode.Should().Be(HttpStatusCode.BadRequest);
         message.Should().Contain(expected);
+
+        UserStorage.Instance.Data.Should().HaveCount(initialCount);
+    }
+
+    [Theory]
+    [MemberData(nameof(UserData.InvalidUserRegistrationExceptionData), MemberType = typeof(UserData))]
+    public async Task Register_Should_NotReturnOkStatus_When_CreateUserReturnsException(
+        UserRegistrationDto userRegistration, HttpStatusCode expectedStatusCode, string expectedMessage)
+    {
+        int initialCount = UserStorage.Instance.Data.Count;
+
+        HttpClient client = Factory.WithWebHostBuilder(builder =>
+            builder.ConfigureTestServices(services => services.AddTransient<UserManager<ApplicationUser>, FakeInvalidUserManager>()))
+                .CreateClient(new());
+
+        (HttpStatusCode statusCode, string message) = await client.CreateAsyncWithError(TestApiPathConstants.AccountsRegister, userRegistration);
+        statusCode.Should().Be(expectedStatusCode);
+        message.Should().Contain(expectedMessage);
 
         UserStorage.Instance.Data.Should().HaveCount(initialCount);
     }
