@@ -29,16 +29,9 @@ public static class ExceptionConstants
     public const string ConnectionRefused = "Connection refused";
     public const string CannotAssignRequestedAddress = "Cannot assign requested address";
 
-    public static string InvalidObjectName(string objectName) => $"Invalid object name '{objectName}'.";
-
     public static string CannotInsertTheValueNull(string columnName, string tableName, string databaseName = DbConstants.SocialEventManagerTest) =>
         $"Cannot insert the value NULL into column '{columnName}', table '{databaseName}.{tableName}'; " +
         $"column does not allow nulls. INSERT fails.{TheStatementHasBeenTerminatedWithSpace}";
-
-    public static string ForeignKeyConstraintConflict(
-        string foriegnKeyName, string tableName, string columnName, string dbName = DbConstants.SocialEventManagerTest) =>
-        $"The INSERT statement conflicted with the FOREIGN KEY constraint \"{foriegnKeyName}\". " +
-        $"The conflict occurred in database \"{dbName}\", table \"{tableName}\", column '{columnName}'.{TheStatementHasBeenTerminatedWithSpace}";
 
     public static string ViolationOfPrimaryKeyConstraint(string partialConstraintName) =>
         $"{ViolationOfKeyConstraint("PRIMARY")} '{partialConstraintName}";
@@ -51,18 +44,10 @@ public static class ExceptionConstants
 
     public static string MethodIsNotFound(string methodName, string className) => $"Method '{methodName}' is not found in '{className}' class.";
 
-    public static string DuplicateRoleName(string roleName) => $"\"Role name '{roleName}' {IsAlreadyTaken}(DuplicateRoleName)\"";
-
     public static string UnexpectedException(Exception ex) => $"Unexpected exception, {ex}";
-
-    #region Private Fields
 
     private const string TheStatementHasBeenTerminatedWithSpace = "\r\nThe statement has been terminated.";
 
     private static string ViolationOfKeyConstraint(string keyType) =>
         $"Violation of {keyType} KEY constraint";
-
-    private const string IsAlreadyTaken = "is already taken.";
-
-    #endregion Private Fields
 }
