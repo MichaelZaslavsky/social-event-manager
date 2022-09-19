@@ -11,37 +11,37 @@
 		<PackageReference Include="Dapper" Version="2.0.123" />
 		<PackageReference Include="Dapper.Contrib" Version="2.0.78" />
 		<PackageReference Include="Evolve" Version="3.0.0" />
-		<PackageReference Include="FluentValidation" Version="11.2.1" />
+		<PackageReference Include="FluentValidation" Version="11.2.2" />
 		<PackageReference Include="Hangfire.Core" Version="1.7.31" />
 		<PackageReference Include="LanguageExt.Core" Version="4.2.9" />
-		<PackageReference Include="MailKit" Version="3.3.0" />
+		<PackageReference Include="MailKit" Version="3.4.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.8" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.9" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.RazorPages" Version="2.2.5" />
 		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.3">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions" Version="6.0.8" />
+		<PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions" Version="6.0.9" />
 		<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Identity.Core" Version="6.0.8" />
-		<PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="6.0.8" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
-		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.22.1" />
-		<PackageReference Include="MimeKit" Version="3.4.0" />
+		<PackageReference Include="Microsoft.Extensions.Identity.Core" Version="6.0.9" />
+		<PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="6.0.9" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.2" />
+		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.23.1" />
+		<PackageReference Include="MimeKit" Version="3.4.1" />
 		<PackageReference Include="NetEscapades.EnumGenerators" Version="1.0.0-beta04" />
-		<PackageReference Include="SecurityCodeScan.VS2019" Version="5.6.6">
+		<PackageReference Include="SecurityCodeScan.VS2019" Version="5.6.7">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Serilog" Version="2.11.0" />
-		<PackageReference Include="ServiceStack.Redis" Version="6.2.0" />
+		<PackageReference Include="Serilog" Version="2.12.0" />
+		<PackageReference Include="ServiceStack.Redis" Version="6.3.0" />
 		<PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
-		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.22.1" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.23.1" />
 	</ItemGroup>
 
 	<Import Project="..\SocialEventManager.Shared\SocialEventManager.Shared.projitems" Label="Shared" />
