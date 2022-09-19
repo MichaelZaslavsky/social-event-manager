@@ -60,6 +60,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Constants\TableNameConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\Validations\ValidationConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\ParallelExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\TaskHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Auth\ApplicationUser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Auth\ConfirmEmailDto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Auth\ForgotPasswordDto.cs" />
