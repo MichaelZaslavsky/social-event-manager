@@ -11,18 +11,18 @@ public sealed class EmailConfiguration
     public string UserName
     {
         get => _userName;
-        init => _userName = value ?? throw new ArgumentNullException(nameof(value), ExceptionConstants.ArgumentNullException);
+        init => _userName = value ?? throw new ArgumentNullException(nameof(UserName), ExceptionConstants.ArgumentNullException);
     }
 
     public string Password
     {
         get => _password;
-        init => _password = value ?? throw new ArgumentNullException(nameof(value), ExceptionConstants.ArgumentNullException);
+        init => _password = value ?? throw new ArgumentNullException(nameof(Password), ExceptionConstants.ArgumentNullException);
     }
 
     public string Host
     {
         get => _host;
-        init => _host = value ?? throw new ArgumentNullException(nameof(value), ExceptionConstants.ArgumentNullException);
+        init => _host = value ?? throw new ArgumentNullException(nameof(Host), ExceptionConstants.ArgumentNullException);
     }
 }

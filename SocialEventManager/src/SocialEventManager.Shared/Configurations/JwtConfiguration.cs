@@ -12,24 +12,24 @@ public sealed class JwtConfiguration
     public string Key
     {
         get => _key;
-        init => _key = value ?? throw new ArgumentNullException(nameof(value), ExceptionConstants.ArgumentNullException);
+        init => _key = value ?? throw new ArgumentNullException(nameof(Key), ExceptionConstants.ArgumentNullException);
     }
 
     public string ExpiryInDays
     {
         get => _expiryInDays;
-        init => _expiryInDays = value ?? throw new ArgumentNullException(nameof(value), ExceptionConstants.ArgumentNullException);
+        init => _expiryInDays = value ?? throw new ArgumentNullException(nameof(ExpiryInDays), ExceptionConstants.ArgumentNullException);
     }
 
     public string Issuer
     {
         get => _issuer;
-        init => _issuer = value ?? throw new ArgumentNullException(nameof(value), ExceptionConstants.ArgumentNullException);
+        init => _issuer = value ?? throw new ArgumentNullException(nameof(Issuer), ExceptionConstants.ArgumentNullException);
     }
 
     public string Audience
     {
         get => _audience;
-        init => _audience = value ?? throw new ArgumentNullException(nameof(value), ExceptionConstants.ArgumentNullException);
+        init => _audience = value ?? throw new ArgumentNullException(nameof(Audience), ExceptionConstants.ArgumentNullException);
     }
 }
