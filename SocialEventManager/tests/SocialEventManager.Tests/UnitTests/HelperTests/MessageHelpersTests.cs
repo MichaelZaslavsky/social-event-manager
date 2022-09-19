@@ -8,7 +8,7 @@ namespace SocialEventManager.Tests.UnitTests.HelperTests;
 
 [UnitTest]
 [Category(CategoryConstants.Helpers)]
-public class MessageHelpersTests
+public sealed class MessageHelpersTests
 {
     [Fact]
     public void BuildRequestMessage_Should_ReturnNull_When_HttpRequestIsNull()

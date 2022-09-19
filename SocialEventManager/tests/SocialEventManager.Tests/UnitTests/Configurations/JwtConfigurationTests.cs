@@ -8,7 +8,7 @@ namespace SocialEventManager.Tests.UnitTests.Configurations;
 
 [UnitTest]
 [Category(nameof(UnitTests))]
-public class JwtConfigurationTests
+public sealed class JwtConfigurationTests
 {
     [Theory]
     [InlineData(null, TestConstants.SomeText, TestConstants.MoreText, TestConstants.LoremIpsum, nameof(JwtConfiguration.Key))]

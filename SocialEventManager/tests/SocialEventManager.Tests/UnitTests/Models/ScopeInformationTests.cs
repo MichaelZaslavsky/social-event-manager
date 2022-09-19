@@ -6,7 +6,7 @@ using Xunit;
 
 namespace SocialEventManager.Tests.UnitTests.Models;
 
-public class ScopeInformationTests
+public sealed class ScopeInformationTests
 {
     [Fact]
     public void Init_Should_Succeed_When_Called()

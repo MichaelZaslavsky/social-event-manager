@@ -8,7 +8,7 @@ namespace SocialEventManager.Tests.UnitTests.Configurations;
 
 [UnitTest]
 [Category(nameof(UnitTests))]
-public class HangfireSettingsConfigurationTests
+public sealed class HangfireSettingsConfigurationTests
 {
     [Theory]
     [InlineData(null, TestConstants.SomeText, nameof(HangfireSettingsConfiguration.UserName))]
