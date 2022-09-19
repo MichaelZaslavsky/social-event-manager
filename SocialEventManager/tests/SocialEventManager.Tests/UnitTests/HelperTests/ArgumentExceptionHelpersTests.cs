@@ -3,6 +3,7 @@ using FluentAssertions;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Helpers;
 using SocialEventManager.Tests.Common.Constants;
+using SocialEventManager.Tests.Common.DataMembers;
 using SocialEventManager.Tests.DataMembers.Common;
 using Xunit;
 using Xunit.Categories;

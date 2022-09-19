@@ -42,12 +42,9 @@ public sealed class RolesService : ServiceBase<IRolesRepository, Role>, IRolesSe
     {
         IEnumerable<Role> roles = await Repository.GetByUserIdAsync(userId);
 
-        if (roles.IsEmpty())
-        {
-            throw new NotFoundException($"The user roles for user '{userId}' {ValidationConstants.WereNotFound}");
-        }
-
-        return Mapper.Map<IEnumerable<RoleDto>>(roles);
+        return roles.IsEmpty()
+            ? throw new NotFoundException($"The user roles for user '{userId}' {ValidationConstants.WereNotFound}")
+            : Mapper.Map<IEnumerable<RoleDto>>(roles);
     }
 
     public async Task<bool> UpdateRole(RoleForUpdateDto roleForUpdate)

@@ -32,24 +32,18 @@ public sealed class UserClaimsService : ServiceBase<IUserClaimsRepository, UserC
     {
         IEnumerable<UserClaim> userClaims = await Repository.GetAsync(userId, nameof(UserClaim.UserId));
 
-        if (userClaims.IsEmpty())
-        {
-            throw new NotFoundException($"The user claims for the user '{userId}' {ValidationConstants.WereNotFound}");
-        }
-
-        return Mapper.Map<IEnumerable<UserClaimDto>>(userClaims);
+        return userClaims.IsEmpty()
+            ? throw new NotFoundException($"The user claims for the user '{userId}' {ValidationConstants.WereNotFound}")
+            : Mapper.Map<IEnumerable<UserClaimDto>>(userClaims);
     }
 
     public async Task<IEnumerable<UserClaimDto>> GetUserClaims(string type, string value)
     {
         IEnumerable<UserClaim> userClaims = await Repository.GetUserClaims(type, value);
 
-        if (userClaims.IsEmpty())
-        {
-            throw new NotFoundException($"The user claims of type '{type}' and value '{value}' {ValidationConstants.WasNotFound}");
-        }
-
-        return Mapper.Map<IEnumerable<UserClaimDto>>(userClaims);
+        return userClaims.IsEmpty()
+            ? throw new NotFoundException($"The user claims of type '{type}' and value '{value}' {ValidationConstants.WasNotFound}")
+            : Mapper.Map<IEnumerable<UserClaimDto>>(userClaims);
     }
 
     public async Task<bool> ReplaceUserClaim(UserClaimBase currentUserClaim, UserClaimForUpdateDto newUserClaimForUpdate)

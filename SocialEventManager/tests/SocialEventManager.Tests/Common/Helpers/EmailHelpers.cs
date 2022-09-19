@@ -21,9 +21,9 @@ internal static class EmailHelpers
                 await client.DisconnectAsync(true);
             }
             catch (SocketException ex)
-                when (ex.Message == ExceptionConstants.NoConnectionCouldBeMade
-                    || ex.Message == ExceptionConstants.ConnectionRefused
-                    || ex.Message == ExceptionConstants.CannotAssignRequestedAddress)
+                when (ex.Message is ExceptionConstants.NoConnectionCouldBeMade
+                    or ExceptionConstants.ConnectionRefused
+                    or ExceptionConstants.CannotAssignRequestedAddress)
             {
                 Log.Information("Email SMTP server does not set for port {port}.", port);
             }

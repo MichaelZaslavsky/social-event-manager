@@ -121,12 +121,9 @@ public class CustomUsersStore :
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
 
-        if (!Guid.TryParse(user.Id, out Guid userId))
-        {
-            throw new FormatException(ValidationConstants.NotAValidIdentifier);
-        }
-
-        return DeleteAccountAsync(user, userId);
+        return Guid.TryParse(user.Id, out Guid userId)
+            ? DeleteAccountAsync(user, userId)
+            : throw new FormatException(ValidationConstants.NotAValidIdentifier);
     }
 
     public Task<ApplicationUser> FindByIdAsync(string userId, CancellationToken cancellationToken)
@@ -134,12 +131,9 @@ public class CustomUsersStore :
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(userId);
 
-        if (!Guid.TryParse(userId, out Guid id))
-        {
-            throw new FormatException(ValidationConstants.NotAValidIdentifier);
-        }
-
-        return GetAccountAsync(id);
+        return Guid.TryParse(userId, out Guid id)
+            ? GetAccountAsync(id)
+            : throw new FormatException(ValidationConstants.NotAValidIdentifier);
     }
 
     public async Task<ApplicationUser> FindByNameAsync(string normalizedUserName, CancellationToken cancellationToken)
@@ -260,12 +254,9 @@ public class CustomUsersStore :
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
 
-        if (!Guid.TryParse(user.Id, out Guid userId))
-        {
-            throw new FormatException(ValidationConstants.NotAValidIdentifier);
-        }
-
-        return GetUserRoleAsync(userId);
+        return Guid.TryParse(user.Id, out Guid userId)
+            ? GetUserRoleAsync(userId)
+            : throw new FormatException(ValidationConstants.NotAValidIdentifier);
     }
 
     public async Task<IList<ApplicationUser>> GetUsersInRoleAsync(string roleName, CancellationToken cancellationToken)
@@ -333,12 +324,9 @@ public class CustomUsersStore :
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
 
-        if (!Guid.TryParse(user.Id, out Guid userId))
-        {
-            throw new FormatException(ValidationConstants.NotAValidIdentifier);
-        }
-
-        return GetUserClaimsAsync(userId);
+        return Guid.TryParse(user.Id, out Guid userId)
+            ? GetUserClaimsAsync(userId)
+            : throw new FormatException(ValidationConstants.NotAValidIdentifier);
     }
 
     public async Task AddClaimsAsync(ApplicationUser user, IEnumerable<Claim> claims, CancellationToken cancellationToken)

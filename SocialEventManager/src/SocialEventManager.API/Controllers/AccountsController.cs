@@ -1,7 +1,7 @@
 using LanguageExt.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SocialEventManager.BLL.Services;
+using SocialEventManager.BLL.Services.Auth;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Shared.Models.Auth;
