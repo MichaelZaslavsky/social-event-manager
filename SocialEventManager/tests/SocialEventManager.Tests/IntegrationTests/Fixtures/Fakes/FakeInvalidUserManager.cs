@@ -31,13 +31,14 @@ public sealed class FakeInvalidUserManager : UserManager<ApplicationUser>
     {
         throw user.FirstName switch
         {
-            nameof(ValidationException) or nameof(BadRequestException) => new BadRequestException(ExceptionConstants.BadRequest),
+            nameof(ValidationException) => new ValidationException(ExceptionConstants.BadRequest),
+            nameof(BadRequestException) => new BadRequestException(ExceptionConstants.BadRequest),
             nameof(NotFoundException) => new NotFoundException(ExceptionConstants.NotFound),
             nameof(UnprocessableEntityException) => new UnprocessableEntityException(ExceptionConstants.UnprocessableEntity),
             nameof(NullReferenceException) => new NullReferenceException(ExceptionConstants.NullReferenceException),
             nameof(ArgumentNullException) => new ArgumentNullException(ExceptionConstants.ArgumentNullException),
-            nameof(ArgumentException) => new ArgumentNullException(ExceptionConstants.ArgumentException),
-            nameof(TimeoutException) => new ArgumentNullException(ExceptionConstants.TimeoutException),
+            nameof(ArgumentException) => new ArgumentException(ExceptionConstants.ArgumentException),
+            nameof(TimeoutException) => new TimeoutException(ExceptionConstants.TimeoutException),
             nameof(SqlException) => Mock.Of<SqlException>(),
             _ => new Exception(ExceptionConstants.AnErrorOccurred),
         };
