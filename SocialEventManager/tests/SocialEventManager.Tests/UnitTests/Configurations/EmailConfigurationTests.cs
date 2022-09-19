@@ -8,7 +8,7 @@ namespace SocialEventManager.Tests.UnitTests.Configurations;
 
 [UnitTest]
 [Category(nameof(UnitTests))]
-public class EmailConfigurationTests
+public sealed class EmailConfigurationTests
 {
     [Theory]
     [InlineData(null, TestConstants.SomeText, TestConstants.MoreText, nameof(EmailConfiguration.UserName))]

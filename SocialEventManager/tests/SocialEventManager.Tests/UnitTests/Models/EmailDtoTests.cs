@@ -10,7 +10,7 @@ namespace SocialEventManager.Tests.UnitTests.Models;
 
 [UnitTest]
 [Category(nameof(UnitTests))]
-public class EmailDtoTests
+public sealed class EmailDtoTests
 {
     [Theory]
     [MemberData(nameof(EmailData.EmailDtoPartialData), MemberType = typeof(EmailData))]
