@@ -1,7 +1,7 @@
 using LanguageExt.Common;
 using SocialEventManager.Shared.Models.Auth;
 
-namespace SocialEventManager.BLL.Services;
+namespace SocialEventManager.BLL.Services.Auth;
 
 public interface IAuthService
 {

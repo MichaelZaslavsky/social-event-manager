@@ -8,12 +8,6 @@ public static class TypeExtensions
     public static MethodInfo GetNonPublicStaticMethod(this Type type, string methodName)
     {
         MethodInfo? methodInfo = type.GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Static);
-
-        if (methodInfo is null)
-        {
-            throw new ArgumentOutOfRangeException(methodName, ExceptionConstants.MethodIsNotFound(methodName, nameof(type)));
-        }
-
-        return methodInfo;
+        return methodInfo ?? throw new ArgumentOutOfRangeException(methodName, ExceptionConstants.MethodIsNotFound(methodName, nameof(type)));
     }
 }

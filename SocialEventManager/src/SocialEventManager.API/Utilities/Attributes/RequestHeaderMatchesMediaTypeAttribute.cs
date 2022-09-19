@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Mvc.ActionConstraints;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
@@ -40,14 +41,9 @@ public sealed class RequestHeaderMatchesMediaTypeAttribute : Attribute, IActionC
         }
     }
 
-    public int Order
-    {
-        get
-        {
-            return 0;
-        }
-    }
+    public int Order => 0;
 
+    [ExcludeFromCodeCoverage]
     public bool Accept(ActionConstraintContext context)
     {
         IHeaderDictionary requestHeaders = context.RouteContext.HttpContext.Request.Headers;

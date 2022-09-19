@@ -2,7 +2,7 @@ using Bogus;
 using SocialEventManager.Shared.Constants;
 using Xunit;
 
-namespace SocialEventManager.Tests.DataMembers.Common;
+namespace SocialEventManager.Tests.Common.DataMembers;
 
 internal static class StringData
 {

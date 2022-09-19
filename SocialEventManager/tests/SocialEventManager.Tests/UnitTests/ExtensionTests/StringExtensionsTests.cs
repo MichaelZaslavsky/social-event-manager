@@ -2,7 +2,7 @@ using AutoFixture.Xunit2;
 using FluentAssertions;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
-using SocialEventManager.Tests.DataMembers.Common;
+using SocialEventManager.Tests.Common.DataMembers;
 using Xunit;
 using Xunit.Categories;
 

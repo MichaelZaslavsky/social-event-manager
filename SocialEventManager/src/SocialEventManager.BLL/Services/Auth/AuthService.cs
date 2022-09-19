@@ -12,7 +12,7 @@ using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Shared.Models.Auth;
 using SocialEventManager.Shared.Models.Email;
 
-namespace SocialEventManager.BLL.Services;
+namespace SocialEventManager.BLL.Services.Auth;
 
 public sealed class AuthService : IAuthService
 {

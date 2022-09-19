@@ -67,12 +67,9 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(role);
 
-        if (!Guid.TryParse(role.Id, out Guid roleId))
-        {
-            throw new FormatException(ValidationConstants.NotAValidIdentifier);
-        }
-
-        return DeleteRoleAsync(role, roleId);
+        return Guid.TryParse(role.Id, out Guid roleId)
+            ? DeleteRoleAsync(role, roleId)
+            : throw new FormatException(ValidationConstants.NotAValidIdentifier);
     }
 
     public Task<string> GetRoleIdAsync(ApplicationRole role, CancellationToken cancellationToken)
@@ -122,12 +119,7 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(roleId);
 
-        if (!Guid.TryParse(roleId, out Guid id))
-        {
-            throw new FormatException(ValidationConstants.NotAValidIdentifier);
-        }
-
-        return GetRoleAsync(id);
+        return !Guid.TryParse(roleId, out Guid id) ? throw new FormatException(ValidationConstants.NotAValidIdentifier) : GetRoleAsync(id);
     }
 
     public async Task<ApplicationRole> FindByNameAsync(string normalizedRoleName, CancellationToken cancellationToken)
