@@ -1,3 +1,4 @@
+using Bogus;
 using MimeKit;
 using MimeKit.Text;
 using SocialEventManager.Tests.Common.Constants;
@@ -17,6 +18,29 @@ internal static class EmailData
         {
             {
                 GetMessage()
+            },
+        };
+
+    public static TheoryData<string, string?, IEnumerable<string>, IEnumerable<string>> EmailDtoPartialData =>
+        new()
+        {
+            {
+                new Faker().Lorem.Paragraph(),
+                new Faker().Lorem.Text(),
+                new[] { new Faker().Internet.Email(new Faker().Internet.Email()) },
+                new[] { new Faker().Internet.Email(new Faker().Internet.Email()) }
+            },
+        };
+
+    public static TheoryData<string, string?, IEnumerable<string>, IEnumerable<string>, IEnumerable<string>> EmailDtoFullData =>
+        new()
+        {
+            {
+                new Faker().Lorem.Paragraph(),
+                new Faker().Lorem.Text(),
+                new[] { new Faker().Internet.Email(new Faker().Internet.Email()) },
+                new[] { new Faker().Internet.Email(new Faker().Internet.Email()) },
+                new[] { new Faker().Internet.Email(new Faker().Internet.Email()) }
             },
         };
 
