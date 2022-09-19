@@ -2,12 +2,14 @@ using System.Net;
 using FluentAssertions;
 using SocialEventManager.Infrastructure.Auth;
 using SocialEventManager.Shared.Constants;
+using SocialEventManager.Tests.Common.Constants;
 using SocialEventManager.Tests.IntegrationTests.Fixtures;
 using Xunit;
 using Xunit.Categories;
 
 namespace SocialEventManager.Tests.IntegrationTests.ControllerTests;
 
+[Collection(TestConstants.StorageDependent)]
 [IntegrationTest]
 [Category(CategoryConstants.HealthChecks)]
 public sealed class HealthCheckTests : IntegrationTest
