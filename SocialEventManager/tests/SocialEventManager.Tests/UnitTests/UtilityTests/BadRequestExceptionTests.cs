@@ -18,7 +18,7 @@ public sealed class BadRequestExceptionTests
     {
         BadRequestException ex = new(message);
         ex.Message.Should().Be(message);
-        ex.HResult.Should().Be(TestConstants.ExceptionHResult);
+        ex.HResult.Should().Be(TestConstants.ApplicationExceptionHResult);
         ex.InnerException.Should().BeNull();
     }
 
@@ -28,7 +28,7 @@ public sealed class BadRequestExceptionTests
     {
         BadRequestException ex = new(message, innerException);
         ex.Message.Should().Be(message);
-        ex.HResult.Should().Be(TestConstants.ExceptionHResult);
+        ex.HResult.Should().Be(TestConstants.ApplicationExceptionHResult);
         ex.InnerException.Should().Be(innerException);
     }
 }
