@@ -28,7 +28,7 @@ public sealed class RequestHeaderMatchesMediaTypeAttributeTests
     public void Init_Should_ThrowArgumentException_When_MediaTypeIsInvalid(string requestHeaderToMatch, string mediaType, string[] otherMediaTypes)
     {
         Action action = () => new RequestHeaderMatchesMediaTypeAttribute(requestHeaderToMatch, mediaType, otherMediaTypes);
-        action.Should().Throw<ArgumentException>().WithMessage(nameof(mediaType));
+        action.Should().Throw<ArgumentException>().WithMessage(TestExceptionConstants.ArgumentNullException(nameof(mediaType)));
     }
 
     [Theory]
@@ -36,7 +36,7 @@ public sealed class RequestHeaderMatchesMediaTypeAttributeTests
     public void Init_Should_ThrowArgumentException_When_OtherMediaTypesAreInvalid(string requestHeaderToMatch, string mediaType, string[] otherMediaTypes)
     {
         Action action = () => new RequestHeaderMatchesMediaTypeAttribute(requestHeaderToMatch, mediaType, otherMediaTypes);
-        action.Should().Throw<ArgumentException>().WithMessage(nameof(otherMediaTypes));
+        action.Should().Throw<ArgumentException>().WithMessage(TestExceptionConstants.ArgumentNullException(nameof(otherMediaTypes)));
     }
 
     [Theory]

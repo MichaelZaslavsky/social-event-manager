@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Mvc.ActionConstraints;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
+using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Helpers;
 
 namespace SocialEventManager.API.Utilities.Attributes;
@@ -25,7 +26,7 @@ public sealed class RequestHeaderMatchesMediaTypeAttribute : Attribute, IActionC
         }
         else
         {
-            throw new ArgumentException(nameof(mediaType));
+            throw new ArgumentException(ExceptionConstants.ArgumentNullException, nameof(mediaType));
         }
 
         foreach (string otherMediaType in otherMediaTypes)
@@ -36,7 +37,7 @@ public sealed class RequestHeaderMatchesMediaTypeAttribute : Attribute, IActionC
             }
             else
             {
-                throw new ArgumentException(nameof(otherMediaTypes));
+                throw new ArgumentException(ExceptionConstants.ArgumentNullException, nameof(otherMediaTypes));
             }
         }
     }
