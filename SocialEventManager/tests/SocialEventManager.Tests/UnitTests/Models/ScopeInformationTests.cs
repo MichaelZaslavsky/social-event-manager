@@ -3,9 +3,12 @@ using FluentAssertions;
 using SocialEventManager.Infrastructure.Loggers;
 using SocialEventManager.Shared.Constants;
 using Xunit;
+using Xunit.Categories;
 
 namespace SocialEventManager.Tests.UnitTests.Models;
 
+[UnitTest]
+[Category(nameof(UnitTests))]
 public sealed class ScopeInformationTests
 {
     [Fact]
