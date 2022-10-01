@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Reflection;
 using AspNetCoreRateLimit;
 using FluentValidation;
@@ -73,7 +74,7 @@ try
 }
 catch (Exception ex)
 {
-    Log.Fatal(ex, ApiConstants.HostTerminatedUnexpectedly);
+    Log.Fatal(ex.Demystify(), ApiConstants.HostTerminatedUnexpectedly);
 }
 finally
 {
