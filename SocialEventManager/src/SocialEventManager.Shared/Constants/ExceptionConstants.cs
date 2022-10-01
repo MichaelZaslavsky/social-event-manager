@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace SocialEventManager.Shared.Constants;
 
 public static class ExceptionConstants
@@ -44,7 +46,7 @@ public static class ExceptionConstants
 
     public static string MethodIsNotFound(string methodName, string className) => $"Method '{methodName}' is not found in '{className}' class.";
 
-    public static string UnexpectedException(Exception ex) => $"Unexpected exception, {ex}";
+    public static string UnexpectedException(Exception ex) => $"Unexpected exception, {ex.Demystify()}";
 
     private const string TheStatementHasBeenTerminatedWithSpace = "\r\nThe statement has been terminated.";
 

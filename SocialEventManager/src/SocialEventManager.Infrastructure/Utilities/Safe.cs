@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Linq.Expressions;
 using Serilog;
 using SocialEventManager.Shared.Constants;
@@ -29,7 +30,7 @@ public static class Safe
         }
         catch (Exception ex)
         {
-            LogError(ex);
+            LogError(ex.Demystify());
             return result;
         }
     }
@@ -42,7 +43,7 @@ public static class Safe
         }
         catch (Exception ex)
         {
-            LogError(ex);
+            LogError(ex.Demystify());
             return result;
         }
     }

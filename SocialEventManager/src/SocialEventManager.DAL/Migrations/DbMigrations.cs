@@ -1,4 +1,5 @@
 using System.Data.SqlClient;
+using System.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
@@ -38,7 +39,7 @@ public sealed class DbMigrations
         }
         catch (Exception ex)
         {
-            Log.Error(ExceptionConstants.DatabaseMigrationFailed, ex);
+            Log.Error(ExceptionConstants.DatabaseMigrationFailed, ex.Demystify());
             throw;
         }
     }
