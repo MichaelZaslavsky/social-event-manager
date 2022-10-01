@@ -150,7 +150,7 @@ My Events:
 
 ✔️ .NET Core DI setups
 
-✔️ AutoMapper
+✔️ Mapster / AutoMapper
 
 ✔️ Logs with Serilog
 
