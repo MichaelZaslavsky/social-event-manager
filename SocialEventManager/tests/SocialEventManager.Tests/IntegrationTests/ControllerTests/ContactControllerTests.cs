@@ -32,19 +32,15 @@ public sealed class ContactControllerTests : IntegrationTest
     [MemberData(nameof(ContactData.ValidContact), MemberType = typeof(ContactData))]
     public async Task Post_Should_ReturnOk_When_ContactDetailsIsValid(ContactDto contact)
     {
-        SimpleSmtpServer smtp = SimpleSmtpServer.Start(EmailData.FakePort);
-
         await Client.CreateAsync(ApiPathConstants.Contact, contact);
         await BackgroundJobHelpers.WaitForCompletion(BackgroundJobType.Email);
 
-        SmtpMessage[] emails = smtp.ReceivedEmail;
+        SmtpMessage[] emails = Smtp.ReceivedEmail;
         emails.Should().HaveCount(1);
 
         SmtpMessage actual = emails[0];
         actual.Subject.Should().Be(MessageConstants.ContactInfo(contact.Name, contact.Email));
         actual.MessageParts.Select(mp => mp.BodyData).First().Should().Be(contact.Text);
-
-        smtp.Stop();
     }
 
     [Theory]
@@ -60,8 +56,6 @@ public sealed class ContactControllerTests : IntegrationTest
     [MemberData(nameof(ContactData.ValidContact), MemberType = typeof(ContactData))]
     public async Task Post_Should_ReturnOk_When_ContactDetailsIsValidAndEmailProviderIsNotFaked(ContactDto contact)
     {
-        SimpleSmtpServer smtp = SimpleSmtpServer.Start(EmailData.FakePort);
-
         HttpClient client = Factory
             .WithWebHostBuilder(builder => builder.ConfigureTestServices(services => services.AddScoped<IEmailProvider, EmailSmtpProvider>()))
             .CreateClient();
@@ -69,13 +63,11 @@ public sealed class ContactControllerTests : IntegrationTest
         await client.CreateAsync(ApiPathConstants.Contact, contact);
         await BackgroundJobHelpers.WaitForCompletion(BackgroundJobType.Email);
 
-        SmtpMessage[] emails = smtp.ReceivedEmail;
+        SmtpMessage[] emails = Smtp.ReceivedEmail;
         emails.Should().HaveCount(1);
 
         SmtpMessage actual = emails[0];
         actual.Subject.Should().Be(MessageConstants.ContactInfo(contact.Name, contact.Email));
         actual.MessageParts.Select(mp => mp.BodyData).First().Should().Be(contact.Text);
-
-        smtp.Stop();
     }
 }
