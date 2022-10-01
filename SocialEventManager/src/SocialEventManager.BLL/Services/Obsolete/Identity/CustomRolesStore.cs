@@ -1,5 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
-using AutoMapper;
+using MapsterMapper;
 using Microsoft.AspNetCore.Identity;
 using SocialEventManager.BLL.Services.Roles;
 using SocialEventManager.DAL.Infrastructure;
@@ -127,8 +127,8 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(normalizedRoleName);
 
-        RoleDto role = await _rolesService.GetRole(normalizedRoleName);
-        return _mapper.Map<ApplicationRole>(role);
+        RoleDto? role = await _rolesService.GetRole(normalizedRoleName);
+        return _mapper.Map<ApplicationRole>(role!);
     }
 
     #endregion Implement IRoleStore
@@ -148,7 +148,7 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
 
     private async Task<ApplicationRole> GetRoleAsync(Guid id)
     {
-        RoleDto role = await _rolesService.GetRole(id);
-        return _mapper.Map<ApplicationRole>(role);
+        RoleDto? role = await _rolesService.GetRole(id);
+        return _mapper.Map<ApplicationRole>(role!);
     }
 }

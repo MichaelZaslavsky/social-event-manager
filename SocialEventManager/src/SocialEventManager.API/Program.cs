@@ -121,6 +121,7 @@ static void ConfigureServices(IServiceCollection services, IConfiguration config
         .RegisterDependencies()
         .AddRedisClients(config)
         .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
+        .AddMappings()
         .AddScoped<ValidationFilterAttribute>()
         .AddHealthChecks(config)
         .AddResponseCompression(options => options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { MediaTypeConstants.ApplicationOctetStream }));

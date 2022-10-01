@@ -8,11 +8,11 @@ public interface IAccountsService
 {
     Task<int> CreateAccount(AccountForCreationDto accountForCreation);
 
-    Task<AccountDto> GetAccount(Guid userId);
+    Task<AccountDto?> GetAccount(Guid userId);
 
-    Task<AccountDto> GetAccountByNormalizedUserName(string normalizedUserName);
+    Task<AccountDto?> GetAccountByNormalizedUserName(string normalizedUserName);
 
-    Task<AccountDto> GetAccountByEmail(string normalizedEmail);
+    Task<AccountDto?> GetAccountByEmail(string normalizedEmail);
 
     Task<IEnumerable<AccountDto>> GetAccounts(string roleName);
 

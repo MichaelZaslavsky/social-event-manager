@@ -27,7 +27,7 @@
             Represents user accounts.
             </summary>
         </member>
-        <member name="M:SocialEventManager.API.Controllers.Obsolete.AccountsController.#ctor(Microsoft.AspNetCore.Identity.UserManager{SocialEventManager.Shared.Models.Identity.ApplicationUser},Microsoft.AspNetCore.Identity.SignInManager{SocialEventManager.Shared.Models.Identity.ApplicationUser},AutoMapper.IMapper)">
+        <member name="M:SocialEventManager.API.Controllers.Obsolete.AccountsController.#ctor(Microsoft.AspNetCore.Identity.UserManager{SocialEventManager.Shared.Models.Identity.ApplicationUser},Microsoft.AspNetCore.Identity.SignInManager{SocialEventManager.Shared.Models.Identity.ApplicationUser},MapsterMapper.IMapper)">
             <summary>
             Initializes a new instance of the <see cref="T:SocialEventManager.API.Controllers.Obsolete.AccountsController"/> class.
             </summary>

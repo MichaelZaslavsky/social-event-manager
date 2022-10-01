@@ -1,5 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
-using AutoMapper;
+using MapsterMapper;
 using SocialEventManager.BLL.Services.Infrastructure;
 using SocialEventManager.BLL.Services.Users;
 using SocialEventManager.DAL.Repositories.Accounts;
@@ -33,22 +33,22 @@ public sealed class AccountsService : ServiceBase<IAccountsRepository, Account>,
         return await Repository.InsertAsync(account);
     }
 
-    public async Task<AccountDto> GetAccount(Guid userId)
+    public async Task<AccountDto?> GetAccount(Guid userId)
     {
         Account? account = await Repository.GetSingleOrDefaultAsync(userId, nameof(Account.UserId));
-        return Mapper.Map<AccountDto>(account);
+        return Mapper.Map<AccountDto?>(account!);
     }
 
-    public async Task<AccountDto> GetAccountByNormalizedUserName(string normalizedUserName)
+    public async Task<AccountDto?> GetAccountByNormalizedUserName(string normalizedUserName)
     {
         Account? account = await Repository.GetSingleOrDefaultAsync(normalizedUserName, nameof(Account.NormalizedUserName));
-        return Mapper.Map<AccountDto>(account);
+        return Mapper.Map<AccountDto?>(account!);
     }
 
-    public async Task<AccountDto> GetAccountByEmail(string normalizedEmail)
+    public async Task<AccountDto?> GetAccountByEmail(string normalizedEmail)
     {
         Account? account = await Repository.GetSingleOrDefaultAsync(normalizedEmail, nameof(Account.NormalizedEmail));
-        return Mapper.Map<AccountDto>(account);
+        return Mapper.Map<AccountDto?>(account!);
     }
 
     public async Task<IEnumerable<AccountDto>> GetAccounts(string roleName)
@@ -100,7 +100,7 @@ public sealed class AccountsService : ServiceBase<IAccountsRepository, Account>,
 
     private async Task EnsureAccountExists(Guid userId)
     {
-        AccountDto account = await GetAccount(userId);
+        AccountDto? account = await GetAccount(userId);
 
         if (account is null)
         {

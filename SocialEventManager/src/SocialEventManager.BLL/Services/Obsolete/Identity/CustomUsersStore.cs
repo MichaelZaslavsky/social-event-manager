@@ -141,7 +141,7 @@ public class CustomUsersStore :
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(normalizedUserName);
 
-        AccountDto account = await _accountsService.GetAccountByNormalizedUserName(normalizedUserName);
+        AccountDto? account = await _accountsService.GetAccountByNormalizedUserName(normalizedUserName);
         return _mapper.Map<ApplicationUser>(account);
     }
 
@@ -180,7 +180,7 @@ public class CustomUsersStore :
     {
         cancellationToken.ThrowIfCancellationRequested();
 
-        AccountDto account = await _accountsService.GetAccountByEmail(normalizedEmail);
+        AccountDto? account = await _accountsService.GetAccountByEmail(normalizedEmail);
         return _mapper.Map<ApplicationUser>(account);
     }
 
@@ -403,7 +403,7 @@ public class CustomUsersStore :
 
     private async Task<ApplicationUser> GetAccountAsync(Guid id)
     {
-        AccountDto account = await _accountsService.GetAccount(id);
+        AccountDto? account = await _accountsService.GetAccount(id);
         return _mapper.Map<ApplicationUser>(account);
     }
 

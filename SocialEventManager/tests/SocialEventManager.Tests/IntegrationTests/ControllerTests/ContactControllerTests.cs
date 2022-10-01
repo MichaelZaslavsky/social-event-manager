@@ -62,8 +62,6 @@ public sealed class ContactControllerTests : IntegrationTest
     {
         SimpleSmtpServer smtp = SimpleSmtpServer.Start(EmailData.FakePort);
 
-        await Factory.DisposeAsync();
-
         HttpClient client = Factory
             .WithWebHostBuilder(builder => builder.ConfigureTestServices(services => services.AddScoped<IEmailProvider, EmailSmtpProvider>()))
             .CreateClient();

@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Security.Claims;
-using AutoMapper;
+using MapsterMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
