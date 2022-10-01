@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Enrichers.AspnetcoreHttpcontext;
 using SocialEventManager.API.Configurations;
@@ -21,6 +22,7 @@ using SocialEventManager.DAL.Migrations;
 using SocialEventManager.Infrastructure.Attributes;
 using SocialEventManager.Infrastructure.Filters;
 using SocialEventManager.Infrastructure.Filters.BackgroundJobs;
+using SocialEventManager.Infrastructure.Identity;
 using SocialEventManager.Infrastructure.Middleware;
 using SocialEventManager.Shared.Constants;
 
@@ -65,6 +67,7 @@ try
 
     Log.Information(ApiConstants.StartingHost);
     Task.Run(() => new DbMigrations(builder.Configuration).Migrate(environmentName).GetAwaiter().GetResult());
+    RunEntityFrameworkMigration(app);
 
     app.Run();
 }
@@ -164,6 +167,14 @@ static void ConfigureApplication(WebApplication app, IApiVersionDescriptionProvi
             endpoints.MapControllers();
             endpoints.MapHub<ChatHub>(ApiPathConstants.ChatHub);
         });
+}
+
+static void RunEntityFrameworkMigration(IHost host)
+{
+    using IServiceScope scope = host.Services.CreateScope();
+    IServiceProvider services = scope.ServiceProvider;
+    ApplicationDbContext context = services.GetRequiredService<ApplicationDbContext>();
+    context.Database.Migrate();
 }
 
 // This is used as a workaround for letting WebApplicationFactory access the Program file.
