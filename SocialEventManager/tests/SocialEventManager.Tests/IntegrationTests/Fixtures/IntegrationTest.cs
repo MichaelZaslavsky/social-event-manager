@@ -1,13 +1,15 @@
 using System.Reflection;
+using netDumbster.smtp;
 using SocialEventManager.Infrastructure.Auth;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Tests.Common.Constants;
+using SocialEventManager.Tests.Common.DataMembers;
 using SocialEventManager.Tests.Common.DataMembers.Storages;
 using Xunit;
 
 namespace SocialEventManager.Tests.IntegrationTests.Fixtures;
 
-public class IntegrationTest : IClassFixture<ApiWebApplicationFactory>
+public class IntegrationTest : IClassFixture<ApiWebApplicationFactory>, IDisposable
 {
     protected const string Email = TestConstants.ValidEmail;
 
@@ -16,6 +18,7 @@ public class IntegrationTest : IClassFixture<ApiWebApplicationFactory>
         JwtHandler = jwtHandler;
         Factory = fixture;
         Client = Factory.CreateClient();
+        Smtp = SimpleSmtpServer.Start(EmailData.FakePort);
 
         InitStorages();
         SetAuthorization(Email);
@@ -26,6 +29,22 @@ public class IntegrationTest : IClassFixture<ApiWebApplicationFactory>
     protected ApiWebApplicationFactory Factory { get; }
 
     protected HttpClient Client { get; }
+
+    protected SimpleSmtpServer Smtp { get; }
+
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (disposing && Smtp is not null)
+        {
+            Smtp.Stop();
+        }
+    }
 
     protected void SetAuthorization(string email)
     {

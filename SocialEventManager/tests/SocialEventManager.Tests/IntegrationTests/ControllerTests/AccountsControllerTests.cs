@@ -13,7 +13,6 @@ using SocialEventManager.Shared.Enums;
 using SocialEventManager.Shared.Extensions;
 using SocialEventManager.Shared.Models.Auth;
 using SocialEventManager.Tests.Common.Constants;
-using SocialEventManager.Tests.Common.DataMembers;
 using SocialEventManager.Tests.Common.DataMembers.Identity;
 using SocialEventManager.Tests.Common.DataMembers.Storages.Identity;
 using SocialEventManager.Tests.Common.Helpers;
@@ -38,7 +37,6 @@ public sealed class AccountsControllerTests : IntegrationTest
     [MemberData(nameof(UserData.ValidUserRegistration), MemberType = typeof(UserData))]
     public async Task Register_Should_ReturnOk_When_UserIsValid(UserRegistrationDto userRegistration)
     {
-        SimpleSmtpServer smtp = SimpleSmtpServer.Start(EmailData.FakePort);
         int initialCount = UserStorage.Instance.Data.Count;
 
         await Client.CreateAsync(TestApiPathConstants.AccountsRegister, userRegistration);
@@ -53,9 +51,7 @@ public sealed class AccountsControllerTests : IntegrationTest
         IdentityUserRole<Guid> actualUserRole = UserRoleStorage.Instance.Data.Single(ur => ur.UserId == actual.Id);
         IdentityRole<Guid> actualRole = RoleStorage.Instance.Data.Single(r => r.Id == actualUserRole.RoleId);
         AssertRole(UserRoles.User, actualRole);
-        AssertSmtpEmail(userRegistration, smtp);
-
-        smtp.Stop();
+        AssertSmtpEmail(userRegistration, Smtp);
     }
 
     [Theory]
@@ -156,7 +152,6 @@ public sealed class AccountsControllerTests : IntegrationTest
     [MemberData(nameof(UserData.ValidUserRegistration), MemberType = typeof(UserData))]
     public async Task Login_Should_ReturnOk_When_UserIsValid(UserRegistrationDto userRegistration)
     {
-        SimpleSmtpServer smtp = SimpleSmtpServer.Start(EmailData.FakePort);
         int initialCount = UserStorage.Instance.Data.Count;
 
         await Client.CreateAsync(TestApiPathConstants.AccountsRegister, userRegistration);
@@ -174,8 +169,6 @@ public sealed class AccountsControllerTests : IntegrationTest
         tokenInfo[JwtRegisteredClaimNames.Email].Should().Be(userRegistration.Email);
 
         UserStorage.Instance.Data.Should().HaveCount(initialCount + 1);
-
-        smtp.Stop();
     }
 
     [Theory]
@@ -195,7 +188,6 @@ public sealed class AccountsControllerTests : IntegrationTest
     [MemberData(nameof(UserData.ValidUserRegistration), MemberType = typeof(UserData))]
     public async Task Login_Should_ReturnUnauthorized_When_PasswordIsIncorrect(UserRegistrationDto userRegistration)
     {
-        SimpleSmtpServer smtp = SimpleSmtpServer.Start(EmailData.FakePort);
         int initialCount = UserStorage.Instance.Data.Count;
 
         await Client.CreateAsync(TestApiPathConstants.AccountsRegister, userRegistration);
@@ -209,8 +201,6 @@ public sealed class AccountsControllerTests : IntegrationTest
         message.Should().Contain(AuthConstants.EmailOrPasswordIsIncorrect);
 
         UserStorage.Instance.Data.Should().HaveCount(initialCount + 1);
-
-        smtp.Stop();
     }
 
     [Theory]
@@ -245,12 +235,10 @@ public sealed class AccountsControllerTests : IntegrationTest
     [MemberData(nameof(UserData.ExistingForgotPasswordUser), MemberType = typeof(UserData))]
     public async Task ForgotPassword_Should_ReturnOk_When_UserExists(ForgotPasswordDto forgotPassword)
     {
-        SimpleSmtpServer smtp = SimpleSmtpServer.Start(EmailData.FakePort);
-
         await Client.CreateAsync(TestApiPathConstants.AccountsForgotPassword, forgotPassword);
         await BackgroundJobHelpers.WaitForCompletion(BackgroundJobType.Email);
 
-        SmtpMessage[] emails = smtp.ReceivedEmail;
+        SmtpMessage[] emails = Smtp.ReceivedEmail;
         emails.Should().HaveCount(1);
 
         string expected = $"http://localhost:3000/{ApiPathConstants.ResetPassword}?email={forgotPassword.Email}&amp;token={TestConstants.ValidToken.Encode()}";
@@ -260,8 +248,6 @@ public sealed class AccountsControllerTests : IntegrationTest
         actual.MessageParts.Select(mp => mp.BodyData).First().Should().Contain(expected);
         actual.ToAddresses.Should().HaveCount(1);
         actual.ToAddresses[0].Address.Should().Be(forgotPassword.Email);
-
-        smtp.Stop();
     }
 
     [Theory]
