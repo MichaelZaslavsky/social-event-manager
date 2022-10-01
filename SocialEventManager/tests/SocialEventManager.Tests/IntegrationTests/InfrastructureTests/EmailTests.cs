@@ -24,7 +24,7 @@ public sealed class EmailTests
 {
     [Theory]
     [MemberData(nameof(EmailData.EmailMessage), MemberType = typeof(EmailData))]
-    public async Task SendAsync_Should_SendsFakeEmail_When_EmailIsValid(MimeMessage message)
+    public async Task SendAsync_Should_SendFakeEmail_When_EmailIsValid(MimeMessage message)
     {
         SimpleSmtpServer smtp = SimpleSmtpServer.Start(EmailData.FakePort);
 
