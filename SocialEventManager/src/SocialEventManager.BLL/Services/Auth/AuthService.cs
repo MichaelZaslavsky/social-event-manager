@@ -1,6 +1,6 @@
-using AutoMapper;
 using Hangfire;
 using LanguageExt.Common;
+using MapsterMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using SocialEventManager.BLL.Services.Email;

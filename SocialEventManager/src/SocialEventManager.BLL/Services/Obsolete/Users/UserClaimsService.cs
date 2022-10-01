@@ -1,5 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
-using AutoMapper;
+using MapsterMapper;
 using SocialEventManager.BLL.Services.Infrastructure;
 using SocialEventManager.DAL.Infrastructure;
 using SocialEventManager.DAL.Repositories.Users;

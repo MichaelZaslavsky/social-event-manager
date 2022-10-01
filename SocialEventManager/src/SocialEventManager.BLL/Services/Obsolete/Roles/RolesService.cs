@@ -1,5 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
-using AutoMapper;
+using MapsterMapper;
 using SocialEventManager.BLL.Services.Infrastructure;
 using SocialEventManager.DAL.Repositories.Roles;
 using SocialEventManager.Shared.Constants;
@@ -26,16 +26,16 @@ public sealed class RolesService : ServiceBase<IRolesRepository, Role>, IRolesSe
         return await Repository.InsertRole(role);
     }
 
-    public async Task<RoleDto> GetRole(Guid roleId)
+    public async Task<RoleDto?> GetRole(Guid roleId)
     {
         Role? role = await Repository.GetSingleOrDefaultAsync(roleId, nameof(Role.Id));
-        return Mapper.Map<RoleDto>(role);
+        return Mapper.Map<RoleDto?>(role!);
     }
 
-    public async Task<RoleDto> GetRole(string normalizedRoleName)
+    public async Task<RoleDto?> GetRole(string normalizedRoleName)
     {
         Role? role = await Repository.GetSingleOrDefaultAsync(normalizedRoleName, nameof(Role.NormalizedName));
-        return Mapper.Map<RoleDto>(role);
+        return Mapper.Map<RoleDto?>(role!);
     }
 
     public async Task<IEnumerable<RoleDto>> GetRoles(Guid userId)

@@ -1,4 +1,4 @@
-using AutoMapper;
+using MapsterMapper;
 using Serilog;
 using SocialEventManager.DAL.Infrastructure;
 

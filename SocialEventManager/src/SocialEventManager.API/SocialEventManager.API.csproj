@@ -24,6 +24,8 @@
 		<PackageReference Include="FluentValidation.AspNetCore" Version="11.2.2" />
 		<PackageReference Include="Hangfire" Version="1.7.31" />
 		<PackageReference Include="Hangfire.Dashboard.Basic.Authentication" Version="5.0.0" />
+		<PackageReference Include="Mapster" Version="7.3.0" />
+		<PackageReference Include="Mapster.DependencyInjection" Version="1.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.9" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Api.Analyzers" Version="2.2.6" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />

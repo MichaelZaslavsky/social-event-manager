@@ -1,5 +1,5 @@
-using AutoMapper;
 using Hangfire;
+using MapsterMapper;
 using SocialEventManager.Infrastructure.Email;
 using SocialEventManager.Shared.Models.Contact;
 using SocialEventManager.Shared.Models.Email;
