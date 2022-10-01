@@ -100,7 +100,7 @@ public sealed class AccountsControllerTests : IntegrationTest
 
     [Theory]
     [MemberData(nameof(UserData.ValidConfirmEmail), MemberType = typeof(UserData))]
-    public async Task ConfirmEmail_ReturnOk_When_DataIsValid(ConfirmEmailDto confirmEmail)
+    public async Task ConfirmEmail_Should_ReturnOk_When_DataIsValid(ConfirmEmailDto confirmEmail)
     {
         FormUrlEncodedContent formContent = ConvertToFormEncodedContent(confirmEmail);
 
@@ -114,7 +114,7 @@ public sealed class AccountsControllerTests : IntegrationTest
 
     [Theory]
     [MemberData(nameof(UserData.NonExistingConfirmEmailUserData), MemberType = typeof(UserData))]
-    public async Task ConfirmEmail_ReturnUnprocessableEntity_When_UserDoesNotExist(ConfirmEmailDto confirmEmail, string expected)
+    public async Task ConfirmEmail_Should_ReturnUnprocessableEntity_When_UserDoesNotExist(ConfirmEmailDto confirmEmail, string expected)
     {
         FormUrlEncodedContent formContent = ConvertToFormEncodedContent(confirmEmail);
 
@@ -131,7 +131,7 @@ public sealed class AccountsControllerTests : IntegrationTest
 
     [Theory]
     [MemberData(nameof(UserData.InvalidConfirmEmailTokenData), MemberType = typeof(UserData))]
-    public async Task ConfirmEmail_ReturnUnprocessableEntity_When_ToeknIsInvalid(ConfirmEmailDto confirmEmail, string expected)
+    public async Task ConfirmEmail_Should_ReturnUnprocessableEntity_When_ToeknIsInvalid(ConfirmEmailDto confirmEmail, string expected)
     {
         UserStorage.Instance.Data.Single(u => u.Email == confirmEmail.Email).EmailConfirmed = false;
 
@@ -205,7 +205,7 @@ public sealed class AccountsControllerTests : IntegrationTest
 
     [Theory]
     [MemberData(nameof(UserData.ValidUserLogin), MemberType = typeof(UserData))]
-    public async Task Login_ReturnUnauthorized_When_EmailIsNotVerified(UserLoginDto userLogin)
+    public async Task Login_Should_ReturnUnauthorized_When_EmailIsNotVerified(UserLoginDto userLogin)
     {
         int initialCount = UserStorage.Instance.Data.Count;
         UserStorage.Instance.Data.Single(u => u.Email == userLogin.Email).EmailConfirmed = false;
