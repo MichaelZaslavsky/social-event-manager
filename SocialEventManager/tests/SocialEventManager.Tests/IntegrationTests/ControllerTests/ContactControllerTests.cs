@@ -56,6 +56,8 @@ public sealed class ContactControllerTests : IntegrationTest
     [MemberData(nameof(ContactData.ValidContact), MemberType = typeof(ContactData))]
     public async Task Post_Should_ReturnOk_When_ContactDetailsIsValidAndEmailProviderIsNotFaked(ContactDto contact)
     {
+        await Factory.DisposeAsync();
+
         HttpClient client = Factory
             .WithWebHostBuilder(builder => builder.ConfigureTestServices(services => services.AddScoped<IEmailProvider, EmailSmtpProvider>()))
             .CreateClient();
