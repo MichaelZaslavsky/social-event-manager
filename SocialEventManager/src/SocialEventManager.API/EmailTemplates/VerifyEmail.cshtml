@@ -1,6 +1,7 @@
+@using SocialEventManager.Shared.Constants
 @model SocialEventManager.Shared.Models.Email.VerifyEmail
 @{
-    Layout = "~/EmailTemplates/_Layout.cshtml";
+    Layout = EmailConstants.LayoutPath;
 }
 
 <h1>Hi @Model.FirstName,</h1>
