@@ -1,8 +1,10 @@
 using System.ComponentModel;
+using NetEscapades.EnumGenerators;
 using SocialEventManager.Shared.Constants;
 
 namespace SocialEventManager.Shared.Enums;
 
+[EnumExtensions]
 public enum UserLoginResult
 {
     Success = 0,
