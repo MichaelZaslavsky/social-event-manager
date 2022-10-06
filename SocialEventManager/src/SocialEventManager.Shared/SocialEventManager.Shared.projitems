@@ -20,6 +20,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Constants\ContactConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\DataConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\DbConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants\EmailConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\ExceptionConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\GlobalConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\IdentityConstants.cs" />

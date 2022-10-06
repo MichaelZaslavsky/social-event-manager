@@ -244,7 +244,7 @@ public sealed class AccountsControllerTests : IntegrationTest
         string expected = $"http://localhost:3000/{ApiPathConstants.ResetPassword}?email={forgotPassword.Email}&amp;token={TestConstants.ValidToken.Encode()}";
 
         SmtpMessage actual = emails[0];
-        actual.Subject.Should().Be(AuthConstants.ForgotPasswordSubject);
+        actual.Subject.Should().Be(EmailConstants.ForgotPasswordSubject);
         actual.MessageParts.Select(mp => mp.BodyData).First().Should().Contain(expected);
         actual.ToAddresses.Should().HaveCount(1);
         actual.ToAddresses[0].Address.Should().Be(forgotPassword.Email);
@@ -313,7 +313,7 @@ public sealed class AccountsControllerTests : IntegrationTest
         string expectedUrl = $"http://localhost:3000/{ApiPathConstants.ConfirmEmail}?email={expected.Email}&amp;token={TestConstants.ValidToken.Encode()}";
 
         SmtpMessage actual = emails[0];
-        actual.Subject.Should().Be(AuthConstants.VerifyEmailSubject);
+        actual.Subject.Should().Be(EmailConstants.VerifyEmailSubject);
         actual.MessageParts.Select(mp => mp.BodyData).First().Should().Contain(expectedUrl);
         actual.ToAddresses.Should().HaveCount(1);
         actual.ToAddresses[0].Address.Should().Be(expected.Email);

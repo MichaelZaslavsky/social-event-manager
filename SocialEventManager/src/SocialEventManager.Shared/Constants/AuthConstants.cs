@@ -11,8 +11,6 @@ public static class AuthConstants
     public const string ConfirmEmailFailed = "Confirm email failed.";
     public const string EmailOrPasswordIsIncorrect = "The email address or password is incorrect.";
     public const string EmailNotVerified = "Invalid login attempt. Please verify your email address.";
-    public const string ForgotPasswordSubject = "Password Reset";
     public const string ResetPasswordFailed = "Reset password failed.";
     public const string UserIsLocked = "Your account has been locked for 30 minutes. Please try again later.";
-    public const string VerifyEmailSubject = "Verify email address";
 }
