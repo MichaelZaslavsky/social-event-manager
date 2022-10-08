@@ -51,7 +51,7 @@ public static class LoggerExtensions
             return null;
         }
 
-        List<string> excludedClaims = new(10) { "nbf", "exp", "auth_time", "amr", "sub", "at_hash", "s_hash", "sid", "name", "preferred_username" };
+        HashSet<string> excludedClaims = new(10) { "nbf", "exp", "auth_time", "amr", "sub", "at_hash", "s_hash", "sid", "name", "preferred_username" };
         const string userNameClaimType = "name";
 
         UserInformation userInfo = new()
@@ -62,7 +62,7 @@ public static class LoggerExtensions
         };
 
         foreach (string claimType in principal.Claims
-            .Where(c => excludedClaims.All(ec => ec != c.Type))
+            .Where(c => !excludedClaims.Contains(c.Type))
             .Select(c => c.Type)
             .Distinct())
         {
