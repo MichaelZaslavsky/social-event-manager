@@ -51,7 +51,7 @@ public static class LoggerExtensions
             return null;
         }
 
-        List<string> excludedClaims = new() { "nbf", "exp", "auth_time", "amr", "sub", "at_hash", "s_hash", "sid", "name", "preferred_username" };
+        List<string> excludedClaims = new(10) { "nbf", "exp", "auth_time", "amr", "sub", "at_hash", "s_hash", "sid", "name", "preferred_username" };
         const string userNameClaimType = "name";
 
         UserInformation userInfo = new()
