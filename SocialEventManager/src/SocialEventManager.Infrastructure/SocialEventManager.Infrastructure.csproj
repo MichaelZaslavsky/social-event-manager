@@ -25,10 +25,6 @@
 		</PackageReference>
 		<PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions" Version="6.0.9" />
 		<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Identity.Core" Version="6.0.9" />
-		<PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="6.0.9" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.2" />
-		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.23.1" />
 		<PackageReference Include="MimeKit" Version="3.4.1" />
 		<PackageReference Include="NetEscapades.EnumGenerators" Version="1.0.0-beta04" />
 		<PackageReference Include="ReflectionAnalyzers" Version="0.3.1">
