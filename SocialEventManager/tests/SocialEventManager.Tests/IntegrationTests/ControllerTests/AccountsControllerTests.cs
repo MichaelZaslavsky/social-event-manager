@@ -261,14 +261,14 @@ public sealed class AccountsControllerTests : IntegrationTest
     [MemberData(nameof(UserData.ExistingResetPasswordUser), MemberType = typeof(UserData))]
     public async Task ResetPassword_Should_ReturnOk_When_UserExists(ResetPasswordDto resetPassword)
     {
-        string expectedPasswordHash = UserStorage.Instance.Data.Single(u => u.Email == resetPassword.Email).PasswordHash;
+        string expectedPasswordHash = UserStorage.Instance.Data.Single(u => u.Email == resetPassword.Email).PasswordHash!;
         FormUrlEncodedContent formContent = ConvertToFormEncodedContent(resetPassword);
 
         HttpRequestMessage request = new(HttpMethod.Post, TestApiPathConstants.AccountsResetPassword) { Content = formContent };
         HttpResponseMessage actual = await Client.SendAsync(request);
         actual.StatusCode.Should().Be(HttpStatusCode.OK);
 
-        string actualPasswordHash = UserStorage.Instance.Data.Single(u => u.Email == resetPassword.Email).PasswordHash;
+        string actualPasswordHash = UserStorage.Instance.Data.Single(u => u.Email == resetPassword.Email).PasswordHash!;
         actualPasswordHash.Should().NotBeNullOrWhiteSpace()
             .And.NotBe(expectedPasswordHash);
     }

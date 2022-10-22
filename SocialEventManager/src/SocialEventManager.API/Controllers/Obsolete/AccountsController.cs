@@ -69,7 +69,7 @@ public sealed class AccountsController : ControllerBase
             return BadRequest(errorMessage);
         }
 
-        ApplicationUser currentUser = await _userManager.FindByNameAsync(user.UserName);
+        ApplicationUser currentUser = (await _userManager.FindByNameAsync(user.UserName))!;
 
         string role = RoleType.User.GetDescription();
         await _userManager.AddToRoleAsync(currentUser, role);
@@ -77,7 +77,7 @@ public sealed class AccountsController : ControllerBase
         await _userManager.AddClaimsAsync(applicationUser, new Claim[]
         {
             new(ClaimTypes.Sid, currentUser.Id),
-            new(ClaimTypes.Email, currentUser.Email),
+            new(ClaimTypes.Email, currentUser.Email ?? string.Empty),
             new(ClaimTypes.Role, role),
         });
 

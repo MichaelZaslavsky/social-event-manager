@@ -3,9 +3,12 @@ using FluentAssertions;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Helpers;
 using Xunit;
+using Xunit.Categories;
 
 namespace SocialEventManager.Tests.UnitTests.HelperTests;
 
+[UnitTest]
+[Category(CategoryConstants.Helpers)]
 public sealed class ArgumentNullExceptionHelpersTests
 {
     [Theory]

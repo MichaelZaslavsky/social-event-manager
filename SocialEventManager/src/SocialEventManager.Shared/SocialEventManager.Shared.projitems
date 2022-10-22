@@ -54,6 +54,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TypeExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ArgumentExceptionHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ArgumentNullExceptionHelpers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\ConfigurationHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\HashingHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\HealthCheckHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\MessageHelpers.cs" />

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using SocialEventManager.Shared.Configurations;
 using SocialEventManager.Shared.Constants;
+using SocialEventManager.Shared.Helpers;
 
 namespace SocialEventManager.API.DependencyInjection;
 
@@ -10,7 +11,8 @@ public static class AuthenticationServiceCollectionExtensions
 {
     public static IServiceCollection ConfigureAuthentication(this IServiceCollection services, IConfiguration config)
     {
-        JwtConfiguration jwtConfiguration = config.GetSection(ConfigurationConstants.Jwt).Get<JwtConfiguration>();
+        JwtConfiguration? jwtConfiguration = config.GetSection(ConfigurationConstants.Jwt).Get<JwtConfiguration>();
+        ConfigurationHelpers.ThrowIfNull(jwtConfiguration, ConfigurationConstants.Jwt);
 
         services.AddAuthentication(options =>
         {

@@ -53,7 +53,7 @@ public sealed class RequestHeaderMatchesMediaTypeAttribute : Attribute, IActionC
             return false;
         }
 
-        MediaType parsedRequestMediaType = new(requestHeaders[_requestHeaderToMatch]);
+        MediaType parsedRequestMediaType = new(requestHeaders[_requestHeaderToMatch]!);
 
         // If one of the media types matches, return true.
         foreach (string mediaType in _mediaTypes)
