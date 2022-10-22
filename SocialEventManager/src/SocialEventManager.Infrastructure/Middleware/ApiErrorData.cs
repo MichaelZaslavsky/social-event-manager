@@ -2,18 +2,16 @@ namespace SocialEventManager.Infrastructure.Middleware;
 
 public sealed class ApiErrorData
 {
-    public ApiErrorData(string detail)
+    public ApiErrorData()
     {
-        Detail = detail;
     }
 
-    public ApiErrorData(string detail, string links)
-        : this(detail)
+    public ApiErrorData(string links)
     {
         Links = links;
     }
 
-    public string Detail { get; set; }
+    required public string Detail { get; init; }
 
-    public string Links { get; set; } = null!;
+    public string? Links { get; init; }
 }

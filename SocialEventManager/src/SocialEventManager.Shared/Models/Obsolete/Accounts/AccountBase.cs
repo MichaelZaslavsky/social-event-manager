@@ -22,7 +22,7 @@ public abstract record AccountBase
 
     [MinLength(LengthConstants.Length2)]
     [MaxLength(LengthConstants.LengthMax)]
-    public string PasswordHash { get; init; } = null!;
+    required public string PasswordHash { get; init; }
 
     [Required]
     [MinLength(LengthConstants.Length2)]
@@ -50,22 +50,22 @@ public abstract record AccountBase
     [Required]
     [MinLength(LengthConstants.Length2)]
     [MaxLength(LengthConstants.Length255)]
-    public string NormalizedEmail { get; init; } = null!;
+    required public string NormalizedEmail { get; init; }
 
     [Required]
     [MinLength(LengthConstants.Length2)]
     [MaxLength(LengthConstants.Length255)]
-    public string NormalizedUserName { get; init; } = null!;
+    required public string NormalizedUserName { get; init; }
 
     [Required]
     [MinLength(LengthConstants.Length2)]
     [MaxLength(LengthConstants.Length255)]
-    public string ConcurrencyStamp { get; init; } = null!;
+    required public string ConcurrencyStamp { get; init; }
 
     [Required]
     [MinLength(LengthConstants.Length2)]
     [MaxLength(LengthConstants.LengthMax)]
-    public string SecurityStamp { get; init; } = null!;
+    required public string SecurityStamp { get; init; }
 
     [Required]
     public bool TwoFactorEnabled { get; init; }

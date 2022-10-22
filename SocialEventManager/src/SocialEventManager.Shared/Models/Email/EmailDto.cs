@@ -10,24 +10,23 @@ public sealed record EmailDto
     {
     }
 
-    public EmailDto(string subject, string? body, IEnumerable<string> to)
-        : this(subject, body, to, Enumerable.Empty<string>(), Enumerable.Empty<string>())
+    public EmailDto(string? body, IEnumerable<string> to)
+        : this(body, to, Enumerable.Empty<string>(), Enumerable.Empty<string>())
     {
     }
 
-    public EmailDto(string subject, string? body, IEnumerable<string> to, IEnumerable<string> bcc)
-        : this(subject, body, to, Enumerable.Empty<string>(), bcc)
+    public EmailDto(string? body, IEnumerable<string> to, IEnumerable<string> bcc)
+        : this(body, to, Enumerable.Empty<string>(), bcc)
     {
     }
 
-    public EmailDto(string subject, string? body, IEnumerable<string> to, IEnumerable<string> cc, IEnumerable<string> bcc)
+    public EmailDto(string? body, IEnumerable<string> to, IEnumerable<string> cc, IEnumerable<string> bcc)
     {
         if (to.IsNullOrEmpty() && cc.IsNullOrEmpty() && bcc.IsNullOrEmpty())
         {
             throw new InvalidOperationException(ExceptionConstants.NoRecipientsHaveBeenSpecified);
         }
 
-        Subject = subject;
         Body = body;
         To = to;
         Cc = cc;
@@ -35,7 +34,7 @@ public sealed record EmailDto
     }
 
     [Required]
-    public string Subject { get; init; } = null!;
+    required public string Subject { get; init; }
 
     public string? Body { get; init; }
 

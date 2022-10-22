@@ -19,17 +19,17 @@ public static class ErrorResponseHandler
 
         error.Data = name switch
         {
-            nameof(ValidationException) => new ApiErrorData(JsonConvert.SerializeObject(ex.Message), LinkConstants.BadRequestException),
-            nameof(BadRequestException) => new ApiErrorData(ex.Message, LinkConstants.BadRequestException),
-            nameof(NotFoundException) => new ApiErrorData(ex.Message, LinkConstants.NotFoundException),
-            nameof(UnprocessableEntityException) => new ApiErrorData(ex.Message, LinkConstants.UnprocessableEntity),
-            nameof(NullReferenceException) => new ApiErrorData(ExceptionConstants.NullReferenceException, LinkConstants.NullReferenceException),
-            nameof(ArgumentNullException) => new ApiErrorData(ExceptionConstants.ArgumentNullException, LinkConstants.ArgumentNullException),
-            nameof(ArgumentException) => new ApiErrorData(ExceptionConstants.ArgumentException, LinkConstants.ArgumentException),
-            nameof(TimeoutException) => new ApiErrorData(ExceptionConstants.TimeoutException, LinkConstants.TimeoutException),
-            nameof(SqlException) => new ApiErrorData(ExceptionConstants.SqlException, LinkConstants.SqlException),
-            nameof(Exception) => new ApiErrorData(ExceptionConstants.Exception, LinkConstants.Exception),
-            _ => new ApiErrorData(name)
+            nameof(ValidationException) => new ApiErrorData(LinkConstants.BadRequestException) { Detail = JsonConvert.SerializeObject(ex.Message) },
+            nameof(BadRequestException) => new ApiErrorData(LinkConstants.BadRequestException) { Detail = ex.Message },
+            nameof(NotFoundException) => new ApiErrorData(LinkConstants.NotFoundException) { Detail = ex.Message },
+            nameof(UnprocessableEntityException) => new ApiErrorData(LinkConstants.UnprocessableEntity) { Detail = ex.Message },
+            nameof(NullReferenceException) => new ApiErrorData(LinkConstants.NullReferenceException) { Detail = ExceptionConstants.NullReferenceException },
+            nameof(ArgumentNullException) => new ApiErrorData(LinkConstants.ArgumentNullException) { Detail = ExceptionConstants.ArgumentNullException },
+            nameof(ArgumentException) => new ApiErrorData(LinkConstants.ArgumentException) { Detail = ExceptionConstants.ArgumentException },
+            nameof(TimeoutException) => new ApiErrorData(LinkConstants.TimeoutException) { Detail = ExceptionConstants.TimeoutException },
+            nameof(SqlException) => new ApiErrorData(LinkConstants.SqlException) { Detail = ExceptionConstants.SqlException },
+            nameof(Exception) => new ApiErrorData(LinkConstants.Exception) { Detail = ExceptionConstants.Exception },
+            _ => new ApiErrorData() { Detail = name }
         };
 
         string? requestMessage = MessageHelpers.BuildRequestMessage(context.Request)?.Replace(Environment.NewLine, string.Empty);

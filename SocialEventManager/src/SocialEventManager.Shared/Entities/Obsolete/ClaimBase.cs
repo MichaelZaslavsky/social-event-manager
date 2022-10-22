@@ -17,9 +17,9 @@ public abstract class ClaimBase
 
     [Required]
     [StringLength(LengthConstants.Length255)]
-    public string Type { get; set; } = null!;
+    required public string Type { get; set; }
 
     [Required]
     [StringLength(StringLengthAttribute.MaxText)]
-    public string Value { get; set; } = null!;
+    required public string Value { get; set; }
 }

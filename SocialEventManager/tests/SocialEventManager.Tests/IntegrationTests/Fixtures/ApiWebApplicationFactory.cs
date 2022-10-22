@@ -8,7 +8,7 @@ namespace SocialEventManager.Tests.IntegrationTests.Fixtures;
 
 public sealed class ApiWebApplicationFactory : WebApplicationFactory<Program>
 {
-    public IConfiguration Configuration { get; private set; } = null!;
+    required public IConfiguration Configuration { get; set; }
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {

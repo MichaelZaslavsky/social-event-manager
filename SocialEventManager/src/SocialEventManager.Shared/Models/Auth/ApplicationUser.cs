@@ -4,7 +4,7 @@ namespace SocialEventManager.Shared.Models.Auth;
 
 public sealed class ApplicationUser : IdentityUser<Guid>
 {
-    public string FirstName { get; set; } = null!;
+    required public string FirstName { get; init; }
 
-    public string LastName { get; set; } = null!;
+    required public string LastName { get; init; }
 }

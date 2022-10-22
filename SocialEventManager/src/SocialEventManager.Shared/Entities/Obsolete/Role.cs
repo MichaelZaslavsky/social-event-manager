@@ -12,17 +12,17 @@ public sealed class Role
     [Required]
     [ExplicitKey]
     [PrimaryKey]
-    public Guid Id { get; set; }
+    required public Guid Id { get; set; }
 
     [Required]
     [StringLength(LengthConstants.Length255)]
-    public string ConcurrencyStamp { get; set; } = null!;
+    required public string ConcurrencyStamp { get; set; }
 
     [Required]
     [StringLength(LengthConstants.Length255)]
-    public string Name { get; set; } = null!;
+    required public string Name { get; set; }
 
     [Required]
     [StringLength(LengthConstants.Length255)]
-    public string NormalizedName { get; set; } = null!;
+    required public string NormalizedName { get; set; }
 }

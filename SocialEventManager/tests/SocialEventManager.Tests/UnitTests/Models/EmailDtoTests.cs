@@ -17,7 +17,11 @@ public sealed class EmailDtoTests
     public void InitPartialFields_Should_ReturnEmailDto_When_DataIsValid(
         string subject, string? body, IEnumerable<string> to, IEnumerable<string> bcc)
     {
-        EmailDto email = new(subject, body, to, bcc);
+        EmailDto email = new(body, to, bcc)
+        {
+            Subject = subject,
+        };
+
         AssertEmail(email, subject, body, to, Enumerable.Empty<string>(), bcc);
     }
 
@@ -26,7 +30,11 @@ public sealed class EmailDtoTests
     public void InitAllFields_Should_ReturnEmailDto_When_DataIsValid(
         string subject, string? body, IEnumerable<string> to, IEnumerable<string> cc, IEnumerable<string> bcc)
     {
-        EmailDto email = new(subject, body, to, cc, bcc);
+        EmailDto email = new(body, to, cc, bcc)
+        {
+            Subject = subject,
+        };
+
         AssertEmail(email, subject, body, to, cc, bcc);
     }
 
@@ -35,7 +43,11 @@ public sealed class EmailDtoTests
     public void InitFields_Should_ThrowInvalidOperationException_When_NoRecipientsHaveBeenSpecified(
         string subject, string? body)
     {
-        Action action = () => new EmailDto(subject, body, Enumerable.Empty<string>(), Enumerable.Empty<string>(), Enumerable.Empty<string>());
+        Action action = () => new EmailDto(body, Enumerable.Empty<string>(), Enumerable.Empty<string>(), Enumerable.Empty<string>())
+        {
+            Subject = subject,
+        };
+
         action.Should().Throw<InvalidOperationException>().WithMessage(ExceptionConstants.NoRecipientsHaveBeenSpecified);
     }
 

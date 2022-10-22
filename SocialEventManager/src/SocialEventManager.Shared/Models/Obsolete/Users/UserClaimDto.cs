@@ -11,5 +11,5 @@ public record UserClaimDto : UserClaimBase
 {
     [Required]
     [NotDefault]
-    public Guid UserId { get; set; }
+    required public Guid UserId { get; set; }
 }
