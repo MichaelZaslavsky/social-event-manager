@@ -56,7 +56,7 @@ public class CustomUsersStore :
         return Task.FromResult(user.Id);
     }
 
-    public Task<string> GetUserNameAsync(ApplicationUser user, CancellationToken cancellationToken)
+    public Task<string?> GetUserNameAsync(ApplicationUser user, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
@@ -64,7 +64,7 @@ public class CustomUsersStore :
         return Task.FromResult(user.UserName);
     }
 
-    public Task SetUserNameAsync(ApplicationUser user, string userName, CancellationToken cancellationToken)
+    public Task SetUserNameAsync(ApplicationUser user, string? userName, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
@@ -73,7 +73,7 @@ public class CustomUsersStore :
         return Task.CompletedTask;
     }
 
-    public Task<string> GetNormalizedUserNameAsync(ApplicationUser user, CancellationToken cancellationToken)
+    public Task<string?> GetNormalizedUserNameAsync(ApplicationUser user, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
@@ -81,7 +81,7 @@ public class CustomUsersStore :
         return Task.FromResult(user.NormalizedUserName);
     }
 
-    public Task SetNormalizedUserNameAsync(ApplicationUser user, string normalizedName, CancellationToken cancellationToken)
+    public Task SetNormalizedUserNameAsync(ApplicationUser user, string? normalizedName, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
@@ -100,7 +100,7 @@ public class CustomUsersStore :
 
         return id > 0
             ? IdentityResult.Success
-            : IdentityResult.Failed(new IdentityError { Description = UserValidationConstants.CouldNotInsertUser(user.Email) });
+            : IdentityResult.Failed(new IdentityError { Description = UserValidationConstants.CouldNotInsertUser(user.Email!) });
     }
 
     public async Task<IdentityResult> UpdateAsync(ApplicationUser user, CancellationToken cancellationToken)
@@ -113,7 +113,7 @@ public class CustomUsersStore :
 
         return isUpdated
             ? IdentityResult.Success
-            : IdentityResult.Failed(new IdentityError { Description = UserValidationConstants.CouldNotUpdateUser(user.Email) });
+            : IdentityResult.Failed(new IdentityError { Description = UserValidationConstants.CouldNotUpdateUser(user.Email!) });
     }
 
     public Task<IdentityResult> DeleteAsync(ApplicationUser user, CancellationToken cancellationToken)
@@ -126,7 +126,7 @@ public class CustomUsersStore :
             : throw new FormatException(ValidationConstants.NotAValidIdentifier);
     }
 
-    public Task<ApplicationUser> FindByIdAsync(string userId, CancellationToken cancellationToken)
+    public Task<ApplicationUser?> FindByIdAsync(string userId, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(userId);
@@ -136,7 +136,7 @@ public class CustomUsersStore :
             : throw new FormatException(ValidationConstants.NotAValidIdentifier);
     }
 
-    public async Task<ApplicationUser> FindByNameAsync(string normalizedUserName, CancellationToken cancellationToken)
+    public async Task<ApplicationUser?> FindByNameAsync(string normalizedUserName, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(normalizedUserName);
@@ -149,7 +149,7 @@ public class CustomUsersStore :
 
     #region Implement IUserEmailStore
 
-    public Task SetEmailAsync(ApplicationUser user, string email, CancellationToken cancellationToken)
+    public Task SetEmailAsync(ApplicationUser user, string? email, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
@@ -158,7 +158,7 @@ public class CustomUsersStore :
         return Task.CompletedTask;
     }
 
-    public Task<string> GetEmailAsync(ApplicationUser user, CancellationToken cancellationToken)
+    public Task<string?> GetEmailAsync(ApplicationUser user, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
@@ -176,7 +176,7 @@ public class CustomUsersStore :
         return Task.CompletedTask;
     }
 
-    public async Task<ApplicationUser> FindByEmailAsync(string normalizedEmail, CancellationToken cancellationToken)
+    public async Task<ApplicationUser?> FindByEmailAsync(string normalizedEmail, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
 
@@ -184,7 +184,7 @@ public class CustomUsersStore :
         return _mapper.Map<ApplicationUser>(account);
     }
 
-    public Task<string> GetNormalizedEmailAsync(ApplicationUser user, CancellationToken cancellationToken)
+    public Task<string?> GetNormalizedEmailAsync(ApplicationUser user, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
@@ -192,7 +192,7 @@ public class CustomUsersStore :
         return Task.FromResult(user.NormalizedEmail);
     }
 
-    public Task SetNormalizedEmailAsync(ApplicationUser user, string normalizedEmail, CancellationToken cancellationToken)
+    public Task SetNormalizedEmailAsync(ApplicationUser user, string? normalizedEmail, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
@@ -205,7 +205,7 @@ public class CustomUsersStore :
 
     #region Implement IUserPasswordStore
 
-    public Task SetPasswordHashAsync(ApplicationUser user, string passwordHash, CancellationToken cancellationToken)
+    public Task SetPasswordHashAsync(ApplicationUser user, string? passwordHash, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
@@ -214,7 +214,7 @@ public class CustomUsersStore :
         return Task.CompletedTask;
     }
 
-    public Task<string> GetPasswordHashAsync(ApplicationUser user, CancellationToken cancellationToken)
+    public Task<string?> GetPasswordHashAsync(ApplicationUser user, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
@@ -307,7 +307,7 @@ public class CustomUsersStore :
         return Task.CompletedTask;
     }
 
-    public Task<string> GetSecurityStampAsync(ApplicationUser user, CancellationToken cancellationToken)
+    public Task<string?> GetSecurityStampAsync(ApplicationUser user, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(user);
@@ -398,10 +398,10 @@ public class CustomUsersStore :
 
         return isDeleted
             ? IdentityResult.Success
-            : IdentityResult.Failed(new IdentityError { Description = UserValidationConstants.CouldNotDeleteUser(user.Email) });
+            : IdentityResult.Failed(new IdentityError { Description = UserValidationConstants.CouldNotDeleteUser(user.Email!) });
     }
 
-    private async Task<ApplicationUser> GetAccountAsync(Guid id)
+    private async Task<ApplicationUser?> GetAccountAsync(Guid id)
     {
         AccountDto? account = await _accountsService.GetAccount(id);
         return _mapper.Map<ApplicationUser>(account);

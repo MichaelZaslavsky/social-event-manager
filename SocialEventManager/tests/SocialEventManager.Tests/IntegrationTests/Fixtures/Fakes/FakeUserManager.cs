@@ -31,7 +31,7 @@ public sealed class FakeUserManager : UserManager<ApplicationUser>
     {
         if (UserStorage.Instance.Data.Select(u => u.Email).Contains(user.Email))
         {
-            return Task.FromResult(IdentityResult.Failed(new IdentityErrorDescriber().DuplicateEmail(user.Email)));
+            return Task.FromResult(IdentityResult.Failed(new IdentityErrorDescriber().DuplicateEmail(user.Email!)));
         }
 
         user.PasswordHash = _passwordHasher.HashPassword(user, password);
@@ -64,7 +64,7 @@ public sealed class FakeUserManager : UserManager<ApplicationUser>
         return Task.FromResult(IdentityResult.Success);
     }
 
-    public override Task<ApplicationUser> FindByEmailAsync(string email) =>
+    public override Task<ApplicationUser?> FindByEmailAsync(string email) =>
         Task.FromResult(UserStorage.Instance.Data.SingleOrDefault(u => u.Email == email))!;
 
     public override Task<string> GenerateEmailConfirmationTokenAsync(ApplicationUser user) => Task.FromResult(TestConstants.ValidToken);

@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using SocialEventManager.DAL.Infrastructure;
 using SocialEventManager.Shared.Constants;
 using SocialEventManager.Shared.Extensions;
+using SocialEventManager.Shared.Helpers;
 using Xunit;
 using Xunit.Categories;
 
@@ -24,7 +25,9 @@ public sealed class DbSessionTests
     [Fact]
     public void InitDbSession_Should_ReturnValidSession_When_ConnectionStringIsValid()
     {
-        string connectionString = _configuration.GetConnectionString(DbConstants.SocialEventManagerTest);
+        string? connectionString = _configuration.GetConnectionString(DbConstants.SocialEventManagerTest);
+        ConfigurationHelpers.ThrowIfNull(connectionString, DbConstants.SocialEventManagerTest);
+
         DbSession session = new(connectionString);
 
         session.Should().NotBeNull();
@@ -45,7 +48,9 @@ public sealed class DbSessionTests
     [Fact]
     public void InitDbSession_Should_ReturnTransaction_When_TransactionHasBegun()
     {
-        string connectionString = _configuration.GetConnectionString(DbConstants.SocialEventManagerTest);
+        string? connectionString = _configuration.GetConnectionString(DbConstants.SocialEventManagerTest);
+        ConfigurationHelpers.ThrowIfNull(connectionString, DbConstants.SocialEventManagerTest);
+
         DbSession session = new(connectionString);
         using IDbTransaction transaction = session.Connection.BeginTransaction();
 
@@ -55,7 +60,9 @@ public sealed class DbSessionTests
     [Fact]
     public void InitDbSession_Should_ReturnNullConnection_When_ConnectionIsDisposed()
     {
-        string connectionString = _configuration.GetConnectionString(DbConstants.SocialEventManagerTest);
+        string? connectionString = _configuration.GetConnectionString(DbConstants.SocialEventManagerTest);
+        ConfigurationHelpers.ThrowIfNull(connectionString, DbConstants.SocialEventManagerTest);
+
         DbSession session = new(connectionString);
         using IDbTransaction transaction = session.Connection.BeginTransaction();
         session.Dispose();

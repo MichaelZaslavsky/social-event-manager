@@ -59,7 +59,7 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
 
         return isUpdated
             ? IdentityResult.Success
-            : IdentityResult.Failed(new IdentityError { Description = RoleValidationConstants.CouldNotUpdateRole(role.Name) });
+            : IdentityResult.Failed(new IdentityError { Description = RoleValidationConstants.CouldNotUpdateRole(role.Name!) });
     }
 
     public Task<IdentityResult> DeleteAsync(ApplicationRole role, CancellationToken cancellationToken)
@@ -80,7 +80,7 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
         return Task.FromResult(role.Id);
     }
 
-    public Task<string> GetRoleNameAsync(ApplicationRole role, CancellationToken cancellationToken)
+    public Task<string?> GetRoleNameAsync(ApplicationRole role, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(role);
@@ -88,7 +88,7 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
         return Task.FromResult(role.Name);
     }
 
-    public Task SetRoleNameAsync(ApplicationRole role, string roleName, CancellationToken cancellationToken)
+    public Task SetRoleNameAsync(ApplicationRole role, string? roleName, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(role);
@@ -97,7 +97,7 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
         return Task.CompletedTask;
     }
 
-    public Task<string> GetNormalizedRoleNameAsync(ApplicationRole role, CancellationToken cancellationToken)
+    public Task<string?> GetNormalizedRoleNameAsync(ApplicationRole role, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(role);
@@ -105,7 +105,7 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
         return Task.FromResult(role.NormalizedName);
     }
 
-    public Task SetNormalizedRoleNameAsync(ApplicationRole role, string normalizedName, CancellationToken cancellationToken)
+    public Task SetNormalizedRoleNameAsync(ApplicationRole role, string? normalizedName, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(role);
@@ -114,7 +114,7 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
         return Task.CompletedTask;
     }
 
-    public Task<ApplicationRole> FindByIdAsync(string roleId, CancellationToken cancellationToken)
+    public Task<ApplicationRole?> FindByIdAsync(string roleId, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(roleId);
@@ -122,7 +122,7 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
         return !Guid.TryParse(roleId, out Guid id) ? throw new FormatException(ValidationConstants.NotAValidIdentifier) : GetRoleAsync(id);
     }
 
-    public async Task<ApplicationRole> FindByNameAsync(string normalizedRoleName, CancellationToken cancellationToken)
+    public async Task<ApplicationRole?> FindByNameAsync(string normalizedRoleName, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(normalizedRoleName);
@@ -143,10 +143,10 @@ public class CustomRolesStore : IRoleStore<ApplicationRole>
 
         return isDeleted
             ? IdentityResult.Success
-            : IdentityResult.Failed(new IdentityError { Description = RoleValidationConstants.CouldNotDeleteRole(role.Name) });
+            : IdentityResult.Failed(new IdentityError { Description = RoleValidationConstants.CouldNotDeleteRole(role.Name!) });
     }
 
-    private async Task<ApplicationRole> GetRoleAsync(Guid id)
+    private async Task<ApplicationRole?> GetRoleAsync(Guid id)
     {
         RoleDto? role = await _rolesService.GetRole(id);
         return _mapper.Map<ApplicationRole>(role!);

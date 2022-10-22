@@ -126,7 +126,7 @@ public sealed class AuthService : IAuthService
 
     private async Task SendConfirmEmail(UserRegistrationDto userRegistration)
     {
-        ApplicationUser user = await _userManager.FindByEmailAsync(userRegistration.Email);
+        ApplicationUser user = (await _userManager.FindByEmailAsync(userRegistration.Email))!;
         string url = await GenerateConfirmEmailUrl(user);
         string html = await _renderer.RenderAsync(new VerifyEmail(user.FirstName, url));
 

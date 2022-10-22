@@ -38,7 +38,7 @@ public sealed class Startup
         services.Configure(Configuration)
             .AddLogging(builder => builder.SetMinimumLevel(LogLevel.Debug))
             .AddSingleton<IInMemoryDatabase, InMemoryDatabase>(_ =>
-                new InMemoryDatabase(Configuration.GetConnectionString(DbConstants.SocialEventManagerTest)))
+                new InMemoryDatabase(Configuration.GetConnectionString(DbConstants.SocialEventManagerTest)!))
             .AddSingleton(Configuration)
             .RegisterDependencies()
             .AddRedisClients(Configuration);

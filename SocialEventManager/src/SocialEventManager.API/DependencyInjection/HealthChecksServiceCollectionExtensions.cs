@@ -9,7 +9,7 @@ public static class HealthChecksServiceCollectionExtensions
     public static IServiceCollection AddHealthChecks(this IServiceCollection services, IConfiguration config)
     {
         services.AddHealthChecks()
-            .AddSqlServer(config.GetConnectionString(DbConstants.SocialEventManager), failureStatus: HealthStatus.Unhealthy, tags: new[] { ApiPathConstants.Ready });
+            .AddSqlServer(config.GetConnectionString(DbConstants.SocialEventManager)!, failureStatus: HealthStatus.Unhealthy, tags: new[] { ApiPathConstants.Ready });
 
         return services;
     }

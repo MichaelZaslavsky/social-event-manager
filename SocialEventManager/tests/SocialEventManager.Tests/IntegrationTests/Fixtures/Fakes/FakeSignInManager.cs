@@ -40,7 +40,7 @@ public sealed class FakeSignInManager : SignInManager<ApplicationUser>
             return Task.FromResult(SignInResult.LockedOut);
         }
 
-        PasswordVerificationResult passwordVerificationResult = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, password);
+        PasswordVerificationResult passwordVerificationResult = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash!, password);
 
         SignInResult result;
 

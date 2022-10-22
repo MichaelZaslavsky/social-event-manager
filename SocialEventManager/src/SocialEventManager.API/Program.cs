@@ -46,11 +46,9 @@ try
         })
         .UseSerilog((provider, _, loggerConfig) => loggerConfig.WithSerilogLogger(provider, builder.Configuration));
 
-    builder.Host.ConfigureLogging(logging =>
-    {
-        logging.ClearProviders();
-        logging.SetMinimumLevel(LogLevel.Trace);
-    });
+    builder.Logging
+        .ClearProviders()
+        .SetMinimumLevel(LogLevel.Trace);
 
     builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
         .AddJsonFile(ApiConstants.AppSettingsJson, optional: false, reloadOnChange: true)
@@ -181,8 +179,6 @@ static void RunEntityFrameworkMigration(IHost host)
 
 // This is used as a workaround for letting WebApplicationFactory access the Program file.
 // For more info, read https://stackoverflow.com/questions/69058176/how-to-use-webapplicationfactory-in-net6-without-speakable-entry-point.
-#pragma warning disable CA1050 // Declare types in namespaces
 public partial class Program
 {
 }
-#pragma warning restore CA1050 // Declare types in namespaces

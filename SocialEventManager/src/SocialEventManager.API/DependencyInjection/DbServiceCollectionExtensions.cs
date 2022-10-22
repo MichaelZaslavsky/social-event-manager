@@ -11,7 +11,7 @@ public static class DbServiceCollectionExtensions
     {
         services.AddDbContext<ApplicationDbContext>(
             opts => opts.UseSqlServer(
-                config.GetConnectionString(DbConstants.SocialEventManager),
+                config.GetConnectionString(DbConstants.SocialEventManager)!,
                 s => s.MigrationsAssembly($"{nameof(SocialEventManager)}.{nameof(DAL)}")
                     .MigrationsHistoryTable(TableNameConstants.EntityFrameworkHistory, SchemaConstants.Migration)));
 
@@ -21,7 +21,7 @@ public static class DbServiceCollectionExtensions
     public static IServiceCollection AddSqlServer(this IServiceCollection services, IConfiguration config)
     {
         services.AddSingleton<IDbSession, DbSession>(_ =>
-            new DbSession(config.GetConnectionString(DbConstants.SocialEventManager)));
+            new DbSession(config.GetConnectionString(DbConstants.SocialEventManager)!));
 
         return services;
     }

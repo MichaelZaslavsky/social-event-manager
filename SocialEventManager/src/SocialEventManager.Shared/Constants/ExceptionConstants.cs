@@ -48,6 +48,8 @@ public static class ExceptionConstants
 
     public static string UnexpectedException(Exception ex) => $"Unexpected exception, {ex.Demystify()}";
 
+    public static string ConfigurationKeyIsMissing(string key) => $"Configuration key '{key}` is missing.";
+
     private const string TheStatementHasBeenTerminatedWithSpace = "\r\nThe statement has been terminated.";
 
     private static string ViolationOfKeyConstraint(string keyType) =>
