@@ -104,7 +104,11 @@ public sealed class AuthService : IAuthService
         string url = await GenerateResetPasswordUrl(user);
         string html = await _renderer.RenderAsync(new ForgotPassword(user.FirstName, url));
 
-        EmailDto email = new(EmailConstants.ForgotPasswordSubject, html, new[] { forgotPassword.Email });
+        EmailDto email = new(html, new[] { forgotPassword.Email })
+        {
+            Subject = EmailConstants.ForgotPasswordSubject,
+        };
+
         BackgroundJob.Enqueue(() => _emailService.SendEmailAsync(email));
     }
 
@@ -130,7 +134,11 @@ public sealed class AuthService : IAuthService
         string url = await GenerateConfirmEmailUrl(user);
         string html = await _renderer.RenderAsync(new VerifyEmail(user.FirstName, url));
 
-        EmailDto email = new(EmailConstants.VerifyEmailSubject, html, new[] { userRegistration.Email });
+        EmailDto email = new(html, new[] { userRegistration.Email })
+        {
+            Subject = EmailConstants.VerifyEmailSubject,
+        };
+
         BackgroundJob.Enqueue(() => _emailService.SendEmailAsync(email));
     }
 

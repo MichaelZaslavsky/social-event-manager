@@ -20,9 +20,9 @@ public sealed class UserRole
 
     [Required]
     [ForeignKey(typeof(Account), OnDelete = GlobalConstants.Cascade)]
-    public Guid UserId { get; set; }
+    required public Guid UserId { get; set; }
 
     [Required]
     [ForeignKey(typeof(Role), OnDelete = GlobalConstants.Cascade)]
-    public Guid RoleId { get; set; }
+    required public Guid RoleId { get; set; }
 }

@@ -8,15 +8,15 @@ namespace SocialEventManager.Shared.Models.Users;
 [ExcludeFromCodeCoverage]
 public abstract record UserClaimBase
 {
-    public int Id { get; init; }
+    required public int Id { get; init; }
 
     [Required]
     [MinLength(LengthConstants.Length2)]
     [MaxLength(LengthConstants.Length255)]
-    public string Type { get; init; } = null!;
+    required public string Type { get; init; }
 
     [Required]
     [MinLength(LengthConstants.Length2)]
     [MaxLength(LengthConstants.LengthMax)]
-    public string Value { get; init; } = null!;
+    required public string Value { get; init; }
 }

@@ -14,5 +14,5 @@ public sealed class UserClaim : ClaimBase
 {
     [Required]
     [ForeignKey(typeof(Account), OnDelete = GlobalConstants.Cascade)]
-    public Guid UserId { get; set; }
+    required public Guid UserId { get; set; }
 }

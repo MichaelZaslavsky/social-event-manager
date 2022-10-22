@@ -4,11 +4,11 @@ public sealed record ContextInformation
 {
     public string? Host { get; init; }
 
-    public string Method { get; init; } = null!;
+    required public string Method { get; init; }
 
     public string? RemoteIpAddress { get; init; }
 
-    public string Protocol { get; init; } = null!;
+    required public string Protocol { get; init; }
 
     public UserInformation? UserInfo { get; init; }
 }

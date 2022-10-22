@@ -25,14 +25,14 @@ public sealed class Account
 
     [Required]
     [StringLength(LengthConstants.Length255)]
-    public string UserName { get; set; } = null!;
+    required public string UserName { get; set; }
 
     [StringLength(StringLengthAttribute.MaxText)]
-    public string PasswordHash { get; set; } = null!;
+    required public string PasswordHash { get; set; }
 
     [Required]
     [StringLength(LengthConstants.Length255)]
-    public string Email { get; set; } = null!;
+    required public string Email { get; set; }
 
     [Required]
     public bool EmailConfirmed { get; set; }
@@ -53,19 +53,19 @@ public sealed class Account
 
     [Required]
     [StringLength(LengthConstants.Length255)]
-    public string NormalizedEmail { get; set; } = null!;
+    required public string NormalizedEmail { get; set; }
 
     [Required]
     [StringLength(LengthConstants.Length255)]
-    public string NormalizedUserName { get; set; } = null!;
+    required public string NormalizedUserName { get; set; }
 
     [Required]
     [StringLength(LengthConstants.Length255)]
-    public string ConcurrencyStamp { get; set; } = null!;
+    required public string ConcurrencyStamp { get; set; }
 
     [Required]
     [StringLength(StringLengthAttribute.MaxText)]
-    public string SecurityStamp { get; set; } = null!;
+    required public string SecurityStamp { get; set; }
 
     [Required]
     public bool TwoFactorEnabled { get; set; }

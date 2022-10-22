@@ -8,9 +8,9 @@ namespace SocialEventManager.Shared.Models.Identity;
 [ExcludeFromCodeCoverage]
 public sealed class ApplicationUser : IdentityUser
 {
-    public string AuthenticationType { get; set; } = null!;
+    required public string AuthenticationType { get; set; }
 
     public bool IsAuthenticated { get; set; }
 
-    public string Name { get; set; } = null!;
+    required public string Name { get; set; }
 }

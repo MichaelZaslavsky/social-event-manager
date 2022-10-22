@@ -15,12 +15,12 @@ public sealed record LoginModel
     /// Gets the name of the user.
     /// </summary>
     [Required]
-    public string UserName { get; init; } = null!;
+    required public string UserName { get; init; }
 
     /// <summary>
     /// Gets the password of the user.
     /// </summary>
     [Required]
     [DataType(DataType.Password)]
-    public string Password { get; init; } = null!;
+    required public string Password { get; init; }
 }

@@ -7,7 +7,7 @@ namespace SocialEventManager.Shared.Helpers;
 
 public static class ArgumentExceptionHelpers
 {
-    public static void ThrowIfNullOrEmpty<T>([NotNull] IEnumerable<T>? argument, [CallerArgumentExpression("argument")] string paramName = "")
+    public static void ThrowIfNullOrEmpty<T>([NotNull] IEnumerable<T>? argument, [CallerArgumentExpression(nameof(argument))] string paramName = "")
     {
         if (argument.IsNullOrEmpty())
         {
@@ -15,7 +15,7 @@ public static class ArgumentExceptionHelpers
         }
     }
 
-    public static void ThrowIfNullOrWhiteSpace([NotNull] string? argument, [CallerArgumentExpression("argument")] string paramName = "")
+    public static void ThrowIfNullOrWhiteSpace([NotNull] string? argument, [CallerArgumentExpression(nameof(argument))] string paramName = "")
     {
         if (argument.IsNullOrWhiteSpace())
         {

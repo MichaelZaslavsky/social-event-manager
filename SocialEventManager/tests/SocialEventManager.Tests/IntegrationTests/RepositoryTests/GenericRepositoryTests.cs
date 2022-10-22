@@ -1,4 +1,5 @@
 using AutoFixture.Xunit2;
+using Bogus;
 using FluentAssertions;
 using Moq;
 using SocialEventManager.DAL.Repositories.Roles;
@@ -37,8 +38,14 @@ public sealed class GenericRepositoryTests : RepositoryTestBase<IRolesRepository
     [MemberData(nameof(RoleData.ValidRole), MemberType = typeof(RoleData))]
     public async Task InsertAsync_Should_VerifyNeverCalled_When_RoleHasDifferentValue(Role role)
     {
+        Role fakeRole = new Faker<Role>()
+            .RuleFor(r => r.Id, _ => Guid.Empty)
+            .RuleFor(r => r.Name, f => f.Random.String())
+            .RuleFor(r => r.NormalizedName, f => f.Random.String().ToUpper())
+            .RuleFor(r => r.ConcurrencyStamp, f => f.Random.String());
+
         await MockRepository.Object.InsertAsync(role);
-        MockRepository.Verify(r => r.InsertAsync(new Role()), Times.Never);
+        MockRepository.Verify(r => r.InsertAsync(fakeRole), Times.Never);
     }
 
     [Theory]

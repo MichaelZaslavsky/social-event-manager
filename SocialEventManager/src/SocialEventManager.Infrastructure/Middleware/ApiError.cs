@@ -2,11 +2,11 @@ namespace SocialEventManager.Infrastructure.Middleware;
 
 public sealed class ApiError
 {
-    public string Id { get; set; } = null!;
+    required public string Id { get; init; }
 
-    public short Status { get; set; }
+    public short Status { get; init; }
 
-    public string Title { get; set; } = null!;
+    required public string Title { get; init; }
 
     public ApiErrorData? Data { get; set; }
 }
