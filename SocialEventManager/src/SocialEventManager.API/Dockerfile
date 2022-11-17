@@ -8,16 +8,16 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["src/SocialEventManager.API/SocialEventManager.API.csproj", "src/SocialEventManager.API/"]
-COPY ["src/SocialEventManager.Infrastructure/SocialEventManager.Infrastructure.csproj", "src/SocialEventManager.Infrastructure/"]
 COPY ["src/SocialEventManager.BLL/SocialEventManager.BLL.csproj", "src/SocialEventManager.BLL/"]
 COPY ["src/SocialEventManager.DAL/SocialEventManager.DAL.csproj", "src/SocialEventManager.DAL/"]
+COPY ["src/SocialEventManager.Infrastructure/SocialEventManager.Infrastructure.csproj", "src/SocialEventManager.Infrastructure/"]
 RUN dotnet restore "src/SocialEventManager.API/SocialEventManager.API.csproj"
 COPY . .
 WORKDIR "/src/src/SocialEventManager.API"
 RUN dotnet build "SocialEventManager.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "SocialEventManager.API.csproj" -c Release -o /app/publish
+RUN dotnet publish "SocialEventManager.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
