@@ -29,7 +29,7 @@ public static class ErrorResponseHandler
             nameof(TimeoutException) => new ApiErrorData(LinkConstants.TimeoutException) { Detail = ExceptionConstants.TimeoutException },
             nameof(SqlException) => new ApiErrorData(LinkConstants.SqlException) { Detail = ExceptionConstants.SqlException },
             nameof(Exception) => new ApiErrorData(LinkConstants.Exception) { Detail = ExceptionConstants.Exception },
-            _ => new ApiErrorData() { Detail = name }
+            _ => new ApiErrorData { Detail = name }
         };
 
         string? requestMessage = MessageHelpers.BuildRequestMessage(context.Request)?.Replace(Environment.NewLine, string.Empty);
