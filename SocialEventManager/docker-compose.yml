@@ -99,6 +99,8 @@ services:
       - Email__UserName=${EMAIL__USERNAME}
       - Email__Password=${EMAIL__PASSWORD}
       - Email__Host=${EMAIL__HOST}
+      - CollectCoverage=true
+      - CoverletOutputFormat=lcov
     volumes:
       - .:/home/runner/work/social-event-manager/social-event-manager/SocialEventManager
       - .:/tests
