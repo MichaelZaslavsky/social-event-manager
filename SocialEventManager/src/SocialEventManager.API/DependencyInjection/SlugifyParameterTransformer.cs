@@ -2,12 +2,15 @@ using System.Text.RegularExpressions;
 
 namespace SocialEventManager.API.DependencyInjection;
 
-public sealed class SlugifyParameterTransformer : IOutboundParameterTransformer
+public sealed partial class SlugifyParameterTransformer : IOutboundParameterTransformer
 {
     public string? TransformOutbound(object? value)
     {
         return value is null
             ? null
-            : Regex.Replace(value.ToString()!, "([a-z])([A-Z])", "$1-$2").ToLower();
+            : DashSeparatedRegex().Replace(value.ToString()!, "$1-$2").ToLower();
     }
+
+    [GeneratedRegex("([a-z])([A-Z])")]
+    private static partial Regex DashSeparatedRegex();
 }
