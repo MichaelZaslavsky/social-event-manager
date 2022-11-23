@@ -30,9 +30,9 @@ public static class FakeRegistrationCollectionExtensions
                 return services;
             }
 
-            if (fakeTypesByName.ContainsKey(name))
+            if (fakeTypesByName.TryGetValue(name, out Type? value))
             {
-                services.AddTransient(type, fakeTypesByName[name]);
+                services.AddTransient(type, value);
             }
         }
 
