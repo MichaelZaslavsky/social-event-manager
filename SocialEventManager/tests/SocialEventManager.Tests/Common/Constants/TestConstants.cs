@@ -21,6 +21,8 @@ internal static class TestConstants
         "29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvc2lkIjoiZmRlYzdmY2ItMmIxZi00ZWRhLTgxYTAtMWM3NjUxY2ZhNjdjIiwiaGFzLXN1YnNjcmlwdGlvbiI6InRydWUiLCJleHAiOjE2NjEy" +
         "NzI2NDMsImlzcyI6ImFwaS5jbGlja3JlcG9ydGluZy5haSIsImF1ZCI6ImNsaWNrcmVwb3J0aW5nLmFpIn0.pjdsikg89IA2MK58igRP1w5XsW3EHTY5PIleWAmqRV4";
 
+    public const string FailedToFindRegisteredServices = "Failed to find registered service/s for: ";
+
     public static string ValueCannotBeNullOrEmpty(string paramName) => $"{ExceptionConstants.ValueCannotBeNullOrEmpty} {Parameter(paramName)}";
 
     public static string ValueCannotBeNullOrWhiteSpace(string paramName) => $"{ExceptionConstants.ValueCannotBeNullOrWhiteSpace} {Parameter(paramName)}";
