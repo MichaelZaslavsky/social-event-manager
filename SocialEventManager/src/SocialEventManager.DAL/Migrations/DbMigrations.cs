@@ -1,5 +1,6 @@
 using System.Data.SqlClient;
 using System.Diagnostics;
+using EvolveDb;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
@@ -26,7 +27,7 @@ public sealed class DbMigrations
         {
             await new EnumLookupTableCreator(connection).Run();
 
-            Evolve.Evolve evolve = new(connection, msg => Log.Information(msg))
+            Evolve evolve = new(connection, msg => Log.Information(msg))
             {
                 Locations = locations,
                 IsEraseDisabled = true,
