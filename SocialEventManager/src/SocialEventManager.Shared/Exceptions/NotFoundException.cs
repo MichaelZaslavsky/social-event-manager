@@ -1,6 +1,9 @@
+using System.Net;
+using SocialEventManager.Shared.Constants;
+
 namespace SocialEventManager.Shared.Exceptions;
 
-public sealed class NotFoundException : ApplicationException
+public sealed class NotFoundException : HttpException
 {
     public NotFoundException()
     {
@@ -15,4 +18,8 @@ public sealed class NotFoundException : ApplicationException
         : base(message, innerException)
     {
     }
+
+    public override HttpStatusCode StatusCode { get; init; } = HttpStatusCode.NotFound;
+
+    public override string Title { get; init; } = ExceptionConstants.NotFound;
 }

@@ -43,6 +43,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Enums\SchemaType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\UserLoginResult.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EqualityComparers\Obsolete\UserClaimEqualityComparer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Exceptions\HttpException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions\UnprocessableEntityException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\EnumerationExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\GuidExtensions.cs" />
