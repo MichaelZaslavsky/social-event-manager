@@ -1,6 +1,9 @@
+using System.Net;
+using SocialEventManager.Shared.Constants;
+
 namespace SocialEventManager.Shared.Exceptions;
 
-public sealed class BadRequestException : ApplicationException
+public sealed class BadRequestException : HttpException
 {
     public BadRequestException()
     {
@@ -15,4 +18,8 @@ public sealed class BadRequestException : ApplicationException
         : base(message, innerException)
     {
     }
+
+    public override HttpStatusCode StatusCode { get; init; } = HttpStatusCode.BadRequest;
+
+    public override string Title { get; init; } = ExceptionConstants.BadRequest;
 }

@@ -9,18 +9,14 @@ public static class ExceptionExtensions
 {
     public static (HttpStatusCode httpStatusCode, string title) ToHttpStatusCodeAndTitle(this Exception? ex)
     {
-        if (ex is null)
+        if (ex is HttpException httpException)
         {
-            return (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError);
+            return (httpException.StatusCode, httpException.Title);
         }
 
-        return ex switch
-        {
-            NotFoundException => (HttpStatusCode.NotFound, ExceptionConstants.NotFound),
-            BadRequestException or ValidationException => (HttpStatusCode.BadRequest, ExceptionConstants.BadRequest),
-            UnprocessableEntityException => (HttpStatusCode.UnprocessableEntity, ExceptionConstants.UnprocessableEntity),
-            _ => (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError),
-        };
+        return ex is ValidationException
+            ? (HttpStatusCode.BadRequest, ExceptionConstants.BadRequest)
+            : (HttpStatusCode.InternalServerError, ExceptionConstants.InternalServerError);
     }
 
     public static bool IsCritical(this Exception? ex)
