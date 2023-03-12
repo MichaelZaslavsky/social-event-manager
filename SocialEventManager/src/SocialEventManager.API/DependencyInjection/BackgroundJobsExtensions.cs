@@ -3,7 +3,6 @@ using Hangfire.Annotations;
 using HangfireBasicAuthenticationFilter;
 using SocialEventManager.Shared.Configurations;
 using SocialEventManager.Shared.Constants;
-using SocialEventManager.Shared.Helpers;
 
 namespace SocialEventManager.API.DependencyInjection;
 
@@ -19,11 +18,9 @@ public static class BackgroundJobsExtensions
 
     public static IApplicationBuilder UseHangfireDashboard([NotNull] this IApplicationBuilder app, IConfiguration config)
     {
-        HangfireSettingsConfiguration? hangfireSettings = config
+        HangfireSettingsConfiguration hangfireSettings = config
             .GetSection(ConfigurationConstants.HangfireSettings)
-            .Get<HangfireSettingsConfiguration>();
-
-        ConfigurationHelpers.ThrowIfNull(hangfireSettings, ConfigurationConstants.HangfireSettings);
+            .Get<HangfireSettingsConfiguration>()!;
 
         return app.UseHangfireDashboard(ApiPathConstants.Hangfire, new()
         {
