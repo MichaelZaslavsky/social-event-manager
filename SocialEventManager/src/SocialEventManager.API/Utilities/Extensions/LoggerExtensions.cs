@@ -5,7 +5,6 @@ using Serilog;
 using Serilog.Enrichers.AspnetcoreHttpcontext;
 using SocialEventManager.API.Utilities.Logging;
 using SocialEventManager.Shared.Constants;
-using SocialEventManager.Shared.Helpers;
 
 namespace SocialEventManager.API.Utilities.Extensions;
 
@@ -13,8 +12,7 @@ public static class LoggerExtensions
 {
     public static void WithSerilogLogger(this LoggerConfiguration loggerConfig, IServiceProvider provider, IConfiguration config)
     {
-        string? seqServerUrl = config[ApiConstants.SeqServerUrlSettingPath];
-        ConfigurationHelpers.ThrowIfNull(seqServerUrl, ApiConstants.SeqServerUrlSettingPath);
+        string seqServerUrl = config[ApiConstants.SeqServerUrlSettingPath]!;
 
         string? assemblyName = Assembly.GetEntryAssembly()?.GetName().Name;
 

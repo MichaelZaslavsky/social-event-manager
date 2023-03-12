@@ -11,7 +11,7 @@ public static class DbServiceCollectionExtensions
     {
         services.AddDbContext<ApplicationDbContext>(
             opts => opts.UseSqlServer(
-                config.GetConnectionString(DbConstants.SocialEventManager)!,
+                config.GetConnectionString(DbConstants.SocialEventManager),
                 s => s.MigrationsAssembly($"{nameof(SocialEventManager)}.{nameof(DAL)}")
                     .MigrationsHistoryTable(TableNameConstants.EntityFrameworkHistory, SchemaConstants.Migration)));
 
